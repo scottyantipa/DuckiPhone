@@ -1,0 +1,818 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E05014551814AB7C00A06560 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014541814AB7C00A06560 /* Foundation.framework */; };
+		E05014571814AB7C00A06560 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014561814AB7C00A06560 /* CoreGraphics.framework */; };
+		E05014591814AB7C00A06560 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014581814AB7C00A06560 /* UIKit.framework */; };
+		E050145B1814AB7C00A06560 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E050145A1814AB7C00A06560 /* CoreData.framework */; };
+		E05014611814AB7C00A06560 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E050145F1814AB7C00A06560 /* InfoPlist.strings */; };
+		E05014631814AB7C00A06560 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014621814AB7C00A06560 /* main.m */; };
+		E05014751814AB7C00A06560 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E05014741814AB7C00A06560 /* Images.xcassets */; };
+		E050147C1814AB7C00A06560 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E050147B1814AB7C00A06560 /* XCTest.framework */; };
+		E050147D1814AB7C00A06560 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014541814AB7C00A06560 /* Foundation.framework */; };
+		E050147E1814AB7C00A06560 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014581814AB7C00A06560 /* UIKit.framework */; };
+		E050147F1814AB7C00A06560 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E050145A1814AB7C00A06560 /* CoreData.framework */; };
+		E05014871814AB7C00A06560 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E05014851814AB7C00A06560 /* InfoPlist.strings */; };
+		E05014891814AB7C00A06560 /* DuckTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014881814AB7C00A06560 /* DuckTests.m */; };
+		E05014B91814AC9900A06560 /* EditManagedObjCountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E050149A1814AC9900A06560 /* EditManagedObjCountViewController.m */; };
+		E05014BA1814AC9900A06560 /* EditOrderForBottleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E050149D1814AC9900A06560 /* EditOrderForBottleDetailsViewController.m */; };
+		E05014BB1814AC9900A06560 /* EditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E050149F1814AC9900A06560 /* EditTextViewController.m */; };
+		E05014BC1814AC9900A06560 /* HomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A11814AC9900A06560 /* HomeTableViewController.m */; };
+		E05014BD1814AC9900A06560 /* InventorySnapshotForBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A31814AC9900A06560 /* InventorySnapshotForBottle.m */; };
+		E05014BE1814AC9900A06560 /* InventorySnapshotForBottle+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A51814AC9900A06560 /* InventorySnapshotForBottle+Create.m */; };
+		E05014BF1814AC9900A06560 /* NewOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A71814AC9900A06560 /* NewOrderTableViewController.m */; };
+		E05014C01814AC9900A06560 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A91814AC9900A06560 /* Order.m */; };
+		E05014C11814AC9900A06560 /* Order+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014AB1814AC9900A06560 /* Order+Create.m */; };
+		E05014C21814AC9900A06560 /* OrderForBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014AD1814AC9900A06560 /* OrderForBottle.m */; };
+		E05014C31814AC9900A06560 /* OrderForBottle+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014AF1814AC9900A06560 /* OrderForBottle+Create.m */; };
+		E05014C41814AC9900A06560 /* OSXData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E05014B01814AC9900A06560 /* OSXData.sqlite */; };
+		E05014C51814AC9900A06560 /* PickBottleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014B21814AC9900A06560 /* PickBottleTableViewController.m */; };
+		E05014C61814AC9900A06560 /* TakeInventoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014B51814AC9900A06560 /* TakeInventoryTableViewController.m */; };
+		E05014E51814AD7100A06560 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014DF1814AD7100A06560 /* libzbar.a */; };
+		E05014E61814AD7100A06560 /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = E05014E11814AD7100A06560 /* zbar-back.png */; };
+		E05014E71814AD7100A06560 /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = E05014E21814AD7100A06560 /* zbar-help.html */; };
+		E05014E81814AD7100A06560 /* zbar-helpicons.png in Resources */ = {isa = PBXBuildFile; fileRef = E05014E31814AD7100A06560 /* zbar-helpicons.png */; };
+		E05014E91814AD7100A06560 /* zbar-samples.png in Resources */ = {isa = PBXBuildFile; fileRef = E05014E41814AD7100A06560 /* zbar-samples.png */; };
+		E05014F21814AEB500A06560 /* Duck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E05014F01814AEB500A06560 /* Duck.xcdatamodeld */; };
+		E050150F1814AED400A06560 /* AlcoholSubType.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014F41814AED400A06560 /* AlcoholSubType.m */; };
+		E05015101814AED400A06560 /* AlcoholSubType+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014F61814AED400A06560 /* AlcoholSubType+Create.m */; };
+		E05015111814AED400A06560 /* AlcoholSubTypesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014F81814AED400A06560 /* AlcoholSubTypesTableViewController.m */; };
+		E05015121814AED400A06560 /* AlcoholType.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014FA1814AED400A06560 /* AlcoholType.m */; };
+		E05015131814AED400A06560 /* AlcoholType+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014FC1814AED400A06560 /* AlcoholType+Create.m */; };
+		E05015141814AED400A06560 /* AlcoholTypesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014FE1814AED400A06560 /* AlcoholTypesTableViewController.m */; };
+		E05015151814AED400A06560 /* AllSubTypesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05015001814AED400A06560 /* AllSubTypesTableViewController.m */; };
+		E05015161814AED400A06560 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E05015021814AED400A06560 /* AppDelegate.m */; };
+		E05015171814AED400A06560 /* BaseCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05015041814AED400A06560 /* BaseCoreDataTableViewController.m */; };
+		E05015181814AED400A06560 /* Bottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E05015061814AED400A06560 /* Bottle.m */; };
+		E05015191814AED400A06560 /* Bottle+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05015081814AED400A06560 /* Bottle+Create.m */; };
+		E050151A1814AED400A06560 /* BottleDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E050150A1814AED400A06560 /* BottleDetailTableViewController.m */; };
+		E050151B1814AED400A06560 /* BottlesForSubTypeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E050150C1814AED400A06560 /* BottlesForSubTypeTableViewController.m */; };
+		E050151C1814AED400A06560 /* BottlesInOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E050150E1814AED400A06560 /* BottlesInOrderTableViewController.m */; };
+		E050151E1814B0AD00A06560 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E050151D1814B0AD00A06560 /* CoreMedia.framework */; };
+		E05015201814B0B700A06560 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E050151F1814B0B700A06560 /* QuartzCore.framework */; };
+		E05015221814B19400A06560 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E05015211814B19400A06560 /* libiconv.dylib */; };
+		E05C1AAD1814BED900FE57EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E05C1AAC1814BED900FE57EF /* Main.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E05014801814AB7C00A06560 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E05014491814AB7C00A06560 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E05014501814AB7C00A06560;
+			remoteInfo = Duck;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E05014511814AB7C00A06560 /* Duck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Duck.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E05014541814AB7C00A06560 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E05014561814AB7C00A06560 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E05014581814AB7C00A06560 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E050145A1814AB7C00A06560 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		E050145E1814AB7C00A06560 /* Duck-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Duck-Info.plist"; sourceTree = "<group>"; };
+		E05014601814AB7C00A06560 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E05014621814AB7C00A06560 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E05014641814AB7C00A06560 /* Duck-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Duck-Prefix.pch"; sourceTree = "<group>"; };
+		E05014741814AB7C00A06560 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		E050147A1814AB7C00A06560 /* DuckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DuckTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E050147B1814AB7C00A06560 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		E05014841814AB7C00A06560 /* DuckTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DuckTests-Info.plist"; sourceTree = "<group>"; };
+		E05014861814AB7C00A06560 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E05014881814AB7C00A06560 /* DuckTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DuckTests.m; sourceTree = "<group>"; };
+		E05014981814AC9900A06560 /* EditCountDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCountDelegate.h; sourceTree = "<group>"; };
+		E05014991814AC9900A06560 /* EditManagedObjCountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditManagedObjCountViewController.h; sourceTree = "<group>"; };
+		E050149A1814AC9900A06560 /* EditManagedObjCountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditManagedObjCountViewController.m; sourceTree = "<group>"; };
+		E050149B1814AC9900A06560 /* EditNameViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNameViewDelegate.h; sourceTree = "<group>"; };
+		E050149D1814AC9900A06560 /* EditOrderForBottleDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditOrderForBottleDetailsViewController.m; sourceTree = "<group>"; };
+		E050149E1814AC9900A06560 /* EditTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTextViewController.h; sourceTree = "<group>"; };
+		E050149F1814AC9900A06560 /* EditTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTextViewController.m; sourceTree = "<group>"; };
+		E05014A01814AC9900A06560 /* HomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewController.h; sourceTree = "<group>"; };
+		E05014A11814AC9900A06560 /* HomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewController.m; sourceTree = "<group>"; };
+		E05014A21814AC9900A06560 /* InventorySnapshotForBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventorySnapshotForBottle.h; sourceTree = "<group>"; };
+		E05014A31814AC9900A06560 /* InventorySnapshotForBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventorySnapshotForBottle.m; sourceTree = "<group>"; };
+		E05014A41814AC9900A06560 /* InventorySnapshotForBottle+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "InventorySnapshotForBottle+Create.h"; sourceTree = "<group>"; };
+		E05014A51814AC9900A06560 /* InventorySnapshotForBottle+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "InventorySnapshotForBottle+Create.m"; sourceTree = "<group>"; };
+		E05014A61814AC9900A06560 /* NewOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewOrderTableViewController.h; sourceTree = "<group>"; };
+		E05014A71814AC9900A06560 /* NewOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewOrderTableViewController.m; sourceTree = "<group>"; };
+		E05014A81814AC9900A06560 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
+		E05014A91814AC9900A06560 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		E05014AA1814AC9900A06560 /* Order+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Order+Create.h"; sourceTree = "<group>"; };
+		E05014AB1814AC9900A06560 /* Order+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Order+Create.m"; sourceTree = "<group>"; };
+		E05014AC1814AC9900A06560 /* OrderForBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderForBottle.h; sourceTree = "<group>"; };
+		E05014AD1814AC9900A06560 /* OrderForBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderForBottle.m; sourceTree = "<group>"; };
+		E05014AE1814AC9900A06560 /* OrderForBottle+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OrderForBottle+Create.h"; sourceTree = "<group>"; };
+		E05014AF1814AC9900A06560 /* OrderForBottle+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OrderForBottle+Create.m"; sourceTree = "<group>"; };
+		E05014B01814AC9900A06560 /* OSXData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = OSXData.sqlite; sourceTree = "<group>"; };
+		E05014B11814AC9900A06560 /* PickBottleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickBottleTableViewController.h; sourceTree = "<group>"; };
+		E05014B21814AC9900A06560 /* PickBottleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickBottleTableViewController.m; sourceTree = "<group>"; };
+		E05014B31814AC9900A06560 /* SubTypeSelectorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubTypeSelectorDelegate.h; sourceTree = "<group>"; };
+		E05014B41814AC9900A06560 /* TakeInventoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakeInventoryTableViewController.h; sourceTree = "<group>"; };
+		E05014B51814AC9900A06560 /* TakeInventoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakeInventoryTableViewController.m; sourceTree = "<group>"; };
+		E05014CB1814AD7100A06560 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
+		E05014CC1814AD7100A06560 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
+		E05014CD1814AD7100A06560 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		E05014CE1814AD7100A06560 /* ImageScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageScanner.h; sourceTree = "<group>"; };
+		E05014CF1814AD7100A06560 /* Processor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Processor.h; sourceTree = "<group>"; };
+		E05014D01814AD7100A06560 /* Scanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scanner.h; sourceTree = "<group>"; };
+		E05014D11814AD7100A06560 /* Symbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Symbol.h; sourceTree = "<group>"; };
+		E05014D21814AD7100A06560 /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Video.h; sourceTree = "<group>"; };
+		E05014D31814AD7100A06560 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
+		E05014D41814AD7100A06560 /* zbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zbar.h; sourceTree = "<group>"; };
+		E05014D51814AD7100A06560 /* ZBarCameraSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarCameraSimulator.h; sourceTree = "<group>"; };
+		E05014D61814AD7100A06560 /* ZBarCaptureReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarCaptureReader.h; sourceTree = "<group>"; };
+		E05014D71814AD7100A06560 /* ZBarHelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarHelpController.h; sourceTree = "<group>"; };
+		E05014D81814AD7100A06560 /* ZBarImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarImage.h; sourceTree = "<group>"; };
+		E05014D91814AD7100A06560 /* ZBarImageScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarImageScanner.h; sourceTree = "<group>"; };
+		E05014DA1814AD7100A06560 /* ZBarReaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderController.h; sourceTree = "<group>"; };
+		E05014DB1814AD7100A06560 /* ZBarReaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderView.h; sourceTree = "<group>"; };
+		E05014DC1814AD7100A06560 /* ZBarReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderViewController.h; sourceTree = "<group>"; };
+		E05014DD1814AD7100A06560 /* ZBarSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSDK.h; sourceTree = "<group>"; };
+		E05014DE1814AD7100A06560 /* ZBarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSymbol.h; sourceTree = "<group>"; };
+		E05014DF1814AD7100A06560 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
+		E05014E11814AD7100A06560 /* zbar-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-back.png"; sourceTree = "<group>"; };
+		E05014E21814AD7100A06560 /* zbar-help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "zbar-help.html"; sourceTree = "<group>"; };
+		E05014E31814AD7100A06560 /* zbar-helpicons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-helpicons.png"; sourceTree = "<group>"; };
+		E05014E41814AD7100A06560 /* zbar-samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-samples.png"; sourceTree = "<group>"; };
+		E05014F11814AEB500A06560 /* Duck.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Duck.xcdatamodel; sourceTree = "<group>"; };
+		E05014F31814AED400A06560 /* AlcoholSubType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlcoholSubType.h; sourceTree = "<group>"; };
+		E05014F41814AED400A06560 /* AlcoholSubType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlcoholSubType.m; sourceTree = "<group>"; };
+		E05014F51814AED400A06560 /* AlcoholSubType+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AlcoholSubType+Create.h"; sourceTree = "<group>"; };
+		E05014F61814AED400A06560 /* AlcoholSubType+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AlcoholSubType+Create.m"; sourceTree = "<group>"; };
+		E05014F71814AED400A06560 /* AlcoholSubTypesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlcoholSubTypesTableViewController.h; sourceTree = "<group>"; };
+		E05014F81814AED400A06560 /* AlcoholSubTypesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlcoholSubTypesTableViewController.m; sourceTree = "<group>"; };
+		E05014F91814AED400A06560 /* AlcoholType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlcoholType.h; sourceTree = "<group>"; };
+		E05014FA1814AED400A06560 /* AlcoholType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlcoholType.m; sourceTree = "<group>"; };
+		E05014FB1814AED400A06560 /* AlcoholType+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AlcoholType+Create.h"; sourceTree = "<group>"; };
+		E05014FC1814AED400A06560 /* AlcoholType+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AlcoholType+Create.m"; sourceTree = "<group>"; };
+		E05014FD1814AED400A06560 /* AlcoholTypesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlcoholTypesTableViewController.h; sourceTree = "<group>"; };
+		E05014FE1814AED400A06560 /* AlcoholTypesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlcoholTypesTableViewController.m; sourceTree = "<group>"; };
+		E05014FF1814AED400A06560 /* AllSubTypesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllSubTypesTableViewController.h; sourceTree = "<group>"; };
+		E05015001814AED400A06560 /* AllSubTypesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSubTypesTableViewController.m; sourceTree = "<group>"; };
+		E05015011814AED400A06560 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E05015021814AED400A06560 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E05015031814AED400A06560 /* BaseCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCoreDataTableViewController.h; sourceTree = "<group>"; };
+		E05015041814AED400A06560 /* BaseCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCoreDataTableViewController.m; sourceTree = "<group>"; };
+		E05015051814AED400A06560 /* Bottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bottle.h; sourceTree = "<group>"; };
+		E05015061814AED400A06560 /* Bottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bottle.m; sourceTree = "<group>"; };
+		E05015071814AED400A06560 /* Bottle+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bottle+Create.h"; sourceTree = "<group>"; };
+		E05015081814AED400A06560 /* Bottle+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Bottle+Create.m"; sourceTree = "<group>"; };
+		E05015091814AED400A06560 /* BottleDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottleDetailTableViewController.h; sourceTree = "<group>"; };
+		E050150A1814AED400A06560 /* BottleDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottleDetailTableViewController.m; sourceTree = "<group>"; };
+		E050150B1814AED400A06560 /* BottlesForSubTypeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottlesForSubTypeTableViewController.h; sourceTree = "<group>"; };
+		E050150C1814AED400A06560 /* BottlesForSubTypeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottlesForSubTypeTableViewController.m; sourceTree = "<group>"; };
+		E050150D1814AED400A06560 /* BottlesInOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottlesInOrderTableViewController.h; sourceTree = "<group>"; };
+		E050150E1814AED400A06560 /* BottlesInOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottlesInOrderTableViewController.m; sourceTree = "<group>"; };
+		E050151D1814B0AD00A06560 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		E050151F1814B0B700A06560 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E05015211814B19400A06560 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		E05015231814B95B00A06560 /* EditOrderForBottleDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditOrderForBottleDetailsViewController.h; sourceTree = "<group>"; };
+		E05C1AAC1814BED900FE57EF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E050144E1814AB7C00A06560 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E05015221814B19400A06560 /* libiconv.dylib in Frameworks */,
+				E05015201814B0B700A06560 /* QuartzCore.framework in Frameworks */,
+				E050151E1814B0AD00A06560 /* CoreMedia.framework in Frameworks */,
+				E05014571814AB7C00A06560 /* CoreGraphics.framework in Frameworks */,
+				E050145B1814AB7C00A06560 /* CoreData.framework in Frameworks */,
+				E05014E51814AD7100A06560 /* libzbar.a in Frameworks */,
+				E05014591814AB7C00A06560 /* UIKit.framework in Frameworks */,
+				E05014551814AB7C00A06560 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E05014771814AB7C00A06560 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E050147C1814AB7C00A06560 /* XCTest.framework in Frameworks */,
+				E050147F1814AB7C00A06560 /* CoreData.framework in Frameworks */,
+				E050147E1814AB7C00A06560 /* UIKit.framework in Frameworks */,
+				E050147D1814AB7C00A06560 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E05014481814AB7C00A06560 = {
+			isa = PBXGroup;
+			children = (
+				E050145C1814AB7C00A06560 /* Duck */,
+				E05014821814AB7C00A06560 /* DuckTests */,
+				E05014531814AB7C00A06560 /* Frameworks */,
+				E05014521814AB7C00A06560 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E05014521814AB7C00A06560 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E05014511814AB7C00A06560 /* Duck.app */,
+				E050147A1814AB7C00A06560 /* DuckTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E05014531814AB7C00A06560 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E05015211814B19400A06560 /* libiconv.dylib */,
+				E050151F1814B0B700A06560 /* QuartzCore.framework */,
+				E050151D1814B0AD00A06560 /* CoreMedia.framework */,
+				E05014541814AB7C00A06560 /* Foundation.framework */,
+				E05014561814AB7C00A06560 /* CoreGraphics.framework */,
+				E05014581814AB7C00A06560 /* UIKit.framework */,
+				E050145A1814AB7C00A06560 /* CoreData.framework */,
+				E050147B1814AB7C00A06560 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E050145C1814AB7C00A06560 /* Duck */ = {
+			isa = PBXGroup;
+			children = (
+				E05C1AAC1814BED900FE57EF /* Main.storyboard */,
+				E05014F01814AEB500A06560 /* Duck.xcdatamodeld */,
+				E05014B01814AC9900A06560 /* OSXData.sqlite */,
+				E05015011814AED400A06560 /* AppDelegate.h */,
+				E05015021814AED400A06560 /* AppDelegate.m */,
+				E05014EB1814ADB400A06560 /* Controllers */,
+				E05014EF1814AE2B00A06560 /* Protocals */,
+				E05014EE1814AE1800A06560 /* Helpers */,
+				E05014EC1814ADE600A06560 /* DataClasses */,
+				E05014741814AB7C00A06560 /* Images.xcassets */,
+				E05014EA1814AD8100A06560 /* Vendor */,
+				E050145D1814AB7C00A06560 /* Supporting Files */,
+			);
+			path = Duck;
+			sourceTree = "<group>";
+		};
+		E050145D1814AB7C00A06560 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E050145E1814AB7C00A06560 /* Duck-Info.plist */,
+				E050145F1814AB7C00A06560 /* InfoPlist.strings */,
+				E05014621814AB7C00A06560 /* main.m */,
+				E05014641814AB7C00A06560 /* Duck-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E05014821814AB7C00A06560 /* DuckTests */ = {
+			isa = PBXGroup;
+			children = (
+				E05014881814AB7C00A06560 /* DuckTests.m */,
+				E05014831814AB7C00A06560 /* Supporting Files */,
+			);
+			path = DuckTests;
+			sourceTree = "<group>";
+		};
+		E05014831814AB7C00A06560 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E05014841814AB7C00A06560 /* DuckTests-Info.plist */,
+				E05014851814AB7C00A06560 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E05014C71814AD7100A06560 /* ZBarSDK */ = {
+			isa = PBXGroup;
+			children = (
+				E05014C81814AD7100A06560 /* Headers */,
+				E05014DF1814AD7100A06560 /* libzbar.a */,
+				E05014E01814AD7100A06560 /* Resources */,
+			);
+			path = ZBarSDK;
+			sourceTree = "<group>";
+		};
+		E05014C81814AD7100A06560 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				E05014C91814AD7100A06560 /* ZBarSDK */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		E05014C91814AD7100A06560 /* ZBarSDK */ = {
+			isa = PBXGroup;
+			children = (
+				E05014CA1814AD7100A06560 /* zbar */,
+				E05014D41814AD7100A06560 /* zbar.h */,
+				E05014D51814AD7100A06560 /* ZBarCameraSimulator.h */,
+				E05014D61814AD7100A06560 /* ZBarCaptureReader.h */,
+				E05014D71814AD7100A06560 /* ZBarHelpController.h */,
+				E05014D81814AD7100A06560 /* ZBarImage.h */,
+				E05014D91814AD7100A06560 /* ZBarImageScanner.h */,
+				E05014DA1814AD7100A06560 /* ZBarReaderController.h */,
+				E05014DB1814AD7100A06560 /* ZBarReaderView.h */,
+				E05014DC1814AD7100A06560 /* ZBarReaderViewController.h */,
+				E05014DD1814AD7100A06560 /* ZBarSDK.h */,
+				E05014DE1814AD7100A06560 /* ZBarSymbol.h */,
+			);
+			path = ZBarSDK;
+			sourceTree = "<group>";
+		};
+		E05014CA1814AD7100A06560 /* zbar */ = {
+			isa = PBXGroup;
+			children = (
+				E05014CB1814AD7100A06560 /* Decoder.h */,
+				E05014CC1814AD7100A06560 /* Exception.h */,
+				E05014CD1814AD7100A06560 /* Image.h */,
+				E05014CE1814AD7100A06560 /* ImageScanner.h */,
+				E05014CF1814AD7100A06560 /* Processor.h */,
+				E05014D01814AD7100A06560 /* Scanner.h */,
+				E05014D11814AD7100A06560 /* Symbol.h */,
+				E05014D21814AD7100A06560 /* Video.h */,
+				E05014D31814AD7100A06560 /* Window.h */,
+			);
+			path = zbar;
+			sourceTree = "<group>";
+		};
+		E05014E01814AD7100A06560 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E05014E11814AD7100A06560 /* zbar-back.png */,
+				E05014E21814AD7100A06560 /* zbar-help.html */,
+				E05014E31814AD7100A06560 /* zbar-helpicons.png */,
+				E05014E41814AD7100A06560 /* zbar-samples.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E05014EA1814AD8100A06560 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				E05014C71814AD7100A06560 /* ZBarSDK */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		E05014EB1814ADB400A06560 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E05014A01814AC9900A06560 /* HomeTableViewController.h */,
+				E05014A11814AC9900A06560 /* HomeTableViewController.m */,
+				E05014F71814AED400A06560 /* AlcoholSubTypesTableViewController.h */,
+				E05014F81814AED400A06560 /* AlcoholSubTypesTableViewController.m */,
+				E05014FD1814AED400A06560 /* AlcoholTypesTableViewController.h */,
+				E05014FE1814AED400A06560 /* AlcoholTypesTableViewController.m */,
+				E05014FF1814AED400A06560 /* AllSubTypesTableViewController.h */,
+				E05015001814AED400A06560 /* AllSubTypesTableViewController.m */,
+				E05015031814AED400A06560 /* BaseCoreDataTableViewController.h */,
+				E05015041814AED400A06560 /* BaseCoreDataTableViewController.m */,
+				E05015091814AED400A06560 /* BottleDetailTableViewController.h */,
+				E050150A1814AED400A06560 /* BottleDetailTableViewController.m */,
+				E050150B1814AED400A06560 /* BottlesForSubTypeTableViewController.h */,
+				E050150C1814AED400A06560 /* BottlesForSubTypeTableViewController.m */,
+				E050150D1814AED400A06560 /* BottlesInOrderTableViewController.h */,
+				E050150E1814AED400A06560 /* BottlesInOrderTableViewController.m */,
+				E05015231814B95B00A06560 /* EditOrderForBottleDetailsViewController.h */,
+				E050149D1814AC9900A06560 /* EditOrderForBottleDetailsViewController.m */,
+				E05014A61814AC9900A06560 /* NewOrderTableViewController.h */,
+				E05014A71814AC9900A06560 /* NewOrderTableViewController.m */,
+				E05014B11814AC9900A06560 /* PickBottleTableViewController.h */,
+				E05014B21814AC9900A06560 /* PickBottleTableViewController.m */,
+				E05014B41814AC9900A06560 /* TakeInventoryTableViewController.h */,
+				E05014B51814AC9900A06560 /* TakeInventoryTableViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		E05014EC1814ADE600A06560 /* DataClasses */ = {
+			isa = PBXGroup;
+			children = (
+				E05014F31814AED400A06560 /* AlcoholSubType.h */,
+				E05014F41814AED400A06560 /* AlcoholSubType.m */,
+				E05014F51814AED400A06560 /* AlcoholSubType+Create.h */,
+				E05014F61814AED400A06560 /* AlcoholSubType+Create.m */,
+				E05014F91814AED400A06560 /* AlcoholType.h */,
+				E05014FA1814AED400A06560 /* AlcoholType.m */,
+				E05014FB1814AED400A06560 /* AlcoholType+Create.h */,
+				E05014FC1814AED400A06560 /* AlcoholType+Create.m */,
+				E05015051814AED400A06560 /* Bottle.h */,
+				E05015061814AED400A06560 /* Bottle.m */,
+				E05015071814AED400A06560 /* Bottle+Create.h */,
+				E05015081814AED400A06560 /* Bottle+Create.m */,
+				E05014A21814AC9900A06560 /* InventorySnapshotForBottle.h */,
+				E05014A31814AC9900A06560 /* InventorySnapshotForBottle.m */,
+				E05014A41814AC9900A06560 /* InventorySnapshotForBottle+Create.h */,
+				E05014A51814AC9900A06560 /* InventorySnapshotForBottle+Create.m */,
+				E05014A81814AC9900A06560 /* Order.h */,
+				E05014A91814AC9900A06560 /* Order.m */,
+				E05014AA1814AC9900A06560 /* Order+Create.h */,
+				E05014AB1814AC9900A06560 /* Order+Create.m */,
+				E05014AC1814AC9900A06560 /* OrderForBottle.h */,
+				E05014AD1814AC9900A06560 /* OrderForBottle.m */,
+				E05014AE1814AC9900A06560 /* OrderForBottle+Create.h */,
+				E05014AF1814AC9900A06560 /* OrderForBottle+Create.m */,
+			);
+			name = DataClasses;
+			sourceTree = "<group>";
+		};
+		E05014EE1814AE1800A06560 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E050149E1814AC9900A06560 /* EditTextViewController.h */,
+				E050149F1814AC9900A06560 /* EditTextViewController.m */,
+				E05014991814AC9900A06560 /* EditManagedObjCountViewController.h */,
+				E050149A1814AC9900A06560 /* EditManagedObjCountViewController.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		E05014EF1814AE2B00A06560 /* Protocals */ = {
+			isa = PBXGroup;
+			children = (
+				E05014981814AC9900A06560 /* EditCountDelegate.h */,
+				E050149B1814AC9900A06560 /* EditNameViewDelegate.h */,
+				E05014B31814AC9900A06560 /* SubTypeSelectorDelegate.h */,
+			);
+			name = Protocals;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E05014501814AB7C00A06560 /* Duck */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E050148C1814AB7C00A06560 /* Build configuration list for PBXNativeTarget "Duck" */;
+			buildPhases = (
+				E050144D1814AB7C00A06560 /* Sources */,
+				E050144E1814AB7C00A06560 /* Frameworks */,
+				E050144F1814AB7C00A06560 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Duck;
+			productName = Duck;
+			productReference = E05014511814AB7C00A06560 /* Duck.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E05014791814AB7C00A06560 /* DuckTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E050148F1814AB7C00A06560 /* Build configuration list for PBXNativeTarget "DuckTests" */;
+			buildPhases = (
+				E05014761814AB7C00A06560 /* Sources */,
+				E05014771814AB7C00A06560 /* Frameworks */,
+				E05014781814AB7C00A06560 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E05014811814AB7C00A06560 /* PBXTargetDependency */,
+			);
+			name = DuckTests;
+			productName = DuckTests;
+			productReference = E050147A1814AB7C00A06560 /* DuckTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E05014491814AB7C00A06560 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Scott Antipa";
+				TargetAttributes = {
+					E05014791814AB7C00A06560 = {
+						TestTargetID = E05014501814AB7C00A06560;
+					};
+				};
+			};
+			buildConfigurationList = E050144C1814AB7C00A06560 /* Build configuration list for PBXProject "Duck" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E05014481814AB7C00A06560;
+			productRefGroup = E05014521814AB7C00A06560 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E05014501814AB7C00A06560 /* Duck */,
+				E05014791814AB7C00A06560 /* DuckTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E050144F1814AB7C00A06560 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E05014C41814AC9900A06560 /* OSXData.sqlite in Resources */,
+				E05014E71814AD7100A06560 /* zbar-help.html in Resources */,
+				E05014E91814AD7100A06560 /* zbar-samples.png in Resources */,
+				E05014E81814AD7100A06560 /* zbar-helpicons.png in Resources */,
+				E05014E61814AD7100A06560 /* zbar-back.png in Resources */,
+				E05014751814AB7C00A06560 /* Images.xcassets in Resources */,
+				E05C1AAD1814BED900FE57EF /* Main.storyboard in Resources */,
+				E05014611814AB7C00A06560 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E05014781814AB7C00A06560 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E05014871814AB7C00A06560 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E050144D1814AB7C00A06560 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E050150F1814AED400A06560 /* AlcoholSubType.m in Sources */,
+				E05014C31814AC9900A06560 /* OrderForBottle+Create.m in Sources */,
+				E050151B1814AED400A06560 /* BottlesForSubTypeTableViewController.m in Sources */,
+				E05015131814AED400A06560 /* AlcoholType+Create.m in Sources */,
+				E05015171814AED400A06560 /* BaseCoreDataTableViewController.m in Sources */,
+				E05014BA1814AC9900A06560 /* EditOrderForBottleDetailsViewController.m in Sources */,
+				E05015151814AED400A06560 /* AllSubTypesTableViewController.m in Sources */,
+				E050151A1814AED400A06560 /* BottleDetailTableViewController.m in Sources */,
+				E05014C51814AC9900A06560 /* PickBottleTableViewController.m in Sources */,
+				E05015111814AED400A06560 /* AlcoholSubTypesTableViewController.m in Sources */,
+				E05014BE1814AC9900A06560 /* InventorySnapshotForBottle+Create.m in Sources */,
+				E05014BF1814AC9900A06560 /* NewOrderTableViewController.m in Sources */,
+				E05015191814AED400A06560 /* Bottle+Create.m in Sources */,
+				E05014B91814AC9900A06560 /* EditManagedObjCountViewController.m in Sources */,
+				E05015181814AED400A06560 /* Bottle.m in Sources */,
+				E05014C01814AC9900A06560 /* Order.m in Sources */,
+				E05014BC1814AC9900A06560 /* HomeTableViewController.m in Sources */,
+				E05014F21814AEB500A06560 /* Duck.xcdatamodeld in Sources */,
+				E05015141814AED400A06560 /* AlcoholTypesTableViewController.m in Sources */,
+				E05014BB1814AC9900A06560 /* EditTextViewController.m in Sources */,
+				E05014C61814AC9900A06560 /* TakeInventoryTableViewController.m in Sources */,
+				E05015101814AED400A06560 /* AlcoholSubType+Create.m in Sources */,
+				E05015161814AED400A06560 /* AppDelegate.m in Sources */,
+				E05014C21814AC9900A06560 /* OrderForBottle.m in Sources */,
+				E05015121814AED400A06560 /* AlcoholType.m in Sources */,
+				E05014C11814AC9900A06560 /* Order+Create.m in Sources */,
+				E050151C1814AED400A06560 /* BottlesInOrderTableViewController.m in Sources */,
+				E05014BD1814AC9900A06560 /* InventorySnapshotForBottle.m in Sources */,
+				E05014631814AB7C00A06560 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E05014761814AB7C00A06560 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E05014891814AB7C00A06560 /* DuckTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E05014811814AB7C00A06560 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E05014501814AB7C00A06560 /* Duck */;
+			targetProxy = E05014801814AB7C00A06560 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E050145F1814AB7C00A06560 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E05014601814AB7C00A06560 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E05014851814AB7C00A06560 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E05014861814AB7C00A06560 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E050148A1814AB7C00A06560 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		E050148B1814AB7C00A06560 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E050148D1814AB7C00A06560 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Duck/Duck-Prefix.pch";
+				INFOPLIST_FILE = "Duck/Duck-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/scottantipa/dev/duck/Duck/Duck/ZBarSDK,
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = armv7;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E050148E1814AB7C00A06560 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Duck/Duck-Prefix.pch";
+				INFOPLIST_FILE = "Duck/Duck-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/scottantipa/dev/duck/Duck/Duck/ZBarSDK,
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = armv7;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		E05014901814AB7C00A06560 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Duck.app/Duck";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Duck/Duck-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "DuckTests/DuckTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		E05014911814AB7C00A06560 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Duck.app/Duck";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Duck/Duck-Prefix.pch";
+				INFOPLIST_FILE = "DuckTests/DuckTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E050144C1814AB7C00A06560 /* Build configuration list for PBXProject "Duck" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E050148A1814AB7C00A06560 /* Debug */,
+				E050148B1814AB7C00A06560 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E050148C1814AB7C00A06560 /* Build configuration list for PBXNativeTarget "Duck" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E050148D1814AB7C00A06560 /* Debug */,
+				E050148E1814AB7C00A06560 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E050148F1814AB7C00A06560 /* Build configuration list for PBXNativeTarget "DuckTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E05014901814AB7C00A06560 /* Debug */,
+				E05014911814AB7C00A06560 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E05014F01814AEB500A06560 /* Duck.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E05014F11814AEB500A06560 /* Duck.xcdatamodel */,
+			);
+			currentVersion = E05014F11814AEB500A06560 /* Duck.xcdatamodel */;
+			path = Duck.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = E05014491814AB7C00A06560 /* Project object */;
+}
