@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E000D7411817B0F1006232A8 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014DF1814AD7100A06560 /* libzbar.a */; };
 		E05014551814AB7C00A06560 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014541814AB7C00A06560 /* Foundation.framework */; };
 		E05014571814AB7C00A06560 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014561814AB7C00A06560 /* CoreGraphics.framework */; };
 		E05014591814AB7C00A06560 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014581814AB7C00A06560 /* UIKit.framework */; };
@@ -34,7 +35,6 @@
 		E05014C41814AC9900A06560 /* OSXData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E05014B01814AC9900A06560 /* OSXData.sqlite */; };
 		E05014C51814AC9900A06560 /* PickBottleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014B21814AC9900A06560 /* PickBottleTableViewController.m */; };
 		E05014C61814AC9900A06560 /* TakeInventoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014B51814AC9900A06560 /* TakeInventoryTableViewController.m */; };
-		E05014E51814AD7100A06560 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014DF1814AD7100A06560 /* libzbar.a */; };
 		E05014E61814AD7100A06560 /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = E05014E11814AD7100A06560 /* zbar-back.png */; };
 		E05014E71814AD7100A06560 /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = E05014E21814AD7100A06560 /* zbar-help.html */; };
 		E05014E81814AD7100A06560 /* zbar-helpicons.png in Resources */ = {isa = PBXBuildFile; fileRef = E05014E31814AD7100A06560 /* zbar-helpicons.png */; };
@@ -181,12 +181,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E000D7411817B0F1006232A8 /* libzbar.a in Frameworks */,
 				E05015221814B19400A06560 /* libiconv.dylib in Frameworks */,
 				E05015201814B0B700A06560 /* QuartzCore.framework in Frameworks */,
 				E050151E1814B0AD00A06560 /* CoreMedia.framework in Frameworks */,
 				E05014571814AB7C00A06560 /* CoreGraphics.framework in Frameworks */,
 				E050145B1814AB7C00A06560 /* CoreData.framework in Frameworks */,
-				E05014E51814AD7100A06560 /* libzbar.a in Frameworks */,
 				E05014591814AB7C00A06560 /* UIKit.framework in Frameworks */,
 				E05014551814AB7C00A06560 /* Foundation.framework in Frameworks */,
 			);
@@ -699,6 +699,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/scottantipa/dev/duck/Duck/Duck/ZBarSDK,
+					/Users/scottantipa/dev/duck/DuckiPhone/Duck/ZBarSDK,
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -719,6 +720,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/scottantipa/dev/duck/Duck/Duck/ZBarSDK,
+					/Users/scottantipa/dev/duck/DuckiPhone/Duck/ZBarSDK,
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";

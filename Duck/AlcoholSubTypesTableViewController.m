@@ -34,7 +34,6 @@
     
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"AlcoholSubType"];
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"parent.name = %@", self.parentType.name];
-    NSLog(@"parent type: %@", self.parentType.name);
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
@@ -46,14 +45,14 @@
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     
-    // get the results and print them
-    NSError *err;
-    NSArray *fetchedObjects = [self.parentType.managedObjectContext executeFetchRequest:fetchRequest error:&err];
-    NSLog(@"Count of subtypes: %d", fetchedObjects.count);
-    for (AlcoholSubType *subType in fetchedObjects) {
-        NSLog(@"SubType Name: %@", subType.name);
-    }
-    
+    // For Testing...
+//    NSError *err;
+//    NSArray *fetchedObjects = [self.parentType.managedObjectContext executeFetchRequest:fetchRequest error:&err];
+//    NSLog(@"Count of subtypes: %d", fetchedObjects.count);
+//    for (AlcoholSubType *subType in fetchedObjects) {
+//        NSLog(@"SubType Name: %@", subType.name);
+//    }
+
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.parentType.managedObjectContext sectionNameKeyPath:nil cacheName:nil];

@@ -40,11 +40,11 @@
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     // List them out for testing
-    NSError * err = nil;
-    NSArray * fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&err];
-    for (AlcoholType *type in fetchedObjects) {
-        NSLog(@"Type Name: %@", type.name);
-    }
+//    NSError * err = nil;
+//    NSArray * fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&err];
+//    for (AlcoholType *type in fetchedObjects) {
+//        NSLog(@"Type Name: %@", type.name);
+//    }
 
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
