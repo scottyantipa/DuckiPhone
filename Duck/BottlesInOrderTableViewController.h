@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 #import "Order+Create.h"
+#import "Vendor.h"
 
-@interface BottlesInOrderTableViewController : UITableViewController
+@interface BottlesInOrderTableViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 @property (strong, nonatomic) Order * order;
+@property (nonatomic, strong) NSArray * sortedBottlesInOrder;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @end

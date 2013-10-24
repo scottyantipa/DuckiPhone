@@ -11,6 +11,7 @@
 #import "BottleDetailTableViewController.h"
 #import "NewOrderTableViewController.h"
 #import "Order+Create.h"
+#import "PastOrdersTableViewController.h"
 
 @interface HomeTableViewController ()
 
@@ -27,7 +28,7 @@
     }
     else if ([segue.identifier isEqualToString:@"New Bottle"]) {
         Bottle *bottle = [Bottle newBottleForName:@"New Bottle" inManagedObjectContext:_managedObjectContext];
-        [segue.destinationViewController setBottleInfo:bottle];
+        [segue.destinationViewController setBottle:bottle];
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
     }
     else if ([segue.identifier isEqualToString:@"Take Inventory"]) {
@@ -37,6 +38,10 @@
         Order * order = [Order newOrderForDate:[NSDate date] inManagedObjectContext:_managedObjectContext];
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
         [segue.destinationViewController setOrder:order];
+    }
+    else if ([segue.identifier isEqualToString:@"Show Past Orders Segue ID"]) {
+        PastOrdersTableViewController * vc = [segue destinationViewController];
+        vc.managedObjectContext = _managedObjectContext;
     }
 }
 
@@ -61,7 +66,7 @@
 //    BottleDetailTableViewController * bottleTVC = [BottleDetailTableViewController new];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle: nil];
     BottleDetailTableViewController * bottleTVC = [storyboard instantiateViewControllerWithIdentifier:@"BottleDetailStoryBoardID"];
-    [bottleTVC setBottleInfo:bottle];
+    [bottleTVC setBottle:bottle];
     [bottleTVC setManagedObjectContext:_managedObjectContext];
     [self.navigationController pushViewController:bottleTVC animated:YES];
     

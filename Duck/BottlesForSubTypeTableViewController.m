@@ -85,7 +85,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     Bottle *bottle = [self.fetchedResultsController objectAtIndexPath:indexPath];
     if ([segue.destinationViewController respondsToSelector:@selector(setBottleInfo:)]) {
-        [segue.destinationViewController setBottleInfo:bottle];
+        [segue.destinationViewController setBottle:bottle];
         [segue.destinationViewController setManagedObjectContext:self.subType.managedObjectContext];
     }
 }

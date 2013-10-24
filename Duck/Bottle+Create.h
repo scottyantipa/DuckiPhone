@@ -7,6 +7,7 @@
 //
 
 #import "Bottle.h"
+#import "OrderForBottle+Create.h"
 
 @interface Bottle (Create)
 +(NSOrderedSet *)whiteList;
@@ -15,4 +16,5 @@
 +(Bottle *)newBottleForName:(NSString *)barcode inManagedObjectContext:(NSManagedObjectContext *)context;
 +(Bottle *)newBottleForBarcode:(NSString *)barcode inManagedObjectContext:(NSManagedObjectContext *)context;
 +(Bottle *)newBlankBottleInContext:(NSManagedObjectContext *)context;
++(OrderForBottle *)mostRecentOrderForBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
 @end

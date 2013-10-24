@@ -99,5 +99,25 @@
     }
     return bottle;
 }
-
++(OrderForBottle *)mostRecentOrderForBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"OrderForBottle" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"whichBottle.name = %@", bottle.name];
+    [fetchRequest setPredicate:predicate];
+    
+    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"whichOrder.date" ascending:YES];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // We only want the most recent one
+    [fetchRequest setFetchBatchSize:1];
+    
+    NSError * err = nil;
+    NSArray * fetchedObjects = [context executeFetchRequest:fetchRequest error:&err];
+    OrderForBottle * orderForBottle = [fetchedObjects lastObject];
+    
+    return orderForBottle;
+}
 @end

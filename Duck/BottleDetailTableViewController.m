@@ -20,18 +20,17 @@
 
 @implementation BottleDetailTableViewController
 
-@synthesize bottleInfo = _bottleInfo;
+@synthesize bottle = bottle;
 @synthesize whiteList = _whiteList;
 @synthesize managedObjectContext = _managedObjectContext;
 
-
 -(void)viewDidLoad
 {
-    if (!_bottleInfo.name) {
+    if (!bottle.name) {
         self.title = @"New Bottle";
     }
     else {
-        self.title = _bottleInfo.name;
+        self.title = bottle.name;
     }
     self.whiteList = [Bottle whiteList];
 }
@@ -41,7 +40,7 @@
 }
 
 -(void)setBottleInfo:(Bottle *)bottleInfo {
-    _bottleInfo = bottleInfo;
+    bottle = bottleInfo;
 }
 
 -(NSNumber *)countOfBottle {
@@ -50,7 +49,7 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"InventorySnapshotForBottle" inManagedObjectContext:_managedObjectContext];
     [fetchRequest setEntity:entity];
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"whichBottle.name = %@", _bottleInfo.name];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"whichBottle.name = %@", bottle.name];
     [fetchRequest setPredicate:predicate];
     
     NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
@@ -93,10 +92,10 @@
     NSString *nameForProperty = [self nameForProperty:property];
     cell.detailTextLabel.text = nameForProperty;
     if ([property isEqualToString:@"subType"]) {
-        if (!_bottleInfo.subType) {
+        if (!bottle.subType) {
             cell.textLabel.text = @"Enter Category";
         } else {
-            cell.textLabel.text = [_bottleInfo.subType name];
+            cell.textLabel.text = [bottle.subType name];
         }
     }
     else if ([property isEqualToString:@"count"]) {
@@ -107,11 +106,11 @@
         }
     }
     else if ([property isEqualToString:@"barcode"]) {
-        NSNumber * barcode = _bottleInfo.barcode;
+        NSNumber * barcode = bottle.barcode;
         cell.textLabel.text = [NSString stringWithFormat:@"%@", barcode];
     }
     else {
-        cell.textLabel.text = [_bottleInfo valueForKey:property];
+        cell.textLabel.text = [bottle valueForKey:property];
     }
 }
 
@@ -139,6 +138,11 @@
         EditManagedObjCountViewController * editCountView = [segue destinationViewController];
         editCountView.delegate = self;
     }
+    else if ([[segue identifier] isEqualToString:@"Show Create Order View Segue ID"]) {
+        CreateMessageToVendorForOneBottleViewController * vc = [segue destinationViewController];
+        vc.managedObjectContext = _managedObjectContext;
+        vc.bottle = bottle;
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -160,7 +164,7 @@
 
 -(void)didFinishSelectingSubType:(AlcoholSubType *)subType
 {
-    _bottleInfo.subType = subType;
+    bottle.subType = subType;
     NSError *error;
     if (![_managedObjectContext save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -171,18 +175,18 @@
 
 -(void)didFinishEditingText:(NSString *)name
 {
-    _bottleInfo.name = name;
+    bottle.name = name;
     self.title = name;
     [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(NSString *)textForNameView {
-    return _bottleInfo.name;
+    return bottle.name;
 }
 
 -(void)didFinishEditingCount:(float *)count forObject:(id)obj {
-    [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:[NSDate date] withCount:count forBottle:_bottleInfo inManagedObjectContext:_managedObjectContext];
+    [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:[NSDate date] withCount:count forBottle:bottle inManagedObjectContext:_managedObjectContext];
     [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -195,9 +199,5 @@
 }
 
 #pragma Actions and Outlets
-- (IBAction)didPressDeleteButton:(id)sender {
-    [_managedObjectContext deleteObject:_bottleInfo];
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 @end

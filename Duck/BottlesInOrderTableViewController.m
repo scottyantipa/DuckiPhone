@@ -19,10 +19,15 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize order = _order;
+@synthesize sortedBottlesInOrder = _sortedBottlesInOrder;
 
 - (void)viewDidLoad
 {
     self.title = @"Bottles in Order";
+    NSSet * bottlesInOrder = _order.ordersByBottle;
+    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"whichBottle.name" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    _sortedBottlesInOrder = [bottlesInOrder sortedArrayUsingDescriptors:sortDescriptors];
     [super viewDidLoad];
 
 }
@@ -33,13 +38,6 @@
 
 -(void)setOrder:(Order *)order {
     _order = order;
-}
-
--(NSArray *)getSortedBottlesInOrder {
-    NSSet * bottlesInOrder = _order.ordersByBottle;
-    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"whichBottle.name" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
-   return [bottlesInOrder sortedArrayUsingDescriptors:sortDescriptors];
 }
 
 #pragma mark - Table view data source
@@ -59,8 +57,8 @@
 {
     static NSString *CellIdentifier = @"Bottles in New Order CellID";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    NSArray * sortedBottleOrders = [Order getSortedBottlesInOrder:_order];
-    OrderForBottle * orderForBottle = [sortedBottleOrders objectAtIndex:indexPath.row];
+    
+    OrderForBottle * orderForBottle = [_sortedBottlesInOrder objectAtIndex:indexPath.row];
     cell.textLabel.text = orderForBottle.whichBottle.name;
     NSMutableString * priceStr = [NSMutableString stringWithFormat:@"Enter Price"];
     if (orderForBottle.unitPrice) {
@@ -91,6 +89,37 @@
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
         [segue.destinationViewController setOrderForBottle:orderForBottle];
     }
+}
+
+-(IBAction)didTouchReOrderButton:(id)sender
+{
+    // Create a mail view controller to re-order this
+    // Will need to iterate through each bottle snapshot and produce a string
+    // Use the order.whichVendor to get email, name, etc.
+    NSString * vendorName = _order.whichVendor.name;
+    NSString * greeting = [NSString stringWithFormat:@"Hello %@,\n\nI would like to place an order with you as described below:", vendorName];
+    
+    NSMutableArray * bottleStrings = [[NSMutableArray alloc] init];
+    for (OrderForBottle * orderForBottle in _sortedBottlesInOrder) {
+        // Create the string for this bottle order (bottle name, price, quantity)
+        NSString * name = [NSString stringWithFormat:@"Bottle: %@", orderForBottle.whichBottle.name];
+        NSString * quantity = [NSString stringWithFormat:@"Qty: %g", [orderForBottle.quantity floatValue]];
+        NSString * price = [NSString stringWithFormat:@"Unit Price: %g", [orderForBottle.unitPrice floatValue]];
+        NSString * blockForBottle = [NSString stringWithFormat:@"%@\n%@\n%@", name, quantity, price];
+        
+        [bottleStrings addObject:blockForBottle];
+    }
+    
+    NSString * allBottles = [bottleStrings componentsJoinedByString:@"\n\n"];
+    NSString * signOff = [NSString stringWithFormat:@"Thank you. \n\nPowered by Duck Rows"];
+    
+    NSString * body = [NSString stringWithFormat:@"%@\n\n%@\n\n%@", greeting, allBottles, signOff];
+    
+    MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+    mailViewController.mailComposeDelegate = self;
+    [mailViewController setSubject:@"New Order"];
+    [mailViewController setMessageBody:body isHTML:NO];
+    [self presentViewController:mailViewController animated:YES completion:nil];
 }
 
 @end
