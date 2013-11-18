@@ -24,16 +24,16 @@
 - (void)viewDidLoad
 {
     self.title = @"Bottles in Order";
-    NSSet * bottlesInOrder = _order.ordersByBottle;
-    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"whichBottle.name" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    _sortedBottlesInOrder = [bottlesInOrder sortedArrayUsingDescriptors:sortDescriptors];
     [super viewDidLoad];
 
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [self.tableView reloadData];
+    NSSet * bottlesInOrder = _order.ordersByBottle;
+    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"whichBottle.name" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    _sortedBottlesInOrder = [bottlesInOrder sortedArrayUsingDescriptors:sortDescriptors];
 }
 
 -(void)setOrder:(Order *)order {
@@ -93,7 +93,7 @@
 
 -(IBAction)didTouchReOrderButton:(id)sender
 {
-    // Create a mail view controller to re-order this
+    // Create a mail view controller to order from the vendor
     // Will need to iterate through each bottle snapshot and produce a string
     // Use the order.whichVendor to get email, name, etc.
     NSString * vendorName = _order.whichVendor.name;

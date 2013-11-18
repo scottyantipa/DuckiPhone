@@ -32,7 +32,7 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"Show Bottles in Order CellID"]) {
+    if ([segue.identifier isEqualToString:@"Show Bottles in Order Segue ID"]) {
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
         [segue.destinationViewController setOrder:_order];
     }
@@ -53,13 +53,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // There will need to be 3 rows:  Bottles in Order, Date, Total Amount
-    static NSString *CellIdentifier = @"New Order CellID";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    NSString * cellID = [NSString stringWithFormat:@"New Order CellID"];
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     NSString * labelText;
     NSString * detailText;
     if (indexPath.row == 0) {
         labelText = [NSString stringWithFormat:@"%d", _order.ordersByBottle.count];
         detailText = [NSString stringWithFormat:@"Bottles in this order"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if (indexPath.row == 1) {
         labelText = [NSString stringWithFormat:@"$%g", [Order totalAmountOfOrder:_order]];
         detailText = [NSString stringWithFormat:@"Total Amount"];
@@ -82,8 +83,8 @@
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) { // its the "Bottles in Order" cell
-        [self performSegueWithIdentifier:@"Show Bottles in Order CellID" sender:nil];
+    if (indexPath.row == 0) { // its the "Bottles in Order" cell
+        [self performSegueWithIdentifier:@"Show Bottles in Order Segue ID" sender:nil];
     } else {
         return; // not working, all of the cells perform the segue above
     }

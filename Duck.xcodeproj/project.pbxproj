@@ -31,7 +31,6 @@
 		E05014C11814AC9900A06560 /* Order+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014AB1814AC9900A06560 /* Order+Create.m */; };
 		E05014C21814AC9900A06560 /* OrderForBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014AD1814AC9900A06560 /* OrderForBottle.m */; };
 		E05014C31814AC9900A06560 /* OrderForBottle+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014AF1814AC9900A06560 /* OrderForBottle+Create.m */; };
-		E05014C41814AC9900A06560 /* OSXData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E05014B01814AC9900A06560 /* OSXData.sqlite */; };
 		E05014C51814AC9900A06560 /* PickBottleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014B21814AC9900A06560 /* PickBottleTableViewController.m */; };
 		E05014C61814AC9900A06560 /* TakeInventoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014B51814AC9900A06560 /* TakeInventoryTableViewController.m */; };
 		E05014E61814AD7100A06560 /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = E05014E11814AD7100A06560 /* zbar-back.png */; };
@@ -57,6 +56,7 @@
 		E05015201814B0B700A06560 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E050151F1814B0B700A06560 /* QuartzCore.framework */; };
 		E05015221814B19400A06560 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E05015211814B19400A06560 /* libiconv.dylib */; };
 		E05C1AAD1814BED900FE57EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E05C1AAC1814BED900FE57EF /* Main.storyboard */; };
+		E06010D7181EC90A00B5FEA8 /* OSXData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E06010D6181EC90A00B5FEA8 /* OSXData.sqlite */; };
 		E082728518198DDD007A2977 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E082728418198DDD007A2977 /* MessageUI.framework */; };
 		E0827288181991DA007A2977 /* CreateMessageToVendorForOneBottleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0827287181991DA007A2977 /* CreateMessageToVendorForOneBottleViewController.m */; };
 		E082728B1819ACE3007A2977 /* PastOrdersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E082728A1819ACE3007A2977 /* PastOrdersTableViewController.m */; };
@@ -111,7 +111,6 @@
 		E05014AD1814AC9900A06560 /* OrderForBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderForBottle.m; sourceTree = "<group>"; };
 		E05014AE1814AC9900A06560 /* OrderForBottle+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OrderForBottle+Create.h"; sourceTree = "<group>"; };
 		E05014AF1814AC9900A06560 /* OrderForBottle+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OrderForBottle+Create.m"; sourceTree = "<group>"; };
-		E05014B01814AC9900A06560 /* OSXData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = OSXData.sqlite; sourceTree = "<group>"; };
 		E05014B11814AC9900A06560 /* PickBottleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickBottleTableViewController.h; sourceTree = "<group>"; };
 		E05014B21814AC9900A06560 /* PickBottleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickBottleTableViewController.m; sourceTree = "<group>"; };
 		E05014B31814AC9900A06560 /* SubTypeSelectorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubTypeSelectorDelegate.h; sourceTree = "<group>"; };
@@ -176,6 +175,7 @@
 		E05015211814B19400A06560 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		E05015231814B95B00A06560 /* EditOrderForBottleDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditOrderForBottleDetailsViewController.h; sourceTree = "<group>"; };
 		E05C1AAC1814BED900FE57EF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		E06010D6181EC90A00B5FEA8 /* OSXData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = OSXData.sqlite; sourceTree = "<group>"; };
 		E082728418198DDD007A2977 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		E0827286181991DA007A2977 /* CreateMessageToVendorForOneBottleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateMessageToVendorForOneBottleViewController.h; sourceTree = "<group>"; };
 		E0827287181991DA007A2977 /* CreateMessageToVendorForOneBottleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateMessageToVendorForOneBottleViewController.m; sourceTree = "<group>"; };
@@ -258,7 +258,7 @@
 			children = (
 				E05C1AAC1814BED900FE57EF /* Main.storyboard */,
 				E05014F01814AEB500A06560 /* Duck.xcdatamodeld */,
-				E05014B01814AC9900A06560 /* OSXData.sqlite */,
+				E06010D6181EC90A00B5FEA8 /* OSXData.sqlite */,
 				E05015011814AED400A06560 /* AppDelegate.h */,
 				E05015021814AED400A06560 /* AppDelegate.m */,
 				E05014EB1814ADB400A06560 /* Controllers */,
@@ -538,9 +538,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E05014C41814AC9900A06560 /* OSXData.sqlite in Resources */,
 				E05014E71814AD7100A06560 /* zbar-help.html in Resources */,
 				E05014E91814AD7100A06560 /* zbar-samples.png in Resources */,
+				E06010D7181EC90A00B5FEA8 /* OSXData.sqlite in Resources */,
 				E05014E81814AD7100A06560 /* zbar-helpicons.png in Resources */,
 				E05014E61814AD7100A06560 /* zbar-back.png in Resources */,
 				E05014751814AB7C00A06560 /* Images.xcassets in Resources */,

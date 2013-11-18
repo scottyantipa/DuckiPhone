@@ -31,18 +31,15 @@
     CGFloat floatVal = (CGFloat)[text floatValue];
     NSNumber * number = [NSNumber numberWithFloat:floatVal];
     if (tag == 1) {
-        NSLog(@"setting unitPrice to: %@", number);
         _orderForBottle.unitPrice = number;
     } else if (tag == 2) {
-        NSLog(@"setting quantity to: %@", number);
+
         _orderForBottle.quantity = number;
     }
     NSError *error;
     if (![_managedObjectContext save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
-    NSLog(@"unitPrice: %@", _orderForBottle.unitPrice);
-    NSLog(@"quantity: %@", _orderForBottle.quantity);
     [textField resignFirstResponder];
 }
 
