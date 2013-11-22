@@ -25,6 +25,10 @@
     self.title = subType.name;
 }
 
+-(NSManagedObjectContext *)context {
+    return self.subType.managedObjectContext;
+}
+
 - (NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
@@ -44,11 +48,11 @@
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     // get the results and print them
-    NSError *err;
-    NSArray *fetchedObjects = [self.subType.managedObjectContext executeFetchRequest:fetchRequest error:&err];
-    for (Bottle *bottle in fetchedObjects) {
-        NSLog(@"fetched result: %@ with order %@", bottle.name, bottle.userOrdering);
-    }
+//    NSError *err;
+//    NSArray *fetchedObjects = [self.subType.managedObjectContext executeFetchRequest:fetchRequest error:&err];
+//    for (Bottle *bottle in fetchedObjects) {
+//        NSLog(@"fetched result: %@ with order %@", bottle.name, bottle.userOrdering);
+//    }
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
@@ -81,7 +85,7 @@
     Bottle *bottle = [self.fetchedResultsController objectAtIndexPath:indexPath];
     if ([segue.destinationViewController respondsToSelector:@selector(setBottleInfo:)]) {
         [segue.destinationViewController setBottle:bottle];
-        [segue.destinationViewController setManagedObjectContext:self.subType.managedObjectContext];
+        [segue.destinationViewController setManagedObjectContext:[self context]];
     }
 }
 
@@ -95,33 +99,7 @@
     }
     Bottle * bottle = [_fetchedResultsController objectAtIndexPath:sourceIndexPath];
     NSNumber * newOrderNum = [NSNumber numberWithInt:destinationIndexPath.row];
-    int oldOrder = [bottle.userOrdering intValue];
-    int newOrder = [newOrderNum intValue];
-    bottle.userOrdering = newOrderNum;
-//    NSLog(@"Moving %@ from %u to %u", bottle.name, oldOrder, newOrder);
-    
-    // iterate over the other bottles and update their user ordrering
-    NSArray * fetchedBottles = [_fetchedResultsController fetchedObjects];
-    for (Bottle * otherBottle in fetchedBottles) {
-        if (otherBottle.name == bottle.name) { // its the bottle we already moved
-            continue;
-        }
-        int oldOrderForOtherBottle = [otherBottle.userOrdering intValue];
-        NSNumber * newOrderForOtherBottle;
-        if ((oldOrder < oldOrderForOtherBottle) & (newOrder >= oldOrderForOtherBottle)) { // bottle was before, now is after
-            newOrderForOtherBottle = [NSNumber numberWithInt:(oldOrderForOtherBottle - 1)];
-        } else if ((oldOrder > oldOrderForOtherBottle) & (newOrder <= oldOrderForOtherBottle)) {   // bottle was after, now is before
-            newOrderForOtherBottle = [NSNumber numberWithInt:(oldOrderForOtherBottle + 1)];
-        } else {
-            continue; // don't change the ordering
-        }
-//        NSLog(@"Changing %@ from %u to %u", otherBottle.name, oldOrderForOtherBottle, [newOrderForOtherBottle intValue]);
-        otherBottle.userOrdering = newOrderForOtherBottle;
-    }
-    NSError *error;
-    if (![self.subType.managedObjectContext save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
+    [AlcoholSubType changeOrderOfBottle:bottle toNumber:newOrderNum inContext:[self context]];
     [[self tableView] reloadData];
 }
 
