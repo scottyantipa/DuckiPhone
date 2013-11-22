@@ -11,4 +11,5 @@
 
 @interface BottlesForSubTypeTableViewController : BaseCoreDataTableViewController
 @property (strong, nonatomic) AlcoholSubType *subType;
+@property (nonatomic) BOOL editing;
 @end

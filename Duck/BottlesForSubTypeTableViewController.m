@@ -31,23 +31,23 @@
     }
     
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"subType.name = %@", self.subType.name];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(subType.name = %@) AND (self.userHasBottle = %@)", self.subType.name, [NSNumber numberWithBool:YES]];
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userOrdering" ascending:YES];
+    NSSortDescriptor * sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO]; // in case no user ordering for the bottle
+    NSArray *sortDescriptors = @[sortDescriptor, sortDescriptor2];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
-    
     
     // get the results and print them
 //    NSError *err;
 //    NSArray *fetchedObjects = [self.subType.managedObjectContext executeFetchRequest:fetchRequest error:&err];
 //    for (Bottle *bottle in fetchedObjects) {
-//        NSLog(@"Botle Name: %@", bottle.name);
+//        NSLog(@"fetched result: %@ with order %@", bottle.name, bottle.userOrdering);
 //    }
     
     // Edit the section name key path and cache name if appropriate.
@@ -63,22 +63,17 @@
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 	    abort();
 	}
-    
     return _fetchedResultsController;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Bottle SubTypes CellID" forIndexPath:indexPath];
-    [self configureCell:cell atIndexPath:indexPath];
+    Bottle *bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = bottle.name;
     return cell;
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    Bottle *bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = bottle.name;
-}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -90,10 +85,65 @@
     }
 }
 
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    if (sourceIndexPath == destinationIndexPath) {
+        return;
+    }
+    Bottle * bottle = [_fetchedResultsController objectAtIndexPath:sourceIndexPath];
+    NSNumber * newOrderNum = [NSNumber numberWithInt:destinationIndexPath.row];
+    int oldOrder = [bottle.userOrdering intValue];
+    int newOrder = [newOrderNum intValue];
+    bottle.userOrdering = newOrderNum;
+    
+    // iterate over the other bottles and update their user ordrering
+    NSArray * fetchedBottles = [_fetchedResultsController fetchedObjects];
+    for (Bottle * otherBottle in fetchedBottles) {
+        if (otherBottle.name == bottle.name) { // its the bottle we already moved
+            continue;
+        }
+        int oldOrderForOtherBottle = [otherBottle.userOrdering intValue];
+        NSNumber * newOrderForOtherBottle;
+        if ((oldOrder < oldOrderForOtherBottle) & (newOrder >= oldOrderForOtherBottle)) { // bottle was before, now is after
+            newOrderForOtherBottle = [NSNumber numberWithInt:(oldOrderForOtherBottle - 1)];
+        } else if ((oldOrder > oldOrderForOtherBottle) & (newOrder <= oldOrderForOtherBottle)) {   // bottle was after, now is before
+            newOrderForOtherBottle = [NSNumber numberWithInt:(oldOrderForOtherBottle + 1)];
+        } else {
+            newOrderForOtherBottle = otherBottle.userOrdering; // don't change the ordering
+        }
+        otherBottle.userOrdering = newOrderForOtherBottle;
+    }
+    NSError *error;
+    if (![self.subType.managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+}
+
+-(void)viewDidLoad {
+    return;
+}
+
 -(void)viewDidUnload
 {
     self.fetchedResultsController = nil;
 }
 
+
+- (IBAction)didTouchEditOrder:(UIBarButtonItem *)sender {
+    if (self.editing) {
+        self.editing = NO;
+        sender.title = @"Edit Ordering";
+        [self.tableView setEditing:NO animated:YES];
+    } else {
+        sender.title = @"Done";
+        self.editing = YES;
+        [self.tableView setEditing:YES animated:YES];
+
+
+    }
+}
 
 @end

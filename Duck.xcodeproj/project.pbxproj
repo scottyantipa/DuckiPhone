@@ -47,7 +47,6 @@
 		E05015151814AED400A06560 /* AllSubTypesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05015001814AED400A06560 /* AllSubTypesTableViewController.m */; };
 		E05015161814AED400A06560 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E05015021814AED400A06560 /* AppDelegate.m */; };
 		E05015171814AED400A06560 /* BaseCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05015041814AED400A06560 /* BaseCoreDataTableViewController.m */; };
-		E05015181814AED400A06560 /* Bottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E05015061814AED400A06560 /* Bottle.m */; };
 		E05015191814AED400A06560 /* Bottle+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05015081814AED400A06560 /* Bottle+Create.m */; };
 		E050151A1814AED400A06560 /* BottleDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E050150A1814AED400A06560 /* BottleDetailTableViewController.m */; };
 		E050151B1814AED400A06560 /* BottlesForSubTypeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E050150C1814AED400A06560 /* BottlesForSubTypeTableViewController.m */; };
@@ -56,12 +55,14 @@
 		E05015201814B0B700A06560 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E050151F1814B0B700A06560 /* QuartzCore.framework */; };
 		E05015221814B19400A06560 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E05015211814B19400A06560 /* libiconv.dylib */; };
 		E05C1AAD1814BED900FE57EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E05C1AAC1814BED900FE57EF /* Main.storyboard */; };
-		E06010D7181EC90A00B5FEA8 /* OSXData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E06010D6181EC90A00B5FEA8 /* OSXData.sqlite */; };
 		E082728518198DDD007A2977 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E082728418198DDD007A2977 /* MessageUI.framework */; };
 		E0827288181991DA007A2977 /* CreateMessageToVendorForOneBottleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0827287181991DA007A2977 /* CreateMessageToVendorForOneBottleViewController.m */; };
 		E082728B1819ACE3007A2977 /* PastOrdersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E082728A1819ACE3007A2977 /* PastOrdersTableViewController.m */; };
 		E08272911819B8FB007A2977 /* Vendor.m in Sources */ = {isa = PBXBuildFile; fileRef = E08272901819B8FB007A2977 /* Vendor.m */; };
 		E08272941819B958007A2977 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = E08272931819B958007A2977 /* Order.m */; };
+		E0A4F8C71839B12A000CA0C6 /* ToggleBottlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A4F8C61839B12A000CA0C6 /* ToggleBottlesTableViewController.m */; };
+		E0A4F8CA1839B3BF000CA0C6 /* Bottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A4F8C91839B3BF000CA0C6 /* Bottle.m */; };
+		E0A4F8D6183ED2C9000CA0C6 /* OSXData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E0A4F8D5183ED2C9000CA0C6 /* OSXData.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,8 +161,6 @@
 		E05015021814AED400A06560 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E05015031814AED400A06560 /* BaseCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCoreDataTableViewController.h; sourceTree = "<group>"; };
 		E05015041814AED400A06560 /* BaseCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCoreDataTableViewController.m; sourceTree = "<group>"; };
-		E05015051814AED400A06560 /* Bottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bottle.h; sourceTree = "<group>"; };
-		E05015061814AED400A06560 /* Bottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bottle.m; sourceTree = "<group>"; };
 		E05015071814AED400A06560 /* Bottle+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bottle+Create.h"; sourceTree = "<group>"; };
 		E05015081814AED400A06560 /* Bottle+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Bottle+Create.m"; sourceTree = "<group>"; };
 		E05015091814AED400A06560 /* BottleDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottleDetailTableViewController.h; sourceTree = "<group>"; };
@@ -175,7 +174,6 @@
 		E05015211814B19400A06560 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		E05015231814B95B00A06560 /* EditOrderForBottleDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditOrderForBottleDetailsViewController.h; sourceTree = "<group>"; };
 		E05C1AAC1814BED900FE57EF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		E06010D6181EC90A00B5FEA8 /* OSXData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = OSXData.sqlite; sourceTree = "<group>"; };
 		E082728418198DDD007A2977 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		E0827286181991DA007A2977 /* CreateMessageToVendorForOneBottleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateMessageToVendorForOneBottleViewController.h; sourceTree = "<group>"; };
 		E0827287181991DA007A2977 /* CreateMessageToVendorForOneBottleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateMessageToVendorForOneBottleViewController.m; sourceTree = "<group>"; };
@@ -185,6 +183,11 @@
 		E08272901819B8FB007A2977 /* Vendor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vendor.m; sourceTree = "<group>"; };
 		E08272921819B958007A2977 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		E08272931819B958007A2977 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		E0A4F8C51839B12A000CA0C6 /* ToggleBottlesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleBottlesTableViewController.h; sourceTree = "<group>"; };
+		E0A4F8C61839B12A000CA0C6 /* ToggleBottlesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleBottlesTableViewController.m; sourceTree = "<group>"; };
+		E0A4F8C81839B3BF000CA0C6 /* Bottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bottle.h; sourceTree = "<group>"; };
+		E0A4F8C91839B3BF000CA0C6 /* Bottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bottle.m; sourceTree = "<group>"; };
+		E0A4F8D5183ED2C9000CA0C6 /* OSXData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = OSXData.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,9 +259,9 @@
 		E050145C1814AB7C00A06560 /* Duck */ = {
 			isa = PBXGroup;
 			children = (
+				E0A4F8D5183ED2C9000CA0C6 /* OSXData.sqlite */,
 				E05C1AAC1814BED900FE57EF /* Main.storyboard */,
 				E05014F01814AEB500A06560 /* Duck.xcdatamodeld */,
-				E06010D6181EC90A00B5FEA8 /* OSXData.sqlite */,
 				E05015011814AED400A06560 /* AppDelegate.h */,
 				E05015021814AED400A06560 /* AppDelegate.m */,
 				E05014EB1814ADB400A06560 /* Controllers */,
@@ -402,6 +405,8 @@
 				E05014B21814AC9900A06560 /* PickBottleTableViewController.m */,
 				E05014B41814AC9900A06560 /* TakeInventoryTableViewController.h */,
 				E05014B51814AC9900A06560 /* TakeInventoryTableViewController.m */,
+				E0A4F8C51839B12A000CA0C6 /* ToggleBottlesTableViewController.h */,
+				E0A4F8C61839B12A000CA0C6 /* ToggleBottlesTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -409,6 +414,10 @@
 		E05014EC1814ADE600A06560 /* DataClasses */ = {
 			isa = PBXGroup;
 			children = (
+				E0A4F8C81839B3BF000CA0C6 /* Bottle.h */,
+				E0A4F8C91839B3BF000CA0C6 /* Bottle.m */,
+				E05015071814AED400A06560 /* Bottle+Create.h */,
+				E05015081814AED400A06560 /* Bottle+Create.m */,
 				E08272921819B958007A2977 /* Order.h */,
 				E08272931819B958007A2977 /* Order.m */,
 				E082728F1819B8FB007A2977 /* Vendor.h */,
@@ -421,10 +430,6 @@
 				E05014FA1814AED400A06560 /* AlcoholType.m */,
 				E05014FB1814AED400A06560 /* AlcoholType+Create.h */,
 				E05014FC1814AED400A06560 /* AlcoholType+Create.m */,
-				E05015051814AED400A06560 /* Bottle.h */,
-				E05015061814AED400A06560 /* Bottle.m */,
-				E05015071814AED400A06560 /* Bottle+Create.h */,
-				E05015081814AED400A06560 /* Bottle+Create.m */,
 				E05014A21814AC9900A06560 /* InventorySnapshotForBottle.h */,
 				E05014A31814AC9900A06560 /* InventorySnapshotForBottle.m */,
 				E05014A41814AC9900A06560 /* InventorySnapshotForBottle+Create.h */,
@@ -540,7 +545,7 @@
 			files = (
 				E05014E71814AD7100A06560 /* zbar-help.html in Resources */,
 				E05014E91814AD7100A06560 /* zbar-samples.png in Resources */,
-				E06010D7181EC90A00B5FEA8 /* OSXData.sqlite in Resources */,
+				E0A4F8D6183ED2C9000CA0C6 /* OSXData.sqlite in Resources */,
 				E05014E81814AD7100A06560 /* zbar-helpicons.png in Resources */,
 				E05014E61814AD7100A06560 /* zbar-back.png in Resources */,
 				E05014751814AB7C00A06560 /* Images.xcassets in Resources */,
@@ -579,7 +584,7 @@
 				E05014BF1814AC9900A06560 /* NewOrderTableViewController.m in Sources */,
 				E05015191814AED400A06560 /* Bottle+Create.m in Sources */,
 				E05014B91814AC9900A06560 /* EditManagedObjCountViewController.m in Sources */,
-				E05015181814AED400A06560 /* Bottle.m in Sources */,
+				E0A4F8CA1839B3BF000CA0C6 /* Bottle.m in Sources */,
 				E08272911819B8FB007A2977 /* Vendor.m in Sources */,
 				E05014BC1814AC9900A06560 /* HomeTableViewController.m in Sources */,
 				E0827288181991DA007A2977 /* CreateMessageToVendorForOneBottleViewController.m in Sources */,
@@ -590,6 +595,7 @@
 				E05015101814AED400A06560 /* AlcoholSubType+Create.m in Sources */,
 				E05015161814AED400A06560 /* AppDelegate.m in Sources */,
 				E05014C21814AC9900A06560 /* OrderForBottle.m in Sources */,
+				E0A4F8C71839B12A000CA0C6 /* ToggleBottlesTableViewController.m in Sources */,
 				E05015121814AED400A06560 /* AlcoholType.m in Sources */,
 				E05014C11814AC9900A06560 /* Order+Create.m in Sources */,
 				E050151C1814AED400A06560 /* BottlesInOrderTableViewController.m in Sources */,
