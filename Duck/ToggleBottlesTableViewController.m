@@ -70,12 +70,16 @@
     Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
     NSString * subTypeName = bottle.subType.name;
     NSFetchRequest * fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
+    
+    // Fetch the bottles that the user has.  We will adjust their userOrdering when the user
+    // adds/removes a bottle
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(subType.name = %@) AND (self.userHasBottle = %@)", subTypeName, [NSNumber numberWithBool:YES]];
     NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userOrdering" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
     [fetchRequest setSortDescriptors:sortDescriptors];
     NSError *err;
     NSArray * fetchedBottles = [_managedObjectContext executeFetchRequest:fetchRequest error:&err];
+
     if (bottle.userHasBottle == [NSNumber numberWithInt:1]) { // user did have bottle
         bottle.userHasBottle = [NSNumber numberWithBool:NO];
         int order = [bottle.userOrdering intValue];

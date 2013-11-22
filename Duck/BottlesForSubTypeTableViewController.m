@@ -98,6 +98,7 @@
     int oldOrder = [bottle.userOrdering intValue];
     int newOrder = [newOrderNum intValue];
     bottle.userOrdering = newOrderNum;
+//    NSLog(@"Moving %@ from %u to %u", bottle.name, oldOrder, newOrder);
     
     // iterate over the other bottles and update their user ordrering
     NSArray * fetchedBottles = [_fetchedResultsController fetchedObjects];
@@ -114,13 +115,14 @@
         } else {
             continue; // don't change the ordering
         }
-        NSLog(@"Changing %@ from %u to %u", otherBottle.name, oldOrderForOtherBottle, [newOrderForOtherBottle intValue]);
+//        NSLog(@"Changing %@ from %u to %u", otherBottle.name, oldOrderForOtherBottle, [newOrderForOtherBottle intValue]);
         otherBottle.userOrdering = newOrderForOtherBottle;
     }
     NSError *error;
     if (![self.subType.managedObjectContext save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
+    [[self tableView] reloadData];
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
