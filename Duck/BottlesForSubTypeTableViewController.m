@@ -44,11 +44,11 @@
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     // get the results and print them
-    NSError *err;
-    NSArray *fetchedObjects = [self.subType.managedObjectContext executeFetchRequest:fetchRequest error:&err];
-    for (Bottle *bottle in fetchedObjects) {
-        NSLog(@"fetched result: %@ with order %@", bottle.name, bottle.userOrdering);
-    }
+//    NSError *err;
+//    NSArray *fetchedObjects = [self.subType.managedObjectContext executeFetchRequest:fetchRequest error:&err];
+//    for (Bottle *bottle in fetchedObjects) {
+//        NSLog(@"fetched result: %@ with order %@", bottle.name, bottle.userOrdering);
+//    }
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
@@ -97,7 +97,6 @@
     NSNumber * newOrderNum = [NSNumber numberWithInt:destinationIndexPath.row];
     int oldOrder = [bottle.userOrdering intValue];
     int newOrder = [newOrderNum intValue];
-    NSLog(@"Moving %@ from %u to %u", bottle.name, oldOrder, newOrder);
     bottle.userOrdering = newOrderNum;
     
     // iterate over the other bottles and update their user ordrering
@@ -116,7 +115,6 @@
             newOrderForOtherBottle = otherBottle.userOrdering; // don't change the ordering
         }
         otherBottle.userOrdering = newOrderForOtherBottle;
-        NSLog(@"Changing %@ order from %u to %@", otherBottle.name, oldOrderForOtherBottle, otherBottle.userOrdering);
     }
     NSError *error;
     if (![self.subType.managedObjectContext save:&error]) {
@@ -147,7 +145,5 @@
 
     }
 }
-
-
 
 @end

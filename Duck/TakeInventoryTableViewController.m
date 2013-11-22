@@ -29,7 +29,6 @@
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
     
-    // NOTE ---- THIS WILL EVENTUALLY NEEDED TO BE CUSTOM ORDERED
     NSSortDescriptor * sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"subType.name" ascending:NO];
     NSSortDescriptor * sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"userOrdering" ascending:YES];
     NSArray * sortDescriptors = @[sortDescriptor1, sortDescriptor2];

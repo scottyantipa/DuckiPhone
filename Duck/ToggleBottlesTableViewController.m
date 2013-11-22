@@ -28,12 +28,10 @@
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
     
-    // NOTE ---- THIS WILL EVENTUALLY NEEDED TO BE CUSTOM ORDERED based on user ordering
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    
+    NSSortDescriptor * sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"subType.name" ascending:NO];
+    NSSortDescriptor * sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"userOrdering" ascending:YES];
+    NSArray * sortDescriptors = @[sortDescriptor1, sortDescriptor2];
     [fetchRequest setSortDescriptors:sortDescriptors];
-    
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
@@ -86,7 +84,5 @@
 {
     [super viewDidLoad];
 }
-
-
 
 @end
