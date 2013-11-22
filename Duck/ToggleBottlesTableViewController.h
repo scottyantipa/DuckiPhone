@@ -8,6 +8,7 @@
 
 #import "BaseCoreDataTableViewController.h"
 #import "Bottle+Create.h"
+#import "AlcoholSubType+Create.h"
 
 @interface ToggleBottlesTableViewController : BaseCoreDataTableViewController
 

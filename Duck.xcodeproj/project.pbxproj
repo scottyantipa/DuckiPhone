@@ -385,8 +385,6 @@
 				E05014F81814AED400A06560 /* AlcoholSubTypesTableViewController.m */,
 				E05014FD1814AED400A06560 /* AlcoholTypesTableViewController.h */,
 				E05014FE1814AED400A06560 /* AlcoholTypesTableViewController.m */,
-				E05014FF1814AED400A06560 /* AllSubTypesTableViewController.h */,
-				E05015001814AED400A06560 /* AllSubTypesTableViewController.m */,
 				E050150B1814AED400A06560 /* BottlesForSubTypeTableViewController.h */,
 				E050150C1814AED400A06560 /* BottlesForSubTypeTableViewController.m */,
 				E05015091814AED400A06560 /* BottleDetailTableViewController.h */,
@@ -453,6 +451,8 @@
 				E050149F1814AC9900A06560 /* EditTextViewController.m */,
 				E05014991814AC9900A06560 /* EditManagedObjCountViewController.h */,
 				E050149A1814AC9900A06560 /* EditManagedObjCountViewController.m */,
+				E05014FF1814AED400A06560 /* AllSubTypesTableViewController.h */,
+				E05015001814AED400A06560 /* AllSubTypesTableViewController.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";

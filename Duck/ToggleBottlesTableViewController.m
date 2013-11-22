@@ -18,7 +18,7 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext = _managedObjectContext;
 
-// Fetch all bottles
+// Controller should show all bottles organized by subType, sorted by userOrdering/userHasBottle/name
 - (NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
@@ -68,46 +68,13 @@
 // Toggle if the user has/doesnt have the bottle
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
-    NSString * subTypeName = bottle.subType.name;
-    NSFetchRequest * fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
-    
-    // Fetch the bottles that the user has.  We will adjust their userOrdering when the user
-    // adds/removes a bottle
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(subType.name = %@) AND (self.userHasBottle = %@)", subTypeName, [NSNumber numberWithBool:YES]];
-    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userOrdering" ascending:YES];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    NSError *err;
-    NSArray * fetchedBottles = [_managedObjectContext executeFetchRequest:fetchRequest error:&err];
-
     if (bottle.userHasBottle == [NSNumber numberWithInt:1]) { // user did have bottle
         bottle.userHasBottle = [NSNumber numberWithBool:NO];
-        int order = [bottle.userOrdering intValue];
-        for (Bottle * otherBottle in fetchedBottles) {
-            if (otherBottle.name == bottle.name) {
-                continue;
-            }
-            int oldOrderForOtherBottle = [otherBottle.userOrdering intValue];
-            NSNumber * newOrderForOtherBottle;
-            if (order < oldOrderForOtherBottle) { // removed bottle was before this bottle
-                newOrderForOtherBottle = [NSNumber numberWithInt:(oldOrderForOtherBottle - 1)];
-                otherBottle.userOrdering = newOrderForOtherBottle;
-            } else {
-                continue; // removed bottle was after this bottle, so no change to the order
-            }
-        }
-        NSError *error;
-        if (![_managedObjectContext save:&error]) {
-            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-        }
+        [AlcoholSubType recalculateUserOrderingForSubType:bottle.subType inContext:_managedObjectContext];
     } else { // user did not have bottle so lets add it to the end
-        bottle.userHasBottle = [NSNumber numberWithBool:YES];
-        NSUInteger newOrder = [fetchedBottles count];
-        int newOrderInt = (int)newOrder;
-        bottle.userOrdering = [NSNumber numberWithInteger:(newOrderInt)];
+        [AlcoholSubType userAddedBottle:bottle toSubType:bottle.subType inContext:_managedObjectContext];
     }
     [self.tableView reloadData];
-    [self.tableView setNeedsDisplay];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
