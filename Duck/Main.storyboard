@@ -508,13 +508,7 @@
                             <outlet property="delegate" destination="xxc-Ne-wLM" id="DU0-8H-LaR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="WUi-yc-Muj">
-                        <barButtonItem key="rightBarButtonItem" title="Edit Order" id="W4f-7i-s2E">
-                            <connections>
-                                <action selector="didTouchEditOrder:" destination="xxc-Ne-wLM" id="jmr-Hq-XQN"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="WUi-yc-Muj"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h0p-s7-ma7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

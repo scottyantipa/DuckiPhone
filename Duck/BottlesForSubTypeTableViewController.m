@@ -44,11 +44,11 @@
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     // get the results and print them
-//    NSError *err;
-//    NSArray *fetchedObjects = [self.subType.managedObjectContext executeFetchRequest:fetchRequest error:&err];
-//    for (Bottle *bottle in fetchedObjects) {
-//        NSLog(@"fetched result: %@ with order %@", bottle.name, bottle.userOrdering);
-//    }
+    NSError *err;
+    NSArray *fetchedObjects = [self.subType.managedObjectContext executeFetchRequest:fetchRequest error:&err];
+    for (Bottle *bottle in fetchedObjects) {
+        NSLog(@"fetched result: %@ with order %@", bottle.name, bottle.userOrdering);
+    }
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
@@ -112,8 +112,9 @@
         } else if ((oldOrder > oldOrderForOtherBottle) & (newOrder <= oldOrderForOtherBottle)) {   // bottle was after, now is before
             newOrderForOtherBottle = [NSNumber numberWithInt:(oldOrderForOtherBottle + 1)];
         } else {
-            newOrderForOtherBottle = otherBottle.userOrdering; // don't change the ordering
+            continue; // don't change the ordering
         }
+        NSLog(@"Changing %@ from %u to %u", otherBottle.name, oldOrderForOtherBottle, [newOrderForOtherBottle intValue]);
         otherBottle.userOrdering = newOrderForOtherBottle;
     }
     NSError *error;
@@ -122,28 +123,40 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
+    if (editingStyle == UITableViewCellEditingStyleDelete) { // bottle was deleted
+        bottle.userHasBottle = [NSNumber numberWithBool:NO];
+        int order = [bottle.userOrdering intValue];
+        NSArray * fetchedBottles = [_fetchedResultsController fetchedObjects];
+        for (Bottle * otherBottle in fetchedBottles) {
+            if (otherBottle.name == bottle.name) {
+                continue;
+            }
+            int oldOrderForOtherBottle = [otherBottle.userOrdering intValue];
+            NSNumber * newOrderForOtherBottle;
+            if (order < oldOrderForOtherBottle) { // removed bottle was before this bottle
+                newOrderForOtherBottle = [NSNumber numberWithInt:(oldOrderForOtherBottle - 1)];
+                otherBottle.userOrdering = newOrderForOtherBottle;
+            } else {
+                continue; // removed bottle was after this bottle, so no change to the order
+            }
+        }
+        NSError *error;
+        if (![self.subType.managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
+    }
+}
+
 -(void)viewDidLoad {
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     return;
 }
 
 -(void)viewDidUnload
 {
     self.fetchedResultsController = nil;
-}
-
-
-- (IBAction)didTouchEditOrder:(UIBarButtonItem *)sender {
-    if (self.editing) {
-        self.editing = NO;
-        sender.title = @"Edit Ordering";
-        [self.tableView setEditing:NO animated:YES];
-    } else {
-        sender.title = @"Done";
-        self.editing = YES;
-        [self.tableView setEditing:YES animated:YES];
-
-
-    }
 }
 
 @end
