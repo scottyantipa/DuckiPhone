@@ -2,3 +2,4 @@
 project.xcworkspace/
 Duck.xcodeproj/xcuserdata/
 *.sqlite
+*.DS_STORE

@@ -9,6 +9,7 @@
 #import "AlcoholTypesTableViewController.h"
 #import "AlcoholSubTypesTableViewController.h"
 #import "AlcoholType.h"
+#import "ToggleBottlesTableViewController.h"
 
 @interface AlcoholTypesTableViewController ()
 
@@ -66,11 +67,13 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Need to get category for AlcoholType that creates one
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    AlcoholType *alcType = [self.fetchedResultsController objectAtIndexPath:indexPath];
     if ([segue.destinationViewController respondsToSelector:@selector(setParentType:)]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        AlcoholType *alcType = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [segue.destinationViewController setParentType:alcType];
+    } else if ([segue.identifier isEqualToString:@"Show Toggle Bottle Controller SegueID"]) {
+        ToggleBottlesTableViewController * tvc = [segue destinationViewController];
+        tvc.managedObjectContext = _managedObjectContext;
     }
 }
 
@@ -87,7 +90,5 @@
     AlcoholType *alcType = [_fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = alcType.name;
 }
-
-
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F45" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="12F45" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AlcoholSubType" representedClassName="AlcoholSubType" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="bottles" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Bottle" inverseName="subType" inverseEntity="Bottle" syncable="YES"/>
@@ -12,6 +12,8 @@
     <entity name="Bottle" representedClassName="Bottle" syncable="YES">
         <attribute name="barcode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userHasBottle" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="userOrdering" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="inventoryShapshots" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InventorySnapshotForBottle" inverseName="whichBottle" inverseEntity="InventorySnapshotForBottle" syncable="YES"/>
         <relationship name="orders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OrderForBottle" inverseName="whichBottle" inverseEntity="OrderForBottle" syncable="YES"/>
         <relationship name="subType" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AlcoholSubType" inverseName="bottles" inverseEntity="AlcoholSubType" syncable="YES"/>
@@ -41,7 +43,7 @@
     <elements>
         <element name="AlcoholSubType" positionX="-2169" positionY="-3022" width="128" height="88"/>
         <element name="AlcoholType" positionX="-2169" positionY="-3141" width="128" height="73"/>
-        <element name="Bottle" positionX="-2169" positionY="-2884" width="128" height="118"/>
+        <element name="Bottle" positionX="-2169" positionY="-2884" width="128" height="148"/>
         <element name="InventorySnapshotForBottle" positionX="-1980" positionY="-2743" width="128" height="88"/>
         <element name="Order" positionX="-1901" positionY="-3142" width="128" height="103"/>
         <element name="OrderForBottle" positionX="-1883" positionY="-2974" width="128" height="103"/>

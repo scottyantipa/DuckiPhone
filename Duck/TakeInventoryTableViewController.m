@@ -24,14 +24,15 @@
         return _fetchedResultsController;
     }
     
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
+    NSFetchRequest * fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
     
     // NOTE ---- THIS WILL EVENTUALLY NEEDED TO BE CUSTOM ORDERED
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
+    NSSortDescriptor * sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"subType.name" ascending:NO];
+    NSSortDescriptor * sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"userOrdering" ascending:YES];
+    NSArray * sortDescriptors = @[sortDescriptor1, sortDescriptor2];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
@@ -62,15 +63,15 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    Bottle *bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
+    Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = bottle.name;
-    
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [self countOfBottle:bottle]];
+    NSNumber * bottleCount = [self countOfBottle:bottle];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%g", bottleCount.floatValue];
     
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:sender];
     Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
     EditManagedObjCountViewController * editObjVC = segue.destinationViewController;
     [editObjVC setManagedObj:bottle];
@@ -97,7 +98,11 @@
     NSArray * fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&err];
     InventorySnapshotForBottle * snapshot = [fetchedObjects lastObject];
     
-    return snapshot.count;
+    if (snapshot.count == nil) {
+        return 0;
+    } else {
+        return snapshot.count;
+    }
 }
 
 - (void)viewDidLoad
