@@ -27,7 +27,7 @@
 		E05014BC1814AC9900A06560 /* HomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A11814AC9900A06560 /* HomeTableViewController.m */; };
 		E05014BD1814AC9900A06560 /* InventorySnapshotForBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A31814AC9900A06560 /* InventorySnapshotForBottle.m */; };
 		E05014BE1814AC9900A06560 /* InventorySnapshotForBottle+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A51814AC9900A06560 /* InventorySnapshotForBottle+Create.m */; };
-		E05014BF1814AC9900A06560 /* NewOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A71814AC9900A06560 /* NewOrderTableViewController.m */; };
+		E05014BF1814AC9900A06560 /* OrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A71814AC9900A06560 /* OrderTableViewController.m */; };
 		E05014C11814AC9900A06560 /* Order+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014AB1814AC9900A06560 /* Order+Create.m */; };
 		E05014C21814AC9900A06560 /* OrderForBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014AD1814AC9900A06560 /* OrderForBottle.m */; };
 		E05014C31814AC9900A06560 /* OrderForBottle+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014AF1814AC9900A06560 /* OrderForBottle+Create.m */; };
@@ -104,8 +104,8 @@
 		E05014A31814AC9900A06560 /* InventorySnapshotForBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventorySnapshotForBottle.m; sourceTree = "<group>"; };
 		E05014A41814AC9900A06560 /* InventorySnapshotForBottle+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "InventorySnapshotForBottle+Create.h"; sourceTree = "<group>"; };
 		E05014A51814AC9900A06560 /* InventorySnapshotForBottle+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "InventorySnapshotForBottle+Create.m"; sourceTree = "<group>"; };
-		E05014A61814AC9900A06560 /* NewOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewOrderTableViewController.h; sourceTree = "<group>"; };
-		E05014A71814AC9900A06560 /* NewOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewOrderTableViewController.m; sourceTree = "<group>"; };
+		E05014A61814AC9900A06560 /* OrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewController.h; sourceTree = "<group>"; };
+		E05014A71814AC9900A06560 /* OrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewController.m; sourceTree = "<group>"; };
 		E05014AA1814AC9900A06560 /* Order+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Order+Create.h"; sourceTree = "<group>"; };
 		E05014AB1814AC9900A06560 /* Order+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Order+Create.m"; sourceTree = "<group>"; };
 		E05014AC1814AC9900A06560 /* OrderForBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderForBottle.h; sourceTree = "<group>"; };
@@ -394,10 +394,10 @@
 				E0827287181991DA007A2977 /* CreateMessageToVendorForOneBottleViewController.m */,
 				E050150D1814AED400A06560 /* BottlesInOrderTableViewController.h */,
 				E050150E1814AED400A06560 /* BottlesInOrderTableViewController.m */,
+				E05014A61814AC9900A06560 /* OrderTableViewController.h */,
+				E05014A71814AC9900A06560 /* OrderTableViewController.m */,
 				E05015231814B95B00A06560 /* EditOrderForBottleDetailsViewController.h */,
 				E050149D1814AC9900A06560 /* EditOrderForBottleDetailsViewController.m */,
-				E05014A61814AC9900A06560 /* NewOrderTableViewController.h */,
-				E05014A71814AC9900A06560 /* NewOrderTableViewController.m */,
 				E08272891819ACE3007A2977 /* PastOrdersTableViewController.h */,
 				E082728A1819ACE3007A2977 /* PastOrdersTableViewController.m */,
 				E05014B11814AC9900A06560 /* PickBottleTableViewController.h */,
@@ -415,8 +415,6 @@
 				E0A4F8C91839B3BF000CA0C6 /* Bottle.m */,
 				E05015071814AED400A06560 /* Bottle+Create.h */,
 				E05015081814AED400A06560 /* Bottle+Create.m */,
-				E08272921819B958007A2977 /* Order.h */,
-				E08272931819B958007A2977 /* Order.m */,
 				E082728F1819B8FB007A2977 /* Vendor.h */,
 				E08272901819B8FB007A2977 /* Vendor.m */,
 				E05014F31814AED400A06560 /* AlcoholSubType.h */,
@@ -431,6 +429,8 @@
 				E05014A31814AC9900A06560 /* InventorySnapshotForBottle.m */,
 				E05014A41814AC9900A06560 /* InventorySnapshotForBottle+Create.h */,
 				E05014A51814AC9900A06560 /* InventorySnapshotForBottle+Create.m */,
+				E08272921819B958007A2977 /* Order.h */,
+				E08272931819B958007A2977 /* Order.m */,
 				E05014AA1814AC9900A06560 /* Order+Create.h */,
 				E05014AB1814AC9900A06560 /* Order+Create.m */,
 				E05014AC1814AC9900A06560 /* OrderForBottle.h */,
@@ -583,7 +583,7 @@
 				E05014C51814AC9900A06560 /* PickBottleTableViewController.m in Sources */,
 				E05015111814AED400A06560 /* AlcoholSubTypesTableViewController.m in Sources */,
 				E05014BE1814AC9900A06560 /* InventorySnapshotForBottle+Create.m in Sources */,
-				E05014BF1814AC9900A06560 /* NewOrderTableViewController.m in Sources */,
+				E05014BF1814AC9900A06560 /* OrderTableViewController.m in Sources */,
 				E05015191814AED400A06560 /* Bottle+Create.m in Sources */,
 				E05014B91814AC9900A06560 /* EditManagedObjCountViewController.m in Sources */,
 				E0A4F8CA1839B3BF000CA0C6 /* Bottle.m in Sources */,

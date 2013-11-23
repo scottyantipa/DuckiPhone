@@ -79,7 +79,7 @@
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     Order * order = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    BottlesInOrderTableViewController * tvc = [segue destinationViewController];
+    OrderTableViewController * tvc = [segue destinationViewController];
     tvc.order = order;
     tvc.managedObjectContext = _managedObjectContext;
 }

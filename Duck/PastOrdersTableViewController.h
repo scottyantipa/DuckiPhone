@@ -8,6 +8,7 @@
 
 #import "BaseCoreDataTableViewController.h"
 #import "Order+Create.h"
+#import "OrderTableViewController.h"
 
 @interface PastOrdersTableViewController : BaseCoreDataTableViewController
 

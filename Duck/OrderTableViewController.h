@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Order+Create.h"
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface NewOrderTableViewController : UITableViewController
+@interface OrderTableViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 @property (strong, nonatomic) Order * order;
-@property (strong, nonatomic) NSFetchedResultsController * fetchedResultsController;
 @property (nonatomic,strong) NSManagedObjectContext * managedObjectContext;
 @end

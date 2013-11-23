@@ -106,7 +106,9 @@
         }
     }
     else if ([property isEqualToString:@"barcode"]) {
-        NSNumber * barcode = bottle.barcode;
+        NSNumberFormatter * numFormatter = [[NSNumberFormatter alloc] init];
+        [numFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        NSNumber * barcode = [numFormatter numberFromString:bottle.barcode];
         cell.textLabel.text = [NSString stringWithFormat:@"%@", barcode];
     }
     else {

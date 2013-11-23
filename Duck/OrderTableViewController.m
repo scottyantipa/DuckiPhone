@@ -6,21 +6,35 @@
 //  Copyright (c) 2013 Scott Antipa. All rights reserved.
 //
 
-#import "NewOrderTableViewController.h"
+#import "OrderTableViewController.h"
 
-@interface NewOrderTableViewController ()
+@interface OrderTableViewController ()
 
 @end
 
-@implementation NewOrderTableViewController
-@synthesize fetchedResultsController = _fetchedResultsController;
+@implementation OrderTableViewController
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize order = _order;
 
 
+// Lazy instantiate an order if there isn't one.  If there is an order, add affordance
+// to Re-order from the vendor
 - (void)viewDidLoad
 {
-    self.title = @"New Order";
+    if (!_order) {
+        _order = [Order newOrderForDate:[NSDate date] inManagedObjectContext:_managedObjectContext];
+    } else {
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGFloat screenWidth = screenRect.size.width;
+        UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 70)];
+        UIButton * orderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [orderButton addTarget:self action:@selector(reOrder) forControlEvents:UIControlEventTouchUpInside];
+        [orderButton setTitle:@"Re-order from Vendor" forState:UIControlStateNormal];
+        orderButton.frame = CGRectMake(0, 0, screenWidth, 70);
+        [headerView addSubview:orderButton];
+        self.tableView.tableHeaderView = headerView;
+    }
+    self.title = @"Order";
     [super viewDidLoad];
 
 }
@@ -89,4 +103,26 @@
         return; // not working, all of the cells perform the segue above
     }
 }
+
+#pragma Actions
+
+// Delete order, pop controller
+- (IBAction)didDeleteOrder:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+    [_managedObjectContext deleteObject:_order];
+}
+
+-(void)reOrder {
+    MFMailComposeViewController * mailTVC = [Order mailComposeForOrder:_order];
+    mailTVC.delegate = self;
+    [self presentViewController:mailTVC animated:YES completion:nil];
+}
+
+
+#pragma Delegate methods
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    NSLog(@"Within mailComposer finish method");
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end
