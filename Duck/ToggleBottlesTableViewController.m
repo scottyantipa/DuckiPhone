@@ -56,7 +56,7 @@
     Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"All Bottles to Toggle Cell ID" forIndexPath:indexPath];
     cell.textLabel.text = bottle.name;
-    if (bottle.userHasBottle == [NSNumber numberWithInt:1]) {
+    if ([self.delegate bottleIsSelected:bottle]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -68,17 +68,8 @@
 // Toggle if the user has/doesnt have the bottle
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
-    if (bottle.userHasBottle == [NSNumber numberWithInt:1]) { // user did have bottle
-        bottle.userHasBottle = [NSNumber numberWithBool:NO];
-        [AlcoholSubType recalculateUserOrderingForSubType:bottle.subType inContext:_managedObjectContext];
-    } else { // user did not have bottle so lets add it to the end
-        [AlcoholSubType userAddedBottle:bottle toSubType:bottle.subType inContext:_managedObjectContext];
-    }
+    [self.delegate didSelectBottle:bottle];
     [self.tableView reloadData];
-}
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
 }
 
 - (void)viewDidLoad

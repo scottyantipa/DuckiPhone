@@ -78,10 +78,9 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"Bottles to Pick Segue ID"]) {
-        PickBottleTableViewController * tvc = [segue destinationViewController];
-        [tvc setManagedObjectContext:_managedObjectContext];
-        [tvc setOrder:_order];
+    if ([segue.identifier isEqualToString:@"Toggle Bottles in Order Segue ID"]) {
+        ToggleBottlesTableViewController * tvc = [segue destinationViewController];
+        tvc.delegate = self;
     } else if ([segue.identifier isEqualToString:@"Edit Order For Bottle Segue ID"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         NSArray * sortedBottleOrders = [Order getSortedBottlesInOrder:_order];
@@ -121,5 +120,14 @@
     [mailViewController setMessageBody:body isHTML:NO];
     [self presentViewController:mailViewController animated:YES completion:nil];
 }
+
+// Add/remove bottle from the order
+-(void)didSelectBottle:(Bottle *)bottle {
+}
+
+-(BOOL)bottleIsSelected:(Bottle *)bottle {
+    return YES;
+}
+
 
 @end

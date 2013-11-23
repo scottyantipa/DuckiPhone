@@ -387,7 +387,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Add/Remove" id="K5W-lG-zca">
                             <connections>
                                 <action selector="didPressAddButton:" destination="L8U-UR-1zV" id="KCH-i4-GF5"/>
-                                <segue destination="3GO-ie-Gxx" kind="push" identifier="Bottles to Pick Segue ID" id="bVb-La-fcU"/>
+                                <segue destination="xCa-3a-yKM" kind="push" identifier="Toggle Bottles in Order Segue ID" id="gCl-OI-uA5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -452,35 +452,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAi-98-gal" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2038" y="1016"/>
-        </scene>
-        <!--Pick Bottle Table View Controller-->
-        <scene sceneID="N7e-jC-AA2">
-            <objects>
-                <tableViewController id="3GO-ie-Gxx" customClass="PickBottleTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="WnT-fS-Pak">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Bottles to Pick CellID" id="35f-ow-2b0">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="35f-ow-2b0" id="JtS-oN-3EH">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="3GO-ie-Gxx" id="2Xa-ea-YMf"/>
-                            <outlet property="delegate" destination="3GO-ie-Gxx" id="FT7-VK-lPj"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="PQt-ps-KkD"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="D8e-2W-Zfk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2038" y="420"/>
         </scene>
         <!--Bottles For Sub Type Table View Controller-->
         <scene sceneID="QwF-YM-MRo">
@@ -819,10 +790,11 @@
                             <outlet property="delegate" destination="xCa-3a-yKM" id="Y4p-8x-CFV"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="JCZ-Ac-JMU"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YW5-oW-aIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1406" y="-1701"/>
+            <point key="canvasLocation" x="3048" y="-793"/>
         </scene>
         <!--Alcohol Sub Types Table View Controller-->
         <scene sceneID="a3l-kK-viE">
@@ -874,7 +846,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="rbC-GA-FWu"/>
         <segue reference="Kjs-1H-KHF"/>
+        <segue reference="rbC-GA-FWu"/>
+        <segue reference="gCl-OI-uA5"/>
     </inferredMetricsTieBreakers>
 </document>

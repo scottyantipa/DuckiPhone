@@ -11,8 +11,10 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "Order+Create.h"
 #import "Vendor.h"
+#import "ToggleBottlesDelegate.h"
+#import "ToggleBottlesTableViewController.h"
 
-@interface BottlesInOrderTableViewController : UITableViewController <MFMailComposeViewControllerDelegate>
+@interface BottlesInOrderTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, ToggleBottlesDelegate>
 @property (strong, nonatomic) Order * order;
 @property (nonatomic, strong) NSArray * sortedBottlesInOrder;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
