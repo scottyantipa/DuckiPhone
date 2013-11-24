@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E000D7411817B0F1006232A8 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014DF1814AD7100A06560 /* libzbar.a */; };
+		E03144391841A1530047FA6F /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = E03144381841A1530047FA6F /* Constants.m */; };
 		E05014551814AB7C00A06560 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014541814AB7C00A06560 /* Foundation.framework */; };
 		E05014571814AB7C00A06560 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014561814AB7C00A06560 /* CoreGraphics.framework */; };
 		E05014591814AB7C00A06560 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014581814AB7C00A06560 /* UIKit.framework */; };
@@ -76,6 +77,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E03144371841A1530047FA6F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		E03144381841A1530047FA6F /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		E05014511814AB7C00A06560 /* Duck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Duck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E05014541814AB7C00A06560 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E05014561814AB7C00A06560 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -444,6 +447,8 @@
 		E05014EE1814AE1800A06560 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E03144371841A1530047FA6F /* Constants.h */,
+				E03144381841A1530047FA6F /* Constants.m */,
 				E05015031814AED400A06560 /* BaseCoreDataTableViewController.h */,
 				E05015041814AED400A06560 /* BaseCoreDataTableViewController.m */,
 				E050149E1814AC9900A06560 /* EditTextViewController.h */,
@@ -596,6 +601,7 @@
 				E05014C61814AC9900A06560 /* TakeInventoryTableViewController.m in Sources */,
 				E05015101814AED400A06560 /* AlcoholSubType+Create.m in Sources */,
 				E05015161814AED400A06560 /* AppDelegate.m in Sources */,
+				E03144391841A1530047FA6F /* Constants.m in Sources */,
 				E05014C21814AC9900A06560 /* OrderForBottle.m in Sources */,
 				E0A4F8C71839B12A000CA0C6 /* ToggleBottlesTableViewController.m in Sources */,
 				E05015121814AED400A06560 /* AlcoholType.m in Sources */,

@@ -104,7 +104,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="fpX-Zj-udA" kind="push" identifier="New Order Segue ID" id="AOM-gO-PH1"/>
+                                            <segue destination="fpX-Zj-udA" kind="push" identifier="New Order Segue ID" id="h0G-Ak-puK"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="1gu-yV-3O3" style="IBUITableViewCellStyleDefault" id="aSF-VF-Hsb">
@@ -228,7 +228,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="fpX-Zj-udA" kind="push" identifier="Past Order Segue ID" id="VVu-ni-csw"/>
+                                    <segue destination="fpX-Zj-udA" kind="push" identifier="Past Order Segue ID" id="h54-lP-FQo"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -296,7 +296,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FL4-W3-zM2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1454" y="700"/>
+            <point key="canvasLocation" x="1446" y="700"/>
         </scene>
         <!--Bottles In Order Table View Controller-->
         <scene sceneID="s41-kz-oE7">
@@ -801,9 +801,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="VVu-ni-csw"/>
-        <segue reference="gCl-OI-uA5"/>
+        <segue reference="h0G-Ak-puK"/>
         <segue reference="HEK-hq-4ib"/>
         <segue reference="rbC-GA-FWu"/>
+        <segue reference="gCl-OI-uA5"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -15,6 +15,7 @@
 @implementation OrderTableViewController
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize order = _order;
+@synthesize datePicker = _datePicker;
 
 
 // Lazy instantiate an order if there isn't one.  If there is an order, add affordance
@@ -71,6 +72,10 @@
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     NSString * labelText;
     NSString * detailText;
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber * datePickerNumber = [numberFormatter numberFromString:kDatePickerIndex];
+    NSInteger datePickerInteger = [datePickerNumber integerValue];
     if (indexPath.row == 0) {
         labelText = [NSString stringWithFormat:@"%d", _order.ordersByBottle.count];
         detailText = [NSString stringWithFormat:@"Bottles in this order"];
@@ -78,19 +83,33 @@
     } else if (indexPath.row == 1) {
         labelText = [NSString stringWithFormat:@"$%g", [Order totalAmountOfOrder:_order]];
         detailText = [NSString stringWithFormat:@"Total Amount"];
-    } else if (indexPath.row == 2) {
-        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
-        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-        NSString * dateString = [dateFormatter stringFromDate:_order.date];
-        labelText = [NSString stringWithFormat:@"%@", dateString];
-        detailText = [NSString stringWithFormat:@"Date"];
+    } else if (indexPath.row == datePickerInteger) {
+        UIDatePicker * datePicker = [[UIDatePicker alloc] init];
+        _datePicker = datePicker;
+        datePicker.date = _order.date ? _order.date : [NSDate date];
+        [datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
+        [cell addSubview:datePicker];
+        // LEGACY -- formats the cell as a regular cell with the date printed
+//        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+//        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+//        NSString * dateString = [dateFormatter stringFromDate:_order.date];
+//        labelText = [NSString stringWithFormat:@"%@", dateString];
+//        detailText = [NSString stringWithFormat:@"Date"];
     } else {
         labelText = [NSString stringWithFormat:@"ERROR"];
     }
     cell.textLabel.text = labelText;
     cell.detailTextLabel.text = detailText;
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 2) {
+        CGFloat height = 400;
+        return height;
+    }
+    return 44; // defaultl cell height
 }
 
 #pragma mark - Table view delegate
@@ -100,7 +119,7 @@
     if (indexPath.row == 0) { // its the "Bottles in Order" cell
         [self performSegueWithIdentifier:@"Show Bottles in Order Segue ID" sender:nil];
     } else {
-        return; // not working, all of the cells perform the segue above
+        return;
     }
 }
 
@@ -114,15 +133,18 @@
 
 -(void)reOrder {
     MFMailComposeViewController * mailTVC = [Order mailComposeForOrder:_order];
-    mailTVC.delegate = self;
+    mailTVC.mailComposeDelegate = self;
     [self presentViewController:mailTVC animated:YES completion:nil];
 }
-
 
 #pragma Delegate methods
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     NSLog(@"Within mailComposer finish method");
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)dateChanged {
+    _order.date = _datePicker.date;
 }
 
 @end
