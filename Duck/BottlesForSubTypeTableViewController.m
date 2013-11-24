@@ -83,10 +83,9 @@
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     Bottle *bottle = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    if ([segue.destinationViewController respondsToSelector:@selector(setBottleInfo:)]) {
-        [segue.destinationViewController setBottle:bottle];
-        [segue.destinationViewController setManagedObjectContext:[self context]];
-    }
+    BottleDetailTableViewController * bottleTVC = [segue destinationViewController];
+    bottleTVC.bottle = bottle;
+    bottleTVC.managedObjectContext = self.subType.managedObjectContext;
 }
 
 -(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {

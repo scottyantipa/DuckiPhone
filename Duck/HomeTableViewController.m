@@ -9,7 +9,7 @@
 #import "HomeTableViewController.h"
 #import "Bottle+Create.h"
 #import "BottleDetailTableViewController.h"
-#import "NewOrderTableViewController.h"
+#import "OrderTableViewController.h"
 #import "Order+Create.h"
 #import "PastOrdersTableViewController.h"
 
@@ -35,9 +35,7 @@
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
     }
     else if ([segue.identifier isEqualToString:@"New Order Segue ID"]) {
-        Order * order = [Order newOrderForDate:[NSDate date] inManagedObjectContext:_managedObjectContext];
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
-        [segue.destinationViewController setOrder:order];
     }
     else if ([segue.identifier isEqualToString:@"Show Past Orders Segue ID"]) {
         PastOrdersTableViewController * vc = [segue destinationViewController];

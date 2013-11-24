@@ -9,7 +9,8 @@
 #import "BaseCoreDataTableViewController.h"
 #import "Bottle+Create.h"
 #import "AlcoholSubType+Create.h"
+#import "ToggleBottlesDelegate.h"
 
 @interface ToggleBottlesTableViewController : BaseCoreDataTableViewController
-
+@property (weak) id <ToggleBottlesDelegate> delegate;
 @end

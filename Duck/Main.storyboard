@@ -104,7 +104,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="fpX-Zj-udA" kind="push" identifier="New Order Segue ID" id="AOM-gO-PH1"/>
+                                            <segue destination="fpX-Zj-udA" kind="push" identifier="New Order Segue ID" id="h0G-Ak-puK"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="1gu-yV-3O3" style="IBUITableViewCellStyleDefault" id="aSF-VF-Hsb">
@@ -228,7 +228,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="DUD-vh-dKa" kind="push" identifier="Show Bottles in Existing Order Segue ID" id="h9u-Lt-IEU"/>
+                                    <segue destination="fpX-Zj-udA" kind="push" identifier="Past Order Segue ID" id="h54-lP-FQo"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -241,63 +241,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXQ-Sl-nJD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="978" y="1761"/>
+            <point key="canvasLocation" x="930" y="700"/>
         </scene>
-        <!--Bottles In Order Table View Controller-->
-        <scene sceneID="WkX-Rq-fkD">
-            <objects>
-                <tableViewController id="DUD-vh-dKa" customClass="BottlesInOrderTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3eZ-bi-UR9" customClass="BottlesI">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Bottles in New Order CellID" textLabel="9gQ-gh-IT1" detailTextLabel="gQP-8n-3O0" style="IBUITableViewCellStyleSubtitle" id="xRd-zB-863">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xRd-zB-863" id="ulv-Uq-1KX">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9gQ-gh-IT1">
-                                            <rect key="frame" x="15" y="3" width="34" height="22"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gQP-8n-3O0">
-                                            <rect key="frame" x="15" y="25" width="43" height="15"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="DUD-vh-dKa" id="jVV-2N-eXE"/>
-                            <outlet property="delegate" destination="DUD-vh-dKa" id="0YG-Om-VLC"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="1s3-qf-1t0">
-                        <barButtonItem key="rightBarButtonItem" title="Re-Order" id="gBx-9v-RHD">
-                            <connections>
-                                <action selector="didTouchReOrderButton:" destination="DUD-vh-dKa" id="rGM-Fh-OfL"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mN4-oC-zCk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1494" y="1761"/>
-        </scene>
-        <!--New Order Table View Controller-->
+        <!--Order Table View Controller-->
         <scene sceneID="UUy-8E-wF7">
             <objects>
-                <tableViewController wantsFullScreenLayout="YES" id="fpX-Zj-udA" customClass="NewOrderTableViewController" sceneMemberID="viewController">
+                <tableViewController wantsFullScreenLayout="YES" id="fpX-Zj-udA" customClass="OrderTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="753-I7-JEU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -334,14 +283,20 @@
                             <outlet property="delegate" destination="fpX-Zj-udA" id="2U3-l1-QCc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="OkQ-pE-et5"/>
+                    <navigationItem key="navigationItem" id="OkQ-pE-et5">
+                        <barButtonItem key="rightBarButtonItem" title="Delete" id="hcj-Rl-jWa">
+                            <connections>
+                                <action selector="didDeleteOrder:" destination="fpX-Zj-udA" id="377-rk-Qe0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="L8U-UR-1zV" kind="push" identifier="Show Bottles in Order Segue ID" id="EMR-Y4-2zn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FL4-W3-zM2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1002" y="684"/>
+            <point key="canvasLocation" x="1446" y="700"/>
         </scene>
         <!--Bottles In Order Table View Controller-->
         <scene sceneID="s41-kz-oE7">
@@ -387,14 +342,14 @@
                         <barButtonItem key="rightBarButtonItem" title="Add/Remove" id="K5W-lG-zca">
                             <connections>
                                 <action selector="didPressAddButton:" destination="L8U-UR-1zV" id="KCH-i4-GF5"/>
-                                <segue destination="3GO-ie-Gxx" kind="push" identifier="Bottles to Pick Segue ID" id="bVb-La-fcU"/>
+                                <segue destination="xCa-3a-yKM" kind="push" identifier="Toggle Bottles in Order Segue ID" id="gCl-OI-uA5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U8I-Bp-uxd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1514" y="684"/>
+            <point key="canvasLocation" x="1958" y="700"/>
         </scene>
         <!--Edit Order For Bottle Details View Controller-->
         <scene sceneID="VKp-Ct-78L">
@@ -451,36 +406,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAi-98-gal" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2038" y="1016"/>
-        </scene>
-        <!--Pick Bottle Table View Controller-->
-        <scene sceneID="N7e-jC-AA2">
-            <objects>
-                <tableViewController id="3GO-ie-Gxx" customClass="PickBottleTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="WnT-fS-Pak">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Bottles to Pick CellID" id="35f-ow-2b0">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="35f-ow-2b0" id="JtS-oN-3EH">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="3GO-ie-Gxx" id="2Xa-ea-YMf"/>
-                            <outlet property="delegate" destination="3GO-ie-Gxx" id="FT7-VK-lPj"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="PQt-ps-KkD"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="D8e-2W-Zfk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2038" y="420"/>
+            <point key="canvasLocation" x="2482" y="1032"/>
         </scene>
         <!--Bottles For Sub Type Table View Controller-->
         <scene sceneID="QwF-YM-MRo">
@@ -819,10 +745,11 @@
                             <outlet property="delegate" destination="xCa-3a-yKM" id="Y4p-8x-CFV"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="JCZ-Ac-JMU"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YW5-oW-aIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1406" y="-1701"/>
+            <point key="canvasLocation" x="3048" y="-793"/>
         </scene>
         <!--Alcohol Sub Types Table View Controller-->
         <scene sceneID="a3l-kK-viE">
@@ -874,7 +801,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="h0G-Ak-puK"/>
+        <segue reference="HEK-hq-4ib"/>
         <segue reference="rbC-GA-FWu"/>
-        <segue reference="Kjs-1H-KHF"/>
+        <segue reference="gCl-OI-uA5"/>
     </inferredMetricsTieBreakers>
 </document>

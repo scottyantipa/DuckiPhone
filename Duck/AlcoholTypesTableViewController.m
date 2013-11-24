@@ -74,6 +74,7 @@
     } else if ([segue.identifier isEqualToString:@"Show Toggle Bottle Controller SegueID"]) {
         ToggleBottlesTableViewController * tvc = [segue destinationViewController];
         tvc.managedObjectContext = _managedObjectContext;
+        tvc.delegate = self;
     }
 }
 
@@ -89,6 +90,21 @@
 {
     AlcoholType *alcType = [_fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = alcType.name;
+}
+
+#pragma Protocol methods
+
+-(void)didSelectBottle:(Bottle *)bottle {
+    if (bottle.userHasBottle == [NSNumber numberWithInt:1]) { // user did have bottle
+        bottle.userHasBottle = [NSNumber numberWithBool:NO];
+        [AlcoholSubType recalculateUserOrderingForSubType:bottle.subType inContext:_managedObjectContext];
+    } else { // user did not have bottle so lets add it to the end
+        [AlcoholSubType userAddedBottle:bottle toSubType:bottle.subType inContext:_managedObjectContext];
+    }
+}
+
+-(BOOL)bottleIsSelected:(Bottle *)bottle {
+    return [bottle.userHasBottle boolValue];
 }
 
 @end

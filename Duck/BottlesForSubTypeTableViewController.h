@@ -8,6 +8,7 @@
 
 #import "BaseCoreDataTableViewController.h"
 #import "AlcoholSubTypesTableViewController.h"
+#import "BottleDetailTableViewController.h"
 
 @interface BottlesForSubTypeTableViewController : BaseCoreDataTableViewController
 @property (strong, nonatomic) AlcoholSubType *subType;

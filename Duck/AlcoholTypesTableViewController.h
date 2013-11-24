@@ -7,7 +7,7 @@
 //
 
 #import "BaseCoreDataTableViewController.h"
+#import "ToggleBottlesDelegate.h"
 
-@interface AlcoholTypesTableViewController : BaseCoreDataTableViewController
-
+@interface AlcoholTypesTableViewController : BaseCoreDataTableViewController <ToggleBottlesDelegate>
 @end
