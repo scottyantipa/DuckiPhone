@@ -33,11 +33,12 @@
     } else { // its an existing order so create the 'Re-order from Vendor' button
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         CGFloat screenWidth = screenRect.size.width;
-        UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 70)];
+        int reOrderButtonHeight = 35;
+        UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, reOrderButtonHeight)];
         UIButton * orderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [orderButton addTarget:self action:@selector(reOrder) forControlEvents:UIControlEventTouchUpInside];
         [orderButton setTitle:@"Re-order from Vendor" forState:UIControlStateNormal];
-        orderButton.frame = CGRectMake(0, 0, screenWidth, 70);
+        orderButton.frame = CGRectMake(0, 0, screenWidth, reOrderButtonHeight);
         [headerView addSubview:orderButton];
         self.tableView.tableHeaderView = headerView;
     }
