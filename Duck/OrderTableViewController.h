@@ -15,4 +15,5 @@
 @property (strong, nonatomic) Order * order;
 @property (nonatomic,strong) NSManagedObjectContext * managedObjectContext;
 @property (nonatomic, strong) UIDatePicker * datePicker;
+@property (nonatomic, strong) NSNumberFormatter * numberFormatter;
 @end

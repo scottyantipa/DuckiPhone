@@ -16,15 +16,21 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize order = _order;
 @synthesize datePicker = _datePicker;
+@synthesize numberFormatter = _numberFormatter;
 
 
 // Lazy instantiate an order if there isn't one.  If there is an order, add affordance
-// to Re-order from the vendor
+// to Re-order from the vendor.  Also intialize class vars -- order, datePicker
 - (void)viewDidLoad
 {
-    if (!_order) {
+    _numberFormatter = [[NSNumberFormatter alloc] init];
+    [_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    _datePicker = [[UIDatePicker alloc] init];
+    
+    if (!_order) { // this is a new order to display
         _order = [Order newOrderForDate:[NSDate date] inManagedObjectContext:_managedObjectContext];
-    } else {
+    } else { // its an existing order so create the 'Re-order from Vendor' button
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         CGFloat screenWidth = screenRect.size.width;
         UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 70)];
@@ -57,12 +63,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    if (section == 0) {
+        return 2;
+    } else {
+        return 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,32 +82,19 @@
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     NSString * labelText;
     NSString * detailText;
-    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSNumber * datePickerNumber = [numberFormatter numberFromString:kDatePickerIndex];
-    NSInteger datePickerInteger = [datePickerNumber integerValue];
-    if (indexPath.row == 0) {
-        labelText = [NSString stringWithFormat:@"%d", _order.ordersByBottle.count];
-        detailText = [NSString stringWithFormat:@"Bottles in this order"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    } else if (indexPath.row == 1) {
-        labelText = [NSString stringWithFormat:@"$%g", [Order totalAmountOfOrder:_order]];
-        detailText = [NSString stringWithFormat:@"Total Amount"];
-    } else if (indexPath.row == datePickerInteger) {
-        UIDatePicker * datePicker = [[UIDatePicker alloc] init];
-        _datePicker = datePicker;
-        datePicker.date = _order.date ? _order.date : [NSDate date];
-        [datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
-        [cell addSubview:datePicker];
-        // LEGACY -- formats the cell as a regular cell with the date printed
-//        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-//        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
-//        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-//        NSString * dateString = [dateFormatter stringFromDate:_order.date];
-//        labelText = [NSString stringWithFormat:@"%@", dateString];
-//        detailText = [NSString stringWithFormat:@"Date"];
-    } else {
-        labelText = [NSString stringWithFormat:@"ERROR"];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            labelText = [NSString stringWithFormat:@"%d", _order.ordersByBottle.count];
+            detailText = [NSString stringWithFormat:@"Bottles in this order"];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        } else {
+            labelText = [NSString stringWithFormat:@"$%g", [Order totalAmountOfOrder:_order]];
+            detailText = [NSString stringWithFormat:@"Total Amount"];
+        }
+    } else { // 2nd section, 1st row
+        _datePicker.date = _order.date ? _order.date : [NSDate date];
+        [_datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
+        [cell addSubview:_datePicker];
     }
     cell.textLabel.text = labelText;
     cell.detailTextLabel.text = detailText;
@@ -105,14 +102,12 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 2) {
-        CGFloat height = 400;
-        return height;
+    if (indexPath.section == 1) { // its the date picker section (only one row)
+        return _datePicker.bounds.size.height;
     }
     return 44; // defaultl cell height
 }
 
-#pragma mark - Table view delegate
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -123,6 +118,13 @@
     }
 }
 
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 1) { // date picker section
+        return @"Order placed on:";
+    } else {
+        return @"Order contents:";
+    }
+}
 #pragma Actions
 
 // Delete order, pop controller
