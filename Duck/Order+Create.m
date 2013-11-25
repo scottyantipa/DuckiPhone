@@ -63,7 +63,7 @@
     NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"whichBottle.name" ascending:NO];
     NSArray *sortDescriptors = @[sortDescriptor];
     NSArray * sortedBottlesInOrder = [bottlesInOrder sortedArrayUsingDescriptors:sortDescriptors];
-    NSString * vendorName = order.whichVendor.name;
+    NSString * vendorName = [NSString stringWithFormat:@"placeholder_vendor_name"];
     NSString * greeting = [NSString stringWithFormat:@"Hello %@,\n\nI would like to place an order with you as described below:", vendorName];
     NSMutableArray * bottleStrings = [[NSMutableArray alloc] init];
     

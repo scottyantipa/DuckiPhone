@@ -17,6 +17,7 @@
 @synthesize order = _order;
 @synthesize datePicker = _datePicker;
 @synthesize numberFormatter = _numberFormatter;
+@synthesize addressBook = _addressBook;
 
 
 // Lazy instantiate an order if there isn't one.  If there is an order, add affordance
@@ -27,6 +28,8 @@
     [_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     
     _datePicker = [[UIDatePicker alloc] init];
+    
+    _addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     
     if (!_order) { // this is a new order to display
         _order = [Order newOrderForDate:[NSDate date] inManagedObjectContext:_managedObjectContext];
@@ -64,14 +67,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 2;
-    } else {
+    if (section == 0) { // vendor
+        return 1; // name
+    } else if (section == 1) { // contents
+        return 2; // number of bottles, dollar amount
+    } else { // date picker
         return 1;
     }
 }
@@ -83,7 +88,27 @@
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     NSString * labelText;
     NSString * detailText;
-    if (indexPath.section == 0) {
+    NSString * noNameText = @"No name for vendor";
+    if (indexPath.section == 0) { // vendor information
+        Vendor * vendor = _order.whichVendor;
+        detailText = @"name";
+        if (vendor) {
+            if (vendor.recordID) {
+                NSNumber * vendorRecID = vendor.recordID;
+                NSLog(@"record intValue %u", [vendorRecID intValue]);
+                ABRecordRef vendorRef = ABAddressBookGetPersonWithRecordID(_addressBook, [vendorRecID intValue]);
+                NSString * firstName = (__bridge NSString *)(ABRecordCopyValue(vendorRef, kABPersonFirstNameProperty));
+                NSString * lastName = (__bridge NSString *)(ABRecordCopyValue(vendorRef, kABPersonLastNameProperty));
+                labelText = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+                NSLog(@"displaying vendor as %@", labelText);
+            } else {
+                labelText = noNameText;
+            }
+        } else {
+            labelText = noNameText;
+        }
+    }
+    else if (indexPath.section == 1) { // contents information
         if (indexPath.row == 0) {
             labelText = [NSString stringWithFormat:@"%d", _order.ordersByBottle.count];
             detailText = [NSString stringWithFormat:@"Bottles in this order"];
@@ -92,7 +117,7 @@
             labelText = [NSString stringWithFormat:@"$%g", [Order totalAmountOfOrder:_order]];
             detailText = [NSString stringWithFormat:@"Total Amount"];
         }
-    } else { // 2nd section, 1st row
+    } else { // date picker
         _datePicker.date = _order.date ? _order.date : [NSDate date];
         [_datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
         [cell addSubview:_datePicker];
@@ -103,7 +128,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) { // its the date picker section (only one row)
+    if (indexPath.section == 2) { // its the date picker section (only one row)
         return _datePicker.bounds.size.height;
     }
     return 44; // defaultl cell height
@@ -112,18 +137,25 @@
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) { // its the "Bottles in Order" cell
+    if (indexPath.section == 1 & indexPath.row == 0) { // its the "Bottles in Order" cell
         [self performSegueWithIdentifier:@"Show Bottles in Order Segue ID" sender:nil];
-    } else {
+    } else if (indexPath.section == 0 & indexPath.row == 0) { // its the vendor, so present address book
+        ABPeoplePickerNavigationController * peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
+        peoplePicker.peoplePickerDelegate = self;
+        [self presentViewController:peoplePicker animated:YES completion:nil];
+    }
+    else {
         return;
     }
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 1) { // date picker section
-        return @"Order placed on:";
-    } else {
+    if (section == 0) { // vendor
+        return @"vendor";
+    } else if (section == 1) { // contents
         return @"Order contents:";
+    } else {
+        return @"Order placed on:";
     }
 }
 #pragma Actions
@@ -141,13 +173,43 @@
 }
 
 #pragma Delegate methods
+
+// mail composer
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    NSLog(@"Within mailComposer finish method");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+// date picker
 -(void)dateChanged {
     _order.date = _datePicker.date;
+}
+
+// Address picker
+-(void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person {
+    NSInteger recordID = ABRecordGetRecordID(person);
+    NSLog(@"recordID from getter is %u", recordID);
+    NSNumber * recordNum = [NSNumber numberWithInt:recordID];
+    _order.whichVendor = [Vendor newVendorInContext:_managedObjectContext];
+    Vendor * vendor = _order.whichVendor;
+    NSLog(@"setting vendor.recordID to %@", recordNum);
+    [vendor setRecordID:recordNum];
+    NSLog(@"actual vendor.recordID in picker is %@", vendor.recordID);
+    NSError *error;
+    if (![_managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.tableView reloadData];
+    [self.tableView setNeedsDisplay];
+    return NO;
+}
+
+-(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
+    return NO;
 }
 
 @end

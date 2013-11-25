@@ -1,5 +1,5 @@
 //
-//  Vendor.m
+//  Vendor+Create.h
 //  Duck
 //
 //  Created by Scott Antipa on 11/24/13.
@@ -7,12 +7,7 @@
 //
 
 #import "Vendor.h"
-#import "Order.h"
 
-
-@implementation Vendor
-
-@dynamic recordID;
-@dynamic whichOrder;
-
+@interface Vendor (Create)
++(Vendor *)newVendorInContext:(NSManagedObjectContext *)context;
 @end

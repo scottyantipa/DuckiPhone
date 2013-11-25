@@ -2,7 +2,7 @@
 //  Vendor.h
 //  Duck
 //
-//  Created by Scott Antipa on 10/24/13.
+//  Created by Scott Antipa on 11/24/13.
 //  Copyright (c) 2013 Scott Antipa. All rights reserved.
 //
 
@@ -13,8 +13,7 @@
 
 @interface Vendor : NSManagedObject
 
-@property (nonatomic, retain) NSString * company;
-@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * recordID;
 @property (nonatomic, retain) Order *whichOrder;
 
 @end

@@ -36,8 +36,7 @@
         <relationship name="whichOrder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="ordersByBottle" inverseEntity="Order" syncable="YES"/>
     </entity>
     <entity name="Vendor" representedClassName="Vendor" syncable="YES">
-        <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recordID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="whichOrder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="whichVendor" inverseEntity="Order" syncable="YES"/>
     </entity>
     <elements>
@@ -47,6 +46,6 @@
         <element name="InventorySnapshotForBottle" positionX="-1980" positionY="-2743" width="128" height="88"/>
         <element name="Order" positionX="-1901" positionY="-3142" width="128" height="103"/>
         <element name="OrderForBottle" positionX="-1883" positionY="-2974" width="128" height="103"/>
-        <element name="Vendor" positionX="-1692" positionY="-3141" width="128" height="88"/>
+        <element name="Vendor" positionX="-1692" positionY="-3141" width="128" height="73"/>
     </elements>
 </model>
