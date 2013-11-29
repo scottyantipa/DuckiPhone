@@ -11,7 +11,6 @@
 #import "OrderTableViewController.h"
 #import "Order+Create.h"
 #import "PastOrdersTableViewController.h"
-#import "VendorsTableViewController.h"
 #import <UIKit/UIKit.h>
 #import "ZBarSDK.h"
 

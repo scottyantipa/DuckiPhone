@@ -64,24 +64,25 @@
 +(BOOL)updateVendorFromAddressBook:(Vendor *)vendor {
     NSString * lastName = vendor.lastName;
     NSString * email = vendor.email;
-    NSString * phone = vendor.phone;
-    NSArray * allVendorTraits = @[lastName, email, phone];
+    NSArray * allVendorTraits = @[lastName, email];
     
-    // Set up our variables that we will increment
-    int highestNumberOfCommonTraits = 0; //
+    int highestNumberOfCommonTraits = 0; // number of traits shared with the most similar vendor
+
+    // the address contact info we care about (will update these as we loop through contacts)
     NSString * closestLastName;
     NSString * closestEmail;
-    NSString * closestPhone;
+    
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBook );
     CFIndex nPeople = ABAddressBookGetPersonCount( addressBook );
-    for ( int i = 0; i < nPeople; i++ ) {
-        
-        //
-        // Get traits for this ref
-        //
+    for ( int i = 0; i < nPeople; i++ ) { // looping through contact book
+        // get last name
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
         NSString * refLastName = (__bridge NSString *)ABRecordCopyValue(ref, kABPersonLastNameProperty);
+        if (!refLastName) {
+            NSLog(@"continuing because last name is %@", refLastName);
+            continue;
+        }
 
         // get email
         ABMutableMultiValueRef multi = ABRecordCopyValue(ref, kABPersonEmailProperty);
@@ -94,19 +95,13 @@
                 break;
             }
         }
-        
-        // get first phone and store it
-        NSString * refPhone;
-        ABMultiValueRef multiPhones = ABRecordCopyValue(ref, kABPersonPhoneProperty);
-        for(CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++) {
-            if (i == 0) {
-                refPhone = (__bridge NSString *)(ABMultiValueCopyValueAtIndex(multiPhones, i));
-                break;
-            }
+        if (!refEmail) {
+            NSLog(@"continuing because email is %@", refEmail);
+            continue;
         }
         
-        
-        NSMutableArray * allTraits = @[refLastName, refEmail, refPhone];
+
+        NSMutableArray * allTraits = [[NSMutableArray alloc] initWithArray:@[refLastName, refEmail]];
         int numCommonTraits = 0;
         
         // Run through traits of the main vendor and this contact
@@ -115,7 +110,6 @@
             NSString * vendorTrait = [allVendorTraits objectAtIndex:k];
             NSString * personTrait = [allTraits objectAtIndex:k];
             if ([vendorTrait isEqualToString:personTrait]) {
-//                NSLog(@"incrementing because %@ equals %@", vendorTrait, personTrait);
                 numCommonTraits++;
             }
         }
@@ -123,22 +117,20 @@
             highestNumberOfCommonTraits = numCommonTraits;
             closestLastName = refLastName;
             closestEmail = refEmail;
-            closestPhone = refPhone;
+        }
+        if (numCommonTraits == 2) { // this is an exact match, stop looking (lastName, email)
+            break;
         }
     }
     
     // Now we have our most similar person.  Update the vendor with this information.
-    if (highestNumberOfCommonTraits == 3) { // someone in the address book shared all of the traits
-//        NSLog(@"We found an exact match with lastName(%@)", closestLastName);
+    if (highestNumberOfCommonTraits == 2) { // a perfect match (lastName, email)
         return YES;
     } else if (highestNumberOfCommonTraits > 0) { // We found the right person, now update the Vendor to match it
-//        NSLog(@"We found the right Vendor:  last(%@) email(%@) phone(%@", closestLastName, closestEmail, closestPhone);
         vendor.lastName = closestLastName;
         vendor.email = closestEmail;
-        vendor.phone = closestPhone;
         return YES;
     } else { // we didn't find anyone in the address book
-//        NSLog(@"We didn't find anyone as a match");
         return NO;
     }
 

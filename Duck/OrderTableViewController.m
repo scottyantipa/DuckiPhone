@@ -92,8 +92,9 @@
     if (indexPath.section == 0) { // vendor information
         Vendor * vendor = _order.whichVendor;
         NSString * vendorName = [Vendor fullNameOfVendor:vendor];
+        NSString * vendorEmail = vendor.email;
         labelText = vendorName ? vendorName : noNameText;
-        detailText = @"";
+        detailText = vendorEmail ? vendorEmail : @"No Email For Vendor";
     }
     else if (indexPath.section == 1) { // contents information
         if (indexPath.row == 0) {
@@ -221,6 +222,7 @@
 
 #pragma utils
 
+// Abstracted this because used in multiple places
 -(void)showPeoplePicker {
     ABPeoplePickerNavigationController * peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     peoplePicker.peoplePickerDelegate = self;

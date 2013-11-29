@@ -36,9 +36,6 @@
     else if ([segue.identifier isEqualToString:@"Show Past Orders Segue ID"]) {
         PastOrdersTableViewController * vc = [segue destinationViewController];
         vc.managedObjectContext = _managedObjectContext;
-    } else if ([segue.identifier isEqualToString:@"Show Vendors Segue ID"]) {
-        VendorsTableViewController * tvc = [segue destinationViewController];
-        tvc.managedObjectContext = _managedObjectContext;
     }
 }
 

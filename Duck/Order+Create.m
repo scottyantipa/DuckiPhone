@@ -100,25 +100,30 @@
     if (order.whichVendor) {
         if (!order.whichVendor.email) {
             noError = NO;
-            [errorStrings addObject:[NSString stringWithFormat:@"No email for Vendor"]];
+            [errorStrings addObject:[NSString stringWithFormat:@"No email for Vendor."]];
         }
     } else {
         noError = NO;
-        [errorStrings addObject:[NSString stringWithFormat:@"No Vendor Specified"]];
+        [errorStrings addObject:[NSString stringWithFormat:@"No Vendor Specified."]];
     }
     
-    BOOL ordersAreComplete = YES;
-    for (OrderForBottle * orderForBottle in order.ordersByBottle) {
-        if (([orderForBottle.quantity intValue] == 0) || ([orderForBottle.unitPrice intValue] == 0)) {
-            NSLog(@"order not complete for bottle %@", orderForBottle.whichBottle.name);
-            ordersAreComplete = NO;
-            noError = NO;
-            break;
+    if ([order.ordersByBottle count] > 0) { // check that all the bottles have a price/quantity
+        BOOL ordersAreComplete = YES;
+        for (OrderForBottle * orderForBottle in order.ordersByBottle) {
+            if (([orderForBottle.quantity intValue] == 0) || ([orderForBottle.unitPrice intValue] == 0)) {
+                ordersAreComplete = NO;
+                noError = NO;
+                break;
+            }
         }
+        if (!ordersAreComplete) {
+            [errorStrings addObject:@"Some bottles have zero quantity or price."];
+        }
+    } else {
+        noError = NO;
+        [errorStrings addObject:@"You haven't added bottles to this order."];
     }
-    if (!ordersAreComplete) {
-        [errorStrings addObject:[NSString stringWithFormat:@"Some bottles have zero quantity or price"]];
-    }
+    
     if (noError) {
         return NULL;
     } else {

@@ -126,25 +126,6 @@
                                             <segue destination="ZP9-Lt-Yri" kind="push" identifier="Show Past Orders Segue ID" id="5Mw-vb-YYl"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="xSl-MN-ygr" style="IBUITableViewCellStyleDefault" id="BdP-IZ-j3S">
-                                        <rect key="frame" x="0.0" y="284" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BdP-IZ-j3S" id="XsH-NC-XZ3">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Vendors" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xSl-MN-ygr">
-                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
-                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="hWm-uk-Wfc" kind="push" identifier="Show Vendors Segue ID" id="tAE-YO-M4B"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -261,35 +242,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXQ-Sl-nJD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="930" y="700"/>
-        </scene>
-        <!--Vendors Table View Controller-->
-        <scene sceneID="Rmh-1h-hih">
-            <objects>
-                <tableViewController id="hWm-uk-Wfc" customClass="VendorsTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="N0o-iD-azK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="TC3-Ef-ifa">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TC3-Ef-ifa" id="R9g-wG-Ef0">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="hWm-uk-Wfc" id="ojF-bD-ZZD"/>
-                            <outlet property="delegate" destination="hWm-uk-Wfc" id="X5j-wa-e63"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="YW0-HP-aRr"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mf3-o7-uIc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="930" y="1554"/>
         </scene>
         <!--Order Table View Controller-->
         <scene sceneID="UUy-8E-wF7">
@@ -849,9 +801,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gCl-OI-uA5"/>
-        <segue reference="h0G-Ak-puK"/>
         <segue reference="pK6-lf-Ddj"/>
         <segue reference="HEK-hq-4ib"/>
+        <segue reference="h54-lP-FQo"/>
+        <segue reference="gCl-OI-uA5"/>
     </inferredMetricsTieBreakers>
 </document>
