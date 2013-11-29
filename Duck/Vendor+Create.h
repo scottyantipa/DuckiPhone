@@ -7,7 +7,11 @@
 //
 
 #import "Vendor.h"
+#import <AddressBook/AddressBook.h>
 
 @interface Vendor (Create)
 +(Vendor *)newVendorInContext:(NSManagedObjectContext *)context;
++(NSString *)fullNameOfVendor:(Vendor *)vendor;
++(Vendor *)newVendorForRef:(ABRecordRef)vendorRef inContext:(NSManagedObjectContext *)context;
++(BOOL)updateVendorFromAddressBook:(Vendor *)vendor;
 @end

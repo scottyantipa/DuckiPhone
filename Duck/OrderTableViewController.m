@@ -33,21 +33,21 @@
     
     if (!_order) { // this is a new order to display
         _order = [Order newOrderForDate:[NSDate date] inManagedObjectContext:_managedObjectContext];
-    } else { // its an existing order so create the 'Re-order from Vendor' button
-        CGRect screenRect = [[UIScreen mainScreen] bounds];
-        CGFloat screenWidth = screenRect.size.width;
-        int reOrderButtonHeight = 35;
-        UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, reOrderButtonHeight)];
-        UIButton * orderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [orderButton addTarget:self action:@selector(reOrder) forControlEvents:UIControlEventTouchUpInside];
-        [orderButton setTitle:@"Re-order from Vendor" forState:UIControlStateNormal];
-        orderButton.frame = CGRectMake(0, 0, screenWidth, reOrderButtonHeight);
-        [headerView addSubview:orderButton];
-        self.tableView.tableHeaderView = headerView;
     }
+    
+    // create button to order from vendor
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    int reOrderButtonHeight = 35;
+    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, reOrderButtonHeight)];
+    UIButton * orderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [orderButton addTarget:self action:@selector(didSelectSendOrder) forControlEvents:UIControlEventTouchUpInside];
+    [orderButton setTitle:@"Send Order to Vendor" forState:UIControlStateNormal];
+    orderButton.frame = CGRectMake(0, 0, screenWidth, reOrderButtonHeight);
+    [headerView addSubview:orderButton];
+    self.tableView.tableHeaderView = headerView;
     self.title = @"Order";
     [super viewDidLoad];
-
 }
 
 // We do this because the _order can be edited by
@@ -91,22 +91,9 @@
     NSString * noNameText = @"No name for vendor";
     if (indexPath.section == 0) { // vendor information
         Vendor * vendor = _order.whichVendor;
-        detailText = @"name";
-        if (vendor) {
-            if (vendor.recordID) {
-                NSNumber * vendorRecID = vendor.recordID;
-                NSLog(@"record intValue %u", [vendorRecID intValue]);
-                ABRecordRef vendorRef = ABAddressBookGetPersonWithRecordID(_addressBook, [vendorRecID intValue]);
-                NSString * firstName = (__bridge NSString *)(ABRecordCopyValue(vendorRef, kABPersonFirstNameProperty));
-                NSString * lastName = (__bridge NSString *)(ABRecordCopyValue(vendorRef, kABPersonLastNameProperty));
-                labelText = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-                NSLog(@"displaying vendor as %@", labelText);
-            } else {
-                labelText = noNameText;
-            }
-        } else {
-            labelText = noNameText;
-        }
+        NSString * vendorName = [Vendor fullNameOfVendor:vendor];
+        labelText = vendorName ? vendorName : noNameText;
+        detailText = @"";
     }
     else if (indexPath.section == 1) { // contents information
         if (indexPath.row == 0) {
@@ -140,9 +127,7 @@
     if (indexPath.section == 1 & indexPath.row == 0) { // its the "Bottles in Order" cell
         [self performSegueWithIdentifier:@"Show Bottles in Order Segue ID" sender:nil];
     } else if (indexPath.section == 0 & indexPath.row == 0) { // its the vendor, so present address book
-        ABPeoplePickerNavigationController * peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
-        peoplePicker.peoplePickerDelegate = self;
-        [self presentViewController:peoplePicker animated:YES completion:nil];
+        [self showPeoplePicker];
     }
     else {
         return;
@@ -166,10 +151,30 @@
     [_managedObjectContext deleteObject:_order];
 }
 
--(void)reOrder {
-    MFMailComposeViewController * mailTVC = [Order mailComposeForOrder:_order];
-    mailTVC.mailComposeDelegate = self;
-    [self presentViewController:mailTVC animated:YES completion:nil];
+// Need to check the _order.vendor and see if its info is up to date with the contact address
+// Also check if the order is complete
+-(void)didSelectSendOrder {
+    // First, check that the order is complete (has a vendor, has some bottles, etc.).
+    NSString * error = [Order errorStringForSendingIncompleteOrder:_order];
+    if (error) {
+        NSLog(@"re-order error is %@", error);
+        UIAlertView * cantSendOrderAlertView = [[UIAlertView alloc] initWithTitle:@"Cannot send order because..." message:error delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        cantSendOrderAlertView.tag = 1;
+        [cantSendOrderAlertView show];
+        return;
+    }
+    
+    // Now see if Vendor is up to date with contact book
+    BOOL vendorInfoIsCurrent = [Vendor updateVendorFromAddressBook:_order.whichVendor];
+    if (vendorInfoIsCurrent) {   // Show mail view controller if vendor is current
+        MFMailComposeViewController * mailTVC = [Order mailComposeForOrder:_order];
+        mailTVC.mailComposeDelegate = self;
+        [self presentViewController:mailTVC animated:YES completion:nil];
+    } else {  // vendor is out of date, alert user to select a new vendor
+        UIAlertView * vendorNotCurrentAlertView = [[UIAlertView alloc]initWithTitle:@"Vendor Is Not Current" message:@"The vendor is out of sync with your contact book.  Please select a new vendor." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Pick Vendor", nil];
+        vendorNotCurrentAlertView.tag = 2;
+        [vendorNotCurrentAlertView show];
+    }
 }
 
 #pragma Delegate methods
@@ -190,18 +195,9 @@
 }
 
 -(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person {
-    NSInteger recordID = ABRecordGetRecordID(person);
-    NSLog(@"recordID from getter is %u", recordID);
-    NSNumber * recordNum = [NSNumber numberWithInt:recordID];
-    _order.whichVendor = [Vendor newVendorInContext:_managedObjectContext];
-    Vendor * vendor = _order.whichVendor;
-    NSLog(@"setting vendor.recordID to %@", recordNum);
-    [vendor setRecordID:recordNum];
-    NSLog(@"actual vendor.recordID in picker is %@", vendor.recordID);
-    NSError *error;
-    if (![_managedObjectContext save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
+    Vendor * vendor = [Vendor newVendorForRef:person inContext:_managedObjectContext];
+    _order.whichVendor = vendor;
+
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.tableView reloadData];
     [self.tableView setNeedsDisplay];
@@ -212,4 +208,22 @@
     return NO;
 }
 
+// Alert View
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 2) {
+        if (buttonIndex == 1) { // the "pick vendor" button
+            NSLog(@"User chose to pick a new vendor");
+            [self showPeoplePicker];
+        }
+    }
+}
+
+
+#pragma utils
+
+-(void)showPeoplePicker {
+    ABPeoplePickerNavigationController * peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
+    peoplePicker.peoplePickerDelegate = self;
+    [self presentViewController:peoplePicker animated:YES completion:nil];
+}
 @end

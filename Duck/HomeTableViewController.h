@@ -6,6 +6,12 @@
 //  Copyright (c) 2013 Scott Antipa. All rights reserved.
 //
 
+#import "Bottle+Create.h"
+#import "BottleDetailTableViewController.h"
+#import "OrderTableViewController.h"
+#import "Order+Create.h"
+#import "PastOrdersTableViewController.h"
+#import "VendorsTableViewController.h"
 #import <UIKit/UIKit.h>
 #import "ZBarSDK.h"
 
