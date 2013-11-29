@@ -57,7 +57,7 @@
 {
     static NSString *CellIdentifier = @"Bottles in New Order CellID";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+
     OrderForBottle * orderForBottle = [_sortedBottlesInOrder objectAtIndex:indexPath.row];
     cell.textLabel.text = orderForBottle.whichBottle.name;
     NSMutableString * priceStr = [NSMutableString stringWithFormat:@"Enter Price"];

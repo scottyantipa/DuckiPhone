@@ -11,6 +11,7 @@
 #import "Vendor.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import <AddressBookUI/AddressBookUI.h>
 
 @interface Order (Create)
 +(Order *)newOrderForDate:(NSDate *)date
@@ -22,4 +23,6 @@
 // Either add or remove an orderForBottle from the Order (e.g. when a user toggles that bottle in the
 // order table view controller)
 +(void)toggleBottle:(Bottle *)bottle inOrder:(Order *)order inContext:(NSManagedObjectContext *)context;
+
++(NSString *)errorStringForSendingIncompleteOrder:(Order *)order;
 @end

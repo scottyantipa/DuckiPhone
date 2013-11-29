@@ -2,7 +2,7 @@
 //  Vendor.m
 //  Duck
 //
-//  Created by Scott Antipa on 10/24/13.
+//  Created by Scott Antipa on 11/27/13.
 //  Copyright (c) 2013 Scott Antipa. All rights reserved.
 //
 
@@ -12,8 +12,11 @@
 
 @implementation Vendor
 
+@dynamic firstName;
+@dynamic lastName;
+@dynamic phone;
 @dynamic company;
-@dynamic name;
+@dynamic email;
 @dynamic whichOrder;
 
 @end

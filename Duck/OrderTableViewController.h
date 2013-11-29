@@ -10,10 +10,13 @@
 #import "Order+Create.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import <AddressBookUI/AddressBookUI.h>
+#import "Vendor+Create.h"
 
-@interface OrderTableViewController : UITableViewController <MFMailComposeViewControllerDelegate>
+@interface OrderTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) Order * order;
 @property (nonatomic,strong) NSManagedObjectContext * managedObjectContext;
 @property (nonatomic, strong) UIDatePicker * datePicker;
 @property (nonatomic, strong) NSNumberFormatter * numberFormatter;
+@property (nonatomic) ABAddressBookRef addressBook;
 @end
