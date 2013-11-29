@@ -19,6 +19,7 @@
 
 - (void)viewDidLoad
 {
+    self.title = @"Past Orders";
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }

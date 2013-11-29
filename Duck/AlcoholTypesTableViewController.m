@@ -21,6 +21,11 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext = _managedObjectContext;
 
+-(void)viewDidLoad {
+    self.title = @"All Types";
+    [super viewDidLoad];
+}
+
 - (NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;

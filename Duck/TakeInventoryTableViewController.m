@@ -25,6 +25,8 @@
     }
     
     NSFetchRequest * fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
+
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(self.userHasBottle = %@)", [NSNumber numberWithBool:YES]];
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];

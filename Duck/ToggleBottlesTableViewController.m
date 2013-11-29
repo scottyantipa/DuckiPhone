@@ -66,7 +66,7 @@
 }
 
 // Toggle if the user has/doesnt have the bottle
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
     [self.delegate didSelectBottle:bottle];
     [self.tableView reloadData];

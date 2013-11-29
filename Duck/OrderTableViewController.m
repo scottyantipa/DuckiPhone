@@ -123,7 +123,7 @@
 }
 
 
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1 & indexPath.row == 0) { // its the "Bottles in Order" cell
         [self performSegueWithIdentifier:@"Show Bottles in Order Segue ID" sender:nil];
@@ -158,7 +158,6 @@
     // First, check that the order is complete (has a vendor, has some bottles, etc.).
     NSString * error = [Order errorStringForSendingIncompleteOrder:_order];
     if (error) {
-        NSLog(@"re-order error is %@", error);
         UIAlertView * cantSendOrderAlertView = [[UIAlertView alloc] initWithTitle:@"Cannot send order because..." message:error delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         cantSendOrderAlertView.tag = 1;
         [cantSendOrderAlertView show];
@@ -213,7 +212,6 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == 2) {
         if (buttonIndex == 1) { // the "pick vendor" button
-            NSLog(@"User chose to pick a new vendor");
             [self showPeoplePicker];
         }
     }

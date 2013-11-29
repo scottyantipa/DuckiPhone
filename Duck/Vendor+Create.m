@@ -80,7 +80,6 @@
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
         NSString * refLastName = (__bridge NSString *)ABRecordCopyValue(ref, kABPersonLastNameProperty);
         if (!refLastName) {
-            NSLog(@"continuing because last name is %@", refLastName);
             continue;
         }
 
@@ -96,7 +95,6 @@
             }
         }
         if (!refEmail) {
-            NSLog(@"continuing because email is %@", refEmail);
             continue;
         }
         
