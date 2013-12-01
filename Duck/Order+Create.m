@@ -39,6 +39,8 @@
     return totalAmount;
 }
 
+// Either add or remove an orderForBottle from the Order (e.g. when a user toggles that bottle in the
+// order table view controller)
 +(void)toggleBottle:(Bottle *)bottle inOrder:(Order *)order inContext:(NSManagedObjectContext *)context {
     bool isSelected = NO;
     NSSet * bottlesInOrder = order.ordersByBottle;
@@ -130,5 +132,21 @@
         return [errorStrings componentsJoinedByString:@"\n"];
     }
     return NULL;
+}
+
+// When user wants to duplicate a previous order, we need to make
+// a new Order object with same data, but with a new date.
++(Order *)makeDuplicate:(Order *)order inContext:(NSManagedObjectContext *)context {
+    Order * duplicateOrder = [Order newOrderForDate:[NSDate date] inManagedObjectContext:context];
+    duplicateOrder.whichVendor = order.whichVendor;
+
+    // copy over the orderForBottles
+    for (OrderForBottle * orderForBottle in order.ordersByBottle) {
+        Bottle * bottle = orderForBottle.whichBottle;
+        OrderForBottle * duplicateOrderForBottle = [OrderForBottle newOrderForBottle:bottle forOrder:duplicateOrder inManagedObjectContext:context];
+        duplicateOrderForBottle.quantity = orderForBottle.quantity;
+        duplicateOrderForBottle.unitPrice = orderForBottle.unitPrice;
+    }
+    return duplicateOrder;
 }
 @end

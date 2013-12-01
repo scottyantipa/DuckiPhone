@@ -19,10 +19,7 @@
 +(NSArray *)getSortedBottlesInOrder:(Order *)order;
 +(float)totalAmountOfOrder:(Order *)order;
 +(MFMailComposeViewController *)mailComposeForOrder:(Order *)order;
-
-// Either add or remove an orderForBottle from the Order (e.g. when a user toggles that bottle in the
-// order table view controller)
 +(void)toggleBottle:(Bottle *)bottle inOrder:(Order *)order inContext:(NSManagedObjectContext *)context;
-
 +(NSString *)errorStringForSendingIncompleteOrder:(Order *)order;
++(Order *)makeDuplicate:(Order *)order inContext:(NSManagedObjectContext *)context;
 @end
