@@ -2,7 +2,7 @@
 //  Order.h
 //  Duck
 //
-//  Created by Scott Antipa on 10/24/13.
+//  Created by Scott Antipa on 11/29/13.
 //  Copyright (c) 2013 Scott Antipa. All rights reserved.
 //
 
@@ -15,6 +15,8 @@
 
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSNumber * totalAmount;
+@property (nonatomic, retain) NSNumber * sent;
+@property (nonatomic, retain) NSNumber * arrived;
 @property (nonatomic, retain) NSSet *ordersByBottle;
 @property (nonatomic, retain) Vendor *whichVendor;
 @end

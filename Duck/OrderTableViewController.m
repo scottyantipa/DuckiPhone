@@ -34,28 +34,43 @@
     if (!_order) { // this is a new order to display
         _order = [Order newOrderForDate:[NSDate date] inManagedObjectContext:_managedObjectContext];
     }
-    
-    // create button to order from vendor
+    [self setHeader];
+    [super viewDidLoad];
+}
+
+-(void)reloadAll {
+    [self.tableView reloadData];
+    [self setHeader];
+}
+
+// create button to order from vendor or duplicate order
+-(void)setHeader {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     int reOrderButtonHeight = 35;
     UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, reOrderButtonHeight)];
     UIButton * orderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [orderButton addTarget:self action:@selector(didSelectSendOrder) forControlEvents:UIControlEventTouchUpInside];
-    [orderButton setTitle:@"Send Order to Vendor" forState:UIControlStateNormal];
-    orderButton.frame = CGRectMake(0, 0, screenWidth, reOrderButtonHeight);
+
+    if ([_order.sent isEqualToNumber:[NSNumber numberWithBool:YES]]) {
+        [orderButton addTarget:self action:@selector(didSelectDuplicate) forControlEvents:UIControlEventTouchUpInside];
+        [orderButton setTitle:@"Duplicate this Order" forState:UIControlStateNormal];
+    } else {
+        [orderButton addTarget:self action:@selector(didSelectSendOrder) forControlEvents:UIControlEventTouchUpInside];
+        [orderButton setTitle:@"Send Order to Vendor" forState:UIControlStateNormal];
+    }
+
+    orderButton.frame = CGRectMake(0, 15, screenWidth, reOrderButtonHeight);
     [headerView addSubview:orderButton];
     self.tableView.tableHeaderView = headerView;
     self.title = @"Order";
-    [super viewDidLoad];
 }
+
 
 // We do this because the _order can be edited by
 // a view before/after it
 -(void)viewWillAppear:(BOOL)animated {
     [self.tableView reloadData];
 }
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Show Bottles in Order Segue ID"]) {
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
@@ -67,15 +82,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4; // Vendor, status, bottles, date
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) { // vendor
-        return 1; // name
-    } else if (section == 1) { // contents
-        return 2; // number of bottles, dollar amount
+    if (section == 0) {
+        return 1; // vendor
+    } else if (section == 1) {
+        return 1; // bottles
+    } else if (section == 2) { // contents
+        return 3; // orderSent, orderArrived, total amount
     } else { // date picker
         return 1;
     }
@@ -83,40 +100,58 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // There will need to be 3 rows:  Bottles in Order, Date, Total Amount
     NSString * cellID = [NSString stringWithFormat:@"New Order CellID"];
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     NSString * labelText;
     NSString * detailText;
     NSString * noNameText = @"No name for vendor";
-    if (indexPath.section == 0) { // vendor information
+    
+    if (indexPath.section == 0) { // vendor
         Vendor * vendor = _order.whichVendor;
         NSString * vendorName = [Vendor fullNameOfVendor:vendor];
-        NSString * vendorEmail = vendor.email;
         labelText = vendorName ? vendorName : noNameText;
-        detailText = vendorEmail ? vendorEmail : @"No Email For Vendor";
+        detailText = vendor.email ? vendor.email : @"No Email For Vendor";
+    } else if (indexPath.section == 1) { // status
+        labelText = [NSString stringWithFormat:@"%d", _order.ordersByBottle.count];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    else if (indexPath.section == 1) { // contents information
-        if (indexPath.row == 0) {
-            labelText = [NSString stringWithFormat:@"%d", _order.ordersByBottle.count];
-            detailText = [NSString stringWithFormat:@"Bottles in this order"];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        } else {
+    else if (indexPath.section == 2) { // bottles
+        if (indexPath.row == 0) { // orderSent Switch
+            labelText = @"Order Sent";
+            UISwitch * orderSentSwitch = [[UISwitch alloc]init];
+            orderSentSwitch.tag = 1;
+            [orderSentSwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+            BOOL sent = [_order.sent isEqualToNumber:[NSNumber numberWithBool:YES]];
+            [orderSentSwitch setOn:sent]; // CHANGE TO _order.sent
+            cell.accessoryView = [[UIView alloc]initWithFrame:orderSentSwitch.frame];
+            [cell.accessoryView addSubview:orderSentSwitch];
+        } else if (indexPath.row == 1) { // orderArrived Switch
+            labelText = @"Order Arrived";
+            UISwitch * orderArrivedSwitch = [[UISwitch alloc]init];
+            orderArrivedSwitch.tag = 2;
+            [orderArrivedSwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+            BOOL arrived = [_order.arrived isEqualToNumber:[NSNumber numberWithBool:YES]];
+            [orderArrivedSwitch setOn:arrived]; // CHANGE TO _order.arrived
+            cell.accessoryView = [[UIView alloc]initWithFrame:orderArrivedSwitch.frame];
+            [cell.accessoryView addSubview:orderArrivedSwitch];
+        } else if (indexPath.row == 2) { // total amount
             labelText = [NSString stringWithFormat:@"$%g", [Order totalAmountOfOrder:_order]];
             detailText = [NSString stringWithFormat:@"Total Amount"];
         }
+
     } else { // date picker
         _datePicker.date = _order.date ? _order.date : [NSDate date];
         [_datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
         [cell addSubview:_datePicker];
     }
+    
     cell.textLabel.text = labelText;
     cell.detailTextLabel.text = detailText;
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 2) { // its the date picker section (only one row)
+    if (indexPath.section == 3) { // its the date picker section (only one row)
         return _datePicker.bounds.size.height;
     }
     return 44; // defaultl cell height
@@ -138,12 +173,17 @@
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) { // vendor
         return @"vendor";
-    } else if (section == 1) { // contents
-        return @"Order contents:";
+    } else if (section == 1) { // status
+        return @"bottles in order";
+    } else if (section == 2) { // bottles
+        return @"status";
+    } else if (section == 3) { // date picker
+        return @"date ordered";
     } else {
-        return @"Order placed on:";
+        return @"";
     }
 }
+
 #pragma Actions
 
 // Delete order, pop controller
@@ -177,11 +217,32 @@
     }
 }
 
+// User wants to duplicate the order.  We will create a new Order
+// and show it using this same TVC (with an alert to let the user know it was switched in)
+-(void)didSelectDuplicate {
+    // create a duplicate order
+    Order * duplicateOrder = [Order makeDuplicate:_order inContext:_managedObjectContext];
+    self.order = duplicateOrder;
+    [self reloadAll];
+    
+    // alert user that the view has changed
+    UIAlertView * alertDuplicateIsShowing = [[UIAlertView alloc]initWithTitle:@"Successfully Duplicated Order" message:@"The order now being shown is the new duplicate" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertDuplicateIsShowing show];
+}
+
 #pragma Delegate methods
 
 // mail composer
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (result == MFMailComposeResultFailed) {
+        UIAlertView * failedMailAlertView = [[UIAlertView alloc] initWithTitle:@"Message Failed" message:@"We are not sure what caused the failure" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        [failedMailAlertView show];
+    } else { // the message was sent successfully
+        _order.sent = [NSNumber numberWithBool:YES];
+        [self reloadAll];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 // date picker
@@ -200,7 +261,6 @@
 
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.tableView reloadData];
-    [self.tableView setNeedsDisplay];
     return NO;
 }
 
@@ -217,6 +277,21 @@
     }
 }
 
+// Switch NOTE: It would be nice to abstract this data logic into a data object like Order
+-(void)switchChanged:(id)sender {
+    UISwitch * theSwitch = sender;
+    NSNumber * isOn = [NSNumber numberWithBool:[theSwitch isOn]];
+    if (theSwitch.tag == 1) {
+        _order.sent = isOn;
+    } else if (theSwitch.tag == 2) {
+        _order.arrived = isOn;
+    }
+    NSError *error;
+    if (![_managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+    [self setHeader];
+}
 
 #pragma utils
 
