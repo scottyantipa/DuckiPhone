@@ -11,7 +11,6 @@
 #import "SubTypeSelectorDelegate.h"
 #import "EditNameViewDelegate.h"
 #import "EditCountDelegate.h"
-#import "CreateMessageToVendorForOneBottleViewController.h"
 
 @interface BottleDetailTableViewController : BaseCoreDataTableViewController <SubTypeSelectorDelegate, EditTextViewDelegate, EditCountDelegate>
 @property (strong, nonatomic) Bottle * bottle;

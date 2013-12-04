@@ -140,11 +140,6 @@
         EditManagedObjCountViewController * editCountView = [segue destinationViewController];
         editCountView.delegate = self;
     }
-    else if ([[segue identifier] isEqualToString:@"Show Create Order View Segue ID"]) {
-        CreateMessageToVendorForOneBottleViewController * vc = [segue destinationViewController];
-        vc.managedObjectContext = _managedObjectContext;
-        vc.bottle = bottle;
-    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -187,7 +182,7 @@
     return bottle.name;
 }
 
--(void)didFinishEditingCount:(float *)count forObject:(id)obj {
+-(void)didFinishEditingCount:(NSNumber *)count forObject:(id)obj {
     [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:[NSDate date] withCount:count forBottle:bottle inManagedObjectContext:_managedObjectContext];
     [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
@@ -201,5 +196,9 @@
 }
 
 #pragma Actions and Outlets
+- (IBAction)didTouchDelete:(id)sender {
+    self.bottle.userHasBottle = [NSNumber numberWithBool:NO];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

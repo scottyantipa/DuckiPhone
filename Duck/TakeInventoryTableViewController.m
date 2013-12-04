@@ -114,7 +114,8 @@
 
 #pragma Protocal Methods
 
--(void)didFinishEditingCount:(float *)count forObject:(id)obj {
+// Note that the returned count better be a valid number
+-(void)didFinishEditingCount:(NSNumber *)count forObject:(id)obj {
     [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:[NSDate date] withCount:count forBottle:obj inManagedObjectContext:_managedObjectContext];
     [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];

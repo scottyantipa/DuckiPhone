@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @protocol EditCountDelegate <NSObject>
--(void)didFinishEditingCount:(float *)count forObject:(id)obj;
+-(void)didFinishEditingCount:(NSNumber *)count forObject:(id)obj;
 -(float)countOfManagedObject:(id)obj;
 @end
