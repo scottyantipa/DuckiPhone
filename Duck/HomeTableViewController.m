@@ -23,8 +23,9 @@
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
     }
     else if ([segue.identifier isEqualToString:@"New Bottle"]) {
-        Bottle *bottle = [Bottle newBottleForName:@"New Bottle" inManagedObjectContext:_managedObjectContext];
+        Bottle *bottle = [Bottle newBlankBottleInContext:_managedObjectContext];
         [segue.destinationViewController setBottle:bottle];
+        bottle.userHasBottle = [NSNumber numberWithBool:YES];
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
     }
     else if ([segue.identifier isEqualToString:@"Take Inventory"]) {
@@ -71,7 +72,8 @@
 
 #pragma Outlets/Actions
 - (IBAction)didPressScanButton:(id)sender {
-
+    return;  // until fully implemented
+    
     // ADD: present a barcode reader that scans from the camera feed
     ZBarReaderViewController *reader = [ZBarReaderViewController new];
     reader.readerDelegate = self;

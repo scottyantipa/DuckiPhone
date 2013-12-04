@@ -36,7 +36,8 @@
     
     // if none were returned, then create one
     if ([fetchedObjects count] == 0) {
-        Bottle *newBottle = [Bottle newBottleForName:name inManagedObjectContext:context];
+        Bottle *newBottle = [Bottle newBlankBottleInContext:context];
+        newBottle.name = name;
         return newBottle;
     }
     else {
@@ -79,15 +80,10 @@
                       inManagedObjectContext:context];
     bottle.name = @"No Name";
     bottle.barcode = @"No Barcode";
-    // NOTE:  need to make a new InventorySnapshot of 0 for it
-    return bottle;
-}
-
-+(Bottle *)newBottleForName:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context
-{
-    Bottle *bottle = [Bottle newBlankBottleInContext:context];
-    if (name) {
-        bottle.name = name;
+    [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:[NSDate date] withCount:(NSNumber *)0 forBottle:bottle inManagedObjectContext:context];
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
     return bottle;
 }

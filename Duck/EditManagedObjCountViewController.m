@@ -49,7 +49,8 @@
 -(void)doneWithNumberPad {
     NSString * text = self.textFieldForCount.text;
     CGFloat floatVal = (CGFloat)[text floatValue];
+    NSNumber * num = [NSNumber numberWithFloat:floatVal];
     [self.textFieldForCount resignFirstResponder];
-    [self.delegate didFinishEditingCount:&floatVal forObject:self.managedObj];
+    [self.delegate didFinishEditingCount:num forObject:self.managedObj];
 }
 @end
