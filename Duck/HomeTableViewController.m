@@ -48,33 +48,27 @@
     id <NSFastEnumeration> results = [info objectForKey: ZBarReaderControllerResults];
     ZBarSymbol *symbol = nil;
 
-    // EXAMPLE: just grab the first barcode
+    // just grab the first symbol
     for(symbol in results)
         break;
     
-    // EXAMPLE: do something useful with the barcode data
     NSString * resultText = symbol.data;
-//    NSLog(@"Result Text: %@", resultText );
+    NSLog(@"Result Text: %@", resultText);
     
     // Check and see if there is a bottle with that barcode
     Bottle * bottle = [Bottle bottleForBarcode:resultText inManagedObjectContext:_managedObjectContext];
-//    BottleDetailTableViewController * bottleTVC = [BottleDetailTableViewController new];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle: nil];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     BottleDetailTableViewController * bottleTVC = [storyboard instantiateViewControllerWithIdentifier:@"BottleDetailStoryBoardID"];
     [bottleTVC setBottle:bottle];
     [bottleTVC setManagedObjectContext:_managedObjectContext];
     [self.navigationController pushViewController:bottleTVC animated:YES];
     
-    
-    // ADD: dismiss the controller (NB dismiss from the *reader*!)
     [reader dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma Outlets/Actions
 - (IBAction)didPressScanButton:(id)sender {
-    return;  // until fully implemented
-    
-    // ADD: present a barcode reader that scans from the camera feed
     ZBarReaderViewController *reader = [ZBarReaderViewController new];
     reader.readerDelegate = self;
     reader.supportedOrientationsMask = ZBarOrientationMaskAll;

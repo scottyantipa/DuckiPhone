@@ -104,7 +104,7 @@
         bottle.userHasBottle = [NSNumber numberWithBool:NO];
         [AlcoholSubType recalculateUserOrderingForSubType:bottle.subType inContext:_managedObjectContext];
     } else { // user did not have bottle so lets add it to the end
-        [AlcoholSubType userAddedBottle:bottle toSubType:bottle.subType inContext:_managedObjectContext];
+        [AlcoholSubType changeBottle:bottle toSubType:bottle.subType inContext:_managedObjectContext];
     }
 }
 

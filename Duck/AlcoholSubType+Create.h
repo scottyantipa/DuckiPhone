@@ -19,7 +19,7 @@
 +(void)recalculateUserOrderingForSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context;
 
 // When a user adds a bottle to their collection we need to givee it an ordering
-+(void)userAddedBottle:(Bottle *)bottle toSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context;
++(void)changeBottle:(Bottle *)bottle toSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context;
 
 // When user adjusts the ordering of a bottle
 +(void)changeOrderOfBottle:(Bottle * )bottle toNumber:(NSNumber *)number inContext:(NSManagedObjectContext *)context;
