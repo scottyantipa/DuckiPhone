@@ -14,6 +14,7 @@
 #import <UIKit/UIKit.h>
 #import "ZBarSDK.h"
 
-@interface HomeTableViewController : UITableViewController < ZBarReaderDelegate >
+@interface HomeTableViewController : UITableViewController < ZBarReaderDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property  (strong, nonatomic) NSString *currentScannedBottleBarcode;
 @end

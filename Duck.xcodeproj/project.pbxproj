@@ -395,26 +395,10 @@
 		E05014EB1814ADB400A06560 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E0A41FB218888583001F7493 /* Bottles */,
+				E0A41FB11888855C001F7493 /* Orders */,
 				E05014A01814AC9900A06560 /* HomeTableViewController.h */,
 				E05014A11814AC9900A06560 /* HomeTableViewController.m */,
-				E05014FD1814AED400A06560 /* AlcoholTypesTableViewController.h */,
-				E05014FE1814AED400A06560 /* AlcoholTypesTableViewController.m */,
-				E05014F71814AED400A06560 /* AlcoholSubTypesTableViewController.h */,
-				E05014F81814AED400A06560 /* AlcoholSubTypesTableViewController.m */,
-				E050150B1814AED400A06560 /* BottlesForSubTypeTableViewController.h */,
-				E050150C1814AED400A06560 /* BottlesForSubTypeTableViewController.m */,
-				E05015091814AED400A06560 /* BottleDetailTableViewController.h */,
-				E050150A1814AED400A06560 /* BottleDetailTableViewController.m */,
-				E050150D1814AED400A06560 /* BottlesInOrderTableViewController.h */,
-				E050150E1814AED400A06560 /* BottlesInOrderTableViewController.m */,
-				E05014A61814AC9900A06560 /* OrderTableViewController.h */,
-				E05014A71814AC9900A06560 /* OrderTableViewController.m */,
-				E05015231814B95B00A06560 /* EditOrderForBottleDetailsViewController.h */,
-				E050149D1814AC9900A06560 /* EditOrderForBottleDetailsViewController.m */,
-				E08272891819ACE3007A2977 /* PastOrdersTableViewController.h */,
-				E082728A1819ACE3007A2977 /* PastOrdersTableViewController.m */,
-				E05014B11814AC9900A06560 /* PickBottleTableViewController.h */,
-				E05014B21814AC9900A06560 /* PickBottleTableViewController.m */,
 				E05014B41814AC9900A06560 /* TakeInventoryTableViewController.h */,
 				E05014B51814AC9900A06560 /* TakeInventoryTableViewController.m */,
 			);
@@ -459,6 +443,8 @@
 		E05014EE1814AE1800A06560 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E05014B11814AC9900A06560 /* PickBottleTableViewController.h */,
+				E05014B21814AC9900A06560 /* PickBottleTableViewController.m */,
 				E03144371841A1530047FA6F /* Constants.h */,
 				E03144381841A1530047FA6F /* Constants.m */,
 				E05015031814AED400A06560 /* BaseCoreDataTableViewController.h */,
@@ -484,6 +470,36 @@
 				E05014B31814AC9900A06560 /* SubTypeSelectorDelegate.h */,
 			);
 			name = Protocals;
+			sourceTree = "<group>";
+		};
+		E0A41FB11888855C001F7493 /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+				E050150D1814AED400A06560 /* BottlesInOrderTableViewController.h */,
+				E050150E1814AED400A06560 /* BottlesInOrderTableViewController.m */,
+				E05014A61814AC9900A06560 /* OrderTableViewController.h */,
+				E05014A71814AC9900A06560 /* OrderTableViewController.m */,
+				E05015231814B95B00A06560 /* EditOrderForBottleDetailsViewController.h */,
+				E050149D1814AC9900A06560 /* EditOrderForBottleDetailsViewController.m */,
+				E08272891819ACE3007A2977 /* PastOrdersTableViewController.h */,
+				E082728A1819ACE3007A2977 /* PastOrdersTableViewController.m */,
+			);
+			name = Orders;
+			sourceTree = "<group>";
+		};
+		E0A41FB218888583001F7493 /* Bottles */ = {
+			isa = PBXGroup;
+			children = (
+				E05014FD1814AED400A06560 /* AlcoholTypesTableViewController.h */,
+				E05014FE1814AED400A06560 /* AlcoholTypesTableViewController.m */,
+				E05014F71814AED400A06560 /* AlcoholSubTypesTableViewController.h */,
+				E05014F81814AED400A06560 /* AlcoholSubTypesTableViewController.m */,
+				E050150B1814AED400A06560 /* BottlesForSubTypeTableViewController.h */,
+				E050150C1814AED400A06560 /* BottlesForSubTypeTableViewController.m */,
+				E05015091814AED400A06560 /* BottleDetailTableViewController.h */,
+				E050150A1814AED400A06560 /* BottleDetailTableViewController.m */,
+			);
+			name = Bottles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

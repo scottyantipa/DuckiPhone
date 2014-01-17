@@ -16,6 +16,7 @@
 @implementation HomeTableViewController
 
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize currentScannedBottleBarcode = _currentScannedBottleBarcode;
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -40,6 +41,14 @@
     }
 }
 
+-(void)showBottleDetail:(Bottle *)bottle {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    BottleDetailTableViewController * bottleTVC = [storyboard instantiateViewControllerWithIdentifier:@"BottleDetailStoryBoardID"];
+    [bottleTVC setBottle:bottle];
+    [bottleTVC setManagedObjectContext:_managedObjectContext];
+    [self.navigationController pushViewController:bottleTVC animated:YES];
+}
+
 #pragma Delegate methods
 
 - (void) imagePickerController: (UIImagePickerController*) reader
@@ -53,17 +62,19 @@
         break;
     
     NSString * resultText = symbol.data;
-    NSLog(@"Result Text: %@", resultText);
+    _currentScannedBottleBarcode = resultText;
     
     // Check and see if there is a bottle with that barcode
     Bottle * bottle = [Bottle bottleForBarcode:resultText inManagedObjectContext:_managedObjectContext];
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    BottleDetailTableViewController * bottleTVC = [storyboard instantiateViewControllerWithIdentifier:@"BottleDetailStoryBoardID"];
-    [bottleTVC setBottle:bottle];
-    [bottleTVC setManagedObjectContext:_managedObjectContext];
-    [self.navigationController pushViewController:bottleTVC animated:YES];
-    
+    // If bottle isnt in global db, ask if user wants to create it
+    if (!bottle) {
+        UIAlertView * noBottleAlertView = [[UIAlertView alloc] initWithTitle:@"We don't have record of this bottle" message:nil delegate:self cancelButtonTitle:@"Add Bottle" otherButtonTitles:@"Cancel", nil];
+        noBottleAlertView.tag = 1;
+        [noBottleAlertView show];
+    } else {
+        [self showBottleDetail:bottle];
+    }
     [reader dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -86,4 +97,20 @@
                         completion:nil
      ];
 }
+
+// Alert View
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 1) { // its the "No Bottle" alert from the scanner
+        if (buttonIndex == 1) { // the "pick vendor" button
+            NSLog(@"buttonIndex 1");
+        } else if (buttonIndex == 2) {
+            NSLog(@"buttonIndex 2");
+        } else if (buttonIndex == 0) {
+            Bottle *newBottle = [Bottle newBottleForBarcode:_currentScannedBottleBarcode inManagedObjectContext:_managedObjectContext];
+            newBottle.userHasBottle = [NSNumber numberWithBool:YES];
+            [self showBottleDetail:newBottle];
+        }
+    }
+}
+
 @end
