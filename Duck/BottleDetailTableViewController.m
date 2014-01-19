@@ -20,17 +20,17 @@
 
 @implementation BottleDetailTableViewController
 
-@synthesize bottle = bottle;
+@synthesize bottle = _bottle;
 @synthesize whiteList = _whiteList;
 @synthesize managedObjectContext = _managedObjectContext;
 
 -(void)viewDidLoad
 {
-    if (!bottle.name) {
+    if (!_bottle.name) {
         self.title = @"New Bottle";
     }
     else {
-        self.title = bottle.name;
+        self.title = _bottle.name;
     }
     self.whiteList = [Bottle whiteList];
 }
@@ -40,7 +40,7 @@
 }
 
 -(void)setBottleInfo:(Bottle *)bottleInfo {
-    bottle = bottleInfo;
+    _bottle = bottleInfo;
 }
 
 -(NSNumber *)countOfBottle {
@@ -49,7 +49,7 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"InventorySnapshotForBottle" inManagedObjectContext:_managedObjectContext];
     [fetchRequest setEntity:entity];
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"whichBottle.name = %@", bottle.name];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"whichBottle.name = %@", _bottle.name];
     [fetchRequest setPredicate:predicate];
     
     NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
@@ -92,10 +92,10 @@
     NSString *nameForProperty = [self nameForProperty:property];
     cell.detailTextLabel.text = nameForProperty;
     if ([property isEqualToString:@"subType"]) {
-        if (!bottle.subType) {
+        if (!_bottle.subType) {
             cell.textLabel.text = @"Enter Category";
         } else {
-            cell.textLabel.text = [bottle.subType name];
+            cell.textLabel.text = [_bottle.subType name];
         }
     }
     else if ([property isEqualToString:@"count"]) {
@@ -108,11 +108,11 @@
     else if ([property isEqualToString:@"barcode"]) {
         NSNumberFormatter * numFormatter = [[NSNumberFormatter alloc] init];
         [numFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        NSNumber * barcode = [numFormatter numberFromString:bottle.barcode];
+        NSNumber * barcode = [numFormatter numberFromString:_bottle.barcode];
         cell.textLabel.text = [NSString stringWithFormat:@"%@", barcode];
     }
     else {
-        cell.textLabel.text = [bottle valueForKey:property];
+        cell.textLabel.text = [_bottle valueForKey:property];
     }
 }
 
@@ -161,29 +161,25 @@
 
 -(void)didFinishSelectingSubType:(AlcoholSubType *)subType
 {
-    bottle.subType = subType;
-    NSError *error;
-    if (![_managedObjectContext save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
+    [AlcoholSubType changeBottle:_bottle toSubType:subType inContext:_managedObjectContext];
     [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)didFinishEditingText:(NSString *)name
 {
-    bottle.name = name;
+    _bottle.name = name;
     self.title = name;
     [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(NSString *)textForNameView {
-    return bottle.name;
+    return _bottle.name;
 }
 
 -(void)didFinishEditingCount:(NSNumber *)count forObject:(id)obj {
-    [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:[NSDate date] withCount:count forBottle:bottle inManagedObjectContext:_managedObjectContext];
+    [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:[NSDate date] withCount:count forBottle:_bottle inManagedObjectContext:_managedObjectContext];
     [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
 }

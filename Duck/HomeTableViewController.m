@@ -16,6 +16,7 @@
 @implementation HomeTableViewController
 
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize currentScannedBottleBarcode = _currentScannedBottleBarcode;
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -40,6 +41,14 @@
     }
 }
 
+-(void)showBottleDetail:(Bottle *)bottle {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    BottleDetailTableViewController * bottleTVC = [storyboard instantiateViewControllerWithIdentifier:@"BottleDetailStoryBoardID"];
+    [bottleTVC setBottle:bottle];
+    [bottleTVC setManagedObjectContext:_managedObjectContext];
+    [self.navigationController pushViewController:bottleTVC animated:YES];
+}
+
 #pragma Delegate methods
 
 - (void) imagePickerController: (UIImagePickerController*) reader
@@ -48,33 +57,29 @@
     id <NSFastEnumeration> results = [info objectForKey: ZBarReaderControllerResults];
     ZBarSymbol *symbol = nil;
 
-    // EXAMPLE: just grab the first barcode
+    // just grab the first symbol
     for(symbol in results)
         break;
     
-    // EXAMPLE: do something useful with the barcode data
     NSString * resultText = symbol.data;
-//    NSLog(@"Result Text: %@", resultText );
+    _currentScannedBottleBarcode = resultText;
     
     // Check and see if there is a bottle with that barcode
     Bottle * bottle = [Bottle bottleForBarcode:resultText inManagedObjectContext:_managedObjectContext];
-//    BottleDetailTableViewController * bottleTVC = [BottleDetailTableViewController new];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle: nil];
-    BottleDetailTableViewController * bottleTVC = [storyboard instantiateViewControllerWithIdentifier:@"BottleDetailStoryBoardID"];
-    [bottleTVC setBottle:bottle];
-    [bottleTVC setManagedObjectContext:_managedObjectContext];
-    [self.navigationController pushViewController:bottleTVC animated:YES];
     
-    
-    // ADD: dismiss the controller (NB dismiss from the *reader*!)
+    // If bottle isnt in global db, ask if user wants to create it
+    if (!bottle) {
+        UIAlertView * noBottleAlertView = [[UIAlertView alloc] initWithTitle:@"We don't have record of this bottle" message:nil delegate:self cancelButtonTitle:@"Add Bottle" otherButtonTitles:@"Cancel", nil];
+        noBottleAlertView.tag = 1;
+        [noBottleAlertView show];
+    } else {
+        [self showBottleDetail:bottle];
+    }
     [reader dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma Outlets/Actions
 - (IBAction)didPressScanButton:(id)sender {
-    return;  // until fully implemented
-    
-    // ADD: present a barcode reader that scans from the camera feed
     ZBarReaderViewController *reader = [ZBarReaderViewController new];
     reader.readerDelegate = self;
     reader.supportedOrientationsMask = ZBarOrientationMaskAll;
@@ -92,4 +97,20 @@
                         completion:nil
      ];
 }
+
+// Alert View
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 1) { // its the "No Bottle" alert from the scanner
+        if (buttonIndex == 1) { // the "pick vendor" button
+            NSLog(@"buttonIndex 1");
+        } else if (buttonIndex == 2) {
+            NSLog(@"buttonIndex 2");
+        } else if (buttonIndex == 0) {
+            Bottle *newBottle = [Bottle newBottleForBarcode:_currentScannedBottleBarcode inManagedObjectContext:_managedObjectContext];
+            newBottle.userHasBottle = [NSNumber numberWithBool:YES];
+            [self showBottleDetail:newBottle];
+        }
+    }
+}
+
 @end

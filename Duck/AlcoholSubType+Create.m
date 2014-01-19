@@ -77,7 +77,8 @@
     }
 }
 
-+(void)userAddedBottle:(Bottle *)bottle toSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context {
++(void)changeBottle:(Bottle *)bottle toSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context {
+    bottle.subType = subType;
     NSArray * fetchedBottles = [AlcoholSubType fetchedBottlesForSubType:bottle.subType inContext:context];
     bottle.userHasBottle = [NSNumber numberWithBool:YES];
     NSUInteger newOrder = [fetchedBottles count];

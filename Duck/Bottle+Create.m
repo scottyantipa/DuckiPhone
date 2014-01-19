@@ -63,10 +63,9 @@
     NSError *err;
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&err];
     
-    // if none were returned, then create one
+    // if none were returned, return NO
     if ([fetchedObjects count] == 0) {
-        Bottle *newBottle = [Bottle newBottleForBarcode:barcode inManagedObjectContext:context];
-        return newBottle;
+        return NO;
     }
     else {
         Bottle *bottle = [fetchedObjects lastObject];
