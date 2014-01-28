@@ -107,7 +107,7 @@
 		E05014981814AC9900A06560 /* EditCountDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCountDelegate.h; sourceTree = "<group>"; };
 		E05014991814AC9900A06560 /* EditManagedObjCountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditManagedObjCountViewController.h; sourceTree = "<group>"; };
 		E050149A1814AC9900A06560 /* EditManagedObjCountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditManagedObjCountViewController.m; sourceTree = "<group>"; };
-		E050149B1814AC9900A06560 /* EditNameViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNameViewDelegate.h; sourceTree = "<group>"; };
+		E050149B1814AC9900A06560 /* EditTextViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTextViewDelegate.h; sourceTree = "<group>"; };
 		E050149D1814AC9900A06560 /* EditOrderForBottleDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditOrderForBottleDetailsViewController.m; sourceTree = "<group>"; };
 		E050149E1814AC9900A06560 /* EditTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTextViewController.h; sourceTree = "<group>"; };
 		E050149F1814AC9900A06560 /* EditTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTextViewController.m; sourceTree = "<group>"; };
@@ -466,7 +466,7 @@
 			children = (
 				E05014981814AC9900A06560 /* EditCountDelegate.h */,
 				E0D5854618402FD10067F3AB /* ToggleBottlesDelegate.h */,
-				E050149B1814AC9900A06560 /* EditNameViewDelegate.h */,
+				E050149B1814AC9900A06560 /* EditTextViewDelegate.h */,
 				E05014B31814AC9900A06560 /* SubTypeSelectorDelegate.h */,
 			);
 			name = Protocals;

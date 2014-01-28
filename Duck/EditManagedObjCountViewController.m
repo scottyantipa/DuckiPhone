@@ -24,33 +24,20 @@
     [super viewWillAppear:animated];
 }
 
--(void)viewDidLoad {
-    [super viewDidLoad];
-    
-    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-    numberToolbar.barStyle = UIBarStyleBlackTranslucent;
-    numberToolbar.items = [NSArray arrayWithObjects:
-                           [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
-                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                           [[UIBarButtonItem alloc]initWithTitle:@"Apply" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)],
-                           nil];
-    [numberToolbar sizeToFit];
-    self.textFieldForCount.inputAccessoryView = numberToolbar;
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self updateTextField];
+    return NO;
 }
 
--(void)cancelNumberPad {
-    // replace text field with the actual count of the bottle
-    [self.textFieldForCount resignFirstResponder];
-    float count = [self.delegate countOfManagedObject:self.managedObj];
-    NSString * text = [NSString stringWithFormat:@"%g", count];
-    self.textFieldForCount.text = text;
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    [self updateTextField];
 }
 
--(void)doneWithNumberPad {
+-(void)updateTextField {
     NSString * text = self.textFieldForCount.text;
     CGFloat floatVal = (CGFloat)[text floatValue];
     NSNumber * num = [NSNumber numberWithFloat:floatVal];
-    [self.textFieldForCount resignFirstResponder];
-    [self.delegate didFinishEditingCount:num forObject:self.managedObj];
+    [self.delegate didFinishEditingCount:num forObject:self.managedObj];;
 }
+
 @end

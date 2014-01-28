@@ -171,7 +171,6 @@
     _bottle.name = name;
     self.title = name;
     [self.tableView reloadData];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(NSString *)textForNameView {
@@ -181,7 +180,6 @@
 -(void)didFinishEditingCount:(NSNumber *)count forObject:(id)obj {
     [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:[NSDate date] withCount:count forBottle:_bottle inManagedObjectContext:_managedObjectContext];
     [self.tableView reloadData];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(float)countOfManagedObject:(id)obj {

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EditNameViewDelegate.h"
+#import "EditTextViewDelegate.h"
 
 @interface EditTextViewController : UIViewController <UITextFieldDelegate>
 @property (weak) id <EditTextViewDelegate> delegate;

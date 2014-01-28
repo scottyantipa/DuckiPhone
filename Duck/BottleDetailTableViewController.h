@@ -9,7 +9,7 @@
 #import "BaseCoreDataTableViewController.h"
 #import "Bottle.h"
 #import "SubTypeSelectorDelegate.h"
-#import "EditNameViewDelegate.h"
+#import "EditTextViewDelegate.h"
 #import "EditCountDelegate.h"
 
 @interface BottleDetailTableViewController : BaseCoreDataTableViewController <SubTypeSelectorDelegate, EditTextViewDelegate, EditCountDelegate>

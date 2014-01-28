@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "EditCountDelegate.h"
 
-@interface EditManagedObjCountViewController : UIViewController
+@interface EditManagedObjCountViewController : UIViewController <UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UITextField * textFieldForCount;
 @property (strong, nonatomic) id managedObj;
 @property (weak) id <EditCountDelegate> delegate;
