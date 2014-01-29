@@ -118,14 +118,12 @@
 -(void)didFinishEditingCount:(NSNumber *)count forObject:(id)obj {
     [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:[NSDate date] withCount:count forBottle:obj inManagedObjectContext:_managedObjectContext];
     [self.tableView reloadData];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(float)countOfManagedObject:(id)obj {
     NSNumber * num = [self countOfBottle:obj];
     float countAsFloat = [num floatValue];
     return countAsFloat;
-    
 }
 
 

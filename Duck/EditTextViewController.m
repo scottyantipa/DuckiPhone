@@ -14,12 +14,18 @@
 
 @implementation EditTextViewController
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSString * text = self.textFieldForName.text;
-    NSLog(@"%@", text);
-    [self.textFieldForName resignFirstResponder];
-    [self.delegate didFinishEditingText:text];
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self updateTextField];
     return NO;
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    [self updateTextField];
+}
+
+-(void)updateTextField {
+    NSString * text = self.textFieldForName.text;
+    [self.delegate didFinishEditingText:text];
 }
 
 -(void)viewWillAppear:(BOOL)animated {

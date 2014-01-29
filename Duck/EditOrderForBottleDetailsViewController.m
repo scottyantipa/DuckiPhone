@@ -20,9 +20,9 @@
     [self updateTextField:textField];
     return NO;
 }
--(bool)textFieldDidEndEditing:(UITextField *)textField {
+
+-(void)textFieldDidEndEditing:(UITextField *)textField {
     [self updateTextField:textField];
-    return NO;
 }
 
 -(void)updateTextField:(UITextField *)textField {
