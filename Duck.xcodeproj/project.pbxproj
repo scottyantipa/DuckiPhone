@@ -98,7 +98,7 @@
 		E05014601814AB7C00A06560 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E05014621814AB7C00A06560 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E05014641814AB7C00A06560 /* Duck-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Duck-Prefix.pch"; sourceTree = "<group>"; };
-		E05014741814AB7C00A06560 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		E05014741814AB7C00A06560 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Duck/Images.xcassets; sourceTree = "<group>"; };
 		E050147A1814AB7C00A06560 /* DuckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DuckTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E050147B1814AB7C00A06560 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		E05014841814AB7C00A06560 /* DuckTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DuckTests-Info.plist"; sourceTree = "<group>"; };
@@ -239,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				E050145C1814AB7C00A06560 /* Duck */,
+				E05014741814AB7C00A06560 /* Images.xcassets */,
 				E05014821814AB7C00A06560 /* DuckTests */,
 				E05014531814AB7C00A06560 /* Frameworks */,
 				E05014521814AB7C00A06560 /* Products */,
@@ -284,7 +285,6 @@
 				E05014EF1814AE2B00A06560 /* Protocals */,
 				E05014EE1814AE1800A06560 /* Helpers */,
 				E05014EC1814ADE600A06560 /* DataClasses */,
-				E05014741814AB7C00A06560 /* Images.xcassets */,
 				E05014EA1814AD8100A06560 /* Vendor */,
 				E050145D1814AB7C00A06560 /* Supporting Files */,
 			);

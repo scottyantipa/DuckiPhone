@@ -49,6 +49,8 @@
     self.textFieldForUnits.text = [NSString stringWithFormat:@"%@", _orderForBottle.quantity];
     self.textFieldForPrice.tag = 1;
     self.textFieldForUnits.tag = 2;
+    self.textFieldForPrice.keyboardType = UIKeyboardTypeNumberPad;
+    self.textFieldForUnits.keyboardType = UIKeyboardTypeNumberPad;
     self.title = _orderForBottle.whichBottle.name;
     [self.view setNeedsDisplay];
     [super viewWillAppear:animated];
