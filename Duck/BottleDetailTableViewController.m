@@ -35,6 +35,31 @@
     self.whiteList = [Bottle whiteList];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [self makeRequest:@"POST"];
+}
+
+-(void)makeRequest:(NSString *)method {
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://127.0.0.1:3333/bottle"]];
+    NSString * paramStr = [NSString stringWithFormat:@"name=%@&barcode=%@", _bottle.name, _bottle.barcode];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:method];
+    [request setHTTPBody:[paramStr dataUsingEncoding:NSASCIIStringEncoding]];
+    
+    (void) [[NSURLConnection alloc] initWithRequest:request delegate:self];
+}
+
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSLog(@"finished loading connection %@", connection);
+}
+-(void)connection:(NSConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    NSLog(@"got response %@", response);
+}
+
+-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    NSLog(@"didReceiveData %@", data);
+}
+
 -(void)setManagedObjectContext:(NSManagedObjectContext *)context {
     _managedObjectContext = context;
 }
@@ -191,6 +216,7 @@
 
 #pragma Actions and Outlets
 - (IBAction)didTouchDelete:(id)sender {
+    [self makeRequest:@"DELETE"];
     self.bottle.userHasBottle = [NSNumber numberWithBool:NO];
     [self.navigationController popViewControllerAnimated:YES];
 }
