@@ -40,25 +40,39 @@
 }
 
 -(void)makeRequest:(NSString *)method {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://127.0.0.1:3333/bottle"]];
-    NSString * paramStr = [NSString stringWithFormat:@"name=%@&barcode=%@", _bottle.name, _bottle.barcode];
+    // make sure name param url encoded for whitespaces etc. (got this from: http://stackoverflow.com/questions/8088473/url-encode-an-nsstring)
+    NSString * encodedBottleName = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                  NULL,
+                                                                                  (CFStringRef)_bottle.name,
+                                                                                  NULL,
+                                                                                  (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                  kCFStringEncodingUTF8 ));
+    
+    
+    NSString * params = [NSString stringWithFormat:@"name=%@&barcode=%@", encodedBottleName, _bottle.barcode];
+    NSString * urlString = [NSMutableString stringWithFormat:@"http://127.0.0.1:3333/bottle?%@", params];
+    NSURL * url = [NSURL URLWithString:urlString];
+    
+    // create the reqeust, set the method, and send it
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:method];
-    [request setHTTPBody:[paramStr dataUsingEncoding:NSASCIIStringEncoding]];
-    
     (void) [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
+
+// These connection methods are not in use right now
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"finished loading connection %@", connection);
+//    NSLog(@"finished loading connection %@", connection);
 }
 -(void)connection:(NSConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSLog(@"got response %@", response);
+//    NSLog(@"got response %@", response);
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    NSLog(@"didReceiveData %@", data);
+//    NSLog(@"didReceiveData %@", data);
 }
+
+
 
 -(void)setManagedObjectContext:(NSManagedObjectContext *)context {
     _managedObjectContext = context;
