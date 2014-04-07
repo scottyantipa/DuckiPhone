@@ -50,7 +50,7 @@
     
     
     NSString * params = [NSString stringWithFormat:@"name=%@&barcode=%@", encodedBottleName, _bottle.barcode];
-    NSString * urlString = [NSMutableString stringWithFormat:@"http://127.0.0.1:3333/bottle?%@", params];
+    NSString * urlString = [NSMutableString stringWithFormat:@"http://10.0.0.6:3333/bottle?%@", params];
     NSURL * url = [NSURL URLWithString:urlString];
     
     // create the reqeust, set the method, and send it
