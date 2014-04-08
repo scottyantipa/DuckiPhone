@@ -49,8 +49,12 @@
                                                                                   kCFStringEncodingUTF8 ));
     
     
+    NSMutableString * remoteUrl = [NSMutableString stringWithFormat:@"http://ec2-54-82-243-92.compute-1.amazonaws.com:3333/bottle?"];
+    NSMutableString * localUrl = [NSMutableString stringWithFormat:@"http://10.0.0.6:3333/bottle?"];
+    BOOL isRemote = NO;
+    NSString * urlBase = isRemote ? remoteUrl : localUrl;
     NSString * params = [NSString stringWithFormat:@"name=%@&barcode=%@", encodedBottleName, _bottle.barcode];
-    NSString * urlString = [NSMutableString stringWithFormat:@"http://10.0.0.6:3333/bottle?%@", params];
+    NSString * urlString = [urlBase stringByAppendingString:params];
     NSURL * url = [NSURL URLWithString:urlString];
     
     // create the reqeust, set the method, and send it
