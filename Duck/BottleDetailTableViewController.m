@@ -53,7 +53,7 @@
     NSMutableString * localUrl = [NSMutableString stringWithFormat:@"http://10.0.0.6:3333/bottle?"];
     BOOL isRemote = YES;
     NSString * urlBase = isRemote ? remoteUrl : localUrl;
-    NSString * params = [NSString stringWithFormat:@"name=%@&barcode=%@&category=%@ ", encodedBottleName, _bottle.barcode, _bottle.subType.name];
+    NSString * params = [NSString stringWithFormat:@"name=%@&barcode=%@&category=%@", encodedBottleName, _bottle.barcode, _bottle.subType.name];
     NSString * urlString = [urlBase stringByAppendingString:params];
     NSURL * url = [NSURL URLWithString:urlString];
     
