@@ -7,6 +7,7 @@
 //
 
 #import "EditTextViewController.h"
+#import "Tesseract.h"
 
 @interface EditTextViewController ()
 
@@ -36,4 +37,24 @@
     [super viewWillAppear:animated];
 }
 
+- (IBAction)didPressScan:(id)sender {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    Tesseract* tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
+    NSNumber * splineFraction = [NSNumber numberWithInt:1];
+    [tesseract setValue:splineFraction forKey:@"textord_spline_outlier_fraction"];
+    [tesseract setImage:chosenImage];
+    [tesseract recognize];
+    
+    NSLog(@"%@", [tesseract recognizedText]);
+    [tesseract clear];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
 @end
