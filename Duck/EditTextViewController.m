@@ -48,8 +48,6 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     Tesseract* tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
-    NSNumber * splineFraction = [NSNumber numberWithInt:1];
-    [tesseract setValue:splineFraction forKey:@"textord_spline_outlier_fraction"];
     [tesseract setImage:chosenImage];
     [tesseract recognize];
     

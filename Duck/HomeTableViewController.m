@@ -18,6 +18,10 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize currentScannedBottleBarcode = _currentScannedBottleBarcode;
 
+-(void)viewDidLoad {
+    self.title = @"x86";
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Show Inventory"]) {
