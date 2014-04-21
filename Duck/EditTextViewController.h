@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "EditTextViewDelegate.h"
 
-@interface EditTextViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface EditTextViewController : UIViewController <UITextFieldDelegate>
 @property (weak) id <EditTextViewDelegate> delegate;
 @property (strong, nonatomic) UITextView * view;
 @property (strong, nonatomic) IBOutlet UITextField * textFieldForName;

@@ -7,7 +7,6 @@
 //
 
 #import "EditTextViewController.h"
-#import "Tesseract.h"
 
 @interface EditTextViewController ()
 
@@ -35,24 +34,5 @@
     self.textFieldForName.text = [self.delegate textForNameView];
     [self.view setNeedsDisplay];
     [super viewWillAppear:animated];
-}
-
-- (IBAction)didPressScan:(id)sender {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:picker animated:YES completion:NULL];
-}
-
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    Tesseract* tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
-    [tesseract setImage:chosenImage];
-    [tesseract recognize];
-    
-    NSLog(@"%@", [tesseract recognizedText]);
-    [tesseract clear];
-    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 @end
