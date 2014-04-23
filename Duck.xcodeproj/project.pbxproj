@@ -15,7 +15,7 @@
 		E024A4EC19081351003A80DB /* AlcoholType.m in Sources */ = {isa = PBXBuildFile; fileRef = E024A4EB19081351003A80DB /* AlcoholType.m */; };
 		E024A4EF19081351003A80DB /* OrderForBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E024A4EE19081351003A80DB /* OrderForBottle.m */; };
 		E024A4F219081351003A80DB /* AlcoholSubType.m in Sources */ = {isa = PBXBuildFile; fileRef = E024A4F119081351003A80DB /* AlcoholSubType.m */; };
-		E024A525190821C6003A80DB /* OSXData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E024A524190821C6003A80DB /* OSXData.sqlite */; };
+		E024A527190824F4003A80DB /* OSXData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E024A526190824F4003A80DB /* OSXData.sqlite */; };
 		E02D3F721849542C00C435A3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E02D3F711849542C00C435A3 /* AVFoundation.framework */; };
 		E02D3F741849543C00C435A3 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E02D3F731849543C00C435A3 /* CoreVideo.framework */; };
 		E03144391841A1530047FA6F /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = E03144381841A1530047FA6F /* Constants.m */; };
@@ -111,7 +111,7 @@
 		E024A4EE19081351003A80DB /* OrderForBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderForBottle.m; sourceTree = "<group>"; };
 		E024A4F019081351003A80DB /* AlcoholSubType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlcoholSubType.h; sourceTree = "<group>"; };
 		E024A4F119081351003A80DB /* AlcoholSubType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlcoholSubType.m; sourceTree = "<group>"; };
-		E024A524190821C6003A80DB /* OSXData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = OSXData.sqlite; path = "../../../../Library/Developer/Xcode/DerivedData/OSXData-hkenohltsmtmosbrovqiotxcfwgz/Build/Products/Debug/OSXData.sqlite"; sourceTree = "<group>"; };
+		E024A526190824F4003A80DB /* OSXData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = OSXData.sqlite; path = "../../../../Library/Developer/Xcode/DerivedData/OSXData-hkenohltsmtmosbrovqiotxcfwgz/Build/Products/Debug/OSXData.sqlite"; sourceTree = "<group>"; };
 		E02D3F711849542C00C435A3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E02D3F731849543C00C435A3 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		E03144371841A1530047FA6F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -306,7 +306,7 @@
 		E050145C1814AB7C00A06560 /* Duck */ = {
 			isa = PBXGroup;
 			children = (
-				E024A524190821C6003A80DB /* OSXData.sqlite */,
+				E024A526190824F4003A80DB /* OSXData.sqlite */,
 				E0C5A55B1849ABDD008E9B94 /* Duck.xcdatamodeld */,
 				E05C1AAC1814BED900FE57EF /* Main.storyboard */,
 				E05015011814AED400A06560 /* AppDelegate.h */,
@@ -653,7 +653,7 @@
 				E079251419039B4700162737 /* Icon-72@2x.png in Resources */,
 				E05014751814AB7C00A06560 /* Images.xcassets in Resources */,
 				E079250F19039B4700162737 /* Icon-40.png in Resources */,
-				E024A525190821C6003A80DB /* OSXData.sqlite in Resources */,
+				E024A527190824F4003A80DB /* OSXData.sqlite in Resources */,
 				E079251B19039B4700162737 /* Icon.png in Resources */,
 				E05C1AAD1814BED900FE57EF /* Main.storyboard in Resources */,
 				E079251519039B4700162737 /* Icon-76.png in Resources */,
