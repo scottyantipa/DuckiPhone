@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E000D7411817B0F1006232A8 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014DF1814AD7100A06560 /* libzbar.a */; };
+		E024A4C819080938003A80DB /* OSXData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E024A4C719080938003A80DB /* OSXData.sqlite */; };
 		E02D3F721849542C00C435A3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E02D3F711849542C00C435A3 /* AVFoundation.framework */; };
 		E02D3F741849543C00C435A3 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E02D3F731849543C00C435A3 /* CoreVideo.framework */; };
 		E03144391841A1530047FA6F /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = E03144381841A1530047FA6F /* Constants.m */; };
@@ -84,8 +85,6 @@
 		E0C5A55A1849AAAC008E9B94 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C5A5591849AAAC008E9B94 /* Order.m */; };
 		E0C5A55D1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0C5A55B1849ABDD008E9B94 /* Duck.xcdatamodeld */; };
 		E0C5A55E1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0C5A55B1849ABDD008E9B94 /* Duck.xcdatamodeld */; };
-		E0C5A5631849AC9E008E9B94 /* OSXData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E0C5A5621849AC9E008E9B94 /* OSXData.sqlite */; };
-		E0C5A5641849AC9E008E9B94 /* OSXData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E0C5A5621849AC9E008E9B94 /* OSXData.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +98,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E024A4C719080938003A80DB /* OSXData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = OSXData.sqlite; sourceTree = "<group>"; };
 		E02D3F711849542C00C435A3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E02D3F731849543C00C435A3 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		E03144371841A1530047FA6F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -230,7 +230,6 @@
 		E0C5A5581849AAAC008E9B94 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		E0C5A5591849AAAC008E9B94 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		E0C5A55C1849ABDD008E9B94 /* Duck.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Duck.xcdatamodel; sourceTree = "<group>"; };
-		E0C5A5621849AC9E008E9B94 /* OSXData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = OSXData.sqlite; sourceTree = "<group>"; };
 		E0D5854618402FD10067F3AB /* ToggleBottlesDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleBottlesDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -308,16 +307,16 @@
 		E050145C1814AB7C00A06560 /* Duck */ = {
 			isa = PBXGroup;
 			children = (
-				E07924FE19039B4600162737 /* icons */,
+				E024A4C719080938003A80DB /* OSXData.sqlite */,
 				E0C5A55B1849ABDD008E9B94 /* Duck.xcdatamodeld */,
 				E05C1AAC1814BED900FE57EF /* Main.storyboard */,
-				E0C5A5621849AC9E008E9B94 /* OSXData.sqlite */,
 				E05015011814AED400A06560 /* AppDelegate.h */,
 				E05015021814AED400A06560 /* AppDelegate.m */,
 				E05014EB1814ADB400A06560 /* Controllers */,
 				E05014EF1814AE2B00A06560 /* Protocals */,
 				E05014EE1814AE1800A06560 /* Helpers */,
 				E05014EC1814ADE600A06560 /* DataClasses */,
+				E07924FE19039B4600162737 /* icons */,
 				E05014EA1814AD8100A06560 /* Vendor */,
 				E050145D1814AB7C00A06560 /* Supporting Files */,
 			);
@@ -639,7 +638,6 @@
 			files = (
 				E05014E71814AD7100A06560 /* zbar-help.html in Resources */,
 				E05014E91814AD7100A06560 /* zbar-samples.png in Resources */,
-				E0C5A5631849AC9E008E9B94 /* OSXData.sqlite in Resources */,
 				E079251619039B4700162737 /* Icon-76@2x.png in Resources */,
 				E079251919039B4700162737 /* Icon-Small.png in Resources */,
 				E05014E81814AD7100A06560 /* zbar-helpicons.png in Resources */,
@@ -656,6 +654,7 @@
 				E079251419039B4700162737 /* Icon-72@2x.png in Resources */,
 				E05014751814AB7C00A06560 /* Images.xcassets in Resources */,
 				E079250F19039B4700162737 /* Icon-40.png in Resources */,
+				E024A4C819080938003A80DB /* OSXData.sqlite in Resources */,
 				E079251B19039B4700162737 /* Icon.png in Resources */,
 				E05C1AAD1814BED900FE57EF /* Main.storyboard in Resources */,
 				E079251519039B4700162737 /* Icon-76.png in Resources */,
@@ -668,7 +667,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0C5A5641849AC9E008E9B94 /* OSXData.sqlite in Resources */,
 				E05014871814AB7C00A06560 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
