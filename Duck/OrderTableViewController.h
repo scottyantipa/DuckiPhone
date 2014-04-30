@@ -12,6 +12,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "Vendor+Create.h"
+#import "EditVendorInfoViewController.h"
 
 @interface OrderTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) Order * order;

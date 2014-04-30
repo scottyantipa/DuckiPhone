@@ -15,6 +15,7 @@
     Order * order = [NSEntityDescription
                                insertNewObjectForEntityForName:@"Order"
                                inManagedObjectContext:context];
+    order.whichVendor = [Vendor newVendorInContext:context];
     order.date = date;
     return order;
 }

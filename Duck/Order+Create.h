@@ -8,7 +8,7 @@
 
 #import "Order.h"
 #import "OrderForBottle+Create.h"
-#import "Vendor.h"
+#import "Vendor+Create.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import <AddressBookUI/AddressBookUI.h>

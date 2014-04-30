@@ -75,6 +75,8 @@
     if ([segue.identifier isEqualToString:@"Show Bottles in Order Segue ID"]) {
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
         [segue.destinationViewController setOrder:_order];
+    } else if ([segue.identifier isEqualToString:@"Show Vendor Contact Info Segue ID"]) {
+        [segue.destinationViewController setVendor:_order.whichVendor];
     }
 }
 
@@ -163,7 +165,7 @@
     if (indexPath.section == 1 & indexPath.row == 0) { // its the "Bottles in Order" cell
         [self performSegueWithIdentifier:@"Show Bottles in Order Segue ID" sender:nil];
     } else if (indexPath.section == 0 & indexPath.row == 0) { // its the vendor, so present address book
-        [self showPeoplePicker];
+        [self alertForPickingManualOrFromAddressBook:@"Pick vendor from address book, or enter manually?"];
     }
     else {
         return;
@@ -199,22 +201,13 @@
     NSString * error = [Order errorStringForSendingIncompleteOrder:_order];
     if (error) {
         UIAlertView * cantSendOrderAlertView = [[UIAlertView alloc] initWithTitle:@"Cannot send order because..." message:error delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        cantSendOrderAlertView.tag = 1;
         [cantSendOrderAlertView show];
         return;
     }
     
-    // Now see if Vendor is up to date with contact book
-    BOOL vendorInfoIsCurrent = [Vendor updateVendorFromAddressBook:_order.whichVendor];
-    if (vendorInfoIsCurrent) {   // Show mail view controller if vendor is current
-        MFMailComposeViewController * mailTVC = [Order mailComposeForOrder:_order];
-        mailTVC.mailComposeDelegate = self;
-        [self presentViewController:mailTVC animated:YES completion:nil];
-    } else {  // vendor is out of date, alert user to select a new vendor
-        UIAlertView * vendorNotCurrentAlertView = [[UIAlertView alloc]initWithTitle:@"Vendor Is Not Current" message:@"The vendor is out of sync with your contact book.  Please select a new vendor." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Pick Vendor", nil];
-        vendorNotCurrentAlertView.tag = 2;
-        [vendorNotCurrentAlertView show];
-    }
+    MFMailComposeViewController * mailTVC = [Order mailComposeForOrder:_order];
+    mailTVC.mailComposeDelegate = self;
+    [self presentViewController:mailTVC animated:YES completion:nil];
 }
 
 // User wants to duplicate the order.  We will create a new Order
@@ -238,7 +231,7 @@
         UIAlertView * failedMailAlertView = [[UIAlertView alloc] initWithTitle:@"Message Failed" message:@"We are not sure what caused the failure" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [self dismissViewControllerAnimated:YES completion:nil];
         [failedMailAlertView show];
-    } else { // the message was sent successfully
+    } else if (result == MFMailComposeResultSent) { // the message was sent successfully
         _order.sent = [NSNumber numberWithBool:YES];
         [self reloadAll];
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -270,9 +263,11 @@
 
 // Alert View
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alertView.tag == 2) {
-        if (buttonIndex == 1) { // the "pick vendor" button
+    if (alertView.tag == 1) { // asking user to select how to pick their vendor
+        if (buttonIndex == 0) { // "Address Book"
             [self showPeoplePicker];
+        } else if (buttonIndex == 1) { // "Manually Enter"
+            [self performSegueWithIdentifier:@"Show Vendor Contact Info Segue ID" sender:nil];
         }
     }
 }
@@ -294,6 +289,12 @@
 }
 
 #pragma utils
+
+-(void)alertForPickingManualOrFromAddressBook:(NSString *)message {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:message message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Address Book", @"Manually", nil];
+    alert.tag = 1;
+    [alert show];
+}
 
 // Abstracted this because used in multiple places
 -(void)showPeoplePicker {
