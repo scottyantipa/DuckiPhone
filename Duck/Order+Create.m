@@ -85,12 +85,12 @@
     }
 
     NSString * allBottles = [bottleStrings componentsJoinedByString:@"\n\n"];  // join all bottle descriptions with a space between
-    NSString * signOff = [NSString stringWithFormat:@"Thank you. \n\nPowered by Duck Rows"];
+    NSString * signOff = [NSString stringWithFormat:@"Thank you!\n"];
     NSString * body = [NSString stringWithFormat:@"%@\n\n%@\n\n%@", greeting, allBottles, signOff];
 
     MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
     [mailViewController setToRecipients:toRecipients];
-    [mailViewController setSubject:@"Re-Order"];
+    [mailViewController setSubject:@"Placing Order"];
     [mailViewController setMessageBody:body isHTML:NO];
     return mailViewController;
 }

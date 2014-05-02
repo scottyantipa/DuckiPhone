@@ -106,13 +106,13 @@
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     NSString * labelText;
     NSString * detailText;
-    NSString * noNameText = @"No name for vendor";
+    NSString * noNameText = @"No name";
     
     if (indexPath.section == 0) { // vendor
         Vendor * vendor = _order.whichVendor;
         NSString * vendorName = [Vendor fullNameOfVendor:vendor];
         labelText = vendorName ? vendorName : noNameText;
-        detailText = vendor.email ? vendor.email : @"No Email For Vendor";
+        detailText = vendor.email ? vendor.email : @"No Email";
     } else if (indexPath.section == 1) { // status
         labelText = [NSString stringWithFormat:@"%d", _order.ordersByBottle.count];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -176,7 +176,7 @@
     if (section == 0) { // vendor
         return @"vendor";
     } else if (section == 1) { // status
-        return @"bottles in order";
+        return @"# skus in order";
     } else if (section == 2) { // bottles
         return @"status";
     } else if (section == 3) { // date picker
@@ -231,11 +231,12 @@
         UIAlertView * failedMailAlertView = [[UIAlertView alloc] initWithTitle:@"Message Failed" message:@"We are not sure what caused the failure" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [self dismissViewControllerAnimated:YES completion:nil];
         [failedMailAlertView show];
+        return;
     } else if (result == MFMailComposeResultSent) { // the message was sent successfully
         _order.sent = [NSNumber numberWithBool:YES];
         [self reloadAll];
-        [self dismissViewControllerAnimated:YES completion:nil];
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 // date picker
