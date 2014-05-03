@@ -245,7 +245,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXQ-Sl-nJD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="930" y="700"/>
+            <point key="canvasLocation" x="714" y="840"/>
         </scene>
         <!--Order Table View Controller-->
         <scene sceneID="UUy-8E-wF7">
@@ -297,11 +297,12 @@
                     <connections>
                         <segue destination="L8U-UR-1zV" kind="push" identifier="Show Bottles in Order Segue ID" id="EMR-Y4-2zn"/>
                         <segue destination="K1K-8Y-5wK" kind="push" identifier="Show Vendor Contact Info Segue ID" id="Ncl-VD-cSO"/>
+                        <segue destination="U2j-8O-QXu" kind="push" identifier="Show Invoice Segue ID" id="y3y-TX-SpB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FL4-W3-zM2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1403" y="475"/>
+            <point key="canvasLocation" x="1227" y="859"/>
         </scene>
         <!--Edit Vendor Info View Controller - Vendor Contact-->
         <scene sceneID="o9Z-Kt-tpr">
@@ -375,7 +376,54 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zWk-2t-mix" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1872" y="1452"/>
+            <point key="canvasLocation" x="1718" y="1304"/>
+        </scene>
+        <!--InvoiceTVC-->
+        <scene sceneID="Mqn-vo-Rf8">
+            <objects>
+                <tableViewController id="U2j-8O-QXu" customClass="InvoiceTVC" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jxm-nw-Dq9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Invoice TVC CellReuse ID" textLabel="TgJ-kQ-SU2" style="IBUITableViewCellStyleDefault" id="gI0-R3-bl1">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gI0-R3-bl1" id="xJG-ya-geO">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TgJ-kQ-SU2">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="U2j-8O-QXu" id="0AY-5y-EKE"/>
+                            <outlet property="delegate" destination="U2j-8O-QXu" id="bJP-7A-heQ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="V1N-Vu-lhR">
+                        <barButtonItem key="rightBarButtonItem" title="Add Photo" id="ce2-BB-qfS">
+                            <connections>
+                                <action selector="didSelectAddPhoto:" destination="U2j-8O-QXu" id="Uz9-VS-bqZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addPhotoBarButton" destination="ce2-BB-qfS" id="0qG-sy-zsg"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T8K-rs-92b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1302" y="1640"/>
         </scene>
         <!--Bottles In Order Table View Controller-->
         <scene sceneID="s41-kz-oE7">
@@ -428,7 +476,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U8I-Bp-uxd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="700"/>
+            <point key="canvasLocation" x="1718" y="608"/>
         </scene>
         <!--Edit Order For Bottle Details View Controller-->
         <scene sceneID="VKp-Ct-78L">
@@ -485,7 +533,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAi-98-gal" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2482" y="1032"/>
+            <point key="canvasLocation" x="2306" y="623"/>
         </scene>
         <!--Bottles For Sub Type Table View Controller-->
         <scene sceneID="QwF-YM-MRo">
@@ -797,9 +845,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="MLT-4y-wai"/>
         <segue reference="pK6-lf-Ddj"/>
-        <segue reference="Kjs-1H-KHF"/>
+        <segue reference="HEK-hq-4ib"/>
+        <segue reference="h54-lP-FQo"/>
         <segue reference="gCl-OI-uA5"/>
     </inferredMetricsTieBreakers>
 </document>

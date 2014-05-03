@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 Scott Antipa. All rights reserved.
 //
 
+// Store globally constant vars here
+
 #import <Foundation/Foundation.h>
 
 @interface Constants : NSObject
-extern NSString *const kDatePickerIndex;
 @end

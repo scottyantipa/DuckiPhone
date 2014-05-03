@@ -9,5 +9,4 @@
 #import "Constants.h"
 
 @implementation Constants
-NSString *const kDatePickerIndex = @"2";
 @end

@@ -15,6 +15,5 @@
 @interface BottlesInOrderTableViewController : UITableViewController <ToggleBottlesDelegate>
 @property (strong, nonatomic) Order * order;
 @property (nonatomic, strong) NSArray * sortedBottlesInOrder;
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @end

@@ -17,6 +17,7 @@
                                inManagedObjectContext:context];
     order.whichVendor = [Vendor newVendorInContext:context];
     order.date = date;
+    order.invoice = [NSEntityDescription insertNewObjectForEntityForName:@"Invoice" inManagedObjectContext:context];
     return order;
 }
 

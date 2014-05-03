@@ -77,6 +77,9 @@
         [segue.destinationViewController setOrder:_order];
     } else if ([segue.identifier isEqualToString:@"Show Vendor Contact Info Segue ID"]) {
         [segue.destinationViewController setVendor:_order.whichVendor];
+    } else if ([segue.identifier isEqualToString:@"Show Invoice Segue ID"]) {
+        [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
+        [segue.destinationViewController setInvoice:_order.invoice];
     }
 }
 
@@ -92,9 +95,9 @@
     if (section == 0) {
         return 1; // vendor
     } else if (section == 1) {
-        return 1; // bottles
-    } else if (section == 2) { // contents
-        return 3; // orderSent, orderArrived, total amount
+        return 2; // contents (bottles, invoice)
+    } else if (section == 2) {
+        return 2; // status section: orderSent, orderArrived
     } else { // date picker
         return 1;
     }
@@ -113,11 +116,16 @@
         NSString * vendorName = [Vendor fullNameOfVendor:vendor];
         labelText = vendorName ? vendorName : noNameText;
         detailText = vendor.email ? vendor.email : @"No Email";
-    } else if (indexPath.section == 1) { // status
-        labelText = [NSString stringWithFormat:@"%d", _order.ordersByBottle.count];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    } else if (indexPath.section == 1) { // contents
+        if (indexPath.row == 0) { // skus
+            labelText = [NSString stringWithFormat:@"%d skus totalling $%g", _order.ordersByBottle.count, [Order totalAmountOfOrder:_order]];
+        } else if (indexPath.row == 1) { // invoice
+            labelText = @"Invoice";
+        }
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; // for both the sku and the invoice
+
     }
-    else if (indexPath.section == 2) { // bottles
+    else if (indexPath.section == 2) { // status section
         if (indexPath.row == 0) { // orderSent Switch
             labelText = @"Order Sent";
             UISwitch * orderSentSwitch = [[UISwitch alloc]init];
@@ -136,9 +144,6 @@
             [orderArrivedSwitch setOn:arrived]; // CHANGE TO _order.arrived
             cell.accessoryView = [[UIView alloc]initWithFrame:orderArrivedSwitch.frame];
             [cell.accessoryView addSubview:orderArrivedSwitch];
-        } else if (indexPath.row == 2) { // total amount
-            labelText = [NSString stringWithFormat:@"$%g", [Order totalAmountOfOrder:_order]];
-            detailText = [NSString stringWithFormat:@"Total Amount"];
         }
 
     } else { // date picker
@@ -162,10 +167,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1 & indexPath.row == 0) { // its the "Bottles in Order" cell
+    if (indexPath.section == 1 & indexPath.row == 0) {
         [self performSegueWithIdentifier:@"Show Bottles in Order Segue ID" sender:nil];
     } else if (indexPath.section == 0 & indexPath.row == 0) { // its the vendor, so present address book
         [self alertForPickingManualOrFromAddressBook:@"Pick vendor from address book, or enter manually?"];
+    } else if (indexPath.section == 1 & indexPath.row == 1) { // invoice
+        [self performSegueWithIdentifier:@"Show Invoice Segue ID" sender:nil];
     }
     else {
         return;
@@ -175,11 +182,11 @@
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) { // vendor
         return @"vendor";
-    } else if (section == 1) { // status
-        return @"# skus in order";
-    } else if (section == 2) { // bottles
+    } else if (section == 1) { // contents
+        return @"order contents";
+    } else if (section == 2) { // status
         return @"status";
-    } else if (section == 3) { // date picker
+    } else if (section == 3) { // date
         return @"date ordered";
     } else {
         return @"";

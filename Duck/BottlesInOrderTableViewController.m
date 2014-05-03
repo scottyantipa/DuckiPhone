@@ -12,11 +12,9 @@
 #import "EditOrderForBottleDetailsViewController.h"
 
 @interface BottlesInOrderTableViewController ()
-
 @end
 
 @implementation BottlesInOrderTableViewController
-@synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize order = _order;
 @synthesize sortedBottlesInOrder = _sortedBottlesInOrder;
