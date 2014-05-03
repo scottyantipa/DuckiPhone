@@ -18,7 +18,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     HomeTableViewController *controller = (HomeTableViewController *)navigationController.topViewController;
     controller.managedObjectContext = self.managedObjectContext;
