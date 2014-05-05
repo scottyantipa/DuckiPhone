@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Invoice.h"
 #import "InvoicePhoto.h"
+#import "Tesseract.h"
 
 @interface InvoiceTVC : UITableViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) Invoice * invoice;

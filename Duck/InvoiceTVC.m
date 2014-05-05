@@ -138,10 +138,10 @@
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage * chosenImage = info[UIImagePickerControllerEditedImage];
 
-    
     // NOTE: this logic for creating InvoicePhoto should be extracted into a InvoicePhoto+Create category
+
+    UIImage * chosenImage = info[UIImagePickerControllerEditedImage];
     
     // create the photo name to be stored in core data
     NSDate * now = [NSDate date];
@@ -156,10 +156,18 @@
     NSData * data = UIImagePNGRepresentation(chosenImage);
     [data writeToFile:path atomically:YES];
 
-    // create the invoicePhoto
+    // create the invoicePhoto class instance
     InvoicePhoto * invoicePhoto = [NSEntityDescription insertNewObjectForEntityForName:@"InvoicePhoto" inManagedObjectContext:_managedObjectContext];
     invoicePhoto.invoice = _invoice;
     invoicePhoto.documentName = documentName;
+    
+    // tesseract
+    Tesseract * tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
+    [tesseract setImage:chosenImage];
+    [tesseract recognize];
+    NSLog(@"RECOGNIZED: %@", [tesseract recognizedText]);
+    
+    // close modal, reload table
     [self.tableView reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
