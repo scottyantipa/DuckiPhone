@@ -10,10 +10,10 @@
 #import "Invoice.h"
 #import "InvoicePhoto.h"
 #import "Tesseract.h"
+#import "Bottle+Create.h"
 
 @interface InvoiceTVC : UITableViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) Invoice * invoice;
-@property (nonatomic, strong) NSArray * sortedInvoicePhotos;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addPhotoBarButton;
 @property (weak, nonatomic) NSManagedObjectContext* managedObjectContext;
 @end

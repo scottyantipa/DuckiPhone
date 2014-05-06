@@ -18,4 +18,5 @@
 +(Bottle *)newBottleForBarcode:(NSString *)barcode inManagedObjectContext:(NSManagedObjectContext *)context;
 +(Bottle *)newBlankBottleInContext:(NSManagedObjectContext *)context;
 +(OrderForBottle *)mostRecentOrderForBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
++(NSSet *)bottlesFromSearchText:(NSString *)text;
 @end

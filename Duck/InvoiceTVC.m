@@ -14,7 +14,6 @@
 
 @implementation InvoiceTVC
 @synthesize invoice = _invoice;
-@synthesize sortedInvoicePhotos = _sortedInvoicePhotos;
 @synthesize managedObjectContext = _managedObjectContext;
 
 - (void)viewDidLoad
@@ -23,11 +22,11 @@
     self.title = @"Invoice";
 }
 
--(void)viewWillAppear:(BOOL)animated {
+-(NSArray *)sortedInvoicePhotos {
     NSSet * invoicePhotos = _invoice.photos;
     NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"documentName" ascending:NO];
     NSArray * sortDescriptors = @[sortDescriptor];
-    _sortedInvoicePhotos = [invoicePhotos sortedArrayUsingDescriptors:sortDescriptors];
+    return [invoicePhotos sortedArrayUsingDescriptors:sortDescriptors];
 }
 #pragma mark - Table view data source
 
@@ -38,45 +37,46 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _invoice.photos.count;
+    return [[self sortedInvoicePhotos] count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Invoice TVC CellReuse ID" forIndexPath:indexPath];
-    InvoicePhoto * invoicePhoto = [_sortedInvoicePhotos objectAtIndex:indexPath.row];
+    InvoicePhoto * invoicePhoto = [[self sortedInvoicePhotos] objectAtIndex:indexPath.row];
     NSString * documentName = invoicePhoto.documentName;
     UIImage * image = [self loadImage:documentName];
     cell.imageView.image = image;
-                                   
-    // Configure the cell...
-    
     return cell;
 }
 
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
+    if (editingStyle == UITableViewCellEditingStyleDelete) { // delete the invoice photo
+        InvoicePhoto * invoicePhoto = [[self sortedInvoicePhotos] objectAtIndex:indexPath.row];
+        // NOTE: This should be abstracted in an InvoicePhoto cateogry or something
+        [_managedObjectContext deleteObject:invoicePhoto];
+        NSError *error;
+        if (![_managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
 
 /*
 // Override to support rearranging the table view.
@@ -165,8 +165,12 @@
     Tesseract * tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
     [tesseract setImage:chosenImage];
     [tesseract recognize];
-    NSLog(@"RECOGNIZED: %@", [tesseract recognizedText]);
+    NSString * recognizedText = [tesseract recognizedText];
+    invoicePhoto.text = recognizedText;
     
+    NSSet * recognizedBottles = [Bottle bottlesFromSearchText:recognizedText];
+    [invoicePhoto addBottles:recognizedBottles];
+
     // close modal, reload table
     [self.tableView reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];

@@ -2,14 +2,14 @@
 //  Bottle.h
 //  Duck
 //
-//  Created by Scott Antipa on 4/23/14.
+//  Created by Scott Antipa on 5/5/14.
 //  Copyright (c) 2014 Scott Antipa. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class AlcoholSubType, InventorySnapshotForBottle, OrderForBottle;
+@class AlcoholSubType, InventorySnapshotForBottle, InvoicePhoto, OrderForBottle;
 
 @interface Bottle : NSManagedObject
 
@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSSet *inventoryShapshots;
 @property (nonatomic, retain) NSSet *orders;
 @property (nonatomic, retain) AlcoholSubType *subType;
+@property (nonatomic, retain) NSSet *invoicePhotos;
 @end
 
 @interface Bottle (CoreDataGeneratedAccessors)
@@ -33,5 +34,10 @@
 - (void)removeOrdersObject:(OrderForBottle *)value;
 - (void)addOrders:(NSSet *)values;
 - (void)removeOrders:(NSSet *)values;
+
+- (void)addInvoicePhotosObject:(InvoicePhoto *)value;
+- (void)removeInvoicePhotosObject:(InvoicePhoto *)value;
+- (void)addInvoicePhotos:(NSSet *)values;
+- (void)removeInvoicePhotos:(NSSet *)values;
 
 @end

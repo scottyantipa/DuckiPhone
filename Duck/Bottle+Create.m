@@ -116,4 +116,8 @@
     return orderForBottle;
 }
 
++(NSSet *)bottlesFromSearchText:(NSString *)text {
+    NSSet * bottles = [[NSSet alloc] init]; // just return empty set for now
+    return bottles;
+}
 @end

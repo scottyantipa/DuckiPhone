@@ -15,6 +15,7 @@
         <attribute name="userHasBottle" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="userOrdering" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="inventoryShapshots" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InventorySnapshotForBottle" inverseName="whichBottle" inverseEntity="InventorySnapshotForBottle" syncable="YES"/>
+        <relationship name="invoicePhotos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvoicePhoto" inverseName="bottles" inverseEntity="InvoicePhoto" syncable="YES"/>
         <relationship name="orders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OrderForBottle" inverseName="whichBottle" inverseEntity="OrderForBottle" syncable="YES"/>
         <relationship name="subType" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AlcoholSubType" inverseName="bottles" inverseEntity="AlcoholSubType" syncable="YES"/>
     </entity>
@@ -29,6 +30,8 @@
     </entity>
     <entity name="InvoicePhoto" representedClassName="InvoicePhoto" syncable="YES">
         <attribute name="documentName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="bottles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bottle" inverseName="invoicePhotos" inverseEntity="Bottle" syncable="YES"/>
         <relationship name="invoice" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Invoice" inverseName="photos" inverseEntity="Invoice" syncable="YES"/>
     </entity>
     <entity name="Order" representedClassName="Order" syncable="YES">
@@ -57,12 +60,12 @@
     <elements>
         <element name="AlcoholSubType" positionX="-2385" positionY="-3013" width="128" height="88"/>
         <element name="AlcoholType" positionX="-2385" positionY="-3124" width="128" height="73"/>
-        <element name="Bottle" positionX="-2385" positionY="-2889" width="128" height="148"/>
+        <element name="Bottle" positionX="-2385" positionY="-2880" width="128" height="163"/>
         <element name="InventorySnapshotForBottle" positionX="-2169" positionY="-2743" width="128" height="88"/>
+        <element name="Invoice" positionX="-1845" positionY="-2950" width="128" height="73"/>
+        <element name="InvoicePhoto" positionX="-1845" positionY="-2830" width="128" height="103"/>
         <element name="Order" positionX="-2088" positionY="-3121" width="128" height="148"/>
         <element name="OrderForBottle" positionX="-2090" positionY="-2956" width="128" height="103"/>
         <element name="Vendor" positionX="-1845" positionY="-3121" width="128" height="133"/>
-        <element name="Invoice" positionX="-1845" positionY="-2950" width="128" height="28"/>
-        <element name="InvoicePhoto" positionX="-1845" positionY="-2836" width="128" height="28"/>
     </elements>
 </model>

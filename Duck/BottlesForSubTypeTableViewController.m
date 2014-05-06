@@ -108,6 +108,7 @@
         bottle.userHasBottle = [NSNumber numberWithBool:NO];
         int order = [bottle.userOrdering intValue];
         NSArray * fetchedBottles = [_fetchedResultsController fetchedObjects];
+        // update the ordering of the bottles
         for (Bottle * otherBottle in fetchedBottles) {
             if (otherBottle.name == bottle.name) {
                 continue;
