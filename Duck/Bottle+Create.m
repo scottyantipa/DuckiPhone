@@ -116,8 +116,26 @@
     return orderForBottle;
 }
 
-+(NSSet *)bottlesFromSearchText:(NSString *)text {
-    NSSet * bottles = [[NSSet alloc] init]; // just return empty set for now
-    return bottles;
++(NSSet *)bottlesFromSearchText:(NSString *)searchText withOrder:(Order *)order {
+    NSMutableSet * foundBottles = [[NSMutableSet alloc] init]; // the final thing we will return
+
+    // first, iterate through each order and do a simple check to see if
+    // the name or barcode of that bottle is within the search text
+    NSSet * orders = order.ordersByBottle;
+    for (OrderForBottle * order in orders) {
+        BOOL found = NO;
+        Bottle * bottle = order.whichBottle;
+        NSLog(@"Bottle: %@", bottle.name);
+        if ([searchText rangeOfString:bottle.name].location != NSNotFound) {
+            found = YES;
+        }
+        if ([searchText rangeOfString:bottle.barcode].location != NSNotFound) {
+            found = YES;
+        }
+        if (found) {
+            [foundBottles addObject:bottle];
+        }
+    }
+    return foundBottles;
 }
 @end

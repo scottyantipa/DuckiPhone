@@ -16,7 +16,7 @@
 @synthesize invoice = _invoice;
 @synthesize managedObjectContext = _managedObjectContext;
 
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewDidLoad];
     self.title = @"Invoice";
@@ -28,35 +28,100 @@
     NSArray * sortDescriptors = @[sortDescriptor];
     return [invoicePhotos sortedArrayUsingDescriptors:sortDescriptors];
 }
+
+-(NSArray *)sortedBottlesInOrder {
+    return [Order getSortedBottlesInOrder:_invoice.order];
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[self sortedInvoicePhotos] count];
+    if (section == 0) { // the photos
+        return [[self sortedInvoicePhotos] count];
+    } else if (section == 1) {
+        return [[ self sortedBottlesInOrder] count];
+    } else {
+        return 0;
+    }
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Invoice TVC CellReuse ID" forIndexPath:indexPath];
-    InvoicePhoto * invoicePhoto = [[self sortedInvoicePhotos] objectAtIndex:indexPath.row];
-    NSString * documentName = invoicePhoto.documentName;
-    UIImage * image = [self loadImage:documentName];
-    cell.imageView.image = image;
+    UITableViewCell * cell;
+    if (indexPath.section == 0) { // invoice photos
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Invoice Photo CellReuse ID" forIndexPath:indexPath];
+        InvoicePhoto * invoicePhoto = [[self sortedInvoicePhotos] objectAtIndex:indexPath.row];
+        NSString * documentName = invoicePhoto.documentName;
+        UIImage * image = [self loadImage:documentName];
+        cell.imageView.image = image;
+        cell.textLabel.text = @"place_holder";
+    } else if (indexPath.section == 1) { // bottles
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Invoice Bottle CellReuse ID" forIndexPath:indexPath];
+        OrderForBottle * orderForBottle = [[self sortedBottlesInOrder] objectAtIndex:indexPath.row];
+        Bottle * thisBottle = orderForBottle.whichBottle;
+        cell.textLabel.text = thisBottle.name;
+
+        // loop through the photos and see if this bottle has already been recognized
+        // and put a checkmark next to it if so
+        BOOL wasRecognized = false;
+        for (InvoicePhoto * photo in [self sortedInvoicePhotos]) {
+            if (wasRecognized) {
+                break;
+            }
+            NSSet * bottles = photo.bottles;
+            for (Bottle * recognizedBottle in bottles) {
+                if ([thisBottle.barcode isEqualToString:recognizedBottle.barcode]) { // verify same bottle using barcode
+                    wasRecognized = YES;
+                    NSLog(@"FOUND: %@", thisBottle.name);
+                    break;
+                }
+            }
+        }
+        if (wasRecognized) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        
+    }
     return cell;
 }
 
+-(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    NSString * footer;
+    if (section == 0) { // photos
+        footer = @"We use text recognition to recognize bottles from your invoice.  Add as many as you'd like to increase accuracy (we won't add duplicate bottles).";
+    } else if (section == 1) { // bottles
+        footer = @"These are the bottles you listed in your order.  Bottles with a checkmark have been recognized through text recognition in an invoice photo.";
+    }
+    return footer;
+}
 
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSString * header;
+    if (section == 0) {
+        header = @"invoice photos";
+    } else if (section == 1) {
+        header = @"bottles from your order";
+    }
+    return header;
+
+}
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    if (indexPath.section == 0) { // the photos can be deleted
+        return YES;
+    } else {
+        return NO; // not the bottles in order
+    }
 }
 
 
@@ -73,6 +138,7 @@
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
         }
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [[self tableView] reloadData];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
@@ -166,13 +232,16 @@
     [tesseract setImage:chosenImage];
     [tesseract recognize];
     NSString * recognizedText = [tesseract recognizedText];
+    NSLog(@"recognized: %@", recognizedText);
     invoicePhoto.text = recognizedText;
     
-    NSSet * recognizedBottles = [Bottle bottlesFromSearchText:recognizedText];
-    [invoicePhoto addBottles:recognizedBottles];
+    NSSet * recognizedBottles = [Bottle bottlesFromSearchText:recognizedText withOrder:_invoice.order];
+    if (recognizedBottles.count != 0) {
+        [invoicePhoto addBottles:recognizedBottles];
+    }
 
     // close modal, reload table
-    [self.tableView reloadData];
+    [[self tableView] reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

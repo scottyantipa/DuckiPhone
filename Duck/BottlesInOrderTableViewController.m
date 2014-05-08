@@ -27,11 +27,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [self.tableView reloadData];
-    NSSet * bottlesInOrder = _order.ordersByBottle;
-    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"whichBottle.name" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    _sortedBottlesInOrder = [bottlesInOrder sortedArrayUsingDescriptors:sortDescriptors];
+    _sortedBottlesInOrder = [Order getSortedBottlesInOrder:_order];
 }
 
 -(void)setOrder:(Order *)order {
@@ -47,8 +43,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSSet * bottlesInOrder = _order.ordersByBottle;
-    return [bottlesInOrder count];
+    return [_order.ordersByBottle count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -89,9 +84,14 @@
     }
 }
 
+
+#pragma Delegate parent methods for toggle bottles
+
 -(void)didSelectBottle:(Bottle *)bottle {
     [Order toggleBottle:bottle inOrder:_order inContext:_managedObjectContext];
+    [[self tableView] reloadData];
 }
+
 
 
 // Iterate over the bottles in the order to find that orderForBottle
