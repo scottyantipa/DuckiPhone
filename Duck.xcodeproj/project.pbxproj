@@ -12,6 +12,7 @@
 		E00ABBCF19154D0300D6BF17 /* Invoice.m in Sources */ = {isa = PBXBuildFile; fileRef = E00ABBCE19154D0300D6BF17 /* Invoice.m */; };
 		E00ABBD519154D0400D6BF17 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = E00ABBD419154D0400D6BF17 /* Order.m */; };
 		E00ABBDB1915500D00D6BF17 /* InvoiceTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E00ABBDA1915500D00D6BF17 /* InvoiceTVC.m */; };
+		E0223CCA191D38A1003EC403 /* InvoicePhotoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0223CC9191D38A1003EC403 /* InvoicePhotoVC.m */; };
 		E024A4E319081351003A80DB /* Vendor.m in Sources */ = {isa = PBXBuildFile; fileRef = E024A4E219081351003A80DB /* Vendor.m */; };
 		E024A4E619081351003A80DB /* InventorySnapshotForBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E024A4E519081351003A80DB /* InventorySnapshotForBottle.m */; };
 		E024A4EC19081351003A80DB /* AlcoholType.m in Sources */ = {isa = PBXBuildFile; fileRef = E024A4EB19081351003A80DB /* AlcoholType.m */; };
@@ -120,6 +121,8 @@
 		E00ABBD419154D0400D6BF17 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		E00ABBD91915500D00D6BF17 /* InvoiceTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoiceTVC.h; sourceTree = "<group>"; };
 		E00ABBDA1915500D00D6BF17 /* InvoiceTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceTVC.m; sourceTree = "<group>"; };
+		E0223CC8191D38A1003EC403 /* InvoicePhotoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoicePhotoVC.h; sourceTree = "<group>"; };
+		E0223CC9191D38A1003EC403 /* InvoicePhotoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoicePhotoVC.m; sourceTree = "<group>"; };
 		E024A4E119081351003A80DB /* Vendor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vendor.h; sourceTree = "<group>"; };
 		E024A4E219081351003A80DB /* Vendor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vendor.m; sourceTree = "<group>"; };
 		E024A4E419081351003A80DB /* InventorySnapshotForBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventorySnapshotForBottle.h; sourceTree = "<group>"; };
@@ -1277,6 +1280,8 @@
 				E082728A1819ACE3007A2977 /* PastOrdersTableViewController.m */,
 				E00ABBD91915500D00D6BF17 /* InvoiceTVC.h */,
 				E00ABBDA1915500D00D6BF17 /* InvoiceTVC.m */,
+				E0223CC8191D38A1003EC403 /* InvoicePhotoVC.h */,
+				E0223CC9191D38A1003EC403 /* InvoicePhotoVC.m */,
 			);
 			name = Orders;
 			sourceTree = "<group>";
@@ -1443,6 +1448,7 @@
 				E05014B91814AC9900A06560 /* EditManagedObjCountViewController.m in Sources */,
 				E05014BC1814AC9900A06560 /* HomeTableViewController.m in Sources */,
 				E05015141814AED400A06560 /* AlcoholTypesTableViewController.m in Sources */,
+				E0223CCA191D38A1003EC403 /* InvoicePhotoVC.m in Sources */,
 				E024A4EC19081351003A80DB /* AlcoholType.m in Sources */,
 				E031445618431AD20047FA6F /* Vendor+Create.m in Sources */,
 				E05014BB1814AC9900A06560 /* EditTextViewController.m in Sources */,
@@ -1601,6 +1607,8 @@
 					"$(inherited)",
 					/Users/scottantipa/dev/duck/DuckiPhone/Duck/ZBarSDK,
 					"$(PROJECT_DIR)/Duck/tesseract-ios/tesseract-ios-lib/lib",
+					"$(PROJECT_DIR)/Duck/iOSMagick-6.8.8-9",
+					"$(PROJECT_DIR)/Duck/iOSMagick-6.8.8-9-libs",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1631,6 +1639,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Duck/tesseract-ios/tesseract-ios-lib/lib",
 					/Users/scottantipa/dev/duck/DuckiPhone/Duck/ZBarSDK,
+					"$(PROJECT_DIR)/Duck/iOSMagick-6.8.8-9",
+					"$(PROJECT_DIR)/Duck/iOSMagick-6.8.8-9-libs",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -436,11 +436,46 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addPhotoBarButton" destination="ce2-BB-qfS" id="0qG-sy-zsg"/>
+                        <segue destination="esj-1X-JWp" kind="push" identifier="Show Invoice Photo Segue ID" id="GoC-ZM-ggU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8K-rs-92b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1302" y="1640"/>
+            <point key="canvasLocation" x="1718" y="2012"/>
+        </scene>
+        <!--Invoice PhotoVC-->
+        <scene sceneID="FLq-o9-TEX">
+            <objects>
+                <viewController id="esj-1X-JWp" customClass="InvoicePhotoVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zVc-fo-O1y"/>
+                        <viewControllerLayoutGuide type="bottom" id="6B2-WR-Y4A"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oWS-OP-Id7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9QW-hD-icd">
+                                <rect key="frame" x="-9" y="62" width="329" height="506"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Voz-hV-TPi">
+                                        <rect key="frame" x="4" y="-31" width="320" height="568"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8M4-dq-oz7"/>
+                    <connections>
+                        <outlet property="invoiceImageView" destination="Voz-hV-TPi" id="HGv-vM-8Wg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pMZ-3c-BOZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2160" y="2012"/>
         </scene>
         <!--Bottles In Order Table View Controller-->
         <scene sceneID="s41-kz-oE7">
