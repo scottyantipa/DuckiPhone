@@ -137,8 +137,10 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) { // delete the invoice photo
         InvoicePhoto * invoicePhoto = [[self sortedInvoicePhotos] objectAtIndex:indexPath.row];
+        [self deleteImageForName:invoicePhoto.documentName];    
         // NOTE: This should be abstracted in an InvoicePhoto cateogry or something
         [_managedObjectContext deleteObject:invoicePhoto];
+
         NSError *error;
         if (![_managedObjectContext save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -199,6 +201,33 @@
     [self presentViewController:picker animated:YES completion:nil];
 }
 
+// store the image in app /Documents folder
+//(from this example: http://beageek.biz/save-and-load-uiimage-in-documents-directory-on-iphone-xcode-ios/)
+-(void)storeImage:(UIImage *)image forName:(NSString *)name {
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * documentDirectory = [paths objectAtIndex:0];
+    NSString * path = [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", name]];
+    NSData * data = UIImagePNGRepresentation(image);
+    [data writeToFile:path atomically:YES];
+
+}
+
+-(void)deleteImageForName:(NSString *)name {
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * documentDirectory = [paths objectAtIndex:0];
+    NSString * path = [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", name]];
+    
+    UIImage * image = [self loadImage:name];
+    NSLog(@"image before deletion: %@", image);
+    
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:path error:NULL];
+
+    UIImage * imageAfter = [self loadImage:name];
+    NSLog(@"image after deletion: %@", imageAfter);
+    
+}
+
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
     // NOTE: this logic for creating InvoicePhoto should be extracted into a InvoicePhoto+Create category
@@ -213,16 +242,16 @@
     
     // store the photo in app /Documents folder
     //(from this example: http://beageek.biz/save-and-load-uiimage-in-documents-directory-on-iphone-xcode-ios/)
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * documentDirectory = [paths objectAtIndex:0];
-    NSString * path = [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", documentName]];
-    NSData * data = UIImagePNGRepresentation(chosenImage);
-    [data writeToFile:path atomically:YES];
-
+    [self storeImage:chosenImage forName:documentName];
+    
     // create the invoicePhoto class instance
     InvoicePhoto * invoicePhoto = [NSEntityDescription insertNewObjectForEntityForName:@"InvoicePhoto" inManagedObjectContext:_managedObjectContext];
     invoicePhoto.invoice = _invoice;
     invoicePhoto.documentName = documentName;
+    NSError *error;
+    if (![_managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
     
     // tesseract
     Tesseract * tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
