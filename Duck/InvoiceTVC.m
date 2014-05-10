@@ -78,7 +78,6 @@
             for (Bottle * recognizedBottle in bottles) {
                 if ([thisBottle.barcode isEqualToString:recognizedBottle.barcode]) { // verify same bottle using barcode
                     wasRecognized = YES;
-                    NSLog(@"FOUND: %@", thisBottle.name);
                     break;
                 }
             }
@@ -194,6 +193,8 @@
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     } else if (buttonIndex == 1) { // choose existing photo
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    } else {
+        return;
     }
     [self presentViewController:picker animated:YES completion:nil];
 }
@@ -242,67 +243,11 @@
 }
 
 -(UIImage *)convertImage:(UIImage *)src {
-    UIImage * scaled = [self resizeImage:src];
-    return [self toGrayscale:scaled];
+    return [self toGrayscale:src];
 }
 
 -(CGFloat)radians:(CGFloat)degrees {
     return degrees * M_PI / 180.0;
-}
-
-// got this from here: http://stackoverflow.com/questions/13511102/ios-tesseract-ocr-image-preperation
--(UIImage *)resizeImage:(UIImage *)image {
-    
-    CGImageRef imageRef = [image CGImage];
-    CGImageAlphaInfo alphaInfo = CGImageGetAlphaInfo(imageRef);
-    CGColorSpaceRef colorSpaceInfo = CGColorSpaceCreateDeviceRGB();
-    
-    if (alphaInfo == kCGImageAlphaNone)
-        alphaInfo = kCGImageAlphaNoneSkipLast;
-    
-    int width, height;
-    
-    width = 640;//[image size].width;
-    height = 640;//[image size].height;
-    
-    CGContextRef bitmap;
-    
-    if (image.imageOrientation == UIImageOrientationUp | image.imageOrientation == UIImageOrientationDown) {
-        bitmap = CGBitmapContextCreate(NULL, width, height, CGImageGetBitsPerComponent(imageRef), CGImageGetBytesPerRow(imageRef), colorSpaceInfo, alphaInfo);
-        
-    } else {
-        bitmap = CGBitmapContextCreate(NULL, height, width, CGImageGetBitsPerComponent(imageRef), CGImageGetBytesPerRow(imageRef), colorSpaceInfo, alphaInfo);
-        
-    }
-    
-    if (image.imageOrientation == UIImageOrientationLeft) {
-        NSLog(@"image orientation left");
-        CGContextRotateCTM (bitmap, [self radians:90]);
-        CGContextTranslateCTM (bitmap, 0, -height);
-        
-    } else if (image.imageOrientation == UIImageOrientationRight) {
-        NSLog(@"image orientation right");
-        CGContextRotateCTM (bitmap, [self radians:-90]);
-        CGContextTranslateCTM (bitmap, -width, 0);
-        
-    } else if (image.imageOrientation == UIImageOrientationUp) {
-        NSLog(@"image orientation up");
-        
-    } else if (image.imageOrientation == UIImageOrientationDown) {
-        NSLog(@"image orientation down");
-        CGContextTranslateCTM (bitmap, width,height);
-        CGContextRotateCTM (bitmap, [self radians:-180]);
-        
-    }
-    
-    CGContextDrawImage(bitmap, CGRectMake(0, 0, width, height), imageRef);
-    CGImageRef ref = CGBitmapContextCreateImage(bitmap);
-    UIImage *result = [UIImage imageWithCGImage:ref];
-    
-    CGContextRelease(bitmap);
-    CGImageRelease(ref);
-    
-    return result;
 }
 
 // got this from here: http://stackoverflow.com/questions/13511102/ios-tesseract-ocr-image-preperation

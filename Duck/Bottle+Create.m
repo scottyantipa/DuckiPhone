@@ -116,22 +116,53 @@
     return orderForBottle;
 }
 
++(NSString *)cleanedSearchText:(NSString *)searchText {
+    NSString * str = [searchText stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+    return str;
+}
+
+// pass any string and this will return a set of bottles matching any name or barcode in that string
+// but restricted to the bottles in a particular order
 +(NSSet *)bottlesFromSearchText:(NSString *)searchText withOrder:(Order *)order {
+    searchText = [Bottle cleanedSearchText:searchText];
+    int fuzziness = .7;
     NSMutableSet * foundBottles = [[NSMutableSet alloc] init]; // the final thing we will return
+    NSArray * searchPieces = [searchText componentsSeparatedByString:@" "];
 
     // first, iterate through each order and do a simple check to see if
     // the name or barcode of that bottle is within the search text
+    NSArray * bottleProps = [[NSArray alloc] initWithObjects:@"name", @"barcode", nil];
+    BOOL found;
     NSSet * orders = order.ordersByBottle;
+
     for (OrderForBottle * order in orders) {
-        BOOL found = NO;
+        found = NO;
         Bottle * bottle = order.whichBottle;
-        NSLog(@"Bottle: %@", bottle.name);
-        if ([searchText rangeOfString:bottle.name].location != NSNotFound) {
-            found = YES;
+
+        for (NSString * prop in bottleProps) {
+            if (found) {continue;}
+
+            // first do a basic exact match search over the whole search text
+            NSString * value = [bottle valueForKey:prop]; // THIS BETTER BE A STRING
+            if ([searchText rangeOfString:value].location != NSNotFound) {
+                NSLog(@"Exact: %@",value);
+                found = YES;
+                continue;
+            }
+            
+            // Loop through our search pieces and see how they score individually (fuzzy)
+            for (NSString * piece in searchPieces) {
+                if (piece.length < 4) {continue;} // forget small words
+                CGFloat result = [value scoreAgainst:piece fuzziness:[NSNumber numberWithInt:fuzziness]];
+                NSLog(@"result for piece %@ on value %@ is %f", piece, value, result);
+                if (result > .5) {
+                    NSLog(@"FOUND value: %@ from piece: %@", value, piece);
+                    found = YES;
+                    break;
+                }
+            }
         }
-        if ([searchText rangeOfString:bottle.barcode].location != NSNotFound) {
-            found = YES;
-        }
+        
         if (found) {
             [foundBottles addObject:bottle];
         }

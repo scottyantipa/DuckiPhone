@@ -12,6 +12,9 @@
 		E00ABBCF19154D0300D6BF17 /* Invoice.m in Sources */ = {isa = PBXBuildFile; fileRef = E00ABBCE19154D0300D6BF17 /* Invoice.m */; };
 		E00ABBD519154D0400D6BF17 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = E00ABBD419154D0400D6BF17 /* Order.m */; };
 		E00ABBDB1915500D00D6BF17 /* InvoiceTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E00ABBDA1915500D00D6BF17 /* InvoiceTVC.m */; };
+		E01C5916191DF4E3007DD632 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E01C5912191DF4E3007DD632 /* .gitignore */; };
+		E01C5917191DF4E3007DD632 /* NSString+Score.m in Sources */ = {isa = PBXBuildFile; fileRef = E01C5914191DF4E3007DD632 /* NSString+Score.m */; };
+		E01C5918191DF4E3007DD632 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E01C5915191DF4E3007DD632 /* README.md */; };
 		E0223CCA191D38A1003EC403 /* InvoicePhotoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0223CC9191D38A1003EC403 /* InvoicePhotoVC.m */; };
 		E024A4E319081351003A80DB /* Vendor.m in Sources */ = {isa = PBXBuildFile; fileRef = E024A4E219081351003A80DB /* Vendor.m */; };
 		E024A4E619081351003A80DB /* InventorySnapshotForBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E024A4E519081351003A80DB /* InventorySnapshotForBottle.m */; };
@@ -121,6 +124,10 @@
 		E00ABBD419154D0400D6BF17 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		E00ABBD91915500D00D6BF17 /* InvoiceTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoiceTVC.h; sourceTree = "<group>"; };
 		E00ABBDA1915500D00D6BF17 /* InvoiceTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceTVC.m; sourceTree = "<group>"; };
+		E01C5912191DF4E3007DD632 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		E01C5913191DF4E3007DD632 /* NSString+Score.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Score.h"; sourceTree = "<group>"; };
+		E01C5914191DF4E3007DD632 /* NSString+Score.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Score.m"; sourceTree = "<group>"; };
+		E01C5915191DF4E3007DD632 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		E0223CC8191D38A1003EC403 /* InvoicePhotoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoicePhotoVC.h; sourceTree = "<group>"; };
 		E0223CC9191D38A1003EC403 /* InvoicePhotoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoicePhotoVC.m; sourceTree = "<group>"; };
 		E024A4E119081351003A80DB /* Vendor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vendor.h; sourceTree = "<group>"; };
@@ -596,6 +603,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E01C5911191DF4E3007DD632 /* StringScore */ = {
+			isa = PBXGroup;
+			children = (
+				E01C5912191DF4E3007DD632 /* .gitignore */,
+				E01C5913191DF4E3007DD632 /* NSString+Score.h */,
+				E01C5914191DF4E3007DD632 /* NSString+Score.m */,
+				E01C5915191DF4E3007DD632 /* README.md */,
+			);
+			path = StringScore;
+			sourceTree = "<group>";
+		};
 		E05014481814AB7C00A06560 = {
 			isa = PBXGroup;
 			children = (
@@ -750,6 +768,7 @@
 		E05014EA1814AD8100A06560 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				E01C5911191DF4E3007DD632 /* StringScore */,
 				E06129421917E335004CF026 /* Tesseract */,
 				E05014C71814AD7100A06560 /* ZBarSDK */,
 			);
@@ -1380,6 +1399,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E01C5916191DF4E3007DD632 /* .gitignore in Resources */,
 				E05014E71814AD7100A06560 /* zbar-help.html in Resources */,
 				E0612A801917E34C004CF026 /* .gitignore in Resources */,
 				E05014E91814AD7100A06560 /* zbar-samples.png in Resources */,
@@ -1388,6 +1408,7 @@
 				E0612A7B1917E34C004CF026 /* README.md in Resources */,
 				E05014E81814AD7100A06560 /* zbar-helpicons.png in Resources */,
 				E079251D19039B4700162737 /* iTunesArtwork.png in Resources */,
+				E01C5918191DF4E3007DD632 /* README.md in Resources */,
 				E0612A7C1917E34C004CF026 /* .gitignore in Resources */,
 				E079251C19039B4700162737 /* Icon@2x.png in Resources */,
 				E079251819039B4700162737 /* Icon-Small-50@2x.png in Resources */,
@@ -1460,6 +1481,7 @@
 				E05015161814AED400A06560 /* AppDelegate.m in Sources */,
 				E00ABBDB1915500D00D6BF17 /* InvoiceTVC.m in Sources */,
 				E0612A791917E34C004CF026 /* Tesseract.mm in Sources */,
+				E01C5917191DF4E3007DD632 /* NSString+Score.m in Sources */,
 				E03144391841A1530047FA6F /* Constants.m in Sources */,
 				E0A4F8C71839B12A000CA0C6 /* ToggleBottlesTableViewController.m in Sources */,
 				E00ABBCF19154D0300D6BF17 /* Invoice.m in Sources */,
