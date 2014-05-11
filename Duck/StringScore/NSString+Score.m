@@ -20,12 +20,30 @@
 }
 
 - (CGFloat) scoreAgainst:(NSString *)anotherString fuzziness:(NSNumber *)fuzziness options:(NSStringScoreOption)options{
-    NSMutableCharacterSet *workingInvalidCharacterSet = [NSCharacterSet lowercaseLetterCharacterSet];
-    [workingInvalidCharacterSet formUnionWithCharacterSet:[NSCharacterSet uppercaseLetterCharacterSet]];
-    [workingInvalidCharacterSet addCharactersInString:@" "];
-    NSCharacterSet *invalidCharacterSet = [workingInvalidCharacterSet invertedSet];
+    NSMutableCharacterSet *validCharSet;
+
+    //NOTE: I've changed the validCharSet from the vendor library
+    // Next few lines constructs the set of valid characters to look through in our string
     
-    NSString *string = [[[self decomposedStringWithCanonicalMapping] componentsSeparatedByCharactersInSet:invalidCharacterSet] componentsJoinedByString:@""];
+    // get english lower case characters
+    NSRange lowerCaseRange;
+    lowerCaseRange.location = (unsigned int)'a';
+    lowerCaseRange.length = 26;
+    validCharSet = [NSCharacterSet characterSetWithRange:lowerCaseRange];
+    
+    // get english upper case letters
+    NSRange upperCaseRange;
+    upperCaseRange.location = (unsigned int)'A';
+    upperCaseRange.length = 26;
+    
+    // add in numbers and what space
+    [validCharSet formUnionWithCharacterSet:[NSCharacterSet characterSetWithRange:upperCaseRange]];
+    [validCharSet formUnionWithCharacterSet:[NSCharacterSet decimalDigitCharacterSet]];
+    
+    NSCharacterSet *invalidCharacterSet = [validCharSet invertedSet];
+
+    NSString *string = [[self componentsSeparatedByCharactersInSet:invalidCharacterSet] componentsJoinedByString:@""];
+    if (string.length == 0) {return 0;}
     NSString *otherString = [[[anotherString decomposedStringWithCanonicalMapping] componentsSeparatedByCharactersInSet:invalidCharacterSet] componentsJoinedByString:@""];
     
     // If the string is equal to the abbreviation, perfect match.
@@ -133,6 +151,37 @@
     }
     
     return finalScore;
+}
+
+-(void)logCharacterSet:(NSCharacterSet *)characterSet {
+    
+    unichar unicharBuffer[20];
+    int index = 0;
+    
+    for (unichar uc = 0; uc < (0xFFFF); uc ++)
+    {
+        if ([characterSet characterIsMember:uc])
+        {
+            unicharBuffer[index] = uc;
+            
+            index ++;
+            
+            if (index == 20)
+            {
+                NSString * characters = [NSString stringWithCharacters:unicharBuffer length:index];
+                NSLog(@"%@", characters);
+                
+                index = 0;
+            }
+        }
+    }
+    
+    if (index != 0)
+    {
+        NSString * characters = [NSString stringWithCharacters:unicharBuffer length:index];
+        NSLog(@"%@", characters);
+    }
+    
 }
 
 @end

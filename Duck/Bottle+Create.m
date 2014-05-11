@@ -125,7 +125,7 @@
 // but restricted to the bottles in a particular order
 +(NSSet *)bottlesFromSearchText:(NSString *)searchText withOrder:(Order *)order {
     searchText = [Bottle cleanedSearchText:searchText];
-    int fuzziness = .7;
+    NSNumber * fuzziness = [NSNumber numberWithInt:.9];
     NSMutableSet * foundBottles = [[NSMutableSet alloc] init]; // the final thing we will return
     NSArray * searchPieces = [searchText componentsSeparatedByString:@" "];
 
@@ -139,24 +139,24 @@
         found = NO;
         Bottle * bottle = order.whichBottle;
 
+        // For each prop that we want to compare (name, barcode) do a few types of searches
         for (NSString * prop in bottleProps) {
             if (found) {continue;}
 
-            // first do a basic exact match search over the whole search text
+            // First do a basic exact match search over the whole search text
             NSString * value = [bottle valueForKey:prop]; // THIS BETTER BE A STRING
             if ([searchText rangeOfString:value].location != NSNotFound) {
-                NSLog(@"Exact: %@",value);
+//                NSLog(@"Exact: %@",value);
                 found = YES;
                 continue;
             }
             
-            // Loop through our search pieces and see how they score individually (fuzzy)
+            // Second, a FUZZY comparison on each piece of the search text
             for (NSString * piece in searchPieces) {
-                if (piece.length < 4) {continue;} // forget small words
-                CGFloat result = [value scoreAgainst:piece fuzziness:[NSNumber numberWithInt:fuzziness]];
-                NSLog(@"result for piece %@ on value %@ is %f", piece, value, result);
+                CGFloat result = [value scoreAgainst:piece fuzziness:fuzziness];
+//                NSLog(@"piece: %@ value: %@ score: %f", piece, value, result);
                 if (result > .5) {
-                    NSLog(@"FOUND value: %@ from piece: %@", value, piece);
+//                    NSLog(@"FOUND value: %@ from piece: %@", value, piece);
                     found = YES;
                     break;
                 }
