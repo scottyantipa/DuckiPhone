@@ -16,4 +16,5 @@
 @property (strong, nonatomic) Order * order;
 @property (nonatomic, strong) NSArray * sortedBottlesInOrder;
 @property (nonatomic,strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSNumberFormatter * numberFormatter;
 @end

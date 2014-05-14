@@ -16,12 +16,14 @@
 @implementation PastOrdersTableViewController
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize numberFormatter = _numberFormatter;
 
 - (void)viewDidLoad
 {
-    self.title = @"Past Orders";
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    self.title = @"Past Orders";
+    _numberFormatter = [[NSNumberFormatter alloc] init];
+    [_numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
 }
 
 
@@ -72,7 +74,8 @@
     NSString * dateString = [dateFormatter stringFromDate:order.date];
     cell.textLabel.text = dateString;
     float total = [Order totalAmountOfOrder:order];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"$%g", total];
+    NSString * totalDollars = [_numberFormatter stringFromNumber:[NSNumber numberWithFloat:total]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", totalDollars];
     return cell;
 }
 

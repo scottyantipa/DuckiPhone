@@ -44,12 +44,14 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+    [fmt setPositiveFormat:@"0.##"];
     // This should be the text of the bottle
-    self.textFieldForPrice.text = [NSString stringWithFormat:@"%@", _orderForBottle.unitPrice];
+    self.textFieldForPrice.text = [fmt stringFromNumber:_orderForBottle.unitPrice];
     self.textFieldForUnits.text = [NSString stringWithFormat:@"%@", _orderForBottle.quantity];
     self.textFieldForPrice.tag = 1;
     self.textFieldForUnits.tag = 2;
-    self.textFieldForPrice.keyboardType = UIKeyboardTypeNumberPad;
+    self.textFieldForPrice.keyboardType = UIKeyboardTypeDecimalPad;
     self.textFieldForUnits.keyboardType = UIKeyboardTypeNumberPad;
     self.title = _orderForBottle.whichBottle.name;
     [self.view setNeedsDisplay];

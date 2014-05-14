@@ -18,8 +18,10 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
+    [super viewWillAppear:YES];
     self.title = @"Invoice";
+    // NOTE: Should I call this here? Or should this be done immediately when a new bottle is added to an order
+    [self recognizeAllBottlesFromAllPhotos];
 }
 
 -(NSArray *)sortedInvoicePhotos {
@@ -50,6 +52,16 @@
     }
 }
 
+// NOTE: This should be a method within InvoicePhoto+Create
+-(void)recognizeAllBottlesFromAllPhotos {
+    for (InvoicePhoto * invoicePhoto in _invoice.photos) {
+        NSSet * recognizedBottles = [Bottle bottlesFromSearchText:invoicePhoto.text withOrder:_invoice.order];
+        if (recognizedBottles.count != 0) {
+            [invoicePhoto addBottles:recognizedBottles];
+        }
+    }
+
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -260,11 +272,6 @@
     NSString * recognizedText = [tesseract recognizedText];
     NSLog(@"recognized: %@", recognizedText);
     invoicePhoto.text = recognizedText;
-    
-    NSSet * recognizedBottles = [Bottle bottlesFromSearchText:recognizedText withOrder:_invoice.order];
-    if (recognizedBottles.count != 0) {
-        [invoicePhoto addBottles:recognizedBottles];
-    }
 
     // close modal, reload table
     [[self tableView] reloadData];

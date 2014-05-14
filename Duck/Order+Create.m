@@ -71,6 +71,10 @@
     Vendor * vendor = order.whichVendor;
     NSArray * toRecipients = @[vendor.email];
     NSString * greeting = [NSString stringWithFormat:@"%@\n\nI would like to place an order with you as described below:", vendor.firstName];
+
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+
     
     // Create the string for this bottle order (bottle name, price, quantity)
     NSMutableArray * bottleStrings = [[NSMutableArray alloc] init];
@@ -79,14 +83,15 @@
             continue;
         }
         NSString * quantity = [NSString stringWithFormat:@"Qty: %g", [orderForBottle.quantity floatValue]];
-        NSString * name = [NSString stringWithFormat:@"Bottle: %@", orderForBottle.whichBottle.name];
-        NSString * price = [NSString stringWithFormat:@"Unit Price (as of last order): %g", [orderForBottle.unitPrice floatValue]];
+        NSString * name = [NSString stringWithFormat:@"%@", orderForBottle.whichBottle.name];
+        NSString * bottlePrice = [numberFormatter stringFromNumber:orderForBottle.unitPrice];
+        NSString * price = [NSString stringWithFormat:@"Price as of last order: %@", bottlePrice];
         NSString * blockForBottle = [NSString stringWithFormat:@"%@\n%@\n%@", name, quantity, price];
         [bottleStrings addObject:blockForBottle];
     }
 
     NSString * allBottles = [bottleStrings componentsJoinedByString:@"\n\n"];  // join all bottle descriptions with a space between
-    NSString * signOff = [NSString stringWithFormat:@"Thank you!\n"];
+    NSString * signOff = [NSString stringWithFormat:@"Thank you\n"];
     NSString * body = [NSString stringWithFormat:@"%@\n\n%@\n\n%@", greeting, allBottles, signOff];
 
     MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];

@@ -18,18 +18,25 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize order = _order;
 @synthesize sortedBottlesInOrder = _sortedBottlesInOrder;
+@synthesize numberFormatter = _numberFormatter;
 
 - (void)viewDidLoad
 {
-    self.title = @"Bottles in Order";
     [super viewDidLoad];
+    self.title = @"Bottles in Order";
+    _numberFormatter = [[NSNumberFormatter alloc] init];
+    [_numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
 
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    _sortedBottlesInOrder = [Order getSortedBottlesInOrder:_order];
+    [self reload];
 }
 
+-(void)reload{
+    _sortedBottlesInOrder = [Order getSortedBottlesInOrder:_order];
+    [[self tableView] reloadData];
+}
 -(void)setOrder:(Order *)order {
     _order = order;
 }
@@ -55,7 +62,8 @@
     cell.textLabel.text = orderForBottle.whichBottle.name;
     NSMutableString * priceStr = [NSMutableString stringWithFormat:@"Enter Price"];
     if (orderForBottle.unitPrice) {
-        priceStr = [NSMutableString stringWithFormat:@"$%@/unit", orderForBottle.unitPrice];
+        NSString * price = [_numberFormatter stringFromNumber:orderForBottle.unitPrice];
+        priceStr = [NSMutableString stringWithFormat:@"%@/unit", price];
     }
     NSMutableString * quantityStr = [NSMutableString stringWithFormat:@"Enter Quantity"];
     if (orderForBottle.quantity) {
@@ -89,7 +97,7 @@
 
 -(void)didSelectBottle:(Bottle *)bottle {
     [Order toggleBottle:bottle inOrder:_order inContext:_managedObjectContext];
-    [[self tableView] reloadData];
+    [self reload];
 }
 
 

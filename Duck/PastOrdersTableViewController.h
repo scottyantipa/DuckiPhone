@@ -11,5 +11,5 @@
 #import "OrderTableViewController.h"
 
 @interface PastOrdersTableViewController : BaseCoreDataTableViewController
-
+@property (nonatomic, strong) NSNumberFormatter * numberFormatter;
 @end

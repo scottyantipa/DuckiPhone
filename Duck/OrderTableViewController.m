@@ -24,9 +24,10 @@
 // to Re-order from the vendor.  Also intialize class vars -- order, datePicker
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     _numberFormatter = [[NSNumberFormatter alloc] init];
-    [_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    
+    [_numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+
     _datePicker = [[UIDatePicker alloc] init];
     
     _addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
@@ -35,7 +36,7 @@
         _order = [Order newOrderForDate:[NSDate date] inManagedObjectContext:_managedObjectContext];
     }
     [self setHeader];
-    [super viewDidLoad];
+
 }
 
 -(void)reloadAll {
@@ -118,7 +119,8 @@
         detailText = vendor.email ? vendor.email : @"No Email";
     } else if (indexPath.section == 1) { // contents
         if (indexPath.row == 0) { // skus
-            labelText = [NSString stringWithFormat:@"%d skus totalling $%g", _order.ordersByBottle.count, [Order totalAmountOfOrder:_order]];
+            NSString * price = [_numberFormatter stringFromNumber:[NSNumber numberWithFloat:[Order totalAmountOfOrder:_order]]];
+            labelText = [NSString stringWithFormat:@"%d skus totalling %@", _order.ordersByBottle.count, price];
         } else if (indexPath.row == 1) { // invoice
             labelText = @"Invoice";
         }
