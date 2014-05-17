@@ -11,6 +11,11 @@
 #import "AlcoholSubType+Create.h"
 #import "ToggleBottlesDelegate.h"
 
-@interface ToggleBottlesTableViewController : BaseCoreDataTableViewController
+@interface ToggleBottlesTableViewController : BaseCoreDataTableViewController <UISearchBarDelegate, UISearchDisplayDelegate>
 @property (weak) id <ToggleBottlesDelegate> delegate;
+@property (strong, nonatomic) NSFetchedResultsController *searchFetchedResultsController;
+@property (strong, nonatomic) UISearchDisplayController *mySearchDisplayController;
+@property (nonatomic, copy) NSString *savedSearchTerm;
+@property (nonatomic) NSInteger savedScopeButtonIndex;
+@property (nonatomic) BOOL searchWasActive;
 @end

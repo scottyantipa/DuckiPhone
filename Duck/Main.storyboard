@@ -842,8 +842,27 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="JCZ-Ac-JMU"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="dnE-kb-NfJ" id="byo-b0-Nva"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YW5-oW-aIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="Kvx-iz-tFj">
+                    <connections>
+                        <outlet property="delegate" destination="xCa-3a-yKM" id="2TK-cD-kwB"/>
+                        <outlet property="searchContentsController" destination="xCa-3a-yKM" id="utA-U1-pP0"/>
+                        <outlet property="searchResultsDataSource" destination="xCa-3a-yKM" id="wUj-4w-s0m"/>
+                        <outlet property="searchResultsDelegate" destination="xCa-3a-yKM" id="uYJ-PF-Mlo"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="dnE-kb-NfJ">
+                    <connections>
+                        <outlet property="delegate" destination="xCa-3a-yKM" id="0tu-aP-zKb"/>
+                        <outlet property="searchContentsController" destination="xCa-3a-yKM" id="QGn-AX-uIS"/>
+                        <outlet property="searchResultsDataSource" destination="xCa-3a-yKM" id="o8q-Xk-9lG"/>
+                        <outlet property="searchResultsDelegate" destination="xCa-3a-yKM" id="pS1-Ww-PDu"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="3048" y="-793"/>
         </scene>

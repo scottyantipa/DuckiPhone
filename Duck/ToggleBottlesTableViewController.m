@@ -17,7 +17,68 @@
 // why do I have to synthesize these here, as well as in the parent class?
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize searchFetchedResultsController = _searchFetchedResultsController;
 
+#pragma FRC creation
+
+// used to create search FRC
+- (NSFetchedResultsController *)newFetchedResultsControllerWithSearch:(NSString *)searchString
+{
+    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    NSArray * sortDescriptors = @[sortDescriptor];
+    NSPredicate *filterPredicate = [NSPredicate predicateWithFormat:nil];
+    
+    /*
+     Set up the fetched results controller.
+     */
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
+    NSMutableArray *predicateArray = [NSMutableArray array];
+    if(searchString.length)
+    {
+        // your search predicate(s) are added to this array
+        [predicateArray addObject:[NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@", searchString]];
+        // finally add the filter predicate for this view
+        if(filterPredicate)
+        {
+            filterPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:filterPredicate, [NSCompoundPredicate orPredicateWithSubpredicates:predicateArray], nil]];
+        }
+        else
+        {
+            filterPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicateArray];
+        }
+    }
+    [fetchRequest setPredicate:filterPredicate];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                                                managedObjectContext:self.managedObjectContext
+                                                                                                  sectionNameKeyPath:nil
+                                                                                                           cacheName:nil];
+    aFetchedResultsController.delegate = self;
+    
+    NSError *error = nil;
+    if (![aFetchedResultsController performFetch:&error])
+    {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return aFetchedResultsController;
+}
+
+
+// This is the main FRC
 // Controller should show all bottles organized by subType, sorted by userOrdering/userHasBottle/name
 - (NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController != nil) {
@@ -51,18 +112,16 @@
     return _fetchedResultsController;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+// get the search FRC
+
+- (NSFetchedResultsController *)searchFetchedResultsController
 {
-    Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"All Bottles to Toggle Cell ID" forIndexPath:indexPath];
-    cell.textLabel.text = bottle.name;
-    if ([self.delegate bottleIsSelected:bottle]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+    if (_searchFetchedResultsController != nil)
+    {
+        return _searchFetchedResultsController;
     }
-    
-    return cell;
+    _searchFetchedResultsController = [self newFetchedResultsControllerWithSearch:self.searchDisplayController.searchBar.text];
+    return _searchFetchedResultsController;
 }
 
 // Toggle if the user has/doesnt have the bottle
@@ -75,6 +134,179 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [super loadView];
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 44.0)];
+    searchBar.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+    searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.tableView.tableHeaderView = searchBar;
+    
+    self.mySearchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
+    self.mySearchDisplayController.delegate = self;
+    self.mySearchDisplayController.searchResultsDataSource = self;
+    self.mySearchDisplayController.searchResultsDelegate = self;
 }
+
+
+#pragma Search Bar Delegates
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    NSLog(@"search bar text is now: %@", searchText);
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    NSLog(@"Cancel button clicked");
+}
+
+
+#pragma Utils for managing the FRCs
+- (NSFetchedResultsController *)fetchedResultsControllerForTableView:(UITableView *)tableView
+{
+    return tableView == self.tableView ? self.fetchedResultsController : self.searchFetchedResultsController;
+}
+
+- (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    Bottle * bottle = [fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = bottle.name;
+    if ([self.delegate bottleIsSelected:bottle]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)theIndexPath
+{
+    UITableViewCell * cell = [[self tableView] dequeueReusableCellWithIdentifier:@"All Bottles to Toggle Cell ID" forIndexPath:theIndexPath];
+    [self fetchedResultsController:[self fetchedResultsControllerForTableView:theTableView] configureCell:cell atIndexPath:theIndexPath];
+    return cell;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    NSInteger count = [[[self fetchedResultsControllerForTableView:tableView] sections] count];
+    
+    return count;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger numberOfRows = 0;
+    NSFetchedResultsController *fetchController = [self fetchedResultsControllerForTableView:tableView];
+    NSArray *sections = fetchController.sections;
+    if(sections.count > 0)
+    {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
+        numberOfRows = [sectionInfo numberOfObjects];
+    }
+    
+    return numberOfRows;
+    
+}
+
+
+#pragma mark -
+#pragma mark Content Filtering
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSInteger)scope
+{
+    // update the filter, in this case just blow away the FRC and let lazy evaluation create another with the relevant search info
+    self.searchFetchedResultsController.delegate = nil;
+    self.searchFetchedResultsController = nil;
+    // if you care about the scope save off the index to be used by the serchFetchedResultsController
+    //self.savedScopeButtonIndex = scope;
+}
+
+
+#pragma mark -
+#pragma mark Search Bar
+- (void)searchDisplayController:(UISearchDisplayController *)controller willUnloadSearchResultsTableView:(UITableView *)tableView;
+{
+    // search is done so get rid of the search FRC and reclaim memory
+    self.searchFetchedResultsController.delegate = nil;
+    self.searchFetchedResultsController = nil;
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[self.searchDisplayController.searchBar selectedScopeButtonIndex]];
+    
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
+{
+    [self filterContentForSearchText:[self.searchDisplayController.searchBar text]
+                               scope:[self.searchDisplayController.searchBar selectedScopeButtonIndex]];
+    
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
+#pragma make sure that you use the correct table view when getting updates from the FRC delegate methods
+//- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+//{
+//    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
+//    [tableView beginUpdates];
+//}
+//
+//
+//- (void)controller:(NSFetchedResultsController *)controller
+//  didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+//           atIndex:(NSUInteger)sectionIndex
+//     forChangeType:(NSFetchedResultsChangeType)type
+//{
+//    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
+//    
+//    switch(type)
+//    {
+//        case NSFetchedResultsChangeInsert:
+//            [tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+//            break;
+//            
+//        case NSFetchedResultsChangeDelete:
+//            [tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+//            break;
+//    }
+//}
+//
+//
+//- (void)controller:(NSFetchedResultsController *)controller
+//   didChangeObject:(id)anObject
+//       atIndexPath:(NSIndexPath *)theIndexPath
+//     forChangeType:(NSFetchedResultsChangeType)type
+//      newIndexPath:(NSIndexPath *)newIndexPath
+//{
+//    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
+//    
+//    switch(type)
+//    {
+//        case NSFetchedResultsChangeInsert:
+//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+//            break;
+//            
+//        case NSFetchedResultsChangeDelete:
+//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:theIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+//            break;
+//            
+//        case NSFetchedResultsChangeUpdate:
+//            [self fetchedResultsController:controller configureCell:[tableView cellForRowAtIndexPath:theIndexPath] atIndexPath:theIndexPath];
+//            break;
+//            
+//        case NSFetchedResultsChangeMove:
+//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:theIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]withRowAnimation:UITableViewRowAnimationFade];
+//            break;
+//    }
+//}
+//
+//
+//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+//{
+//    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
+//    [tableView endUpdates];
+//}
 
 @end
