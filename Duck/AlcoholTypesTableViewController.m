@@ -100,12 +100,8 @@
 #pragma Protocol methods
 
 -(void)didSelectBottle:(Bottle *)bottle {
-    if (bottle.userHasBottle == [NSNumber numberWithInt:1]) { // user did have bottle
-        bottle.userHasBottle = [NSNumber numberWithBool:NO];
-        [AlcoholSubType recalculateUserOrderingForSubType:bottle.subType inContext:_managedObjectContext];
-    } else { // user did not have bottle so lets add it to the end
-        [AlcoholSubType changeBottle:bottle toSubType:bottle.subType inContext:_managedObjectContext];
-    }
+    [Bottle toggleUserHasBottle:bottle inContext:_managedObjectContext];
+    [AlcoholSubType recalculateUserOrderingForSubType:bottle.subType inContext:_managedObjectContext];
 }
 
 -(BOOL)bottleIsSelected:(Bottle *)bottle {

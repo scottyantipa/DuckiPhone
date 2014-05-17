@@ -20,6 +20,7 @@
 +(Bottle *)bottleForBarcode:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context;
 +(Bottle *)newBottleForBarcode:(NSString *)barcode inManagedObjectContext:(NSManagedObjectContext *)context;
 +(Bottle *)newBlankBottleInContext:(NSManagedObjectContext *)context;
++(void)toggleUserHasBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
 +(OrderForBottle *)mostRecentOrderForBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
 +(NSSet *)bottlesFromSearchText:(NSString *)searchText;
 +(NSSet *)bottlesFromSearchText:(NSString *)searchText withOrder:(Order *)order;

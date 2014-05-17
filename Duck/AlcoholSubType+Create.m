@@ -52,11 +52,11 @@
     return subType;
 }
 
+// Completely recalculate the userOrdering for all bottles (there may be gaps if a user removed/added a bottle)
 +(void)recalculateUserOrderingForSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context {
     NSString * subTypeName = subType.name;
     NSFetchRequest * fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
     
-    // Completely recalculate the userOrdering for all bottles (there may be gaps if a user removed/added a bottle)
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"subType.name = %@", subTypeName];
     NSSortDescriptor * sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"userHasBottle" ascending:NO];
     NSSortDescriptor * sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"userOrdering" ascending:YES];
@@ -77,13 +77,17 @@
     }
 }
 
+// change the bottle to a new subtype and then give the bottle a userOrdering as the last bottle in that subtype
 +(void)changeBottle:(Bottle *)bottle toSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context {
     bottle.subType = subType;
     NSArray * fetchedBottles = [AlcoholSubType fetchedBottlesForSubType:bottle.subType inContext:context];
-    bottle.userHasBottle = [NSNumber numberWithBool:YES];
     NSUInteger newOrder = [fetchedBottles count];
     int newOrderInt = (int)newOrder;
     bottle.userOrdering = [NSNumber numberWithInteger:(newOrderInt)];
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
 }
 
 +(void)changeOrderOfBottle:(Bottle *)bottle toNumber:(NSNumber *)number inContext:(NSManagedObjectContext *)context {

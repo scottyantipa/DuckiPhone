@@ -46,6 +46,10 @@
     }
 }
 
++(void)toggleUserHasBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context {
+    bottle.userHasBottle = [NSNumber numberWithBool:![bottle.userHasBottle boolValue]];
+}
+
 +(Bottle *)bottleForBarcode:(NSString *)barcode inManagedObjectContext:(NSManagedObjectContext *)context {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"barcode = %@", barcode];

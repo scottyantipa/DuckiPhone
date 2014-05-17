@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Scott Antipa. All rights reserved.
 //
 
+// 
+
 #import "ToggleBottlesTableViewController.h"
 #import "AlcoholSubType+Create.h"
 
@@ -124,13 +126,6 @@
     return _searchFetchedResultsController;
 }
 
-// Toggle if the user has/doesnt have the bottle
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
-    [self.delegate didSelectBottle:bottle];
-    [self.tableView reloadData];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -148,14 +143,14 @@
 
 
 #pragma Search Bar Delegates
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    NSLog(@"search bar text is now: %@", searchText);
-}
-
--(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    NSLog(@"Cancel button clicked");
-}
-
+//-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+//    NSLog(@"search bar text is now: %@", searchText);
+//}
+//
+//-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+//    NSLog(@"Cancel button clicked");
+//}
+//
 
 #pragma Utils for managing the FRCs
 - (NSFetchedResultsController *)fetchedResultsControllerForTableView:(UITableView *)tableView
@@ -188,6 +183,14 @@
     return count;
 }
 
+// Toggle if the user has/doesnt have the bottle
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSFetchedResultsController * frc = [self fetchedResultsControllerForTableView:tableView];
+    Bottle * bottle = [frc objectAtIndexPath:indexPath];
+    [self.delegate didSelectBottle:bottle];
+    [tableView reloadData];  // reload the data for the tableView that reported it
+    [self.tableView reloadData]; // reload this table view (in case it was the searchTableView that reported)
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
