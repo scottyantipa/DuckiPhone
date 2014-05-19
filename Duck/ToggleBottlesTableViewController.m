@@ -139,6 +139,8 @@
     self.mySearchDisplayController.delegate = self;
     self.mySearchDisplayController.searchResultsDataSource = self;
     self.mySearchDisplayController.searchResultsDelegate = self;
+    
+    self.searchDisplayController.searchBar.delegate = self;
 }
 
 
@@ -147,9 +149,11 @@
 //    NSLog(@"search bar text is now: %@", searchText);
 //}
 //
-//-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-//    NSLog(@"Cancel button clicked");
-//}
+
+// we're going to show the main table view so let's reload it
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [[self tableView] reloadData];
+}
 //
 
 #pragma Utils for managing the FRCs
@@ -171,7 +175,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)theIndexPath
 {
-    UITableViewCell * cell = [[self tableView] dequeueReusableCellWithIdentifier:@"All Bottles to Toggle Cell ID" forIndexPath:theIndexPath];
+    UITableViewCell * cell;
+    if (theTableView == self.searchDisplayController.searchResultsTableView) {
+        cell = [[self tableView] dequeueReusableCellWithIdentifier:@"All Bottles to Toggle Cell ID"];
+    } else {
+        cell = [[self tableView] dequeueReusableCellWithIdentifier:@"All Bottles to Toggle Cell ID" forIndexPath:theIndexPath];
+    }
     [self fetchedResultsController:[self fetchedResultsControllerForTableView:theTableView] configureCell:cell atIndexPath:theIndexPath];
     return cell;
 }
@@ -188,8 +197,12 @@
     NSFetchedResultsController * frc = [self fetchedResultsControllerForTableView:tableView];
     Bottle * bottle = [frc objectAtIndexPath:indexPath];
     [self.delegate didSelectBottle:bottle];
-    [tableView reloadData];  // reload the data for the tableView that reported it
-    [self.tableView reloadData]; // reload this table view (in case it was the searchTableView that reported)
+    if (tableView == self.tableView) {
+        NSLog(@"Did touch tableView");
+    } else {
+        NSLog(@"Did touch searchTableView");
+    }
+    [tableView reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -227,6 +240,7 @@
     // search is done so get rid of the search FRC and reclaim memory
     self.searchFetchedResultsController.delegate = nil;
     self.searchFetchedResultsController = nil;
+    [[self tableView] reloadData];
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
@@ -248,68 +262,75 @@
     return YES;
 }
 
+//
+// Content changes in tableViews.  First couple methods are for editing the tableView, which aren't used right now
+//
 #pragma make sure that you use the correct table view when getting updates from the FRC delegate methods
-//- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-//{
-//    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
-//    [tableView beginUpdates];
-//}
-//
-//
-//- (void)controller:(NSFetchedResultsController *)controller
-//  didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-//           atIndex:(NSUInteger)sectionIndex
-//     forChangeType:(NSFetchedResultsChangeType)type
-//{
-//    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
-//    
-//    switch(type)
-//    {
-//        case NSFetchedResultsChangeInsert:
-//            [tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeDelete:
-//            [tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//    }
-//}
-//
-//
-//- (void)controller:(NSFetchedResultsController *)controller
-//   didChangeObject:(id)anObject
-//       atIndexPath:(NSIndexPath *)theIndexPath
-//     forChangeType:(NSFetchedResultsChangeType)type
-//      newIndexPath:(NSIndexPath *)newIndexPath
-//{
-//    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
-//    
-//    switch(type)
-//    {
-//        case NSFetchedResultsChangeInsert:
-//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeDelete:
-//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:theIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeUpdate:
-//            [self fetchedResultsController:controller configureCell:[tableView cellForRowAtIndexPath:theIndexPath] atIndexPath:theIndexPath];
-//            break;
-//            
-//        case NSFetchedResultsChangeMove:
-//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:theIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//    }
-//}
-//
-//
-//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-//{
-//    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
-//    [tableView endUpdates];
-//}
+- (void)controller:(NSFetchedResultsController *)controller
+  didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex
+     forChangeType:(NSFetchedResultsChangeType)type
+{
+    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
+    
+    switch(type)
+    {
+        case NSFetchedResultsChangeInsert:
+            [tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
 
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)theIndexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
+    
+    switch(type)
+    {
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:theIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self fetchedResultsController:controller configureCell:[tableView cellForRowAtIndexPath:theIndexPath] atIndexPath:theIndexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:theIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+//
+// For begin/end updates, make sure to begin/end for the proper tableView
+//
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
+    [tableView endUpdates];
+}
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
+    [tableView beginUpdates];
+}
+
+// Turn off the vertical letters on RHS of tableView (looks bad and doesn't provide much utility)
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    return nil;
+}
 @end

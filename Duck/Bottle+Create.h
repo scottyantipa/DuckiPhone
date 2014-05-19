@@ -22,7 +22,6 @@
 +(Bottle *)newBlankBottleInContext:(NSManagedObjectContext *)context;
 +(void)toggleUserHasBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
 +(OrderForBottle *)mostRecentOrderForBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
-+(NSSet *)bottlesFromSearchText:(NSString *)searchText;
 +(NSSet *)bottlesFromSearchText:(NSString *)searchText withOrder:(Order *)order;
 +(NSString *)cleanedSearchText:(NSString *)searchText;
 @end
