@@ -12,6 +12,7 @@
 #import "InventorySnapshotForBottle+Create.h"
 #import "Order+Create.h"
 #import "NSString+Score.h"
+#import "InventorySnapshotForBottle+Create.h"
 
 
 @interface Bottle (Create)
@@ -24,4 +25,5 @@
 +(OrderForBottle *)mostRecentOrderForBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
 +(NSSet *)bottlesFromSearchText:(NSString *)searchText withOrder:(Order *)order;
 +(NSString *)cleanedSearchText:(NSString *)searchText;
++(NSNumber *)countOfBottle:(Bottle *)bottle forContext:(NSManagedObjectContext *)context;
 @end

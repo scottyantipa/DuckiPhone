@@ -197,11 +197,6 @@
     NSFetchedResultsController * frc = [self fetchedResultsControllerForTableView:tableView];
     Bottle * bottle = [frc objectAtIndexPath:indexPath];
     [self.delegate didSelectBottle:bottle];
-    if (tableView == self.tableView) {
-        NSLog(@"Did touch tableView");
-    } else {
-        NSLog(@"Did touch searchTableView");
-    }
     [tableView reloadData];
 }
 

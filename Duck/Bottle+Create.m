@@ -116,8 +116,35 @@
     NSError * err = nil;
     NSArray * fetchedObjects = [context executeFetchRequest:fetchRequest error:&err];
     OrderForBottle * orderForBottle = [fetchedObjects lastObject];
-    
     return orderForBottle;
+}
+
+
+// Get the most recent InventorySnapshotForBottle
+// and set that count to _count
++(NSNumber *)countOfBottle:(Bottle *)bottle forContext:(NSManagedObjectContext *)context {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"InventorySnapshotForBottle" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"whichBottle.name = %@", bottle.name];
+    [fetchRequest setPredicate:predicate];
+    
+    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // We only want the most recent one
+    [fetchRequest setFetchBatchSize:1];
+    
+    NSError * err = nil;
+    NSArray * fetchedObjects = [context executeFetchRequest:fetchRequest error:&err];
+    InventorySnapshotForBottle * snapshot = [fetchedObjects lastObject];
+    
+    if (snapshot.count == nil) {
+        return 0;
+    } else {
+        return snapshot.count;
+    }
 }
 
 +(NSString *)cleanedSearchText:(NSString *)searchText {

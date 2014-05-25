@@ -66,7 +66,7 @@
 {
     Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = bottle.name;
-    NSNumber * bottleCount = [self countOfBottle:bottle];
+    NSNumber * bottleCount = [Bottle countOfBottle:bottle forContext:_managedObjectContext];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%g", bottleCount.floatValue];
     
 }
@@ -79,32 +79,6 @@
     editObjVC.delegate = self;
 }
 
--(NSNumber *)countOfBottle:(Bottle *)bottle {
-    // Get the most recent InventorySnapshotForBottle
-    // and set that count to _count
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"InventorySnapshotForBottle" inManagedObjectContext:_managedObjectContext];
-    [fetchRequest setEntity:entity];
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"whichBottle.name = %@", bottle.name];
-    [fetchRequest setPredicate:predicate];
-    
-    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // We only want the most recent one
-    [fetchRequest setFetchBatchSize:1];
-    
-    NSError * err = nil;
-    NSArray * fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&err];
-    InventorySnapshotForBottle * snapshot = [fetchedObjects lastObject];
-    
-    if (snapshot.count == nil) {
-        return 0;
-    } else {
-        return snapshot.count;
-    }
-}
 
 - (void)viewDidLoad
 {
@@ -121,7 +95,7 @@
 }
 
 -(float)countOfManagedObject:(id)obj {
-    NSNumber * num = [self countOfBottle:obj];
+    NSNumber * num = [Bottle countOfBottle:obj forContext:_managedObjectContext];
     float countAsFloat = [num floatValue];
     return countAsFloat;
 }

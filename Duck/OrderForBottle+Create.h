@@ -14,5 +14,4 @@
 +(OrderForBottle *)newOrderForBottle:(Bottle *)bottle
                                 forOrder:(Order *)order
                   inManagedObjectContext:(NSManagedObjectContext *)context;
-
 @end
