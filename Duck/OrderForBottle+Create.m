@@ -23,9 +23,13 @@
     orderForBottle.whichBottle = bottle;
     orderForBottle.whichOrder = order;
 
-    // copy over the info from the most recent order
-    orderForBottle.quantity = mostRecentOrder.quantity;
-    orderForBottle.unitPrice = mostRecentOrder.unitPrice;
+    if (mostRecentOrder != nil) {  // copy over the info from the most recent order (if there was one)
+        orderForBottle.quantity = mostRecentOrder.quantity;
+        orderForBottle.unitPrice = mostRecentOrder.unitPrice;
+    } else { // just zero them out
+        orderForBottle.quantity = [NSNumber numberWithFloat:0];
+        orderForBottle.unitPrice = [NSNumber numberWithFloat:0];
+    }
 
     NSError *error;
     if (![context save:&error]) {

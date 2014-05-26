@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Scott Antipa. All rights reserved.
 //
 
-// 
-
 #import "ToggleBottlesTableViewController.h"
 #import "AlcoholSubType+Create.h"
 
@@ -20,10 +18,12 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize searchFetchedResultsController = _searchFetchedResultsController;
+@synthesize searchBar = _searchBar;
+@synthesize subType = _subType;
 
 #pragma FRC creation
 
-// used to create search FRC
+// There are two FRC's, one for search and one for the main table.  This is used just for the search table.
 - (NSFetchedResultsController *)newFetchedResultsControllerWithSearch:(NSString *)searchString
 {
     NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
@@ -39,6 +39,10 @@
     {
         // your search predicate(s) are added to this array
         [predicateArray addObject:[NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@", searchString]];
+        
+        // If we only want to see bottles in a certain subtype.  Note this code is duplicated in the standard tvc.
+        if (_subType) { [predicateArray addObject:[NSPredicate predicateWithFormat:@"subType.name = %@", _subType.name]];}
+
         // finally add the filter predicate for this view
         if(filterPredicate)
         {
@@ -46,7 +50,7 @@
         }
         else
         {
-            filterPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicateArray];
+            filterPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicateArray];
         }
     }
     [fetchRequest setPredicate:filterPredicate];
@@ -88,6 +92,13 @@
     }
     
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
+
+    // If we only want to see bottles in a certain subtype.  Note this code is duplicated in th search table frc.
+    if (_subType) {
+        NSPredicate * predicate = [NSPredicate predicateWithFormat:@"subType.name = %@", _subType.name];
+        [fetchRequest setPredicate:predicate];
+    }
+
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
@@ -130,12 +141,12 @@
 {
     [super viewDidLoad];
     [super loadView];
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 44.0)];
-    searchBar.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
-    searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.tableView.tableHeaderView = searchBar;
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 44.0)];
+    _searchBar.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+    _searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.tableView.tableHeaderView = _searchBar;
     
-    self.mySearchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
+    self.mySearchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
     self.mySearchDisplayController.delegate = self;
     self.mySearchDisplayController.searchResultsDataSource = self;
     self.mySearchDisplayController.searchResultsDelegate = self;
@@ -324,8 +335,18 @@
     [tableView beginUpdates];
 }
 
+#pragma Customizing search
+
 // Turn off the vertical letters on RHS of tableView (looks bad and doesn't provide much utility)
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
     return nil;
+}
+
+// Change text of cancel button.
+// http://stackoverflow.com/questions/2536151/how-to-change-the-default-text-of-cancel-button-which-appears-in-the-uisearchbar/14509280#14509280
+- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller
+{
+    id barButtonAppearanceInSearchBar = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
+    [barButtonAppearanceInSearchBar setTitle:@"Done"];
 }
 @end

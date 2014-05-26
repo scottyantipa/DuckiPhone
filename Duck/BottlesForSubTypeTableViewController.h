@@ -9,8 +9,10 @@
 #import "BaseCoreDataTableViewController.h"
 #import "AlcoholSubTypesTableViewController.h"
 #import "BottleDetailTableViewController.h"
+#import "ToggleBottlesDelegate.h"
+#import "ToggleBottlesTableViewController.h"
 
-@interface BottlesForSubTypeTableViewController : BaseCoreDataTableViewController
+@interface BottlesForSubTypeTableViewController : BaseCoreDataTableViewController <ToggleBottlesDelegate>
 @property (strong, nonatomic) AlcoholSubType *subType;
 @property (nonatomic) BOOL editing;
 @end

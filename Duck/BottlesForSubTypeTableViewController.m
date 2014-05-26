@@ -25,6 +25,24 @@
     self.title = subType.name;
 }
 
+// create button as header of table to "Add More Bottles"
+-(void)setHeader {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    int headerHeight = 40;
+    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, headerHeight)];
+    UIButton * addBottlesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    
+    [addBottlesButton addTarget:self action:@selector(didSelectAddBottles) forControlEvents:UIControlEventTouchUpInside];
+    [addBottlesButton setTitle:@"Add More Bottles" forState:UIControlStateNormal];
+    addBottlesButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    
+    addBottlesButton.frame = CGRectMake(0, 0, screenWidth, headerHeight);
+    [headerView addSubview:addBottlesButton];
+    self.tableView.tableHeaderView = headerView;
+}
+
+
 -(NSManagedObjectContext *)context {
     return self.subType.managedObjectContext;
 }
@@ -33,7 +51,6 @@
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
-    
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(subType.name = %@) AND (userHasBottle = %@)", self.subType.name, [NSNumber numberWithBool:YES]];
     
@@ -56,7 +73,7 @@
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.subType.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self context] sectionNameKeyPath:nil cacheName:nil];
     self.fetchedResultsController = aFetchedResultsController;
     _fetchedResultsController.delegate = self;
     
@@ -81,11 +98,18 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    Bottle *bottle = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    BottleDetailTableViewController * bottleTVC = [segue destinationViewController];
-    bottleTVC.bottle = bottle;
-    bottleTVC.managedObjectContext = self.subType.managedObjectContext;
+    if ([segue.identifier isEqualToString:@"Toggle Subtype Bottles Segue ID"]) { // wants to add bottles
+        ToggleBottlesTableViewController * tvc = [segue destinationViewController];
+        tvc.delegate = self;
+        tvc.managedObjectContext = [self context];
+        [[segue destinationViewController] setSubType:_subType];
+    } else { // selected a bottle, so show the bottle
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        Bottle *bottle = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        BottleDetailTableViewController * bottleTVC = [segue destinationViewController];
+        bottleTVC.bottle = bottle;
+        bottleTVC.managedObjectContext = [self context];
+    }
 }
 
 -(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -123,20 +147,40 @@
             }
         }
         NSError *error;
-        if (![self.subType.managedObjectContext save:&error]) {
+        if (![[self context] save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
         }
     }
 }
 
 -(void)viewDidLoad {
+    [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    return;
+    [self setHeader];
 }
 
 -(void)viewDidUnload
 {
+    [super viewDidUnload];
     self.fetchedResultsController = nil;
 }
+
+// User wants to add bottles, so show toggle bottles view
+-(void)didSelectAddBottles {
+    [self performSegueWithIdentifier:@"Toggle Subtype Bottles Segue ID" sender:nil];
+}
+
+#pragma Delegate parent methods for toggle bottles
+
+-(void)didSelectBottle:(Bottle *)bottle {
+    [Bottle toggleUserHasBottle:bottle inContext:[self context]];
+    [[self tableView] reloadData];
+}
+
+
+-(BOOL)bottleIsSelected:(Bottle *)bottle {
+    return [bottle.userHasBottle boolValue];
+}
+
 
 @end

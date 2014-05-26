@@ -594,7 +594,12 @@
                             <outlet property="delegate" destination="xxc-Ne-wLM" id="DU0-8H-LaR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="WUi-yc-Muj"/>
+                    <navigationItem key="navigationItem" id="WUi-yc-Muj">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="dE5-lc-mrQ"/>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="xCa-3a-yKM" kind="push" identifier="Toggle Subtype Bottles Segue ID" id="8wE-iO-ft0"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h0p-s7-ma7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -898,7 +903,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="MLT-4y-wai"/>
-        <segue reference="gCl-OI-uA5"/>
         <segue reference="HEK-hq-4ib"/>
+        <segue reference="8wE-iO-ft0"/>
     </inferredMetricsTieBreakers>
 </document>
