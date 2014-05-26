@@ -18,19 +18,9 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize currentScannedBottleBarcode = _currentScannedBottleBarcode;
 
--(void)viewDidLoad {
-    self.title = @"x86";
-}
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Show Inventory"]) {
-        [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
-    }
-    else if ([segue.identifier isEqualToString:@"New Bottle"]) {
-        Bottle *bottle = [Bottle newBlankBottleInContext:_managedObjectContext];
-        [segue.destinationViewController setBottle:bottle];
-        bottle.userHasBottle = [NSNumber numberWithBool:YES];
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
     }
     else if ([segue.identifier isEqualToString:@"Take Inventory"]) {

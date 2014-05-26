@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="3">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -20,7 +20,7 @@
             </objects>
             <point key="canvasLocation" x="-193" y="64"/>
         </scene>
-        <!--Home Table View Controller - Duck App-->
+        <!--Home Table View Controller - ex86-->
         <scene sceneID="uva-dk-h9p">
             <objects>
                 <tableViewController id="9JS-DP-95s" customClass="HomeTableViewController" sceneMemberID="viewController">
@@ -69,31 +69,12 @@
                                             <segue destination="ay1-gN-0vh" kind="push" identifier="Take Inventory" id="Gbr-Zp-i4c"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="P7g-YR-mxt" style="IBUITableViewCellStyleDefault" id="DGL-7u-ycZ">
-                                        <rect key="frame" x="0.0" y="207" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DGL-7u-ycZ" id="sDe-h8-WXQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Add New Bottle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P7g-YR-mxt">
-                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
-                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="rWc-a4-jVU" kind="push" identifier="New Bottle" id="pK6-lf-Ddj"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Orders" id="IdI-Kw-zZb">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="9l0-Rm-sGh" style="IBUITableViewCellStyleDefault" id="vLU-br-SJe">
-                                        <rect key="frame" x="0.0" y="299" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="255" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vLU-br-SJe" id="sJZ-nQ-rIR">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -112,7 +93,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="rn3-XV-bVf" style="IBUITableViewCellStyleDefault" id="XFv-GP-5wP">
-                                        <rect key="frame" x="0.0" y="343" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="299" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XFv-GP-5wP" id="ch5-v3-r9v">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -138,8 +119,8 @@
                             <outlet property="delegate" destination="9JS-DP-95s" id="Cth-KV-Np3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Duck App" id="x0p-Xh-ysM">
-                        <barButtonItem key="rightBarButtonItem" title="Scan" id="z5B-cH-o19" userLabel="scanButtonForZBar">
+                    <navigationItem key="navigationItem" title="ex86" id="x0p-Xh-ysM">
+                        <barButtonItem key="rightBarButtonItem" title="Barcode Scan" id="z5B-cH-o19" userLabel="scanButtonForZBar">
                             <connections>
                                 <action selector="didPressScanButton:" destination="9JS-DP-95s" id="Rj5-fR-mWS"/>
                             </connections>
@@ -916,9 +897,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="pK6-lf-Ddj"/>
-        <segue reference="HEK-hq-4ib"/>
-        <segue reference="h54-lP-FQo"/>
+        <segue reference="MLT-4y-wai"/>
         <segue reference="gCl-OI-uA5"/>
+        <segue reference="HEK-hq-4ib"/>
     </inferredMetricsTieBreakers>
 </document>

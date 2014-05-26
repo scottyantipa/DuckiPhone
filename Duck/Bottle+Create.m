@@ -16,35 +16,7 @@
     
 }
 
-+(Bottle *)bottleForName:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context
-{
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name = %@", name];
-    
-    // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
-    
-    // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // get the results and print them
-    NSError *err;
-    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&err];
-    
-    // if none were returned, then create one
-    if ([fetchedObjects count] == 0) {
-        Bottle *newBottle = [Bottle newBlankBottleInContext:context];
-        newBottle.name = name;
-        return newBottle;
-    }
-    else {
-        Bottle *bottle = [fetchedObjects lastObject];
-        return bottle;
-    }
-}
+
 
 +(void)toggleUserHasBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context {
     bottle.userHasBottle = [NSNumber numberWithBool:![bottle.userHasBottle boolValue]];
@@ -77,24 +49,17 @@
     }
 }
 
-+(Bottle *)newBlankBottleInContext:(NSManagedObjectContext *)context {
+// main way to create a new bottle. YOU NEED A BARCODE -- its our way of uniquely identifying bottles
+// and we only let users add a new bottle by scanning the barcode
++(Bottle *)newBottleForBarcode:(NSString *)barcode inManagedObjectContext:(NSManagedObjectContext *)context {
     Bottle *bottle = [NSEntityDescription
                       insertNewObjectForEntityForName:@"Bottle"
                       inManagedObjectContext:context];
     bottle.name = @"No Name";
-    bottle.barcode = @"No Barcode";
-    [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:[NSDate date] withCount:(NSNumber *)0 forBottle:bottle inManagedObjectContext:context];
+    bottle.barcode = barcode;
     NSError *error;
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
-    return bottle;
-}
-
-+(Bottle *)newBottleForBarcode:(NSString *)barcode inManagedObjectContext:(NSManagedObjectContext *)context {
-    Bottle *bottle = [Bottle newBlankBottleInContext:context];
-    if (barcode) {
-        bottle.barcode = barcode;
     }
     return bottle;
 }
@@ -126,7 +91,7 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"InventorySnapshotForBottle" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"whichBottle.name = %@", bottle.name];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"whichBottle.barcode = %@", bottle.barcode];
     [fetchRequest setPredicate:predicate];
     
     NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
@@ -141,7 +106,7 @@
     InventorySnapshotForBottle * snapshot = [fetchedObjects lastObject];
     
     if (snapshot.count == nil) {
-        return 0;
+        return [NSNumber numberWithInt:0];
     } else {
         return snapshot.count;
     }
