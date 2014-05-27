@@ -55,12 +55,17 @@
 // NOTE: This should be a method within InvoicePhoto+Create
 -(void)recognizeAllBottlesFromAllPhotos {
     for (InvoicePhoto * invoicePhoto in _invoice.photos) {
+        [self recognizeBottlesForInvoicePhoto:invoicePhoto];
+    }
+}
+
+-(void)recognizeBottlesForInvoicePhoto:(InvoicePhoto *)invoicePhoto {
+    if (invoicePhoto.text != nil) {
         NSSet * recognizedBottles = [Bottle bottlesFromSearchText:invoicePhoto.text withOrder:_invoice.order];
         if (recognizedBottles.count != 0) {
             [invoicePhoto addBottles:recognizedBottles];
         }
     }
-
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,7 +77,7 @@
         NSString * documentName = invoicePhoto.documentName;
         UIImage * image = [self loadImage:documentName];
         cell.imageView.image = image;
-        cell.textLabel.text = @"place_holder";
+        cell.textLabel.text = [NSString stringWithFormat:@"photo %d", indexPath.row + 1];
     } else if (indexPath.section == 1) { // bottles
         cell = [tableView dequeueReusableCellWithIdentifier:@"Invoice Bottle CellReuse ID" forIndexPath:indexPath];
         OrderForBottle * orderForBottle = [[self sortedBottlesInOrder] objectAtIndex:indexPath.row];
@@ -228,16 +233,8 @@
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * documentDirectory = [paths objectAtIndex:0];
     NSString * path = [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", name]];
-    
-    UIImage * image = [self loadImage:name];
-    NSLog(@"image before deletion: %@", image);
-    
     NSFileManager * fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:path error:NULL];
-
-    UIImage * imageAfter = [self loadImage:name];
-    NSLog(@"image after deletion: %@", imageAfter);
-    
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -265,17 +262,26 @@
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
     
-    // tesseract
-    Tesseract * tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
-    [tesseract setImage:chosenImage];
-    [tesseract recognize];
-    NSString * recognizedText = [tesseract recognizedText];
-    NSLog(@"recognized: %@", recognizedText);
-    invoicePhoto.text = recognizedText;
-
-    // close modal, reload table
-    [[self tableView] reloadData];
+    // close camera and show spinner while tesseract does its job
     [self dismissViewControllerAnimated:YES completion:nil];
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(135,140,50,50)];
+    spinner.color = [UIColor blueColor];
+    [spinner startAnimating];
+    [self.view addSubview:spinner];
+    
+    // run tesseract in background while displaying a spinner
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        Tesseract * tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
+        [tesseract setImage:chosenImage];
+        [tesseract recognize];
+        NSString * recognizedText = [tesseract recognizedText];
+        invoicePhoto.text = recognizedText;
+        [self recognizeBottlesForInvoicePhoto:invoicePhoto];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[self tableView] reloadData];
+            [spinner removeFromSuperview];
+        });
+    });
 }
 
 -(UIImage *)convertImage:(UIImage *)src {

@@ -115,21 +115,12 @@
     _fetchedResultsController.delegate = self;
     
 	NSError *error = nil;
-    NSLog(@"fetchedObjs before fetch %d", _fetchedResultsController.fetchedObjects.count);
 	if (![_fetchedResultsController performFetch:&error]) {
         // Replace this implementation with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 	    abort();
 	}
-    NSLog(@"fetchedObjs after fetch %d", _fetchedResultsController.fetchedObjects.count);    
-    NSError *err;
-    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&err];
-    for (Bottle * bottle in fetchedObjects) {
-        NSLog(@"Bottle: %@", bottle.name);
-    }
-
-    
     return _fetchedResultsController;
 }
 

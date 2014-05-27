@@ -103,8 +103,12 @@
 
 // When user tries to send a new or past order to the vendor
 // this checks to see if the order has enough information (vendor, vendor email, bottles, etc.)
+// and that the user is logged into the mail app
 +(NSString *)errorStringForSendingIncompleteOrder:(Order *)order {
     BOOL noError = YES;
+    if (![MFMailComposeViewController canSendMail]) {
+        return [NSString stringWithFormat:@"You must log in to the Apple mail app to enable sending email"];
+    }
     NSMutableArray * errorStrings = [[NSMutableArray alloc]init];
     if (order.whichVendor) {
         if (!order.whichVendor.email) {
