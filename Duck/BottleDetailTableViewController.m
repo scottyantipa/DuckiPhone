@@ -187,6 +187,7 @@
     _bottle.name = name;
     self.title = name;
     [self.tableView reloadData];
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 -(NSString *)textForNameView {

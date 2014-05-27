@@ -15,24 +15,19 @@
 @implementation EditTextViewController
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.view endEditing:YES];
     [self updateTextField];
-    return NO;
-}
-
--(void)textFieldDidEndEditing:(UITextField *)textField {
-    [self updateTextField];
+    return YES;
 }
 
 -(void)updateTextField {
-    NSString * text = self.textFieldForName.text;
-    [self.delegate didFinishEditingText:text];
+    [self.delegate didFinishEditingText:self.textFieldForName.text];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    // This should be the text of the bottle
     self.title = @"Edit Bottle Name";
     self.textFieldForName.text = [self.delegate textForNameView];
-    [self.view setNeedsDisplay];
+    self.textFieldForName.returnKeyType = UIReturnKeyDone;
     [super viewWillAppear:animated];
 }
 @end

@@ -25,10 +25,14 @@
     self.textFieldForFirstName.text = _vendor.firstName;
     self.textFieldForLastName.text = _vendor.lastName;
     self.textFieldForEmail.text = _vendor.email;
+    
+    NSArray * fields = @[self.textFieldForEmail, self.textFieldForFirstName, self.textFieldForLastName];
+    for (UITextField * field in fields) {field.returnKeyType = UIReturnKeyDone;}
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     int tag = textField.tag;
+    [self.view endEditing:YES];
     [self updateFieldForTag:tag];
     return YES;
 }
