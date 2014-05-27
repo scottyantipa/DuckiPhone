@@ -41,7 +41,7 @@
         [predicateArray addObject:[NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@", searchString]];
         
         // If we only want to see bottles in a certain subtype.  Note this code is duplicated in the standard tvc.
-        if (_subType) { [predicateArray addObject:[NSPredicate predicateWithFormat:@"subType.name = %@", _subType.name]];}
+        if (_subType != nil) { [predicateArray addObject:[NSPredicate predicateWithFormat:@"subType.name = %@", _subType.name]];}
 
         // finally add the filter predicate for this view
         if(filterPredicate)
@@ -94,7 +94,7 @@
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
 
     // If we only want to see bottles in a certain subtype.  Note this code is duplicated in th search table frc.
-    if (_subType) {
+    if (_subType != nil) {
         NSPredicate * predicate = [NSPredicate predicateWithFormat:@"subType.name = %@", _subType.name];
         [fetchRequest setPredicate:predicate];
     }
@@ -110,17 +110,25 @@
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:@"subType.name" cacheName:@"Master"];
-    self.fetchedResultsController = aFetchedResultsController;
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:@"subType.name" cacheName:nil];
+    _fetchedResultsController = aFetchedResultsController;
     _fetchedResultsController.delegate = self;
     
 	NSError *error = nil;
-	if (![aFetchedResultsController performFetch:&error]) {
+    NSLog(@"fetchedObjs before fetch %d", _fetchedResultsController.fetchedObjects.count);
+	if (![_fetchedResultsController performFetch:&error]) {
         // Replace this implementation with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 	    abort();
 	}
+    NSLog(@"fetchedObjs after fetch %d", _fetchedResultsController.fetchedObjects.count);    
+    NSError *err;
+    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&err];
+    for (Bottle * bottle in fetchedObjects) {
+        NSLog(@"Bottle: %@", bottle.name);
+    }
+
     
     return _fetchedResultsController;
 }
@@ -140,7 +148,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [super loadView];
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 44.0)];
     _searchBar.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
     _searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -152,14 +159,16 @@
     self.mySearchDisplayController.searchResultsDelegate = self;
     
     self.searchDisplayController.searchBar.delegate = self;
+    
+    self.fetchedResultsController = nil;
 }
-
 
 #pragma Search Bar Delegates
 //-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
 //    NSLog(@"search bar text is now: %@", searchText);
 //}
 //
+
 
 // we're going to show the main table view so let's reload it
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
