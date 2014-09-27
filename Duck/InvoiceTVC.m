@@ -112,9 +112,9 @@
 -(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     NSString * footer;
     if (section == 0) { // photos
-        footer = @"We use text recognition to recognize bottles from your invoice.  Add as many as you'd like to increase accuracy (we won't add duplicate bottles).";
+        footer = @"We use text recognition to recognize bottles in your invoice.  Add as many photos as you'd like to increase accuracy.";
     } else if (section == 1) { // bottles
-        footer = @"These are the bottles you listed in your order.  Bottles with a checkmark have been recognized through text recognition in an invoice photo.";
+        footer = @"Bottles with a checkmark have been recognized from the photos you supplied above.";
     }
     return footer;
 }
