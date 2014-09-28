@@ -43,6 +43,10 @@
     [self.navigationController pushViewController:bottleTVC animated:YES];
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 #pragma Delegate methods
 
 - (void) imagePickerController: (UIImagePickerController*) reader
