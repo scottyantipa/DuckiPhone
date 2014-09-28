@@ -208,7 +208,6 @@
 
 #pragma Actions and Outlets
 - (IBAction)didTouchDelete:(id)sender {
-    [self makeRequest:@"DELETE"];
     self.bottle.userHasBottle = [NSNumber numberWithBool:NO];
     [self.navigationController popViewControllerAnimated:YES];
 }
