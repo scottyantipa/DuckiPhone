@@ -62,7 +62,7 @@
     
     NSMutableString * remoteUrl = [NSMutableString stringWithFormat:@"http://ec2-54-82-243-92.compute-1.amazonaws.com:3333/bottle?"];
     NSMutableString * localUrl = [NSMutableString stringWithFormat:@"http://10.0.1.5:3333/bottle?"];
-    BOOL isRemote = NO;
+    BOOL isRemote = YES;
     NSString * urlBase = isRemote ? remoteUrl : localUrl;
     NSString * params = [NSString stringWithFormat:@"name=%@&barcode=%@&category=%@&device=%@", encodedBottleName, _bottle.barcode, _bottle.subType.name, encodedID];
     NSString * urlString = [urlBase stringByAppendingString:params];
@@ -171,6 +171,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSInteger row = indexPath.row;
     id property = [_whiteList objectAtIndex:row];
     if ([property isEqualToString:@"name"]) {

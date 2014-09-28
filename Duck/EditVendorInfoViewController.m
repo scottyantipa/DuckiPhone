@@ -9,7 +9,6 @@
 #import "EditVendorInfoViewController.h"
 
 @interface EditVendorInfoViewController ()
-
 @end
 
 @implementation EditVendorInfoViewController
@@ -32,7 +31,6 @@
     NSArray * fields = @[self.textFieldForEmail, self.textFieldForFirstName, self.textFieldForLastName];
     for (UITextField * field in fields) {field.returnKeyType = UIReturnKeyDone;}
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height * 1.5);
-    
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {

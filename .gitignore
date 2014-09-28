@@ -4,3 +4,4 @@ Duck.xcodeproj/xcuserdata/
 *.sqlite
 *.DS_STORE
 .DS_STORE
+build
