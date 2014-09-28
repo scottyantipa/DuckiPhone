@@ -12,7 +12,6 @@
 #import "EditTextViewDelegate.h"
 #import "EditCountDelegate.h"
 
-
 @interface BottleDetailTableViewController : BaseCoreDataTableViewController <SubTypeSelectorDelegate, EditTextViewDelegate, EditCountDelegate>
 @property (strong, nonatomic) Bottle * bottle;
 @property (strong, nonatomic) NSOrderedSet * whiteList;

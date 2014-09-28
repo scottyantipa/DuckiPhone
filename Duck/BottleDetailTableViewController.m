@@ -40,7 +40,18 @@
 }
 
 -(void)makeRequest:(NSString *)method {
+    NSUUID * uuid = [[UIDevice currentDevice] identifierForVendor];
+    NSString * stringId = [uuid UUIDString];
+
     // make sure name param url encoded for whitespaces etc. (got this from: http://stackoverflow.com/questions/8088473/url-encode-an-nsstring)
+    NSString * encodedID = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                         NULL,
+                                                                                         (CFStringRef)stringId,
+                                                                                         NULL,
+                                                                                         (CFStringRef)@"!*'();:@&=+$,/?%#[]-",
+                                                                                         kCFStringEncodingUTF8 ));
+
+
     NSString * encodedBottleName = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
                                                                                   NULL,
                                                                                   (CFStringRef)_bottle.name,
@@ -50,10 +61,10 @@
     
     
     NSMutableString * remoteUrl = [NSMutableString stringWithFormat:@"http://ec2-54-82-243-92.compute-1.amazonaws.com:3333/bottle?"];
-    NSMutableString * localUrl = [NSMutableString stringWithFormat:@"http://10.0.0.6:3333/bottle?"];
-    BOOL isRemote = YES;
+    NSMutableString * localUrl = [NSMutableString stringWithFormat:@"http://10.0.1.5:3333/bottle?"];
+    BOOL isRemote = NO;
     NSString * urlBase = isRemote ? remoteUrl : localUrl;
-    NSString * params = [NSString stringWithFormat:@"name=%@&barcode=%@&category=%@", encodedBottleName, _bottle.barcode, _bottle.subType.name];
+    NSString * params = [NSString stringWithFormat:@"name=%@&barcode=%@&category=%@&device=%@", encodedBottleName, _bottle.barcode, _bottle.subType.name, encodedID];
     NSString * urlString = [urlBase stringByAppendingString:params];
     NSURL * url = [NSURL URLWithString:urlString];
     
