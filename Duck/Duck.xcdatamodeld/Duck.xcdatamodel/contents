@@ -25,7 +25,7 @@
         <relationship name="whichBottle" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Bottle" inverseName="inventoryShapshots" inverseEntity="Bottle" syncable="YES"/>
     </entity>
     <entity name="Invoice" representedClassName="Invoice" syncable="YES">
-        <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="invoice" inverseEntity="Order" syncable="YES"/>
+        <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="invoices" inverseEntity="Order" syncable="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvoicePhoto" inverseName="invoice" inverseEntity="InvoicePhoto" syncable="YES"/>
     </entity>
     <entity name="InvoicePhoto" representedClassName="InvoicePhoto" syncable="YES">
@@ -39,7 +39,7 @@
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="sent" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="totalAmount" optional="YES" attributeType="Double" minValueString="0" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="invoice" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Invoice" inverseName="order" inverseEntity="Invoice" syncable="YES"/>
+        <relationship name="invoices" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Invoice" inverseName="order" inverseEntity="Invoice" syncable="YES"/>
         <relationship name="ordersByBottle" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OrderForBottle" inverseName="whichOrder" inverseEntity="OrderForBottle" syncable="YES"/>
         <relationship name="whichVendor" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Vendor" inverseName="whichOrder" inverseEntity="Vendor" syncable="YES"/>
     </entity>
@@ -58,13 +58,13 @@
         <relationship name="whichOrder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="whichVendor" inverseEntity="Order" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AlcoholSubType" positionX="-747" positionY="-1278" width="128" height="90"/>
+        <element name="AlcoholSubType" positionX="-747" positionY="-1278" width="128" height="88"/>
         <element name="AlcoholType" positionX="-747" positionY="-1164" width="128" height="75"/>
         <element name="Bottle" positionX="-758" positionY="-1038" width="128" height="165"/>
         <element name="InventorySnapshotForBottle" positionX="-819" positionY="-837" width="128" height="90"/>
-        <element name="Invoice" positionX="-216" positionY="-1107" width="128" height="75"/>
+        <element name="Invoice" positionX="169" positionY="-1197" width="128" height="73"/>
         <element name="InvoicePhoto" positionX="-162" positionY="-987" width="128" height="105"/>
-        <element name="Order" positionX="-297" positionY="-1296" width="128" height="150"/>
+        <element name="Order" positionX="-288" positionY="-1305" width="108" height="148"/>
         <element name="OrderForBottle" positionX="-666" positionY="-837" width="128" height="105"/>
         <element name="Vendor" positionX="-353" positionY="-1107" width="128" height="135"/>
     </elements>
