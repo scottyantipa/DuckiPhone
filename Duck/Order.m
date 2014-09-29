@@ -2,7 +2,7 @@
 //  Order.m
 //  Duck
 //
-//  Created by Scott Antipa on 5/3/14.
+//  Created by Scott Antipa on 9/28/14.
 //  Copyright (c) 2014 Scott Antipa. All rights reserved.
 //
 
@@ -18,8 +18,8 @@
 @dynamic date;
 @dynamic sent;
 @dynamic totalAmount;
+@dynamic invoices;
 @dynamic ordersByBottle;
 @dynamic whichVendor;
-@dynamic invoice;
 
 @end

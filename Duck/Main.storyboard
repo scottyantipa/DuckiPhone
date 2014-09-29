@@ -237,7 +237,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="New Order CellID" textLabel="Lsi-1O-eJB" detailTextLabel="ouz-hH-guz" style="IBUITableViewCellStyleSubtitle" id="6xb-r9-kar">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="New Order CellID" textLabel="Lsi-1O-eJB" detailTextLabel="ouz-hH-guz" style="IBUITableViewCellStyleSubtitle" id="6xb-r9-kar">
                                 <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6xb-r9-kar" id="aia-x5-UKn">
@@ -260,6 +260,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="2y3-6d-7HZ" kind="push" identifier="Show Invoices from OrderTVC" id="Umf-jl-5fZ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -278,7 +281,6 @@
                     <connections>
                         <segue destination="L8U-UR-1zV" kind="push" identifier="Show Bottles in Order Segue ID" id="EMR-Y4-2zn"/>
                         <segue destination="K1K-8Y-5wK" kind="push" identifier="Show Vendor Contact Info Segue ID" id="Ncl-VD-cSO"/>
-                        <segue destination="U2j-8O-QXu" kind="push" identifier="Show Invoice Segue ID" id="y3y-TX-SpB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FL4-W3-zM2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -372,6 +374,36 @@
             </objects>
             <point key="canvasLocation" x="1718" y="1295"/>
         </scene>
+        <!--InvoicesTVC-->
+        <scene sceneID="Shs-se-Dyx">
+            <objects>
+                <tableViewController id="2y3-6d-7HZ" customClass="InvoicesTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1sm-uS-gud">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="sHA-f2-DX4">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sHA-f2-DX4" id="hkO-rv-eOw">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="U2j-8O-QXu" kind="push" identifier="Show Invoice From Invoices" id="mnQ-ZZ-RVg"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="2y3-6d-7HZ" id="7Kq-oh-6fR"/>
+                            <outlet property="delegate" destination="2y3-6d-7HZ" id="aEo-VH-UIf"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Yuz-6m-wHa"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7fN-vj-UDI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1472" y="2088"/>
+        </scene>
         <!--InvoiceTVC-->
         <scene sceneID="Mqn-vo-Rf8">
             <objects>
@@ -435,7 +467,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8K-rs-92b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1718" y="2012"/>
+            <point key="canvasLocation" x="2022" y="2088"/>
         </scene>
         <!--Invoice PhotoVC-->
         <scene sceneID="FLq-o9-TEX">
@@ -465,7 +497,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pMZ-3c-BOZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2160" y="2012"/>
+            <point key="canvasLocation" x="2464" y="2088"/>
         </scene>
         <!--Bottles In Order Table View Controller-->
         <scene sceneID="s41-kz-oE7">

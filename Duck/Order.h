@@ -2,7 +2,7 @@
 //  Order.h
 //  Duck
 //
-//  Created by Scott Antipa on 5/3/14.
+//  Created by Scott Antipa on 9/28/14.
 //  Copyright (c) 2014 Scott Antipa. All rights reserved.
 //
 
@@ -17,12 +17,17 @@
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSNumber * sent;
 @property (nonatomic, retain) NSNumber * totalAmount;
+@property (nonatomic, retain) NSSet *invoices;
 @property (nonatomic, retain) NSSet *ordersByBottle;
 @property (nonatomic, retain) Vendor *whichVendor;
-@property (nonatomic, retain) Invoice *invoice;
 @end
 
 @interface Order (CoreDataGeneratedAccessors)
+
+- (void)addInvoicesObject:(Invoice *)value;
+- (void)removeInvoicesObject:(Invoice *)value;
+- (void)addInvoices:(NSSet *)values;
+- (void)removeInvoices:(NSSet *)values;
 
 - (void)addOrdersByBottleObject:(OrderForBottle *)value;
 - (void)removeOrdersByBottleObject:(OrderForBottle *)value;

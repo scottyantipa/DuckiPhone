@@ -78,9 +78,9 @@
         [segue.destinationViewController setOrder:_order];
     } else if ([segue.identifier isEqualToString:@"Show Vendor Contact Info Segue ID"]) {
         [segue.destinationViewController setVendor:_order.whichVendor];
-    } else if ([segue.identifier isEqualToString:@"Show Invoice Segue ID"]) {
+    } else if ([segue.identifier isEqualToString:@"Show Invoices from OrderTVC"]) {
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
-        [segue.destinationViewController setInvoice:_order.invoice];
+        [segue.destinationViewController setOrder:_order];
     }
 }
 
@@ -96,7 +96,7 @@
     if (section == 0) {
         return 1; // vendor
     } else if (section == 1) {
-        return 2; // contents (bottles, invoice)
+        return 2; // contents (bottles, invoices)
     } else if (section == 2) {
         return 2; // status section: orderSent, orderArrived
     } else { // date picker
@@ -121,10 +121,10 @@
         if (indexPath.row == 0) { // skus
             NSString * price = [_numberFormatter stringFromNumber:[NSNumber numberWithFloat:[Order totalAmountOfOrder:_order]]];
             labelText = [NSString stringWithFormat:@"%d skus totalling %@", _order.ordersByBottle.count, price];
-        } else if (indexPath.row == 1) { // invoice
-            labelText = @"Invoice";
+        } else if (indexPath.row == 1) { // invoices
+            labelText = @"Invoices";
         }
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; // for both the sku and the invoice
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; // for both the sku and the invoices
 
     }
     else if (indexPath.section == 2) { // status section
@@ -173,8 +173,8 @@
         [self performSegueWithIdentifier:@"Show Bottles in Order Segue ID" sender:nil];
     } else if (indexPath.section == 0 & indexPath.row == 0) { // its the vendor, so present address book
         [self alertForPickingManualOrFromAddressBook:@"Pick vendor from address book, or enter manually?"];
-    } else if (indexPath.section == 1 & indexPath.row == 1) { // invoice
-        [self performSegueWithIdentifier:@"Show Invoice Segue ID" sender:nil];
+    } else if (indexPath.section == 1 & indexPath.row == 1) { // invoices
+        [self performSegueWithIdentifier:@"Show Invoices from OrderTVC" sender:nil];
     }
     else {
         return;
