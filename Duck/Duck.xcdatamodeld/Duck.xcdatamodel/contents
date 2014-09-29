@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="13F34" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AlcoholSubType" representedClassName="AlcoholSubType" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="bottles" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Bottle" inverseName="subType" inverseEntity="Bottle" syncable="YES"/>
@@ -58,14 +58,14 @@
         <relationship name="whichOrder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="whichVendor" inverseEntity="Order" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AlcoholSubType" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="AlcoholType" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Bottle" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="InventorySnapshotForBottle" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Invoice" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="InvoicePhoto" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Order" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="OrderForBottle" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Vendor" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AlcoholSubType" positionX="-747" positionY="-1278" width="128" height="90"/>
+        <element name="AlcoholType" positionX="-747" positionY="-1164" width="128" height="75"/>
+        <element name="Bottle" positionX="-758" positionY="-1038" width="128" height="165"/>
+        <element name="InventorySnapshotForBottle" positionX="-819" positionY="-837" width="128" height="90"/>
+        <element name="Invoice" positionX="-216" positionY="-1107" width="128" height="75"/>
+        <element name="InvoicePhoto" positionX="-162" positionY="-987" width="128" height="105"/>
+        <element name="Order" positionX="-297" positionY="-1296" width="128" height="150"/>
+        <element name="OrderForBottle" positionX="-666" positionY="-837" width="128" height="105"/>
+        <element name="Vendor" positionX="-353" positionY="-1107" width="128" height="135"/>
     </elements>
 </model>
