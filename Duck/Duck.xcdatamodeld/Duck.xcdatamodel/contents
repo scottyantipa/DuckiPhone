@@ -25,6 +25,7 @@
         <relationship name="whichBottle" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Bottle" inverseName="inventoryShapshots" inverseEntity="Bottle" syncable="YES"/>
     </entity>
     <entity name="Invoice" representedClassName="Invoice" syncable="YES">
+        <attribute name="dataReceived" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="invoices" inverseEntity="Order" syncable="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvoicePhoto" inverseName="invoice" inverseEntity="InvoicePhoto" syncable="YES"/>
     </entity>
@@ -62,7 +63,7 @@
         <element name="AlcoholType" positionX="-747" positionY="-1164" width="128" height="75"/>
         <element name="Bottle" positionX="-758" positionY="-1038" width="128" height="165"/>
         <element name="InventorySnapshotForBottle" positionX="-819" positionY="-837" width="128" height="90"/>
-        <element name="Invoice" positionX="169" positionY="-1197" width="128" height="73"/>
+        <element name="Invoice" positionX="169" positionY="-1197" width="128" height="90"/>
         <element name="InvoicePhoto" positionX="-162" positionY="-987" width="128" height="105"/>
         <element name="Order" positionX="-288" positionY="-1305" width="108" height="148"/>
         <element name="OrderForBottle" positionX="-666" positionY="-837" width="128" height="105"/>

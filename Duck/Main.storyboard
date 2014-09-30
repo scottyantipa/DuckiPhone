@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="3">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -109,6 +108,45 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="ZP9-Lt-Yri" kind="push" identifier="Show Past Orders Segue ID" id="owh-9l-n9g"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Invoices" id="OfI-pq-Atw">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Y0q-Zb-ajh" style="IBUITableViewCellStyleDefault" id="FIx-MG-ZUz">
+                                        <rect key="frame" x="0.0" y="255" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FIx-MG-ZUz" id="bcm-Mo-aFg">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Log New" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y0q-Zb-ajh">
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
+                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="QmZ-Td-jFL" style="IBUITableViewCellStyleDefault" id="Jqq-tc-3Ye">
+                                        <rect key="frame" x="0.0" y="299" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jqq-tc-3Ye" id="Nwq-Uq-EFQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="All Invoices" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QmZ-Td-jFL">
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
+                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Qdd-Rt-UI0" kind="push" identifier="Show All Invoices Segue ID" id="TRA-aS-BIX"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -260,9 +298,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="2y3-6d-7HZ" kind="push" identifier="Show Invoices from OrderTVC" id="Umf-jl-5fZ"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -281,6 +316,7 @@
                     <connections>
                         <segue destination="L8U-UR-1zV" kind="push" identifier="Show Bottles in Order Segue ID" id="EMR-Y4-2zn"/>
                         <segue destination="K1K-8Y-5wK" kind="push" identifier="Show Vendor Contact Info Segue ID" id="Ncl-VD-cSO"/>
+                        <segue destination="2y3-6d-7HZ" kind="push" identifier="Show Invoices from OrderTVC" id="W6W-dy-9c7"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FL4-W3-zM2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -374,16 +410,16 @@
             </objects>
             <point key="canvasLocation" x="1718" y="1295"/>
         </scene>
-        <!--InvoicesTVC-->
+        <!--Invoices-->
         <scene sceneID="Shs-se-Dyx">
             <objects>
-                <tableViewController id="2y3-6d-7HZ" customClass="InvoicesTVC" sceneMemberID="viewController">
+                <tableViewController id="2y3-6d-7HZ" customClass="InvoicesForOrderTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1sm-uS-gud">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="sHA-f2-DX4">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Invoice Reuse ID" id="sHA-f2-DX4">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sHA-f2-DX4" id="hkO-rv-eOw">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -398,13 +434,50 @@
                             <outlet property="delegate" destination="2y3-6d-7HZ" id="aEo-VH-UIf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Yuz-6m-wHa"/>
+                    <navigationItem key="navigationItem" title="Invoices" id="Yuz-6m-wHa">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="zhg-zh-Os2">
+                            <connections>
+                                <action selector="addButtonClicked:" destination="2y3-6d-7HZ" id="v70-08-l2N"/>
+                                <segue destination="U2j-8O-QXu" kind="push" identifier="Show New Invoice" id="1zS-35-j96"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addButton" destination="zhg-zh-Os2" id="uan-9Z-pNN"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7fN-vj-UDI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1472" y="2088"/>
+            <point key="canvasLocation" x="1430" y="2088"/>
         </scene>
-        <!--InvoiceTVC-->
+        <!--InvoicesTVC-->
+        <scene sceneID="o7Q-ZF-Qj7">
+            <objects>
+                <tableViewController id="Qdd-Rt-UI0" customClass="InvoicesTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Axc-tx-g0j">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="All Invoices Cell Reuse ID" id="xzd-jt-c01">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xzd-jt-c01" id="aO8-pY-Pne">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Qdd-Rt-UI0" id="I35-H4-hnZ"/>
+                            <outlet property="delegate" destination="Qdd-Rt-UI0" id="Dd1-Nq-rdS"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="yRQ-if-2SC"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KT9-dm-XAr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="242" y="975"/>
+        </scene>
+        <!--Invoice-->
         <scene sceneID="Mqn-vo-Rf8">
             <objects>
                 <tableViewController id="U2j-8O-QXu" customClass="InvoiceTVC" sceneMemberID="viewController">
@@ -453,7 +526,7 @@
                             <outlet property="delegate" destination="U2j-8O-QXu" id="bJP-7A-heQ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="V1N-Vu-lhR">
+                    <navigationItem key="navigationItem" title="Invoice" id="V1N-Vu-lhR">
                         <barButtonItem key="rightBarButtonItem" title="Add Photo" id="ce2-BB-qfS">
                             <connections>
                                 <action selector="didSelectAddPhoto:" destination="U2j-8O-QXu" id="Uz9-VS-bqZ"/>
@@ -469,7 +542,7 @@
             </objects>
             <point key="canvasLocation" x="2022" y="2088"/>
         </scene>
-        <!--Invoice PhotoVC-->
+        <!--Invoice Photo-->
         <scene sceneID="FLq-o9-TEX">
             <objects>
                 <viewController id="esj-1X-JWp" customClass="InvoicePhotoVC" sceneMemberID="viewController">
@@ -490,7 +563,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="8M4-dq-oz7"/>
+                    <navigationItem key="navigationItem" title="Invoice Photo" id="8M4-dq-oz7"/>
                     <connections>
                         <outlet property="invoiceImageView" destination="Voz-hV-TPi" id="HGv-vM-8Wg"/>
                     </connections>
@@ -931,8 +1004,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="MLT-4y-wai"/>
         <segue reference="HEK-hq-4ib"/>
+        <segue reference="MLT-4y-wai"/>
         <segue reference="gCl-OI-uA5"/>
+        <segue reference="mnQ-ZZ-RVg"/>
     </inferredMetricsTieBreakers>
 </document>
