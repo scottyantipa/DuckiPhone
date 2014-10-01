@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "OrderForBottle+Create.h"
 #import "Bottle+Create.h"
+#import "EditPriceAndQuantityDelegate.h"
 
-@interface EditOrderForBottleDetailsViewController : UIViewController
-@property (strong, nonatomic) OrderForBottle * orderForBottle;
+@interface EditPriceAndQtyVC : UIViewController
 @property (strong, nonatomic) IBOutlet UITextField * textFieldForUnits;
 @property (strong, nonatomic) IBOutlet UITextField * textFieldForPrice;
 @property (nonatomic,strong) NSManagedObjectContext * managedObjectContext;
+@property (strong, nonatomic) id managedObject;
+@property (weak) id <EditPriceAndQuantityDelegate> delegate;
 @end

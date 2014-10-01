@@ -11,8 +11,10 @@
 #import "Vendor.h"
 #import "ToggleBottlesDelegate.h"
 #import "ToggleBottlesTableViewController.h"
+#import "EditPriceAndQuantityDelegate.h"
+#import "EditPriceAndQtyVC.h"
 
-@interface BottlesInOrderTableViewController : UITableViewController <ToggleBottlesDelegate>
+@interface BottlesInOrderTableViewController : UITableViewController <ToggleBottlesDelegate, EditPriceAndQuantityDelegate>
 @property (strong, nonatomic) Order * order;
 @property (nonatomic, strong) NSArray * sortedBottlesInOrder;
 @property (nonatomic,strong) NSManagedObjectContext *managedObjectContext;

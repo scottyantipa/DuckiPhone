@@ -11,8 +11,9 @@
 #import "ToggleBottlesDelegate.h"
 #import "ToggleBottlesTableViewController.h"
 #import "InvoiceForBottle.h"
+#import "EditPriceAndQtyVC.h"
 
-@interface BottlesInInvoiceTVC : UITableViewController <ToggleBottlesDelegate>
+@interface BottlesInInvoiceTVC : UITableViewController <ToggleBottlesDelegate, EditPriceAndQuantityDelegate>
 
 @property (strong, nonatomic) Invoice * invoice;
 @property (strong, nonatomic) NSArray * sortedInvoicesByBottle;

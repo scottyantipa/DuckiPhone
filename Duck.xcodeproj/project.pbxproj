@@ -46,7 +46,7 @@
 		E05014871814AB7C00A06560 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E05014851814AB7C00A06560 /* InfoPlist.strings */; };
 		E05014891814AB7C00A06560 /* DuckTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014881814AB7C00A06560 /* DuckTests.m */; };
 		E05014B91814AC9900A06560 /* EditManagedObjCountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E050149A1814AC9900A06560 /* EditManagedObjCountViewController.m */; };
-		E05014BA1814AC9900A06560 /* EditOrderForBottleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E050149D1814AC9900A06560 /* EditOrderForBottleDetailsViewController.m */; };
+		E05014BA1814AC9900A06560 /* EditPriceAndQtyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E050149D1814AC9900A06560 /* EditPriceAndQtyVC.m */; };
 		E05014BB1814AC9900A06560 /* EditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E050149F1814AC9900A06560 /* EditTextViewController.m */; };
 		E05014BC1814AC9900A06560 /* HomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A11814AC9900A06560 /* HomeTableViewController.m */; };
 		E05014BE1814AC9900A06560 /* InventorySnapshotForBottle+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A51814AC9900A06560 /* InventorySnapshotForBottle+Create.m */; };
@@ -159,6 +159,7 @@
 		E0309B4919DB84A800F00CA3 /* BottlesInInvoiceTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottlesInInvoiceTVC.m; sourceTree = "<group>"; };
 		E0309B4B19DB87C000F00CA3 /* Invoice+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Invoice+Create.h"; sourceTree = "<group>"; };
 		E0309B4C19DB87C000F00CA3 /* Invoice+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Invoice+Create.m"; sourceTree = "<group>"; };
+		E0309B4E19DBBEB800F00CA3 /* EditPriceAndQuantityDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPriceAndQuantityDelegate.h; sourceTree = "<group>"; };
 		E03144371841A1530047FA6F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		E03144381841A1530047FA6F /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		E031445418431AD20047FA6F /* Vendor+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Vendor+Create.h"; sourceTree = "<group>"; };
@@ -182,7 +183,7 @@
 		E05014991814AC9900A06560 /* EditManagedObjCountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditManagedObjCountViewController.h; sourceTree = "<group>"; };
 		E050149A1814AC9900A06560 /* EditManagedObjCountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditManagedObjCountViewController.m; sourceTree = "<group>"; };
 		E050149B1814AC9900A06560 /* EditTextViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTextViewDelegate.h; sourceTree = "<group>"; };
-		E050149D1814AC9900A06560 /* EditOrderForBottleDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditOrderForBottleDetailsViewController.m; sourceTree = "<group>"; };
+		E050149D1814AC9900A06560 /* EditPriceAndQtyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPriceAndQtyVC.m; sourceTree = "<group>"; };
 		E050149E1814AC9900A06560 /* EditTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTextViewController.h; sourceTree = "<group>"; };
 		E050149F1814AC9900A06560 /* EditTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTextViewController.m; sourceTree = "<group>"; };
 		E05014A01814AC9900A06560 /* HomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewController.h; sourceTree = "<group>"; };
@@ -250,7 +251,7 @@
 		E050151D1814B0AD00A06560 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		E050151F1814B0B700A06560 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E05015211814B19400A06560 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
-		E05015231814B95B00A06560 /* EditOrderForBottleDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditOrderForBottleDetailsViewController.h; sourceTree = "<group>"; };
+		E05015231814B95B00A06560 /* EditPriceAndQtyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPriceAndQtyVC.h; sourceTree = "<group>"; };
 		E05C1AAC1814BED900FE57EF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E06129451917E34C004CF026 /* Tesseract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tesseract.h; sourceTree = "<group>"; };
 		E06129461917E34C004CF026 /* Tesseract.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Tesseract.mm; sourceTree = "<group>"; };
@@ -873,6 +874,7 @@
 			isa = PBXGroup;
 			children = (
 				E05014981814AC9900A06560 /* EditCountDelegate.h */,
+				E0309B4E19DBBEB800F00CA3 /* EditPriceAndQuantityDelegate.h */,
 				E0D5854618402FD10067F3AB /* ToggleBottlesDelegate.h */,
 				E050149B1814AC9900A06560 /* EditTextViewDelegate.h */,
 				E05014B31814AC9900A06560 /* SubTypeSelectorDelegate.h */,
@@ -1314,8 +1316,8 @@
 				E050150E1814AED400A06560 /* BottlesInOrderTableViewController.m */,
 				E05014A61814AC9900A06560 /* OrderTableViewController.h */,
 				E05014A71814AC9900A06560 /* OrderTableViewController.m */,
-				E05015231814B95B00A06560 /* EditOrderForBottleDetailsViewController.h */,
-				E050149D1814AC9900A06560 /* EditOrderForBottleDetailsViewController.m */,
+				E05015231814B95B00A06560 /* EditPriceAndQtyVC.h */,
+				E050149D1814AC9900A06560 /* EditPriceAndQtyVC.m */,
 				E08272891819ACE3007A2977 /* PastOrdersTableViewController.h */,
 				E082728A1819ACE3007A2977 /* PastOrdersTableViewController.m */,
 				E00ABBD91915500D00D6BF17 /* InvoiceTVC.h */,
@@ -1485,7 +1487,7 @@
 				E05015131814AED400A06560 /* AlcoholType+Create.m in Sources */,
 				E0309B0519DB427000F00CA3 /* Order.m in Sources */,
 				E05015171814AED400A06560 /* BaseCoreDataTableViewController.m in Sources */,
-				E05014BA1814AC9900A06560 /* EditOrderForBottleDetailsViewController.m in Sources */,
+				E05014BA1814AC9900A06560 /* EditPriceAndQtyVC.m in Sources */,
 				E05015151814AED400A06560 /* AllSubTypesTableViewController.m in Sources */,
 				E050151A1814AED400A06560 /* BottleDetailTableViewController.m in Sources */,
 				E05014C51814AC9900A06560 /* PickBottleTableViewController.m in Sources */,

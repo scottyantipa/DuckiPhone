@@ -9,7 +9,7 @@
 #import "BottlesInOrderTableViewController.h"
 #import "PickBottleTableViewController.h"
 #import "Bottle+Create.h"
-#import "EditOrderForBottleDetailsViewController.h"
+#import "EditPriceAndQtyVC.h"
 
 @interface BottlesInOrderTableViewController ()
 @end
@@ -87,8 +87,11 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         NSArray * sortedBottleOrders = [Order getSortedBottlesInOrder:_order];
         OrderForBottle * orderForBottle = [sortedBottleOrders objectAtIndex:indexPath.row];
-        [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
-        [segue.destinationViewController setOrderForBottle:orderForBottle];
+        
+        EditPriceAndQtyVC * vc = segue.destinationViewController;
+        [vc setManagedObjectContext:_managedObjectContext];
+        [vc setManagedObject:orderForBottle];
+        vc.delegate = self;
     }
 }
 
@@ -114,6 +117,31 @@
         }
     }
     return bottleIsSelected;
+}
+
+#pragma Delegate methods for edit price and quantity
+
+-(void)didFinishEditingPrice:(NSNumber *)price forObject:(id)obj {
+    OrderForBottle * orderForBottle = (OrderForBottle *)obj;
+    orderForBottle.unitPrice = price;
+}
+-(NSNumber *)priceOfObj:(id)obj {
+    OrderForBottle * orderForBottle = (OrderForBottle *)obj;
+    return orderForBottle.unitPrice;
+}
+
+-(void)didFinishEditingQuantity:(NSNumber *)qty forObject:(id)obj {
+    OrderForBottle * orderForBottle = (OrderForBottle *)obj;
+    orderForBottle.quantity = qty;
+}
+-(NSNumber *)quantityOfObj:(id)obj {
+    OrderForBottle * orderForBottle = (OrderForBottle *)obj;
+    return orderForBottle.quantity;
+}
+
+-(NSString *)nameOfObject:(id)obj {
+    OrderForBottle * orderForBottle = (OrderForBottle *)obj;
+    return orderForBottle.whichBottle.name;
 }
 
 @end

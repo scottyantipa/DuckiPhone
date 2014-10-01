@@ -556,11 +556,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Invoices By Bottle CellID" id="oUl-Fp-NZL">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Invoices By Bottle CellID" textLabel="wrP-Rl-Afd" detailTextLabel="Dqb-tk-kDj" style="IBUITableViewCellStyleSubtitle" id="oUl-Fp-NZL">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oUl-Fp-NZL" id="STR-Bw-LxM">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wrP-Rl-Afd">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dqb-tk-kDj">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="1nc-UA-Vn4" kind="push" identifier="Edit Price And Quantity of Bottle Invoice" id="3gL-ZU-c1M"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -663,10 +680,10 @@
             </objects>
             <point key="canvasLocation" x="1718" y="608"/>
         </scene>
-        <!--Edit Order For Bottle Details View Controller-->
+        <!--Edit Price And QtyVC-->
         <scene sceneID="VKp-Ct-78L">
             <objects>
-                <viewController id="1nc-UA-Vn4" customClass="EditOrderForBottleDetailsViewController" sceneMemberID="viewController">
+                <viewController id="1nc-UA-Vn4" customClass="EditPriceAndQtyVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MVM-7G-Plh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -714,7 +731,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAi-98-gal" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2306" y="623"/>
+            <point key="canvasLocation" x="3146" y="1467"/>
         </scene>
         <!--Bottles For Sub Type Table View Controller-->
         <scene sceneID="QwF-YM-MRo">
@@ -1043,8 +1060,9 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="MLT-4y-wai"/>
-        <segue reference="mol-F4-zxD"/>
-        <segue reference="eb0-v6-zfo"/>
         <segue reference="HEK-hq-4ib"/>
+        <segue reference="mol-F4-zxD"/>
+        <segue reference="gCl-OI-uA5"/>
+        <segue reference="Pga-Po-JW7"/>
     </inferredMetricsTieBreakers>
 </document>

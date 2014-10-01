@@ -73,6 +73,13 @@
         ToggleBottlesTableViewController * tvc = [segue destinationViewController];
         tvc.delegate = self;
         tvc.managedObjectContext = _managedObjectContext;
+    } else if ([segue.identifier isEqualToString:@"Edit Price And Quantity of Bottle Invoice"]){
+        NSIndexPath * indexPath = [self.tableView indexPathForCell:sender];
+        InvoiceForBottle * invoice = [_sortedInvoicesByBottle objectAtIndex:indexPath.row];
+        EditPriceAndQtyVC * vc = segue.destinationViewController;
+        [vc setManagedObjectContext:_managedObjectContext];
+        [vc setManagedObject:invoice];
+        vc.delegate = self;
     }
 }
 
@@ -96,5 +103,31 @@
     }
     return bottleIsSelected;
 }
+
+#pragma Delegate methods for edit price and quantity
+
+-(void)didFinishEditingPrice:(NSNumber *)price forObject:(id)obj {
+    InvoiceForBottle * invoiceForBottle = (InvoiceForBottle *)obj;
+    invoiceForBottle.unitPrice = price;
+}
+-(NSNumber *)priceOfObj:(id)obj {
+    InvoiceForBottle * invoiceForBottle = (InvoiceForBottle *)obj;
+    return invoiceForBottle.unitPrice;
+}
+
+-(void)didFinishEditingQuantity:(NSNumber *)qty forObject:(id)obj {
+    InvoiceForBottle * invoiceForBottle = (InvoiceForBottle *)obj;
+    invoiceForBottle.quantity = qty;
+}
+-(NSNumber *)quantityOfObj:(id)obj {
+    InvoiceForBottle * invoiceForBottle = (InvoiceForBottle *)obj;
+    return invoiceForBottle.quantity;
+}
+
+-(NSString *)nameOfObject:(id)obj {
+    InvoiceForBottle * invoiceForBottle = (InvoiceForBottle *)obj;
+    return invoiceForBottle.bottle.name;
+}
+
 
 @end
