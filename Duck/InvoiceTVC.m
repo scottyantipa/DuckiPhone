@@ -32,6 +32,7 @@
 {
     [super viewWillAppear:YES];
     self.title = @"Invoice";
+    [[self tableView] reloadData];
 }
 
 -(NSArray *)sortedInvoicePhotos {
@@ -58,9 +59,9 @@
 {
     if (section == 0) { // the photos
         return [[self sortedInvoicePhotos] count];
-    } else if (section == 1) { // vendor
+    } else if (section == 1) { // bottles
         return 1;
-    } else  if (section == 2){ // bottles in invoice
+    } else  if (section == 2){ // vendor
         return 1;
     } else if (section == 3){ // order
         return 1;
@@ -141,6 +142,8 @@
     if (indexPath.section == 0) {
         UITableViewCell * cell = [[self tableView] cellForRowAtIndexPath:indexPath];
         [self performSegueWithIdentifier:@"Show Invoice Photo Segue ID" sender:cell];
+    } else if (indexPath.section == 1) {
+        [self performSegueWithIdentifier:@"Show Bottles In Invoice" sender:nil];
     }
 }
 
@@ -162,7 +165,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) { // delete the invoice photo
         InvoicePhoto * invoicePhoto = [[self sortedInvoicePhotos] objectAtIndex:indexPath.row];
         [self deleteImageForName:invoicePhoto.documentName];    
-        // NOTE: This should be abstracted in an InvoicePhoto cateogry or somethingj
+        // NOTE: This should be abstracted in an InvoicePhoto category
         [_managedObjectContext deleteObject:invoicePhoto];
 
         NSError *error;
@@ -192,6 +195,9 @@
         InvoicePhoto * invoicePhoto = [[self sortedInvoicePhotos] objectAtIndex:indexPath.row];
         UIImage * invoiceImage = [self loadImage:invoicePhoto.documentName];
         [[segue destinationViewController] setInvoiceImage:invoiceImage];
+    } else if ([segue.identifier isEqualToString:@"Show Bottles In Invoice"]) {
+        [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
+        [segue.destinationViewController setInvoice:_invoice];
     }
 }
 

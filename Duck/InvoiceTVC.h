@@ -14,6 +14,7 @@
 #import "Tesseract.h"
 #import "InvoicePhotoVC.h"
 #import "Vendor+Create.h"
+#import "BottlesInInvoiceTVC.h"
 
 @interface InvoiceTVC : UITableViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) Invoice * invoice;

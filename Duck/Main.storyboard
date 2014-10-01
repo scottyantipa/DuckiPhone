@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="3">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -448,7 +449,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7fN-vj-UDI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1430" y="2088"/>
+            <point key="canvasLocation" x="1370" y="1980"/>
         </scene>
         <!--InvoicesTVC-->
         <scene sceneID="o7Q-ZF-Qj7">
@@ -478,7 +479,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KT9-dm-XAr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1417" y="2783"/>
+            <point key="canvasLocation" x="1370" y="2933"/>
         </scene>
         <!--Invoice-->
         <scene sceneID="Mqn-vo-Rf8">
@@ -539,11 +540,45 @@
                     <connections>
                         <outlet property="addPhotoBarButton" destination="ce2-BB-qfS" id="0qG-sy-zsg"/>
                         <segue destination="esj-1X-JWp" kind="push" identifier="Show Invoice Photo Segue ID" id="GoC-ZM-ggU"/>
+                        <segue destination="CPO-EV-gMd" kind="push" identifier="Show Bottles In Invoice" id="UBW-U9-nqO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8K-rs-92b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2022" y="2088"/>
+        </scene>
+        <!--Bottles In InvoiceTVC-->
+        <scene sceneID="Mg6-7x-vgQ">
+            <objects>
+                <tableViewController id="CPO-EV-gMd" customClass="BottlesInInvoiceTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6OR-01-q44">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Invoices By Bottle CellID" id="oUl-Fp-NZL">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oUl-Fp-NZL" id="STR-Bw-LxM">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="CPO-EV-gMd" id="wX2-TT-VzI"/>
+                            <outlet property="delegate" destination="CPO-EV-gMd" id="n8F-Gr-P9H"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="hKE-aS-lBL">
+                        <barButtonItem key="rightBarButtonItem" title="Add/Remove" id="ta6-JV-71l">
+                            <connections>
+                                <segue destination="xCa-3a-yKM" kind="push" identifier="Pick Bottles For Invoice" id="eb0-v6-zfo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CPX-hV-zti" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2522" y="2409"/>
         </scene>
         <!--Invoice Photo-->
         <scene sceneID="FLq-o9-TEX">
@@ -573,7 +608,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pMZ-3c-BOZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2464" y="2088"/>
+            <point key="canvasLocation" x="2522" y="1688"/>
         </scene>
         <!--Bottles In Order Table View Controller-->
         <scene sceneID="s41-kz-oE7">
@@ -1009,7 +1044,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="MLT-4y-wai"/>
         <segue reference="mol-F4-zxD"/>
-        <segue reference="gCl-OI-uA5"/>
+        <segue reference="eb0-v6-zfo"/>
         <segue reference="HEK-hq-4ib"/>
     </inferredMetricsTieBreakers>
 </document>
