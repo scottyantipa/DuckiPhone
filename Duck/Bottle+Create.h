@@ -10,7 +10,7 @@
 #import "OrderForBottle+Create.h"
 #import "AlcoholSubType+Create.h"
 #import "InventorySnapshotForBottle+Create.h"
-#import "Order+Create.h"
+#import "Order.h"
 #import "NSString+Score.h"
 #import "InventorySnapshotForBottle+Create.h"
 

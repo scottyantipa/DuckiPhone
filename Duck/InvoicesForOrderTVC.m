@@ -49,6 +49,7 @@
         invoice.order = _order;
     }
     [segue.destinationViewController setInvoice:invoice];
+    [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {

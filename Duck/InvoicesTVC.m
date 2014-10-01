@@ -25,6 +25,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"Show Invoice From All Invoices"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        Invoice * invoice = [_fetchedResultsController objectAtIndexPath:indexPath];
+        [segue.destinationViewController setInvoice:invoice];
+        [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 -(NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
@@ -32,7 +45,7 @@
     NSFetchRequest * fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Invoice"];
     [fetchRequest setFetchBatchSize:20];
     
-    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dataReceived" ascending:NO];
+    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateReceived" ascending:NO];
     
     NSArray * sortDescriptors = @[sortDescriptor];
     [fetchRequest setSortDescriptors:sortDescriptors];

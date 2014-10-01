@@ -459,11 +459,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="All Invoices Cell Reuse ID" id="xzd-jt-c01">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="All Invoices Cell Reuse ID" id="xzd-jt-c01">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xzd-jt-c01" id="aO8-pY-Pne">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="U2j-8O-QXu" kind="push" identifier="Show Invoice From All Invoices" id="mol-F4-zxD"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -475,7 +478,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KT9-dm-XAr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="242" y="975"/>
+            <point key="canvasLocation" x="1417" y="2783"/>
         </scene>
         <!--Invoice-->
         <scene sceneID="Mqn-vo-Rf8">
@@ -1004,9 +1007,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="HEK-hq-4ib"/>
         <segue reference="MLT-4y-wai"/>
+        <segue reference="mol-F4-zxD"/>
         <segue reference="gCl-OI-uA5"/>
-        <segue reference="mnQ-ZZ-RVg"/>
+        <segue reference="HEK-hq-4ib"/>
     </inferredMetricsTieBreakers>
 </document>

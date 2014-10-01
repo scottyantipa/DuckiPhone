@@ -8,6 +8,7 @@
 
 #import "BaseCoreDataTableViewController.h"
 #import "Invoice.h"
+#import "InvoiceTVC.h"
 
 @interface InvoicesTVC : BaseCoreDataTableViewController
 

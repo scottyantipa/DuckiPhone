@@ -13,6 +13,7 @@
 #import "Order+Create.h"
 #import "Tesseract.h"
 #import "InvoicePhotoVC.h"
+#import "Vendor+Create.h"
 
 @interface InvoiceTVC : UITableViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) Invoice * invoice;
@@ -20,4 +21,6 @@
 @property (weak, nonatomic) NSManagedObjectContext* managedObjectContext;
 @property (weak, nonatomic) NSArray * sortedBottlesInOrder;
 @property (weak, nonatomic) NSArray * sortedInvoicePhotos;
+@property (nonatomic, strong) NSNumberFormatter * numberFormatter;
+@property (nonatomic, strong) UIDatePicker * datePicker;
 @end

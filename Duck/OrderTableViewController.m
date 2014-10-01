@@ -36,7 +36,6 @@
         _order = [Order newOrderForDate:[NSDate date] inManagedObjectContext:_managedObjectContext];
     }
     [self setHeader];
-
 }
 
 -(void)reloadAll {
