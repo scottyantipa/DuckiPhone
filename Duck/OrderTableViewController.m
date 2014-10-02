@@ -13,12 +13,11 @@
 @end
 
 @implementation OrderTableViewController
-@synthesize managedObjectContext = _managedObjectContext;
 @synthesize order = _order;
 @synthesize datePicker = _datePicker;
 @synthesize numberFormatter = _numberFormatter;
 @synthesize addressBook = _addressBook;
-
+@synthesize managedObjectContext = _managedObjectContext;
 
 // Lazy instantiate an order if there isn't one.  If there is an order, add affordance
 // to Re-order from the vendor.  Also intialize class vars -- order, datePicker
@@ -27,11 +26,10 @@
     [super viewDidLoad];
     _numberFormatter = [[NSNumberFormatter alloc] init];
     [_numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-
+    
     _datePicker = [[UIDatePicker alloc] init];
     
     _addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
-    
     if (!_order) { // this is a new order to display
         _order = [Order newOrderForDate:[NSDate date] inManagedObjectContext:_managedObjectContext];
     }
@@ -252,34 +250,20 @@
     _order.date = _datePicker.date;
 }
 
+
+-(void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person {
+    Vendor * vendor = [Vendor newVendorForRef:person inContext:_managedObjectContext];
+    _order.whichVendor = vendor;
+    [self.tableView reloadData];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 // Address picker
 -(void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person {
-    Vendor * vendor = [Vendor newVendorForRef:person inContext:_managedObjectContext];
-    _order.whichVendor = vendor;
-
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [self.tableView reloadData];
-    return NO;
-}
-
--(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-    return NO;
-}
-
-// Alert View
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alertView.tag == 1) { // asking user to select how to pick their vendor
-        if (buttonIndex == 0) { // "Address Book"
-            [self showPeoplePicker];
-        } else if (buttonIndex == 1) { // "Manually Enter"
-            [self performSegueWithIdentifier:@"Show Vendor Contact Info Segue ID" sender:nil];
-        }
-    }
-}
 
 // Switch NOTE: It would be nice to abstract this data logic into a data object like Order
 -(void)switchChanged:(id)sender {
@@ -297,6 +281,19 @@
     [self setHeader];
 }
 
+
+#pragma Alert View Delegate methods
+// Alert View
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 1) { // asking user to select how to pick their vendor
+        if (buttonIndex == 0) { // "Address Book"
+            [self showPeoplePicker];
+        } else if (buttonIndex == 1) { // "Manually Enter"
+            [self performSegueWithIdentifier:@"Show Vendor Contact Info Segue ID" sender:nil];
+        }
+    }
+}
+
 #pragma utils
 
 -(void)alertForPickingManualOrFromAddressBook:(NSString *)message {
@@ -305,10 +302,11 @@
     [alert show];
 }
 
-// Abstracted this because used in multiple places
 -(void)showPeoplePicker {
     ABPeoplePickerNavigationController * peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     peoplePicker.peoplePickerDelegate = self;
     [self presentViewController:peoplePicker animated:YES completion:nil];
 }
+
+
 @end

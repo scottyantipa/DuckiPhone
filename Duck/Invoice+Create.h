@@ -10,7 +10,9 @@
 #import "Bottle+Create.h"
 #import "Invoice.h"
 #import "InvoiceForBottle.h"
+#import "Vendor+Create.h"
 
 @interface Invoice (Create)
 +(void)toggleBottle:(Bottle *)bottle inInvoice:(Invoice *)invoice inContext:(NSManagedObjectContext *)context;
++(Invoice *)newBlankInvoiceInContext:(NSManagedObjectContext *)context;
 @end

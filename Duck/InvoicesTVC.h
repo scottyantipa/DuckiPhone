@@ -9,6 +9,7 @@
 #import "BaseCoreDataTableViewController.h"
 #import "Invoice.h"
 #import "InvoiceTVC.h"
+#import "Vendor+Create.h"
 
 @interface InvoicesTVC : BaseCoreDataTableViewController
 

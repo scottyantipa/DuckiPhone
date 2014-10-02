@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="3">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -71,27 +70,8 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Orders" id="IdI-Kw-zZb">
+                            <tableViewSection headerTitle="" id="IdI-Kw-zZb">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="9l0-Rm-sGh" style="IBUITableViewCellStyleDefault" id="vLU-br-SJe">
-                                        <rect key="frame" x="0.0" y="255" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vLU-br-SJe" id="sJZ-nQ-rIR">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="New Order to Vendor" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9l0-Rm-sGh">
-                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
-                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="fpX-Zj-udA" kind="push" identifier="New Order Segue ID" id="MLT-4y-wai"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="rn3-XV-bVf" style="IBUITableViewCellStyleDefault" id="XFv-GP-5wP">
                                         <rect key="frame" x="0.0" y="299" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -99,7 +79,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Past Orders" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rn3-XV-bVf">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Orders" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rn3-XV-bVf">
                                                     <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -113,24 +93,8 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Invoices" id="OfI-pq-Atw">
+                            <tableViewSection headerTitle="" id="OfI-pq-Atw">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Y0q-Zb-ajh" style="IBUITableViewCellStyleDefault" id="FIx-MG-ZUz">
-                                        <rect key="frame" x="0.0" y="255" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FIx-MG-ZUz" id="bcm-Mo-aFg">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Log New" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y0q-Zb-ajh">
-                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
-                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="QmZ-Td-jFL" style="IBUITableViewCellStyleDefault" id="Jqq-tc-3Ye">
                                         <rect key="frame" x="0.0" y="299" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -138,7 +102,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="All Invoices" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QmZ-Td-jFL">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Invoices" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QmZ-Td-jFL">
                                                     <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -261,7 +225,13 @@
                             <outlet property="delegate" destination="ZP9-Lt-Yri" id="4fF-ry-Pno"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="g90-uR-LTm"/>
+                    <navigationItem key="navigationItem" id="g90-uR-LTm">
+                        <barButtonItem key="rightBarButtonItem" title="New Order" id="efK-n8-9k9">
+                            <connections>
+                                <segue destination="fpX-Zj-udA" kind="push" identifier="Show New Order" id="x1p-NG-uUx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXQ-Sl-nJD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -436,7 +406,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Invoices" id="Yuz-6m-wHa">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="zhg-zh-Os2">
+                        <barButtonItem key="rightBarButtonItem" title="New Invoice" id="zhg-zh-Os2">
                             <connections>
                                 <action selector="addButtonClicked:" destination="2y3-6d-7HZ" id="v70-08-l2N"/>
                                 <segue destination="U2j-8O-QXu" kind="push" identifier="Show New Invoice" id="1zS-35-j96"/>
@@ -475,7 +445,13 @@
                             <outlet property="delegate" destination="Qdd-Rt-UI0" id="Dd1-Nq-rdS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="yRQ-if-2SC"/>
+                    <navigationItem key="navigationItem" id="yRQ-if-2SC">
+                        <barButtonItem key="rightBarButtonItem" title="New Invoice" id="aGp-3U-TMl">
+                            <connections>
+                                <segue destination="U2j-8O-QXu" kind="push" identifier="Show New Invoice" id="UnU-qi-g1h"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KT9-dm-XAr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -541,6 +517,7 @@
                         <outlet property="addPhotoBarButton" destination="ce2-BB-qfS" id="0qG-sy-zsg"/>
                         <segue destination="esj-1X-JWp" kind="push" identifier="Show Invoice Photo Segue ID" id="GoC-ZM-ggU"/>
                         <segue destination="CPO-EV-gMd" kind="push" identifier="Show Bottles In Invoice" id="UBW-U9-nqO"/>
+                        <segue destination="K1K-8Y-5wK" kind="push" identifier="Show Vendor Contact Info Segue ID" id="scM-9b-LEy"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8K-rs-92b" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1059,9 +1036,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="MLT-4y-wai"/>
+        <segue reference="x1p-NG-uUx"/>
         <segue reference="HEK-hq-4ib"/>
-        <segue reference="mol-F4-zxD"/>
+        <segue reference="UnU-qi-g1h"/>
+        <segue reference="scM-9b-LEy"/>
         <segue reference="gCl-OI-uA5"/>
         <segue reference="Pga-Po-JW7"/>
     </inferredMetricsTieBreakers>

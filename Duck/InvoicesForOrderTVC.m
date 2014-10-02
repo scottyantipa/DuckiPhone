@@ -45,7 +45,7 @@
         invoice = [_invoicesArray objectAtIndex:indexPath.row];
 
     } else if ([segue.identifier isEqualToString:@"Show New Invoice"]) {
-        invoice = [NSEntityDescription insertNewObjectForEntityForName:@"Invoice" inManagedObjectContext:_managedObjectContext];
+        invoice = [Invoice newBlankInvoiceInContext:_managedObjectContext];
         invoice.order = _order;
     }
     [segue.destinationViewController setInvoice:invoice];
@@ -54,8 +54,6 @@
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
-
 
 @end

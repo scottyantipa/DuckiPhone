@@ -144,6 +144,8 @@
         [self performSegueWithIdentifier:@"Show Invoice Photo Segue ID" sender:cell];
     } else if (indexPath.section == 1) {
         [self performSegueWithIdentifier:@"Show Bottles In Invoice" sender:nil];
+    } else if (indexPath.section == 2) {
+        [self alertForPickingManualOrFromAddressBook:@"Pick vendor from address book, or enter manually?"];
     }
 }
 
@@ -198,6 +200,8 @@
     } else if ([segue.identifier isEqualToString:@"Show Bottles In Invoice"]) {
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
         [segue.destinationViewController setInvoice:_invoice];
+    } else if ([segue.identifier isEqualToString:@"Show Vendor Contact Info Segue ID"]) {
+        [segue.destinationViewController setVendor:_invoice.vendor];
     }
 }
 
@@ -286,6 +290,50 @@
 
 }
 
-#pragma Image Picker Delegate
+//
+// NOTE most of the below is repeated in OrderTVC
+//
+
+
+-(void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person {
+    Vendor * vendor = [Vendor newVendorForRef:person inContext:_managedObjectContext];
+    _invoice.vendor = vendor;
+    [self.tableView reloadData];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+// Address picker
+-(void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma Alert View Delegate methods
+// Alert View
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 1) { // asking user to select how to pick their vendor
+        if (buttonIndex == 0) { // "Address Book"
+            [self showPeoplePicker];
+        } else if (buttonIndex == 1) { // "Manually Enter"
+            [self performSegueWithIdentifier:@"Show Vendor Contact Info Segue ID" sender:nil];
+        }
+    }
+}
+
+#pragma utils
+
+-(void)alertForPickingManualOrFromAddressBook:(NSString *)message {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:message message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Address Book", @"Manually", nil];
+    alert.tag = 1;
+    [alert show];
+}
+
+-(void)showPeoplePicker {
+    ABPeoplePickerNavigationController * peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
+    peoplePicker.peoplePickerDelegate = self;
+    [self presentViewController:peoplePicker animated:YES completion:nil];
+}
+
 
 @end

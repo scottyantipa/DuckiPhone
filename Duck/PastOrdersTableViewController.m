@@ -86,11 +86,15 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    Order * order = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    OrderTableViewController * tvc = [segue destinationViewController];
-    tvc.order = order;
-    tvc.managedObjectContext = _managedObjectContext;
+    OrderTableViewController * tvc = segue.destinationViewController;
+    if ([segue.identifier isEqualToString:@"Show New Order"]) {
+        tvc.order = [Order newOrderForDate:[NSDate date] inManagedObjectContext:_managedObjectContext];
+    } else {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        Order * order = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        tvc.order = order;
+    }
+    [tvc setManagedObjectContext:_managedObjectContext];
 }
 
 @end

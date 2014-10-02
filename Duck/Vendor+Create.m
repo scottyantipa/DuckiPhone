@@ -11,6 +11,7 @@
 @implementation Vendor (Create)
 +(Vendor *)newVendorInContext:(NSManagedObjectContext *)context {
     Vendor * vendor = [NSEntityDescription insertNewObjectForEntityForName:@"Vendor" inManagedObjectContext:context];
+    [Vendor setDefaultValues:vendor];
     NSError *error;
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -18,10 +19,10 @@
     return vendor;
 }
 +(NSString *)fullNameOfVendor:(Vendor *)vendor {
-    if ((vendor.firstName) && (vendor.lastName)) {
-        return [NSString stringWithFormat:@"%@ %@", vendor.firstName, vendor.lastName];
+    if (([vendor.firstName isEqualToString:@""]) && ([vendor.lastName isEqualToString:@""])) {
+        return @"Enter Name";
     } else {
-        return NO;
+        return [NSString stringWithFormat:@"%@ %@", vendor.firstName, vendor.lastName];
     }
 }
 
@@ -30,6 +31,13 @@
     Vendor * vendor = [Vendor newVendorInContext:context];
     vendor.firstName = (__bridge NSString *)ABRecordCopyValue(vendorRef, kABPersonFirstNameProperty);
     vendor.lastName = (__bridge NSString *)ABRecordCopyValue(vendorRef, kABPersonLastNameProperty);
+    
+    if (!vendor.firstName) {
+        vendor.firstName = @"";
+    }
+    if (!vendor.lastName) {
+        vendor.lastName = @"";
+    }
 
     // get the first email and store it
     ABMutableMultiValueRef multi = ABRecordCopyValue(vendorRef, kABPersonEmailProperty);
@@ -43,6 +51,9 @@
         }
     }
     vendor.email = email;
+    if (!vendor.email) {
+        vendor.email = @"";
+    }
     
     // get first phone and store it
     NSString * phone;
@@ -53,6 +64,9 @@
         }
     }
     vendor.phone = phone;
+    if (!vendor.phone) {
+        vendor.phone = @"";
+    }
     return vendor;
 }
 
@@ -133,4 +147,11 @@
     }
 
 }
+
++(void)setDefaultValues:(Vendor *)vendor {
+    vendor.firstName = @"";
+    vendor.lastName = @"";
+    vendor.email = @"";
+}
+
 @end

@@ -14,4 +14,5 @@
 +(NSString *)fullNameOfVendor:(Vendor *)vendor;
 +(Vendor *)newVendorForRef:(ABRecordRef)vendorRef inContext:(NSManagedObjectContext *)context;
 +(BOOL)updateVendorFromAddressBook:(Vendor *)vendor;
++(void)setDefaultValues:(Vendor *)vendor;
 @end

@@ -26,12 +26,16 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    Invoice * invoice;
     if ([segue.identifier isEqualToString:@"Show Invoice From All Invoices"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        Invoice * invoice = [_fetchedResultsController objectAtIndexPath:indexPath];
-        [segue.destinationViewController setInvoice:invoice];
-        [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
+        invoice = [_fetchedResultsController objectAtIndexPath:indexPath];
+    } else if ([segue.identifier isEqualToString:@"Show New Invoice"]) {
+        invoice = [NSEntityDescription insertNewObjectForEntityForName:@"Invoice" inManagedObjectContext:_managedObjectContext];
+        invoice.vendor = [Vendor newVendorInContext:_managedObjectContext];
     }
+    [segue.destinationViewController setInvoice:invoice];
+    [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {

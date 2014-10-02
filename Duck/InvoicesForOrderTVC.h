@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Order+Create.h"
-#import "Invoice.h"
+#import "Invoice+Create.h"
 #import "InvoiceTVC.h"
 
 @interface InvoicesForOrderTVC : UITableViewController
-@property (weak, nonatomic) NSArray * invoicesArray;
+@property (strong, nonatomic) NSArray * invoicesArray;
 @property (weak, nonatomic) Order * order;
 @property (weak, nonatomic) NSManagedObjectContext * managedObjectContext;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;

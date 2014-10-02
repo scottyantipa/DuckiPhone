@@ -34,4 +34,9 @@
     }
 }
 
++(Invoice *)newBlankInvoiceInContext:(NSManagedObjectContext *)context {
+    Invoice * invoice = [NSEntityDescription insertNewObjectForEntityForName:@"Invoice" inManagedObjectContext:context];
+    invoice.vendor = [Vendor newVendorInContext:context];
+    return invoice;
+}
 @end
