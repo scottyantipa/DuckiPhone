@@ -159,4 +159,12 @@
     }
     return duplicateOrder;
 }
+
++(NSString *)description:(Order *)order withNumForatter:(NSNumberFormatter *)formatter {
+    NSString * price = [formatter stringFromNumber:[NSNumber numberWithFloat:[Order totalAmountOfOrder:order]]];
+    NSString * priceSpaced = [@"  " stringByAppendingString:price];
+    NSString * vendorName = [Vendor fullNameOfVendor:order.whichVendor];
+    return [[@"Order to " stringByAppendingString:vendorName] stringByAppendingString:priceSpaced];
+}
+
 @end

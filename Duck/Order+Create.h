@@ -22,4 +22,5 @@
 +(void)toggleBottle:(Bottle *)bottle inOrder:(Order *)order inContext:(NSManagedObjectContext *)context;
 +(NSString *)errorStringForSendingIncompleteOrder:(Order *)order;
 +(Order *)makeDuplicate:(Order *)order inContext:(NSManagedObjectContext *)context;
++(NSString *)description:(Order *)order withNumForatter:(NSNumberFormatter *)formatter;
 @end

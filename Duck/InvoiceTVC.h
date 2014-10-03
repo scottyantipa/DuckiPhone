@@ -16,8 +16,11 @@
 #import "BottlesInInvoiceTVC.h"
 #import "EditVendorInfoViewController.h"
 #import <AddressBookUI/AddressBookUI.h>
+#import "Order+Create.h"
+#import "PickOrderDelegate.h"
+#import "PickOrderTVC.h"
 
-@interface InvoiceTVC : UITableViewController <UIImagePickerControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate>
+@interface InvoiceTVC : UITableViewController <UIImagePickerControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, PickOrderDelegate>
 @property (nonatomic, strong) Invoice * invoice;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addPhotoBarButton;
 @property (weak, nonatomic) NSManagedObjectContext* managedObjectContext;

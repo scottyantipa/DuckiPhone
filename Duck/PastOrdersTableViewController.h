@@ -12,4 +12,5 @@
 
 @interface PastOrdersTableViewController : BaseCoreDataTableViewController
 @property (nonatomic, strong) NSNumberFormatter * numberFormatter;
+@property (nonatomic, strong) NSDateFormatter * dateFormatter;
 @end

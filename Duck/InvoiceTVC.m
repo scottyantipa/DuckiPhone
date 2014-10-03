@@ -91,7 +91,8 @@
         cell.textLabel.text = vendorName ? vendorName : @"No name";
         cell.detailTextLabel.text = vendor.email ? vendor.email : @"No Email";
     } else if (indexPath.section == 3){ // order
-        cell.textLabel.text = @"Linked Order";
+        Order * order = _invoice.order;
+        cell.textLabel.text = order ? [Order description:order withNumForatter:_numberFormatter] : @"Linked Order";
     } else if (indexPath.section == 4){ // date
         _datePicker.date = _invoice.dateReceived ? _invoice.dateReceived : [NSDate date];
         [_datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
@@ -108,6 +109,8 @@
         return @"skus in invoice";
     } else if (section == 2) {
         return @"vendor";
+    } else if (section == 3){ // order
+        return @"order for invoice";
     } else if (section == 4) {
         return @"date received";
     } else {
@@ -146,6 +149,8 @@
         [self performSegueWithIdentifier:@"Show Bottles In Invoice" sender:nil];
     } else if (indexPath.section == 2) {
         [self alertForPickingManualOrFromAddressBook:@"Pick vendor from address book, or enter manually?"];
+    } else if (indexPath.section == 3) {
+        [self performSegueWithIdentifier:@"Show Order Picker" sender:nil];
     }
 }
 
@@ -202,6 +207,11 @@
         [segue.destinationViewController setInvoice:_invoice];
     } else if ([segue.identifier isEqualToString:@"Show Vendor Contact Info Segue ID"]) {
         [segue.destinationViewController setVendor:_invoice.vendor];
+    } else if ([segue.identifier isEqualToString:@"Show Order Picker"]) {
+        PickOrderTVC * tvc = segue.destinationViewController;
+        tvc.delegate = self;
+        [tvc setManagedObjectContext:_managedObjectContext];
+        [tvc setNumberFormatter:_numberFormatter];
     }
 }
 
@@ -335,5 +345,21 @@
     [self presentViewController:peoplePicker animated:YES completion:nil];
 }
 
+#pragma Pick Order delegate methods
+
+-(void)didSelectOrder:(Order *)order {
+    if ([_invoice.order isEqual:order]) {
+        _invoice.order = nil;
+    } else {
+        _invoice.order = order;
+    }
+
+    [self.tableView reloadData];
+    [[self navigationController] popViewControllerAnimated:YES];
+    
+}
+-(BOOL)orderIsSelected:(Order *)order {
+    return [_invoice.order isEqual:order];
+}
 
 @end

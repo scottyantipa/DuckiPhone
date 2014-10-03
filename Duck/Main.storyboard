@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="3">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -518,11 +519,12 @@
                         <segue destination="esj-1X-JWp" kind="push" identifier="Show Invoice Photo Segue ID" id="GoC-ZM-ggU"/>
                         <segue destination="CPO-EV-gMd" kind="push" identifier="Show Bottles In Invoice" id="UBW-U9-nqO"/>
                         <segue destination="K1K-8Y-5wK" kind="push" identifier="Show Vendor Contact Info Segue ID" id="scM-9b-LEy"/>
+                        <segue destination="TO1-6N-POa" kind="push" identifier="Show Order Picker" id="boc-Lf-JQY"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8K-rs-92b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2022" y="2088"/>
+            <point key="canvasLocation" x="2025" y="2210"/>
         </scene>
         <!--Bottles In InvoiceTVC-->
         <scene sceneID="Mg6-7x-vgQ">
@@ -572,7 +574,34 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CPX-hV-zti" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2522" y="2409"/>
+            <point key="canvasLocation" x="2540" y="2056"/>
+        </scene>
+        <!--Pick OrderTVC-->
+        <scene sceneID="oZR-vf-hzB">
+            <objects>
+                <tableViewController id="TO1-6N-POa" customClass="PickOrderTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7mh-Y2-Vgj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell for pick order" id="zu8-8P-JXT">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zu8-8P-JXT" id="d5S-7h-JQh">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="TO1-6N-POa" id="uGG-K9-isd"/>
+                            <outlet property="delegate" destination="TO1-6N-POa" id="zgK-Wj-r7s"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Pd9-py-5CU"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xqa-Wv-M9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2538" y="2717"/>
         </scene>
         <!--Invoice Photo-->
         <scene sceneID="FLq-o9-TEX">
@@ -602,7 +631,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pMZ-3c-BOZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2522" y="1688"/>
+            <point key="canvasLocation" x="2540" y="1376"/>
         </scene>
         <!--Bottles In Order Table View Controller-->
         <scene sceneID="s41-kz-oE7">
@@ -1036,11 +1065,11 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="x1p-NG-uUx"/>
         <segue reference="HEK-hq-4ib"/>
         <segue reference="UnU-qi-g1h"/>
         <segue reference="scM-9b-LEy"/>
-        <segue reference="gCl-OI-uA5"/>
-        <segue reference="Pga-Po-JW7"/>
+        <segue reference="3gL-ZU-c1M"/>
+        <segue reference="eb0-v6-zfo"/>
+        <segue reference="x1p-NG-uUx"/>
     </inferredMetricsTieBreakers>
 </document>

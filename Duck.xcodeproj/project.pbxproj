@@ -106,6 +106,7 @@
 		E082728B1819ACE3007A2977 /* PastOrdersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E082728A1819ACE3007A2977 /* PastOrdersTableViewController.m */; };
 		E0876B621911894400AE3248 /* EditVendorInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0876B611911894400AE3248 /* EditVendorInfoViewController.m */; };
 		E0A4F8C71839B12A000CA0C6 /* ToggleBottlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A4F8C61839B12A000CA0C6 /* ToggleBottlesTableViewController.m */; };
+		E0B115B619DE1224000DBB42 /* PickOrderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0B115B519DE1224000DBB42 /* PickOrderTVC.m */; };
 		E0C5A55D1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0C5A55B1849ABDD008E9B94 /* Duck.xcdatamodeld */; };
 		E0C5A55E1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0C5A55B1849ABDD008E9B94 /* Duck.xcdatamodeld */; };
 		E0E83AEB19189A9D0096233A /* InvoicePhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E83AEA19189A9D0096233A /* InvoicePhoto.m */; };
@@ -576,6 +577,9 @@
 		E0876B611911894400AE3248 /* EditVendorInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditVendorInfoViewController.m; sourceTree = "<group>"; };
 		E0A4F8C51839B12A000CA0C6 /* ToggleBottlesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleBottlesTableViewController.h; sourceTree = "<group>"; };
 		E0A4F8C61839B12A000CA0C6 /* ToggleBottlesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleBottlesTableViewController.m; sourceTree = "<group>"; };
+		E0B115B419DE1224000DBB42 /* PickOrderTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickOrderTVC.h; sourceTree = "<group>"; };
+		E0B115B519DE1224000DBB42 /* PickOrderTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickOrderTVC.m; sourceTree = "<group>"; };
+		E0B115B719DE125D000DBB42 /* PickOrderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickOrderDelegate.h; sourceTree = "<group>"; };
 		E0C5A55C1849ABDD008E9B94 /* Duck.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Duck.xcdatamodel; sourceTree = "<group>"; };
 		E0D5854618402FD10067F3AB /* ToggleBottlesDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleBottlesDelegate.h; sourceTree = "<group>"; };
 		E0E83AE919189A9D0096233A /* InvoicePhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoicePhoto.h; sourceTree = "<group>"; };
@@ -874,6 +878,7 @@
 			isa = PBXGroup;
 			children = (
 				E05014981814AC9900A06560 /* EditCountDelegate.h */,
+				E0B115B719DE125D000DBB42 /* PickOrderDelegate.h */,
 				E0309B4E19DBBEB800F00CA3 /* EditPriceAndQuantityDelegate.h */,
 				E0D5854618402FD10067F3AB /* ToggleBottlesDelegate.h */,
 				E050149B1814AC9900A06560 /* EditTextViewDelegate.h */,
@@ -1316,6 +1321,8 @@
 				E050150E1814AED400A06560 /* BottlesInOrderTableViewController.m */,
 				E05014A61814AC9900A06560 /* OrderTableViewController.h */,
 				E05014A71814AC9900A06560 /* OrderTableViewController.m */,
+				E0B115B419DE1224000DBB42 /* PickOrderTVC.h */,
+				E0B115B519DE1224000DBB42 /* PickOrderTVC.m */,
 				E05015231814B95B00A06560 /* EditPriceAndQtyVC.h */,
 				E050149D1814AC9900A06560 /* EditPriceAndQtyVC.m */,
 				E08272891819ACE3007A2977 /* PastOrdersTableViewController.h */,
@@ -1486,6 +1493,7 @@
 				E082728B1819ACE3007A2977 /* PastOrdersTableViewController.m in Sources */,
 				E05015131814AED400A06560 /* AlcoholType+Create.m in Sources */,
 				E0309B0519DB427000F00CA3 /* Order.m in Sources */,
+				E0B115B619DE1224000DBB42 /* PickOrderTVC.m in Sources */,
 				E05015171814AED400A06560 /* BaseCoreDataTableViewController.m in Sources */,
 				E05014BA1814AC9900A06560 /* EditPriceAndQtyVC.m in Sources */,
 				E05015151814AED400A06560 /* AllSubTypesTableViewController.m in Sources */,

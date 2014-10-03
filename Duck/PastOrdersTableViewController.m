@@ -17,6 +17,7 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize numberFormatter = _numberFormatter;
+@synthesize dateFormatter = _dateFormatter;
 
 - (void)viewDidLoad
 {
@@ -24,6 +25,9 @@
     self.title = @"Past Orders";
     _numberFormatter = [[NSNumberFormatter alloc] init];
     [_numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    _dateFormatter = [[NSDateFormatter alloc] init];
+    [_dateFormatter setDateStyle:NSDateFormatterLongStyle];
+    [_dateFormatter setTimeStyle:NSDateFormatterNoStyle];
 }
 
 
@@ -68,14 +72,9 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Past Orders Reuse ID" forIndexPath:indexPath];
     Order * order = [_fetchedResultsController objectAtIndexPath:indexPath];
-    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterLongStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-    NSString * dateString = [dateFormatter stringFromDate:order.date];
-    cell.textLabel.text = dateString;
-    float total = [Order totalAmountOfOrder:order];
-    NSString * totalDollars = [_numberFormatter stringFromNumber:[NSNumber numberWithFloat:total]];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", totalDollars];
+    NSString * dateString = [_dateFormatter stringFromDate:order.date];
+    cell.textLabel.text = [Order description:order withNumForatter:_numberFormatter];
+    cell.detailTextLabel.text = dateString;
     return cell;
 }
 
