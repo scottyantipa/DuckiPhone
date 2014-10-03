@@ -34,6 +34,8 @@
         vc.managedObjectContext = _managedObjectContext;
     } else if ([segue.identifier isEqualToString:@"Show All Invoices Segue ID"]) {
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
+    } else if ([segue.identifier isEqualToString:@"Show Losses"]) {
+        [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
     }
 }
 

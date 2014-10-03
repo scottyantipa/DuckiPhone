@@ -110,6 +110,7 @@
 		E0C5A55D1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0C5A55B1849ABDD008E9B94 /* Duck.xcdatamodeld */; };
 		E0C5A55E1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0C5A55B1849ABDD008E9B94 /* Duck.xcdatamodeld */; };
 		E0E83AEB19189A9D0096233A /* InvoicePhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E83AEA19189A9D0096233A /* InvoicePhoto.m */; };
+		E0EF7CB319DE71E5001F5CE6 /* LossesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0EF7CB219DE71E5001F5CE6 /* LossesTVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -584,6 +585,8 @@
 		E0D5854618402FD10067F3AB /* ToggleBottlesDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleBottlesDelegate.h; sourceTree = "<group>"; };
 		E0E83AE919189A9D0096233A /* InvoicePhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoicePhoto.h; sourceTree = "<group>"; };
 		E0E83AEA19189A9D0096233A /* InvoicePhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoicePhoto.m; sourceTree = "<group>"; };
+		E0EF7CB119DE71E5001F5CE6 /* LossesTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossesTVC.h; sourceTree = "<group>"; };
+		E0EF7CB219DE71E5001F5CE6 /* LossesTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossesTVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -804,6 +807,8 @@
 				E05014A11814AC9900A06560 /* HomeTableViewController.m */,
 				E05014B41814AC9900A06560 /* TakeInventoryTableViewController.h */,
 				E05014B51814AC9900A06560 /* TakeInventoryTableViewController.m */,
+				E0EF7CB119DE71E5001F5CE6 /* LossesTVC.h */,
+				E0EF7CB219DE71E5001F5CE6 /* LossesTVC.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1496,6 +1501,7 @@
 				E0B115B619DE1224000DBB42 /* PickOrderTVC.m in Sources */,
 				E05015171814AED400A06560 /* BaseCoreDataTableViewController.m in Sources */,
 				E05014BA1814AC9900A06560 /* EditPriceAndQtyVC.m in Sources */,
+				E0EF7CB319DE71E5001F5CE6 /* LossesTVC.m in Sources */,
 				E05015151814AED400A06560 /* AllSubTypesTableViewController.m in Sources */,
 				E050151A1814AED400A06560 /* BottleDetailTableViewController.m in Sources */,
 				E05014C51814AC9900A06560 /* PickBottleTableViewController.m in Sources */,

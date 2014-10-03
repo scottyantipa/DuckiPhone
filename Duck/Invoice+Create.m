@@ -27,6 +27,7 @@
         newInvoiceForBottle.bottle = bottle;
         newInvoiceForBottle.quantity = [NSNumber numberWithFloat:0];
         newInvoiceForBottle.unitPrice = [NSNumber numberWithFloat:0];
+        bottle.userHasBottle = [NSNumber numberWithBool:YES]; // auto add it to their collection        
     }
     NSError *error;
     if (![context save:&error]) {

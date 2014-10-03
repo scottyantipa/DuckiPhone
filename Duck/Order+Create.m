@@ -54,6 +54,7 @@
     }
     if (!isSelected) {
         [OrderForBottle newOrderForBottle:bottle forOrder:order inManagedObjectContext:context];
+        bottle.userHasBottle = [NSNumber numberWithBool:YES]; // auto add it to their collection        
     }
     NSError *error;
     if (![context save:&error]) {
