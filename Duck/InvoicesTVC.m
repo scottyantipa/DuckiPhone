@@ -32,14 +32,11 @@
         invoice = [_fetchedResultsController objectAtIndexPath:indexPath];
     } else if ([segue.identifier isEqualToString:@"Show New Invoice"]) {
         invoice = [NSEntityDescription insertNewObjectForEntityForName:@"Invoice" inManagedObjectContext:_managedObjectContext];
+        invoice.dateReceived = [NSDate date];
         invoice.vendor = [Vendor newVendorInContext:_managedObjectContext];
     }
     [segue.destinationViewController setInvoice:invoice];
     [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
-}
-
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 -(NSFetchedResultsController *)fetchedResultsController {
@@ -69,8 +66,12 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"All Invoices Cell Reuse ID"];
     Invoice * invoice = [_fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"%d", invoice.photos.count];
+    cell.textLabel.text = [NSString stringWithFormat:@"Invoice from vendor %@", [Vendor fullNameOfVendor:invoice.vendor]];
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
