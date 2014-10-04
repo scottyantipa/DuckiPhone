@@ -15,9 +15,18 @@
 @implementation LossesTVC
 @synthesize startDate = _startDate;
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize numberFormatter = _numberFormatter;
 @synthesize userBottles = _userBottles;
-
+@synthesize lossesForEachBottle = _lossesForEachBottle;
+@synthesize totalLosses = _totalLosses;
+@synthesize headerTextView = _headerTextView;
 - (void)viewDidLoad {
+    // get a number formatter for money
+    _numberFormatter = [[NSNumberFormatter alloc] init];
+    [_numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    
+    _lossesForEachBottle = [[NSMutableArray alloc] init];
+    
     // create our start date
     [super viewDidLoad];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -29,30 +38,78 @@
     
     [self setUserBottles];
     [self runModel];
+    [self setHeader];
+    [self reload];
 }
 
+-(void)reload {
+    [self.tableView reloadData];
+    [self setHeaderText];
+}
+
+// create button as header of table to "Add More Bottles"
+-(void)setHeader {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    int headerHeight = 50;
+    
+    _headerTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 20, screenWidth, headerHeight)];
+    self.tableView.tableHeaderView = _headerTextView;
+}
+
+-(void)setHeaderText {
+    if (_totalLosses == 0 || !_totalLosses) {
+        _headerTextView.text = @"We have gone over all of your historical inoivces and there are no losses due to price variation";
+    }
+    _headerTextView.text = [NSString stringWithFormat:@"Changes in vendor prices since your earliest invoice have cost you %@", [_numberFormatter stringFromNumber:[NSNumber numberWithFloat:_totalLosses]]];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [_lossesForEachBottle count];
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary * lossInfo = [_lossesForEachBottle objectAtIndex:indexPath.row];
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Losses By Bottle Cell"];
+    Bottle * bottle = [lossInfo objectForKey:@"bottle"];
+    NSNumber * aggLoss = [lossInfo objectForKey:@"aggregateLoss"];
+    cell.textLabel.text = bottle.name;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"losses of %@", [_numberFormatter stringFromNumber:aggLoss]];
+    return cell;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"Show losses by bottle"]) {
+        NSIndexPath * i = [self.tableView indexPathForCell:sender];
+        NSDictionary * dict = [_lossesForEachBottle objectAtIndex:i.row];
+        [segue.destinationViewController setLossInfo:dict];
+        [segue.destinationViewController setNumberFormatter:_numberFormatter];
+    }
 }
 
 // calculate all losses since start date
 -(void)runModel {
+    _totalLosses = 0;
+    [_lossesForEachBottle removeAllObjects]; // just to cleanup in case this is called multiple times
     for (Bottle * userBottle in _userBottles) {
-        [self createDictForBottle:userBottle];
+        NSMutableDictionary * dict = [self createDictForBottle:userBottle];
+        if (!dict) {
+            continue;
+        }
+        [_lossesForEachBottle addObject:dict];
+        NSNumber * loss = [dict objectForKey:@"aggregateLoss"];
+        _totalLosses += [loss floatValue];
     }
 }
 
 // Create a dict that describes the losses/gains from changes in price since start date
--(void)createDictForBottle:(Bottle *)bottle {
+-(NSMutableDictionary *)createDictForBottle:(Bottle *)bottle {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"InvoiceForBottle"];
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(bottle.userHasBottle = %@) AND (bottle.barcode = %@) AND (invoice.dateReceived >= %@)", [NSNumber numberWithBool:YES], bottle.barcode, _startDate];
     [fetchRequest setFetchBatchSize:20];
@@ -62,10 +119,37 @@
     
     // get results and print
     NSError * err;
-    NSArray * fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&err];
-    for (InvoiceForBottle * i in fetchedObjects) {
-        NSLog(@"invoideForBottle bottle: %@ and date: %@", i.bottle.name, i.invoice.dateReceived);
+    NSArray * fetchedBottleInvoices = [_managedObjectContext executeFetchRequest:fetchRequest error:&err];
+
+    
+    InvoiceForBottle * oldest = [fetchedBottleInvoices lastObject];
+    NSLog(@"oldest: %@", oldest.invoice.dateReceived);
+    NSNumber * priceOfOldest = oldest.unitPrice;
+    
+    NSMutableDictionary * lossesForBottleDict = [[NSMutableDictionary alloc] init];
+    NSMutableArray * invoicesWithBadPrice = [[NSMutableArray alloc] init];
+    float aggregateLoss = 0;
+    for (InvoiceForBottle * bottleInvoice in fetchedBottleInvoices) {
+        if (![bottleInvoice.unitPrice isEqual:priceOfOldest]) {
+            float loss = [bottleInvoice.quantity floatValue] * ([priceOfOldest floatValue] - [bottleInvoice.unitPrice floatValue]);
+            loss = abs(loss);
+            aggregateLoss += loss;
+            [invoicesWithBadPrice addObject:bottleInvoice];
+        }
     }
+    
+    if (aggregateLoss == 0) {
+        return nil;
+    }
+    
+    [invoicesWithBadPrice addObject:oldest]; // because we want to display it (but it will be a loss of 0 so won't affect the value)
+    
+    [lossesForBottleDict setObject:bottle forKey:@"bottle"];
+    [lossesForBottleDict setObject:invoicesWithBadPrice forKey:@"bottleInvoices"];
+    [lossesForBottleDict setObject:[NSNumber numberWithFloat:aggregateLoss] forKey:@"aggregateLoss"];
+    [lossesForBottleDict setObject:priceOfOldest forKey:@"priceOfOldest"];
+    
+    return lossesForBottleDict;
 }
 
 -(void)setUserBottles {

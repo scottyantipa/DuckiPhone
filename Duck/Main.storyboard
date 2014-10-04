@@ -125,7 +125,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Losses From Price Changes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xlk-Ij-PBh">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Get Vendor Refund" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xlk-Ij-PBh">
                                                     <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -489,11 +489,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="EDu-CG-49w">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Losses By Bottle Cell" textLabel="6Be-cw-8Cm" detailTextLabel="EwE-vI-oED" style="IBUITableViewCellStyleSubtitle" id="EDu-CG-49w">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EDu-CG-49w" id="7Vh-No-GHQ">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Be-cw-8Cm">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EwE-vI-oED">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="jjo-Rk-i0t" kind="push" identifier="Show losses by bottle" id="CKs-AQ-kW4"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -505,7 +522,34 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y0Y-fh-C4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-118" y="2134"/>
+            <point key="canvasLocation" x="612" y="3126"/>
+        </scene>
+        <!--Losses For BottleTVC-->
+        <scene sceneID="RdM-XW-bjg">
+            <objects>
+                <tableViewController id="jjo-Rk-i0t" customClass="LossesForBottleTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="DqP-RA-V57">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Losses For Bottle Cell ID" id="O9n-WQ-Dnc">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O9n-WQ-Dnc" id="lF5-17-Eq6">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="jjo-Rk-i0t" id="dYg-ug-a4f"/>
+                            <outlet property="delegate" destination="jjo-Rk-i0t" id="CDX-Kc-kuu"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Y4d-ie-tAH"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IDo-V3-oQ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1158" y="3126"/>
         </scene>
         <!--Invoice-->
         <scene sceneID="Mqn-vo-Rf8">
@@ -1119,6 +1163,6 @@
         <segue reference="mol-F4-zxD"/>
         <segue reference="scM-9b-LEy"/>
         <segue reference="3gL-ZU-c1M"/>
-        <segue reference="eb0-v6-zfo"/>
+        <segue reference="Ytc-VC-nkZ"/>
     </inferredMetricsTieBreakers>
 </document>

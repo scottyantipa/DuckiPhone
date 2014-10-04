@@ -10,9 +10,14 @@
 #import "Bottle+Create.h"
 #import "Invoice+Create.h"
 #import "InvoiceForBottle.h"
+#import "LossesForBottleTVC.h"
 
 @interface LossesTVC : UITableViewController
 @property (weak) NSDate * startDate;
 @property (strong, nonatomic) NSArray * userBottles;
 @property (strong, nonatomic) NSManagedObjectContext * managedObjectContext;
+@property (nonatomic, strong) NSNumberFormatter * numberFormatter;
+@property (strong, nonatomic) NSMutableArray * lossesForEachBottle;
+@property (nonatomic) float totalLosses;
+@property (strong, nonatomic) UITextView * headerTextView;
 @end

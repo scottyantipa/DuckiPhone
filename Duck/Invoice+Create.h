@@ -11,8 +11,12 @@
 #import "Invoice.h"
 #import "InvoiceForBottle.h"
 #import "Vendor+Create.h"
+#import "InvoiceForBottle.h"
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 @interface Invoice (Create)
 +(void)toggleBottle:(Bottle *)bottle inInvoice:(Invoice *)invoice inContext:(NSManagedObjectContext *)context;
 +(Invoice *)newBlankInvoiceInContext:(NSManagedObjectContext *)context;
++(MFMailComposeViewController *)mailComposeForBottleRefund:(Bottle *)bottle fromOriginalPrice:(NSNumber *)originalPrice withBottleInvoices:(NSArray *)bottleInvoices forLossOf:(NSNumber *)loss;
 @end

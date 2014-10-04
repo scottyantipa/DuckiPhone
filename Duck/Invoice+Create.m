@@ -40,4 +40,31 @@
     invoice.vendor = [Vendor newVendorInContext:context];
     return invoice;
 }
+
++(MFMailComposeViewController *)mailComposeForBottleRefund:(Bottle *)bottle fromOriginalPrice:(NSNumber *)originalPrice withBottleInvoices:(NSArray *)bottleInvoices forLossOf:(NSNumber *)loss {
+    InvoiceForBottle * last = [bottleInvoices lastObject];
+    Vendor * vendor = last.invoice.vendor;
+    NSArray * toRecipients = @[vendor.email];
+    
+    
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+
+    NSString * greeting = [NSString stringWithFormat:@"%@\n\nIt has come to my attention that there have been price variations over several orders I have made for the bottle %@.  When considering the number of units I have purchased, these price variations have resulted in the following dollar amount in excess cumulative charges: %@.  I would appreciate your response to this refund request either by email or phone.  Thank you.", vendor.firstName, bottle.name, [numberFormatter stringFromNumber:loss]];
+
+    NSMutableArray * invoiceDescriptions = [[NSMutableArray alloc] init];
+    for (InvoiceForBottle * bottleInvoice in bottleInvoices) {
+        NSString * description = [NSString stringWithFormat:@"\nUnit price: %@\nQty: %@\nOn date %@", [numberFormatter stringFromNumber:bottleInvoice.unitPrice], bottleInvoice.quantity, [bottleInvoice.invoice.dateReceived description]];
+        [invoiceDescriptions addObject:description];
+    }
+    
+    NSString * allDescriptions = [invoiceDescriptions componentsJoinedByString:@"\n\n"];
+    NSString * body = [NSString stringWithFormat:@"%@\n\n%@", greeting, allDescriptions];
+    MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+    [mailViewController setToRecipients:toRecipients];
+    [mailViewController setSubject:@"Requesting refund"];
+    [mailViewController setMessageBody:body isHTML:NO];
+    return mailViewController;
+}
+
 @end
