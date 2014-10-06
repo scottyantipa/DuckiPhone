@@ -33,7 +33,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Invoice Reuse ID" forIndexPath:indexPath];
     Invoice * invoice = [_invoicesArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"Number of photos: %d", invoice.photos.count];
+    cell.textLabel.text = [NSString stringWithFormat:@"Invoice from vendor %@", [Vendor fullNameOfVendor:invoice.vendor]];
     return cell;
 }
 

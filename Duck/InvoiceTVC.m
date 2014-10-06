@@ -33,7 +33,23 @@
     [super viewWillAppear:YES];
     self.title = @"Invoice";
     [[self tableView] reloadData];
+    [self setHeader];
 }
+
+// create button to order from vendor or duplicate order
+-(void)setHeader {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    int buttonHeight = 35;
+    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, buttonHeight)];
+    UIButton * addPhotoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    addPhotoButton.frame = CGRectMake(0, 15, screenWidth, buttonHeight);
+    [addPhotoButton addTarget:self action:@selector(didSelectAddPhoto) forControlEvents:UIControlEventTouchUpInside];
+    [addPhotoButton setTitle:@"Add Invoice Photo" forState:UIControlStateNormal];
+    [headerView addSubview:addPhotoButton];
+    self.tableView.tableHeaderView = headerView;
+}
+
 
 -(NSArray *)sortedInvoicePhotos {
     NSSet * invoicePhotos = _invoice.photos;
@@ -103,9 +119,7 @@
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return @"photos of invoice";
-    } else if (section == 1) {
+    if (section == 1) {
         return @"skus in invoice";
     } else if (section == 2) {
         return @"vendor";
@@ -229,7 +243,7 @@
 
 #pragma Button Delegate
 
-- (IBAction)didSelectAddPhoto:(id)sender {
+- (void)didSelectAddPhoto {
     UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo", @"Choose Existing", nil];
     [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
 }
@@ -248,6 +262,11 @@
         return;
     }
     [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (IBAction)didDelete:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+    [_managedObjectContext deleteObject:_invoice];
 }
 
 // store the image in app /Documents folder
