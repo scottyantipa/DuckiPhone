@@ -66,7 +66,8 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"All Invoices Cell Reuse ID"];
     Invoice * invoice = [_fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"Invoice from vendor %@", [Vendor fullNameOfVendor:invoice.vendor]];
+    cell.textLabel.text = [NSString stringWithFormat:@"To %@", [Vendor fullNameOfVendor:invoice.vendor]];
+    cell.detailTextLabel.text = [Invoice contentsDescriptionForInvoice:invoice];
     return cell;
 }
 

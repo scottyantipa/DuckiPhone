@@ -19,4 +19,6 @@
 +(void)toggleBottle:(Bottle *)bottle inInvoice:(Invoice *)invoice inContext:(NSManagedObjectContext *)context;
 +(Invoice *)newBlankInvoiceInContext:(NSManagedObjectContext *)context;
 +(MFMailComposeViewController *)mailComposeForBottleRefund:(Bottle *)bottle fromOriginalPrice:(NSNumber *)originalPrice withBottleInvoices:(NSArray *)bottleInvoices forLossOf:(NSNumber *)loss;
++(float)totalAmountofInvoice:(Invoice *)invoice;
++(NSString *)contentsDescriptionForInvoice:(Invoice *)invoice;
 @end

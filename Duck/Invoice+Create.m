@@ -22,11 +22,12 @@
         }
     }
     if (!isSelected) {
+        InvoiceForBottle * mostRecent = [Bottle mostRecentInvoiceForBottle:bottle inContext:context];
         InvoiceForBottle * newInvoiceForBottle = [NSEntityDescription insertNewObjectForEntityForName:@"InvoiceForBottle" inManagedObjectContext:context];
         newInvoiceForBottle.invoice = invoice;
         newInvoiceForBottle.bottle = bottle;
-        newInvoiceForBottle.quantity = [NSNumber numberWithFloat:0];
-        newInvoiceForBottle.unitPrice = [NSNumber numberWithFloat:0];
+        newInvoiceForBottle.quantity = mostRecent ? mostRecent.quantity : 0;
+        newInvoiceForBottle.unitPrice = mostRecent ? mostRecent.unitPrice : 0;
         bottle.userHasBottle = [NSNumber numberWithBool:YES]; // auto add it to their collection        
     }
     NSError *error;
@@ -42,19 +43,28 @@
 }
 
 +(MFMailComposeViewController *)mailComposeForBottleRefund:(Bottle *)bottle fromOriginalPrice:(NSNumber *)originalPrice withBottleInvoices:(NSArray *)bottleInvoices forLossOf:(NSNumber *)loss {
+
+    // setup number and date formatters
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    
+    
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+
+    
     InvoiceForBottle * last = [bottleInvoices lastObject];
     Vendor * vendor = last.invoice.vendor;
     NSArray * toRecipients = @[vendor.email];
     
-    
-    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
 
     NSString * greeting = [NSString stringWithFormat:@"%@\n\nIt has come to my attention that there have been price variations over several orders I have made for the bottle %@.  When considering the number of units I have purchased, these price variations have resulted in the following dollar amount in excess cumulative charges: %@.  I would appreciate your response to this refund request either by email or phone.  Thank you.", vendor.firstName, bottle.name, [numberFormatter stringFromNumber:loss]];
-
+    
     NSMutableArray * invoiceDescriptions = [[NSMutableArray alloc] init];
     for (InvoiceForBottle * bottleInvoice in bottleInvoices) {
-        NSString * description = [NSString stringWithFormat:@"\nUnit price: %@\nQty: %@\nOn date %@", [numberFormatter stringFromNumber:bottleInvoice.unitPrice], bottleInvoice.quantity, [bottleInvoice.invoice.dateReceived description]];
+        NSString * dateString = [dateFormatter stringFromDate:bottleInvoice.invoice.dateReceived];
+        NSString * description = [NSString stringWithFormat:@"\nUnit price: %@\nQty: %@\n%@", [numberFormatter stringFromNumber:bottleInvoice.unitPrice], bottleInvoice.quantity, dateString];
         [invoiceDescriptions addObject:description];
     }
     
@@ -65,6 +75,22 @@
     [mailViewController setSubject:@"Requesting refund"];
     [mailViewController setMessageBody:body isHTML:NO];
     return mailViewController;
+}
+
++(float)totalAmountofInvoice:(Invoice *)invoice {
+    float total = 0;
+    for (InvoiceForBottle * i in invoice.invoicesByBottle){
+        total +=  [i.unitPrice floatValue] * [i.quantity floatValue];
+    }
+    return total;
+}
+
++(NSString *)contentsDescriptionForInvoice:(Invoice *)invoice {
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+
+    NSString * total = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:[Invoice totalAmountofInvoice:invoice]]];
+    return [NSString stringWithFormat:@"%d skus totalling %@", invoice.invoicesByBottle.count, total];
 }
 
 @end

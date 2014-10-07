@@ -12,5 +12,4 @@
 #import "Vendor+Create.h"
 
 @interface InvoicesTVC : BaseCoreDataTableViewController
-
 @end

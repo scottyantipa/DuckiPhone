@@ -19,5 +19,5 @@
 @property (nonatomic, strong) NSNumberFormatter * numberFormatter;
 @property (strong, nonatomic) NSMutableArray * lossesForEachBottle;
 @property (nonatomic) float totalLosses;
-@property (strong, nonatomic) UITextView * headerTextView;
+@property (strong, nonatomic) UILabel * headerTextView;
 @end

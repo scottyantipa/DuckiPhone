@@ -24,7 +24,7 @@
 @synthesize aggregateLoss = _aggregateLoss;
 @synthesize priceOfOldest = _priceOfOldest;
 @synthesize numberFormatter = _numberFormatter;
-@synthesize headerTextView = _headerTextView;
+@synthesize dateFormatter = _dateFormatter;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,6 +33,11 @@
     _aggregateLoss = [_lossInfo objectForKey:@"aggregateLoss"];
     _priceOfOldest = [_lossInfo objectForKey:@"priceOfOldest"];
     
+    
+    _dateFormatter = [[NSDateFormatter alloc] init];
+    [_dateFormatter setDateStyle:NSDateFormatterLongStyle];
+    [_dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+
     [self setHeader];
 
 }
@@ -41,18 +46,24 @@
 -(void)setHeader {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    int headerHeight = 100;
+    int headerHeight = 150;
     
-    _headerTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 20, screenWidth, headerHeight)];
-    self.tableView.tableHeaderView = _headerTextView;
+    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, headerHeight)];
+    self.tableView.tableHeaderView = headerView;
+    
+    UILabel * textView = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, screenWidth, 50)];
+    [headerView addSubview:textView];
+    [textView setTextAlignment:NSTextAlignmentCenter];
+    textView.lineBreakMode = NSLineBreakByWordWrapping;
+    textView.numberOfLines = 0;
     NSString * formattedLoss = [_numberFormatter stringFromNumber:_aggregateLoss];
-    _headerTextView.text = [NSString stringWithFormat:@"%@ has lost you %@.  The individual orders are below.", _bottle.name, formattedLoss];
+    textView.text = [NSString stringWithFormat:@"%@ has lost you %@.  The individual orders are below.", _bottle.name, formattedLoss];
     
     UIButton * emailButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    emailButton.frame = CGRectMake(0, 50, screenWidth, 35);
+    emailButton.frame = CGRectMake(0, 100, screenWidth, 35);
     [emailButton setTitle:@"Get Vendor Refund" forState:UIControlStateNormal];
     [emailButton addTarget:self action:@selector(sendEmail) forControlEvents:UIControlEventTouchUpInside];
-    [_headerTextView addSubview:emailButton];
+    [headerView addSubview:emailButton];
 }
 
 -(void)sendEmail {
@@ -74,7 +85,10 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"Losses For Bottle Cell ID"];
     InvoiceForBottle * bottleInvoice = [_bottleInvoices objectAtIndex:indexPath.row];
-    cell.textLabel.text = [_numberFormatter stringFromNumber:bottleInvoice.unitPrice];
+    NSString * date = [_dateFormatter stringFromDate:bottleInvoice.invoice.dateReceived];
+    NSString * price = [_numberFormatter stringFromNumber:bottleInvoice.unitPrice];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ on %@", price, date];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
 

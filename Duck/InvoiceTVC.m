@@ -25,6 +25,7 @@
     [_numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     
     _datePicker = [[UIDatePicker alloc] init];
+    [self setHeader];
 }
 
 
@@ -33,19 +34,19 @@
     [super viewWillAppear:YES];
     self.title = @"Invoice";
     [[self tableView] reloadData];
-    [self setHeader];
+
 }
 
 // create button to order from vendor or duplicate order
 -(void)setHeader {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    int buttonHeight = 35;
+    int buttonHeight = 55;
     UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, buttonHeight)];
     UIButton * addPhotoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    addPhotoButton.frame = CGRectMake(0, 15, screenWidth, buttonHeight);
-    [addPhotoButton addTarget:self action:@selector(didSelectAddPhoto) forControlEvents:UIControlEventTouchUpInside];
     [addPhotoButton setTitle:@"Add Invoice Photo" forState:UIControlStateNormal];
+    addPhotoButton.frame = CGRectMake(0, 0, screenWidth, buttonHeight);
+    [addPhotoButton addTarget:self action:@selector(didSelectAddPhoto) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:addPhotoButton];
     self.tableView.tableHeaderView = headerView;
 }
@@ -114,6 +115,9 @@
         [_datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
         [cell addSubview:_datePicker];
         cell.textLabel.text = @"";
+    }
+    if (indexPath.section != 4) { // all but the date picker
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     return cell;
 }

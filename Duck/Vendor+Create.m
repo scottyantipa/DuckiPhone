@@ -19,8 +19,8 @@
     return vendor;
 }
 +(NSString *)fullNameOfVendor:(Vendor *)vendor {
-    if (([vendor.firstName isEqualToString:@""]) && ([vendor.lastName isEqualToString:@""])) {
-        return @"Enter Name";
+    if (([vendor.firstName isEqualToString:@""] && [vendor.lastName isEqualToString:@""]) || !vendor.firstName || !vendor.lastName) {
+        return @"No Name";
     } else {
         return [NSString stringWithFormat:@"%@ %@", vendor.firstName, vendor.lastName];
     }

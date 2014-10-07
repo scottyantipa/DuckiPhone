@@ -20,6 +20,5 @@
 @property (weak, nonatomic) NSNumber * aggregateLoss;
 @property (weak, nonatomic) NSNumber * priceOfOldest;
 @property (nonatomic, strong) NSNumberFormatter * numberFormatter;
-@property (strong, nonatomic) UITextView * headerTextView;
-
+@property (nonatomic, strong) NSDateFormatter * dateFormatter;
 @end

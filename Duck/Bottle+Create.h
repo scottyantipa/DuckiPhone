@@ -13,6 +13,7 @@
 #import "Order.h"
 #import "NSString+Score.h"
 #import "InventorySnapshotForBottle+Create.h"
+#import "InvoiceForBottle.h"
 
 
 @interface Bottle (Create)
@@ -21,6 +22,7 @@
 +(Bottle *)newBottleForBarcode:(NSString *)barcode inManagedObjectContext:(NSManagedObjectContext *)context;
 +(void)toggleUserHasBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
 +(OrderForBottle *)mostRecentOrderForBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
++(InvoiceForBottle *)mostRecentInvoiceForBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
 +(NSSet *)bottlesFromSearchText:(NSString *)searchText withOrder:(Order *)order;
 +(NSString *)cleanedSearchText:(NSString *)searchText;
 +(NSNumber *)countOfBottle:(Bottle *)bottle forContext:(NSManagedObjectContext *)context;

@@ -80,8 +80,26 @@
     
     NSError * err = nil;
     NSArray * fetchedObjects = [context executeFetchRequest:fetchRequest error:&err];
-    OrderForBottle * orderForBottle = [fetchedObjects lastObject];
-    return orderForBottle;
+    return [fetchedObjects lastObject];
+}
+
++(InvoiceForBottle *)mostRecentInvoiceForBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"InvoiceForBottle" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"bottle.name = %@", bottle.name];
+    [fetchRequest setPredicate:predicate];
+    
+    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"invoice.dateReceived" ascending:YES];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // We only want the most recent one
+    [fetchRequest setFetchBatchSize:1];
+    
+    NSError * err = nil;
+    NSArray * fetchedObjects = [context executeFetchRequest:fetchRequest error:&err];
+    return [fetchedObjects lastObject];
 }
 
 

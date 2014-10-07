@@ -51,9 +51,12 @@
 -(void)setHeader {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    int headerHeight = 50;
+    int headerHeight = 75;
     
-    _headerTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 20, screenWidth, headerHeight)];
+    _headerTextView = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, screenWidth - 10, headerHeight)];
+    [_headerTextView setTextAlignment:NSTextAlignmentCenter];
+    _headerTextView.lineBreakMode = NSLineBreakByWordWrapping;
+    _headerTextView.numberOfLines = 0;
     self.tableView.tableHeaderView = _headerTextView;
 }
 
@@ -61,7 +64,7 @@
     if (_totalLosses == 0 || !_totalLosses) {
         _headerTextView.text = @"We have gone over all of your historical inoivces and there are no losses due to price variation";
     }
-    _headerTextView.text = [NSString stringWithFormat:@"Changes in vendor prices since your earliest invoice have cost you %@", [_numberFormatter stringFromNumber:[NSNumber numberWithFloat:_totalLosses]]];
+    _headerTextView.text = [NSString stringWithFormat:@"Changes in vendor prices have cost you %@ across all skus", [_numberFormatter stringFromNumber:[NSNumber numberWithFloat:_totalLosses]]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
