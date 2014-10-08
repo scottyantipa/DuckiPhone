@@ -9,11 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @protocol EditPriceAndQuantityDelegate <NSObject>
--(void)didFinishEditingPrice:(NSNumber *)price forObject:(id)obj;
+-(void)didFinishEditingPrice:(NSNumber *)price andQuantity:(NSNumber *)quantity forObject:(id)obj;
+
 -(NSNumber *)priceOfObj:(id)obj;
-
--(void)didFinishEditingQuantity:(NSNumber *)qty forObject:(id)obj;
 -(NSNumber *)quantityOfObj:(id)obj;
-
 -(NSString *)nameOfObject:(id)obj;
+
 @end

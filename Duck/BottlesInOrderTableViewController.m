@@ -120,20 +120,20 @@
 }
 
 #pragma Delegate methods for edit price and quantity
-
--(void)didFinishEditingPrice:(NSNumber *)price forObject:(id)obj {
+-(void)didFinishEditingPrice:(NSNumber *)price andQuantity:(NSNumber *)quantity forObject:(id)obj {
     OrderForBottle * orderForBottle = (OrderForBottle *)obj;
+    orderForBottle.quantity = quantity;
     orderForBottle.unitPrice = price;
+    [self.tableView reloadData];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
+
 -(NSNumber *)priceOfObj:(id)obj {
     OrderForBottle * orderForBottle = (OrderForBottle *)obj;
     return orderForBottle.unitPrice;
 }
 
--(void)didFinishEditingQuantity:(NSNumber *)qty forObject:(id)obj {
-    OrderForBottle * orderForBottle = (OrderForBottle *)obj;
-    orderForBottle.quantity = qty;
-}
+
 -(NSNumber *)quantityOfObj:(id)obj {
     OrderForBottle * orderForBottle = (OrderForBottle *)obj;
     return orderForBottle.quantity;

@@ -17,4 +17,5 @@
 @property (nonatomic,strong) NSManagedObjectContext * managedObjectContext;
 @property (strong, nonatomic) id managedObject;
 @property (weak) id <EditPriceAndQuantityDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UILabel * objectNameLabel;
 @end

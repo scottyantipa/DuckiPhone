@@ -106,19 +106,55 @@
 
 #pragma Delegate methods for edit price and quantity
 
--(void)didFinishEditingPrice:(NSNumber *)price forObject:(id)obj {
+// user edited price and quantity -- veryify that price doesn't exceed last order
+-(void)didFinishEditingPrice:(NSNumber *)price andQuantity:(NSNumber *)quantity forObject:(id)obj {
     InvoiceForBottle * invoiceForBottle = (InvoiceForBottle *)obj;
+    invoiceForBottle.quantity = quantity;
     invoiceForBottle.unitPrice = price;
+    [self.tableView reloadData];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents * nowComps = [calendar components:NSYearCalendarUnit fromDate:[NSDate date]];
+    
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setYear:[nowComps year] - 1];
+    [components setMonth:[nowComps month]];
+    [components setDay:1];
+    NSDate * date = [calendar dateFromComponents:components];
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"InvoiceForBottle"];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(bottle.userHasBottle = %@) AND (bottle.barcode = %@) AND (invoice.dateReceived >= %@) AND (unitPrice < %@)", [NSNumber numberWithBool:YES], invoiceForBottle.bottle.barcode, date, invoiceForBottle.unitPrice];
+    [fetchRequest setFetchBatchSize:20];
+
+    NSSortDescriptor * sorter1 = [NSSortDescriptor sortDescriptorWithKey:@"unitPrice" ascending:NO];
+    NSArray * sorters = @[sorter1];
+    [fetchRequest setSortDescriptors:sorters];
+    
+    NSError * err;
+    NSArray * fetchedBottleInvoices = [_managedObjectContext executeFetchRequest:fetchRequest error:&err];
+    if (fetchedBottleInvoices.count == 0) {
+        return;
+    }
+    
+    // theres an invoice in
+    InvoiceForBottle * cheaperInvoice = [fetchedBottleInvoices lastObject];
+    NSString * badPriceString = [_numberFormatter stringFromNumber:price];
+    NSString * lowerPriceString = [_numberFormatter stringFromNumber:cheaperInvoice.unitPrice];
+    NSString * message  = [NSString stringWithFormat:@"You just marked %@ as %@ but within the last week you purchased it for %@", invoiceForBottle.bottle.name, badPriceString, lowerPriceString];
+    UIAlertView * badPriceAlertView = [[UIAlertView alloc] initWithTitle:@"Price Discrepancy" message:message delegate:self cancelButtonTitle:@"Forget it" otherButtonTitles:@"Compare Invoices", nil];
+    [badPriceAlertView show];
+    
+    
 }
+
 -(NSNumber *)priceOfObj:(id)obj {
     InvoiceForBottle * invoiceForBottle = (InvoiceForBottle *)obj;
     return invoiceForBottle.unitPrice;
 }
 
--(void)didFinishEditingQuantity:(NSNumber *)qty forObject:(id)obj {
-    InvoiceForBottle * invoiceForBottle = (InvoiceForBottle *)obj;
-    invoiceForBottle.quantity = qty;
-}
+
 -(NSNumber *)quantityOfObj:(id)obj {
     InvoiceForBottle * invoiceForBottle = (InvoiceForBottle *)obj;
     return invoiceForBottle.quantity;
@@ -129,5 +165,9 @@
     return invoiceForBottle.bottle.name;
 }
 
+#pragma Alert View Delegate methods
+// Alert View
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+}
 
 @end

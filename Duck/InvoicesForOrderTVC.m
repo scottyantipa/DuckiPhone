@@ -24,9 +24,11 @@
     return [_invoicesArray count];
 }
 
+
 -(void)viewWillAppear:(BOOL)animated {
-    _invoicesArray = [_order.invoices allObjects];
     [super viewWillAppear:animated];
+    _invoicesArray = [_order.invoices allObjects];
+    [self.tableView reloadData];
 }
 
 

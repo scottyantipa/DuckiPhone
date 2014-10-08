@@ -29,7 +29,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Inventory" id="ncY-8D-kso">
+                            <tableViewSection headerTitle="" id="ncY-8D-kso">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Sry-3g-IYM" style="IBUITableViewCellStyleDefault" id="BgQ-50-WKS">
                                         <rect key="frame" x="0.0" y="119" width="320" height="44"/>
@@ -676,7 +676,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="1nc-UA-Vn4" kind="push" identifier="Edit Price And Quantity of Bottle Invoice" id="3gL-ZU-c1M"/>
+                                    <segue destination="1nc-UA-Vn4" kind="modal" identifier="Edit Price And Quantity of Bottle Invoice" id="3gL-ZU-c1M"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -785,7 +785,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="1nc-UA-Vn4" kind="push" identifier="Edit Order For Bottle Segue ID" id="Pga-Po-JW7"/>
+                                    <segue destination="1nc-UA-Vn4" kind="modal" identifier="Edit Order For Bottle Segue ID" id="Pga-Po-JW7"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -816,7 +816,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="2wy-lP-5Dw">
-                                <rect key="frame" x="20" y="117" width="280" height="30"/>
+                                <rect key="frame" x="20" y="144" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -825,7 +825,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="6BD-EF-39t">
-                                <rect key="frame" x="20" y="196" width="280" height="30"/>
+                                <rect key="frame" x="20" y="223" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -834,16 +834,33 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Units" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7c2-Fr-Iyr">
-                                <rect key="frame" x="20" y="88" width="126" height="21"/>
+                                <rect key="frame" x="20" y="115" width="126" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price per Unit" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YgE-at-cwo">
-                                <rect key="frame" x="20" y="167" width="105" height="21"/>
+                                <rect key="frame" x="20" y="194" width="105" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Zmk-fU-WfP">
+                                <rect key="frame" x="247" y="33" width="37" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedDone:" destination="1nc-UA-Vn4" eventType="touchUpInside" id="QRX-2e-eDb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Order Info" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lYB-yD-tBG">
+                                <rect key="frame" x="20" y="78" width="264" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -851,6 +868,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="xjC-kl-cMd"/>
                     <connections>
+                        <outlet property="objectNameLabel" destination="lYB-yD-tBG" id="Ja7-Sd-CGC"/>
                         <outlet property="textFieldForPrice" destination="6BD-EF-39t" id="btL-ZM-kfd"/>
                         <outlet property="textFieldForUnits" destination="2wy-lP-5Dw" id="m6j-eG-9aH"/>
                         <outlet property="view" destination="MVM-7G-Plh" id="Y4A-Zg-oT8"/>
@@ -858,7 +876,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAi-98-gal" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2694" y="1065"/>
+            <point key="canvasLocation" x="2722" y="1279"/>
         </scene>
         <!--Bottles For Sub Type Table View Controller-->
         <scene sceneID="QwF-YM-MRo">
@@ -1187,10 +1205,10 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="HEK-hq-4ib"/>
-        <segue reference="Ytc-VC-nkZ"/>
         <segue reference="mol-F4-zxD"/>
         <segue reference="scM-9b-LEy"/>
-        <segue reference="3gL-ZU-c1M"/>
+        <segue reference="eb0-v6-zfo"/>
         <segue reference="x1p-NG-uUx"/>
+        <segue reference="Pga-Po-JW7"/>
     </inferredMetricsTieBreakers>
 </document>

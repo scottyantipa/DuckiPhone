@@ -13,7 +13,7 @@
 #import "InvoiceForBottle.h"
 #import "EditPriceAndQtyVC.h"
 
-@interface BottlesInInvoiceTVC : UITableViewController <ToggleBottlesDelegate, EditPriceAndQuantityDelegate>
+@interface BottlesInInvoiceTVC : UITableViewController <ToggleBottlesDelegate, EditPriceAndQuantityDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) Invoice * invoice;
 @property (strong, nonatomic) NSArray * sortedInvoicesByBottle;

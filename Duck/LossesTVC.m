@@ -21,6 +21,8 @@
 @synthesize totalLosses = _totalLosses;
 @synthesize headerTextView = _headerTextView;
 - (void)viewDidLoad {
+    [super viewDidLoad];
+
     // get a number formatter for money
     _numberFormatter = [[NSNumberFormatter alloc] init];
     [_numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -28,10 +30,11 @@
     _lossesForEachBottle = [[NSMutableArray alloc] init];
     
     // create our start date
-    [super viewDidLoad];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [[NSDateComponents alloc] init];
-    [components setYear:2012];
+    NSDateComponents * nowComps = [calendar components:NSYearCalendarUnit fromDate:[NSDate date]];
+
+    [components setYear:[nowComps year] - 1];
     [components setMonth:1];
     [components setDay:1];
     _startDate = [calendar dateFromComponents:components];

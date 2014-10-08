@@ -101,7 +101,7 @@
         cell.imageView.image = image;
         cell.textLabel.text = [NSString stringWithFormat:@""];
     } else if (indexPath.section == 1) { // bottles
-        cell.textLabel.text = [NSString stringWithFormat:@"%d skus entered for invoice", _invoice.invoicesByBottle.count];
+        cell.textLabel.text = [Invoice contentsDescriptionForInvoice:_invoice];
     } else if (indexPath.section == 2){ // vendor
         Vendor * vendor = _invoice.vendor;
         NSString * vendorName = [Vendor fullNameOfVendor:vendor];
@@ -135,21 +135,6 @@
         return @"";
     }
 }
-
--(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return @"Click Add Photo above to take pictures of your invoice";
-            break;
-        case 1:
-            return @"Enter the skus as seen on your invoice";
-            break;
-        default:
-            return @"";
-            break;
-    }
-}
-
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 4) { // its the date picker section (only one row)
@@ -268,9 +253,16 @@
     [self presentViewController:picker animated:YES completion:nil];
 }
 
+// delete the invoice and all of its InvoiceForBottle
 - (IBAction)didDelete:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+    for (InvoiceForBottle * invoiceForBottle in _invoice.invoicesByBottle) {
+        [_managedObjectContext deleteObject:invoiceForBottle];
+    }
     [_managedObjectContext deleteObject:_invoice];
+    NSError *err;
+    [_managedObjectContext save:&err];
+    
 }
 
 // store the image in app /Documents folder
