@@ -14,6 +14,7 @@
 @implementation BottlesInInvoiceTVC
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize invoice = _invoice;
+@synthesize mostRecentInvoiceForBottleAdded = _mostRecentInvoiceForBottleAdded;
 
 - (void)viewDidLoad
 {
@@ -125,10 +126,10 @@
     NSDate * date = [calendar dateFromComponents:components];
     
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"InvoiceForBottle"];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(bottle.userHasBottle = %@) AND (bottle.barcode = %@) AND (invoice.dateReceived >= %@) AND (unitPrice < %@)", [NSNumber numberWithBool:YES], invoiceForBottle.bottle.barcode, date, invoiceForBottle.unitPrice];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(bottle.userHasBottle = %@) AND (bottle.barcode = %@) AND (invoice.dateReceived > %@) AND (unitPrice <= %@) AND (invoice != %@)", [NSNumber numberWithBool:YES], invoiceForBottle.bottle.barcode, date, invoiceForBottle.unitPrice, invoiceForBottle.invoice];
     [fetchRequest setFetchBatchSize:20];
 
-    NSSortDescriptor * sorter1 = [NSSortDescriptor sortDescriptorWithKey:@"unitPrice" ascending:NO];
+    NSSortDescriptor * sorter1 = [NSSortDescriptor sortDescriptorWithKey:@"unitPrice" ascending:YES];
     NSArray * sorters = @[sorter1];
     [fetchRequest setSortDescriptors:sorters];
     
@@ -139,11 +140,14 @@
     }
     
     // theres an invoice in
-    InvoiceForBottle * cheaperInvoice = [fetchedBottleInvoices lastObject];
+    InvoiceForBottle * otherInvoice = [fetchedBottleInvoices lastObject];
+    if ([otherInvoice.unitPrice isEqualToNumber:invoiceForBottle.unitPrice]) {
+        return; // the most recent order was at this price, so no discrepency
+    }
     NSString * badPriceString = [_numberFormatter stringFromNumber:price];
-    NSString * lowerPriceString = [_numberFormatter stringFromNumber:cheaperInvoice.unitPrice];
+    NSString * lowerPriceString = [_numberFormatter stringFromNumber:otherInvoice.unitPrice];
     NSString * message  = [NSString stringWithFormat:@"You just marked %@ as %@ but within the last week you purchased it for %@", invoiceForBottle.bottle.name, badPriceString, lowerPriceString];
-    UIAlertView * badPriceAlertView = [[UIAlertView alloc] initWithTitle:@"Price Discrepancy" message:message delegate:self cancelButtonTitle:@"Forget it" otherButtonTitles:@"Compare Invoices", nil];
+    UIAlertView * badPriceAlertView = [[UIAlertView alloc] initWithTitle:@"Price Discrepancy" message:message delegate:self cancelButtonTitle:nil otherButtonTitles:@"Approve Price Change", @"Ok, I'll Contact The Vendor", nil];
     [badPriceAlertView show];
     
     
@@ -163,11 +167,6 @@
 -(NSString *)nameOfObject:(id)obj {
     InvoiceForBottle * invoiceForBottle = (InvoiceForBottle *)obj;
     return invoiceForBottle.bottle.name;
-}
-
-#pragma Alert View Delegate methods
-// Alert View
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 }
 
 @end
