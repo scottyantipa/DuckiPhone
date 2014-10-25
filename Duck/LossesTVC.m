@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    // get a number formatter for money
+    // get a number formatter for currency formatting
     _numberFormatter = [[NSNumberFormatter alloc] init];
     [_numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     
@@ -32,9 +32,9 @@
     // create our start date
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [[NSDateComponents alloc] init];
-    NSDateComponents * nowComps = [calendar components:NSYearCalendarUnit fromDate:[NSDate date]];
+    NSDateComponents * now = [calendar components:NSYearCalendarUnit fromDate:[NSDate date]];
 
-    [components setYear:[nowComps year] - 1];
+    [components setYear:[now year] - 1];
     [components setMonth:1];
     [components setDay:1];
     _startDate = [calendar dateFromComponents:components];
@@ -56,7 +56,7 @@
     CGFloat screenWidth = screenRect.size.width;
     int headerHeight = 75;
     
-    _headerTextView = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, screenWidth - 10, headerHeight)];
+    _headerTextView = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, screenWidth - 40, headerHeight)];
     [_headerTextView setTextAlignment:NSTextAlignmentCenter];
     _headerTextView.lineBreakMode = NSLineBreakByWordWrapping;
     _headerTextView.numberOfLines = 0;
@@ -66,8 +66,9 @@
 -(void)setHeaderText {
     if (_totalLosses == 0 || !_totalLosses) {
         _headerTextView.text = @"We have gone over all of your historical inoivces and there are no losses due to price variation";
+    } else {
+        _headerTextView.text = [NSString stringWithFormat:@"Changes in vendor prices have cost you %@ across all skus", [_numberFormatter stringFromNumber:[NSNumber numberWithFloat:_totalLosses]]];
     }
-    _headerTextView.text = [NSString stringWithFormat:@"Changes in vendor prices have cost you %@ across all skus", [_numberFormatter stringFromNumber:[NSNumber numberWithFloat:_totalLosses]]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

@@ -15,6 +15,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize invoice = _invoice;
 @synthesize mostRecentInvoiceForBottleAdded = _mostRecentInvoiceForBottleAdded;
+@synthesize noOrderForBottles = _noOrderForBottles;
 
 - (void)viewDidLoad
 {
@@ -22,6 +23,7 @@
     self.title = @"Bottles in Invoice";
     _numberFormatter = [[NSNumberFormatter alloc] init];
     [_numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    _noOrderForBottles = [[NSMutableDictionary alloc] init];
     
 }
 
@@ -29,11 +31,43 @@
     [self reload];
 }
 
+// notify user if there are bottles they have never ordered
+-(void)setHeader {
+    if ([_noOrderForBottles count] == 0) {
+        self.tableView.tableHeaderView = nil;
+        return;
+    }
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    int labelHeight = 80;
+    int labelWidth = screenWidth - 40;
+    UILabel * headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, labelWidth, labelHeight)];
+    [headerView setTextAlignment:NSTextAlignmentCenter];
+    headerView.lineBreakMode = NSLineBreakByWordWrapping;
+    headerView.numberOfLines = 0;
+    headerView.text = [NSString stringWithFormat:@"Bottles in red have not been ordered through ex-86"];
+    headerView.textColor = [UIColor redColor];
+    
+    self.tableView.tableHeaderView = headerView;
+}
+
+
 -(void)reload{
     NSSet * invoicesByBottle = _invoice.invoicesByBottle;
     NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"bottle.name" ascending:NO];
     NSArray *sortDescriptors = @[sortDescriptor];
     _sortedInvoicesByBottle = [invoicesByBottle sortedArrayUsingDescriptors:sortDescriptors];
+
+    // set the dict of bottles which don't have any previous orders
+    _noOrderForBottles = [[NSMutableDictionary alloc] init];
+    for (InvoiceForBottle * bottleInvoice in _sortedInvoicesByBottle) {
+        OrderForBottle * orderForBottle = [Bottle mostRecentOrderForBottle:bottleInvoice.bottle inContext:_managedObjectContext];
+        if (orderForBottle == nil) {
+            [_noOrderForBottles setObject:bottleInvoice.bottle forKey:bottleInvoice.bottle.barcode];
+        }
+    }
+    [self setHeader];
     [[self tableView] reloadData];
 }
 
@@ -65,6 +99,17 @@
         quantityStr = [NSMutableString stringWithFormat:@"%@ units", invoiceForBottle.quantity];
     }
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@", quantityStr, priceStr];
+    
+    // see if it has any previous orders and if not, make it red background
+    if ([_noOrderForBottles objectForKey:invoiceForBottle.bottle.barcode] != nil) {
+        cell.backgroundColor = [UIColor redColor];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.detailTextLabel.textColor = [UIColor whiteColor];
+    } else {
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.textLabel.textColor = [UIColor blackColor];
+        cell.detailTextLabel.textColor = [UIColor blackColor];
+    }
     
     return cell;
 }
@@ -139,7 +184,6 @@
         return;
     }
     
-    // theres an invoice in
     InvoiceForBottle * otherInvoice = [fetchedBottleInvoices lastObject];
     if ([otherInvoice.unitPrice isEqualToNumber:invoiceForBottle.unitPrice]) {
         return; // the most recent order was at this price, so no discrepency

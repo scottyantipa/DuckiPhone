@@ -12,7 +12,7 @@
 #import "ToggleBottlesTableViewController.h"
 #import "InvoiceForBottle.h"
 #import "EditPriceAndQtyVC.h"
-#import "Bottle+Create.h";
+#import "Bottle+Create.h"
 
 @interface BottlesInInvoiceTVC : UITableViewController <ToggleBottlesDelegate, EditPriceAndQuantityDelegate, UIAlertViewDelegate>
 
@@ -21,4 +21,5 @@
 @property (nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSNumberFormatter * numberFormatter;
 @property (nonatomic, strong) InvoiceForBottle * mostRecentInvoiceForBottleAdded;
+@property (nonatomic, strong) NSMutableDictionary * noOrderForBottles;
 @end

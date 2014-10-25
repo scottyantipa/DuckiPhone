@@ -51,7 +51,7 @@
     UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, headerHeight)];
     self.tableView.tableHeaderView = headerView;
     
-    UILabel * textView = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, screenWidth, 50)];
+    UILabel * textView = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, screenWidth - 40, 50)];
     [headerView addSubview:textView];
     [textView setTextAlignment:NSTextAlignmentCenter];
     textView.lineBreakMode = NSLineBreakByWordWrapping;
@@ -60,7 +60,8 @@
     textView.text = [NSString stringWithFormat:@"%@ has lost you %@.  The individual orders are below.", _bottle.name, formattedLoss];
     
     UIButton * emailButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    emailButton.frame = CGRectMake(0, 100, screenWidth, 35);
+    emailButton.frame = CGRectMake(0, 75, screenWidth, 70);
+    emailButton.titleLabel.font = [UIFont systemFontOfSize:20.0];
     [emailButton setTitle:@"Get Vendor Refund" forState:UIControlStateNormal];
     [emailButton addTarget:self action:@selector(sendEmail) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:emailButton];
