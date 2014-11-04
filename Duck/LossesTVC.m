@@ -29,15 +29,12 @@
     
     _lossesForEachBottle = [[NSMutableArray alloc] init];
     
-    // create our start date
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    NSDateComponents * now = [calendar components:NSYearCalendarUnit fromDate:[NSDate date]];
-
-    [components setYear:[now year] - 1];
-    [components setMonth:1];
-    [components setDay:1];
-    _startDate = [calendar dateFromComponents:components];
+    // create our start date for when we still start looking at invoices
+    NSDate *today = [[NSDate alloc] init];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    [offsetComponents setMonth:-6];
+    _startDate = [gregorian dateByAddingComponents:offsetComponents toDate:today options:0];
     
     [self setUserBottles];
     [self runModel];
@@ -65,9 +62,9 @@
 
 -(void)setHeaderText {
     if (_totalLosses == 0 || !_totalLosses) {
-        _headerTextView.text = @"We have gone over all of your historical inoivces and there are no losses due to price variation";
+        _headerTextView.text = @"There are no losses due to price variation over the last 6 months";
     } else {
-        _headerTextView.text = [NSString stringWithFormat:@"Changes in vendor prices have cost you %@ across all skus", [_numberFormatter stringFromNumber:[NSNumber numberWithFloat:_totalLosses]]];
+        _headerTextView.text = [NSString stringWithFormat:@"Changes in vendor prices over the last 6 months have cost you %@ across all skus", [_numberFormatter stringFromNumber:[NSNumber numberWithFloat:_totalLosses]]];
     }
 }
 
