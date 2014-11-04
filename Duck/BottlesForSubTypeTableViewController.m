@@ -25,18 +25,18 @@
     self.title = subType.name;
 }
 
-// create button as header of table to "Add More Bottles"
+// create button as header of table to add more bottles
 -(void)setHeader {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    int headerHeight = 40;
-    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, headerHeight)];
+    int headerHeight = 70;
+    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, screenWidth - 40, headerHeight)];
     UIButton * addBottlesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
     [addBottlesButton addTarget:self action:@selector(didSelectAddBottles) forControlEvents:UIControlEventTouchUpInside];
-    [addBottlesButton setTitle:@"Add More Bottles" forState:UIControlStateNormal];
+    [addBottlesButton setTitle:@"Click add to more skus to your collection" forState:UIControlStateNormal];
     addBottlesButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    
+    addBottlesButton.titleLabel.font = [UIFont systemFontOfSize:16.0];
     addBottlesButton.frame = CGRectMake(0, 0, screenWidth, headerHeight);
     [headerView addSubview:addBottlesButton];
     self.tableView.tableHeaderView = headerView;
