@@ -558,7 +558,7 @@
 		E0612A781917E34C004CF026 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		E0612A841917E374004CF026 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		E0612A861917E773004CF026 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
-		E0671CE21A09908F002DAAE1 /* StandardModalDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardModalDelegate.h; sourceTree = "<group>"; };
+		E0671CE21A09908F002DAAE1 /* BottleDetailDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottleDetailDelegate.h; sourceTree = "<group>"; };
 		E07924FF19039B4700162737 /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
 		E079250019039B4700162737 /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
 		E079250119039B4700162737 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
@@ -886,7 +886,7 @@
 		E05014EF1814AE2B00A06560 /* Protocals */ = {
 			isa = PBXGroup;
 			children = (
-				E0671CE21A09908F002DAAE1 /* StandardModalDelegate.h */,
+				E0671CE21A09908F002DAAE1 /* BottleDetailDelegate.h */,
 				E05014981814AC9900A06560 /* EditCountDelegate.h */,
 				E0B115B719DE125D000DBB42 /* PickOrderDelegate.h */,
 				E0309B4E19DBBEB800F00CA3 /* EditPriceAndQuantityDelegate.h */,

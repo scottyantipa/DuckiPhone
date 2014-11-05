@@ -57,7 +57,7 @@
         [alert show];
         return;
     }
-    [self.delegate didFinishEditing];
+    [self.delegate didFinishEditingBottle:_bottle];
 }
 
 -(void)makeRequest:(NSString *)method {
@@ -229,6 +229,24 @@
     }
     else if ([property isEqualToString:@"count"]) {
         [self performSegueWithIdentifier:@"Edit Bottle Count" sender:nil];
+    }
+    else if ([property isEqualToString:@"barcode"]) {
+        ZBarReaderViewController *reader = [ZBarReaderViewController new];
+        reader.readerDelegate = self;
+        reader.supportedOrientationsMask = ZBarOrientationMaskAll;
+        
+        ZBarImageScanner *scanner = reader.scanner;
+        
+        // Disable rarely used I2/5 to improve performance
+        [scanner setSymbology: ZBAR_I25
+                       config: ZBAR_CFG_ENABLE
+                           to: 0];
+        
+        // present and release the controller
+        [self presentViewController: reader
+                           animated: YES
+                         completion:nil
+         ];
     } else if (property == nil) {
         [self didTouchDelete];
     }
@@ -270,12 +288,31 @@
 #pragma Actions and Outlets
 - (void)didTouchDelete {
     self.bottle.userHasBottle = [NSNumber numberWithBool:NO];
-    [self.delegate didFinishEditing];
+    [self.delegate didFinishEditingBottle:nil];
 }
 
 #pragma Alert View delegate methods
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 }
+
+#pragma Delegate methods for ZBar
+
+- (void) imagePickerController: (UIImagePickerController*) reader
+ didFinishPickingMediaWithInfo: (NSDictionary*) info
+{
+    id <NSFastEnumeration> results = [info objectForKey: ZBarReaderControllerResults];
+    ZBarSymbol *symbol = nil;
+    
+    // just grab the first symbol
+    for(symbol in results)
+        break;
+    
+    NSString * resultText = symbol.data;
+    _bottle.barcode = resultText;
+    [[self tableView] reloadData];
+    [reader dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end

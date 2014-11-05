@@ -67,7 +67,7 @@
     // Check and see if there is a bottle with that barcode
     Bottle * bottle = [Bottle bottleForBarcode:resultText inManagedObjectContext:_managedObjectContext];
     
-    [reader dismissViewControllerAnimated:NO completion:nil];
+    [reader dismissViewControllerAnimated:YES completion:nil];
     
     // If bottle isnt in global db, ask if user wants to create it
     if (!bottle) {
@@ -75,7 +75,6 @@
         noBottleAlertView.tag = 1;
         [noBottleAlertView show];
     } else {
-//        [self showBottleDetail:bottle];
         _mostRecentFoundBottle= bottle;
         [self performSegueWithIdentifier:@"ShowBottleDetailsFromHome" sender:nil];
     }

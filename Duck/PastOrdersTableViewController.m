@@ -30,6 +30,9 @@
     [_dateFormatter setTimeStyle:NSDateFormatterNoStyle];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
+}
 
 - (NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController != nil) {

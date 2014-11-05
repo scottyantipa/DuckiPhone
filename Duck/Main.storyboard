@@ -976,7 +976,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfT-aI-8Lk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="357" y="416"/>
+            <point key="canvasLocation" x="2605" y="10"/>
         </scene>
         <!--Edit Managed Obj Count View Controller-->
         <scene sceneID="GA7-Yx-Qyk">
@@ -1140,7 +1140,13 @@
                             <outlet property="delegate" destination="xCa-3a-yKM" id="Y4p-8x-CFV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="JCZ-Ac-JMU"/>
+                    <navigationItem key="navigationItem" id="JCZ-Ac-JMU">
+                        <barButtonItem key="rightBarButtonItem" title="Add New" id="g4w-n7-1dV">
+                            <connections>
+                                <segue destination="M8x-Pl-qdf" kind="modal" identifier="NewBottleFromToggleBottles" id="sYY-yn-voA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchDisplayController" destination="dnE-kb-NfJ" id="byo-b0-Nva"/>
                     </connections>
@@ -1163,7 +1169,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="3048" y="-793"/>
+            <point key="canvasLocation" x="2934" y="-883"/>
         </scene>
         <!--Alcohol Sub Types Table View Controller-->
         <scene sceneID="a3l-kK-viE">
@@ -1216,8 +1222,8 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="x1p-NG-uUx"/>
-        <segue reference="sZs-gI-2L1"/>
         <segue reference="8wE-iO-ft0"/>
+        <segue reference="sYY-yn-voA"/>
         <segue reference="003-Qb-AWY"/>
         <segue reference="mol-F4-zxD"/>
         <segue reference="Ncl-VD-cSO"/>

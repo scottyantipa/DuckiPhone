@@ -11,10 +11,12 @@
 #import "SubTypeSelectorDelegate.h"
 #import "EditTextViewDelegate.h"
 #import "EditCountDelegate.h"
-#import "StandardModalDelegate.h"
+#import "ZBarSDK.h"
+#import <UIKit/UIKit.h>
+#import "BottleDetailDelegate.h"
 
-@interface BottleDetailTableViewController : BaseCoreDataTableViewController <SubTypeSelectorDelegate, EditTextViewDelegate, EditCountDelegate, UIAlertViewDelegate>
+@interface BottleDetailTableViewController : BaseCoreDataTableViewController <SubTypeSelectorDelegate, EditTextViewDelegate, EditCountDelegate, UIAlertViewDelegate, ZBarReaderDelegate>
 @property (strong, nonatomic) Bottle * bottle;
 @property (strong, nonatomic) NSOrderedSet * whiteList;
-@property (weak) id <StandardModalDelegate> delegate;
+@property (weak) id <BottleDetailDelegate> delegate;
 @end

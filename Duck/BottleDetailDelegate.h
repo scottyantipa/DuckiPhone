@@ -1,5 +1,5 @@
 //
-//  StandardModalDelegate.h
+//  BottleDetailDelegate.h
 //  Duck
 //
 //  Created by Scott Antipa on 11/4/14.
@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Bottle+Create.h"
 
-@protocol StandardModalDelegate <NSObject>
--(void)didFinishEditing;
+@protocol BottleDetailDelegate <NSObject>
+-(void)didFinishEditingBottle:(Bottle *)bottle;
 @end

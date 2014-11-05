@@ -17,8 +17,10 @@
 #import "Bottle+Create.h"
 #import "AlcoholSubType+Create.h"
 #import "ToggleBottlesDelegate.h"
+#import "BottleDetailDelegate.h"
+#import "BottleDetailTableViewController.h"
 
-@interface ToggleBottlesTableViewController : BaseCoreDataTableViewController <UISearchBarDelegate, UISearchDisplayDelegate>
+@interface ToggleBottlesTableViewController : BaseCoreDataTableViewController <UISearchBarDelegate, UISearchDisplayDelegate, BottleDetailDelegate>
 @property (weak) id <ToggleBottlesDelegate> delegate;
 @property (strong, nonatomic) NSFetchedResultsController *searchFetchedResultsController;
 @property (strong, nonatomic) UISearchDisplayController *mySearchDisplayController;

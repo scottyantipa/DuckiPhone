@@ -226,6 +226,14 @@
     
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"NewBottleFromToggleBottles"]) {
+        BottleDetailTableViewController * bottleTVC = (BottleDetailTableViewController*)[[segue destinationViewController] topViewController];
+        bottleTVC.bottle = [Bottle newBottleForBarcode:@"null" inManagedObjectContext:_managedObjectContext];
+        bottleTVC.managedObjectContext = _managedObjectContext;
+        bottleTVC.delegate = self;
+    }
+}
 
 #pragma mark -
 #pragma mark Content Filtering
@@ -349,4 +357,14 @@
     id barButtonAppearanceInSearchBar = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
     [barButtonAppearanceInSearchBar setTitle:@"Done"];
 }
+
+-(void)didFinishEditingBottle:(Bottle *)bottle {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    if (bottle == nil) {
+        return;
+    }
+    [self.delegate didSelectBottle:bottle];
+    [self.tableView reloadData];
+}
+
 @end
