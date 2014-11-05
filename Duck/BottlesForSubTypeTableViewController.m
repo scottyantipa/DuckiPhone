@@ -34,14 +34,13 @@
     UIButton * addBottlesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
     [addBottlesButton addTarget:self action:@selector(didSelectAddBottles) forControlEvents:UIControlEventTouchUpInside];
-    [addBottlesButton setTitle:@"Click add to more skus to your collection" forState:UIControlStateNormal];
+    [addBottlesButton setTitle:@"Click to add more skus to your collection" forState:UIControlStateNormal];
     addBottlesButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     addBottlesButton.titleLabel.font = [UIFont systemFontOfSize:16.0];
     addBottlesButton.frame = CGRectMake(0, 0, screenWidth, headerHeight);
     [headerView addSubview:addBottlesButton];
     self.tableView.tableHeaderView = headerView;
 }
-
 
 -(NSManagedObjectContext *)context {
     return self.subType.managedObjectContext;
@@ -111,9 +110,10 @@
     } else { // selected a bottle, so show the bottle
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         Bottle *bottle = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        BottleDetailTableViewController * bottleTVC = [segue destinationViewController];
+        BottleDetailTableViewController * bottleTVC = (BottleDetailTableViewController*)[[segue destinationViewController] topViewController];
         bottleTVC.bottle = bottle;
         bottleTVC.managedObjectContext = [self context];
+        bottleTVC.delegate = self;
     }
 }
 
@@ -187,5 +187,10 @@
     return [bottle.userHasBottle boolValue];
 }
 
+#pragma Delegate methods for StandardModal
+
+-(void)didFinishEditing {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

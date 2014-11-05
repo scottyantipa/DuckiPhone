@@ -13,8 +13,10 @@
 #import "PastOrdersTableViewController.h"
 #import <UIKit/UIKit.h>
 #import "ZBarSDK.h"
+#import "StandardModalDelegate.h"
 
-@interface HomeTableViewController : UITableViewController < ZBarReaderDelegate, UIAlertViewDelegate>
+@interface HomeTableViewController : UITableViewController < ZBarReaderDelegate, UIAlertViewDelegate, StandardModalDelegate>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property  (strong, nonatomic) NSString *currentScannedBottleBarcode;
+@property (strong, nonatomic) Bottle * mostRecentFoundBottle;
 @end

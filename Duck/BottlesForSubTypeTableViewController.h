@@ -11,8 +11,9 @@
 #import "BottleDetailTableViewController.h"
 #import "ToggleBottlesDelegate.h"
 #import "ToggleBottlesTableViewController.h"
+#import "StandardModalDelegate.h"
 
-@interface BottlesForSubTypeTableViewController : BaseCoreDataTableViewController <ToggleBottlesDelegate>
+@interface BottlesForSubTypeTableViewController : BaseCoreDataTableViewController <ToggleBottlesDelegate, StandardModalDelegate>
 @property (strong, nonatomic) AlcoholSubType *subType;
 @property (nonatomic) BOOL editing;
 @end

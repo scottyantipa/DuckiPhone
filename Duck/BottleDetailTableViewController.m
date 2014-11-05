@@ -39,6 +39,27 @@
     [self makeRequest:@"POST"];
 }
 
+// check that they've added a name and category before alerting delegate we're done editing
+- (IBAction)didPressDone:(id)sender {
+    bool noCategory = _bottle.subType == nil;
+    // note that "No Name" is the default name we provide when creating a new bottle
+    bool noName = [_bottle.name isEqualToString:@""] || _bottle.name == nil || [_bottle.name isEqualToString:@"No Name"];
+    NSString * alertMessage;
+    if (noCategory && noName) {
+        alertMessage = @"You must provide a name and a category";
+    } else if (noCategory) {
+        alertMessage = @"You must provide a category";
+    } else if (noName) {
+        alertMessage = @"You must provide a name";
+    }
+    if (alertMessage != nil) {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:alertMessage message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        [alert show];
+        return;
+    }
+    [self.delegate didFinishEditing];
+}
+
 -(void)makeRequest:(NSString *)method {
     NSUUID * uuid = [[UIDevice currentDevice] identifierForVendor];
     NSString * stringId = [uuid UUIDString];
@@ -99,12 +120,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [_whiteList count] + 1; // all the properties, plus a delete button
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger count = [_whiteList count];
+    NSInteger count = 1;
     return count;
 }
 
@@ -118,10 +139,12 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger row = indexPath.row;
-    id property = [_whiteList objectAtIndex:row];
-    NSString *nameForProperty = [self nameForProperty:property];
-    cell.detailTextLabel.text = nameForProperty;
+    NSInteger section = indexPath.section;
+    id property;
+    if (section <= [_whiteList count] - 1) {
+        property = [_whiteList objectAtIndex:section];
+    }
+
     if ([property isEqualToString:@"subType"]) {
         if (!_bottle.subType) {
             cell.textLabel.text = @"Enter Category";
@@ -138,18 +161,38 @@
         NSNumber * barcode = [numFormatter numberFromString:_bottle.barcode];
         cell.textLabel.text = [NSString stringWithFormat:@"%@", barcode];
     }
+    else if (property == nil) {
+        cell.backgroundColor = [UIColor redColor];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.text = @"REMOVE";
+    }
     else {
         cell.textLabel.text = [_bottle valueForKey:property];
     }
 }
 
--(NSString *)nameForProperty:(NSString *)property {
-    if ([property isEqualToString:@"subType"]) {
-        NSString *name = @"Category";
-        return name;
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    id property;
+    if (section <= [_whiteList count] - 1) {
+        property = [_whiteList objectAtIndex:section];
     }
-    else {
-        return property;
+
+    if ([property isEqualToString:@"subType"]) {
+        return @"category";
+    }
+    else if ([property isEqualToString:@"count"]) {
+        return @"your inventory count";
+    }
+    else if ([property isEqualToString:@"barcode"]) {
+        return @"tap to scan barcode";
+    }
+    else if (property == nil) {
+        return @"remove from your collection";
+    }
+    else if ([property isEqualToString:@"name"]) {
+        return @"name on label";
+    } else {
+        return @"error";
     }
 }
 
@@ -172,8 +215,12 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSInteger row = indexPath.row;
-    id property = [_whiteList objectAtIndex:row];
+    id property;
+    NSInteger section = indexPath.section;
+    if (section <= [_whiteList count] - 1) {
+        property = [_whiteList objectAtIndex:section];
+    }
+
     if ([property isEqualToString:@"name"]) {
         [self performSegueWithIdentifier:@"Edit Bottle Name" sender:nil];
     }
@@ -182,6 +229,8 @@
     }
     else if ([property isEqualToString:@"count"]) {
         [self performSegueWithIdentifier:@"Edit Bottle Count" sender:nil];
+    } else if (property == nil) {
+        [self didTouchDelete];
     }
 }
 
@@ -219,9 +268,14 @@
 }
 
 #pragma Actions and Outlets
-- (IBAction)didTouchDelete:(id)sender {
+- (void)didTouchDelete {
     self.bottle.userHasBottle = [NSNumber numberWithBool:NO];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.delegate didFinishEditing];
+}
+
+#pragma Alert View delegate methods
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+
 }
 
 @end

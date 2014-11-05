@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="3">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -155,11 +155,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="view" destination="9Nh-yN-2dA" id="vZc-Ed-iak"/>
+                        <segue destination="M8x-Pl-qdf" kind="modal" identifier="ShowBottleDetailsFromHome" id="sZs-gI-2L1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ewv-Ju-aCK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-318" y="1036"/>
+            <point key="canvasLocation" x="-8" y="964"/>
         </scene>
         <!--Take Inventory-->
         <scene sceneID="TWc-Ro-YGI">
@@ -316,7 +317,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FL4-W3-zM2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1227" y="859"/>
+            <point key="canvasLocation" x="1171" y="840"/>
         </scene>
         <!--Vendor Contact-->
         <scene sceneID="o9Z-Kt-tpr">
@@ -895,7 +896,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="rWc-a4-jVU" kind="push" id="rbC-GA-FWu"/>
+                                    <segue destination="M8x-Pl-qdf" kind="modal" id="TCw-cl-1mJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -915,59 +916,67 @@
             </objects>
             <point key="canvasLocation" x="1836" y="-990"/>
         </scene>
-        <!--Bottle Detail Table View Controller-->
-        <scene sceneID="mqM-9p-U7M">
+        <!--Root View Controller-->
+        <scene sceneID="zcP-uu-TWi">
             <objects>
-                <tableViewController storyboardIdentifier="BottleDetailStoryBoardID" id="rWc-a4-jVU" customClass="BottleDetailTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gVE-IC-EsI">
+                <tableViewController id="ffN-CU-wvJ" customClass="BottleDetailTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="5TY-HW-65q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Bottle Property CellID" textLabel="hoh-y1-C5j" detailTextLabel="7Kf-fy-dqW" style="IBUITableViewCellStyleSubtitle" id="cJZ-2w-DsO">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Bottle Property CellID" textLabel="dzj-49-2PC" style="IBUITableViewCellStyleDefault" id="1du-pi-ZRA">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cJZ-2w-DsO" id="Nmq-aM-Dgw">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1du-pi-ZRA" id="eGV-OO-0hf">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hoh-y1-C5j">
-                                            <rect key="frame" x="15" y="2" width="36" height="22"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dzj-49-2PC">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Kf-fy-dqW">
-                                            <rect key="frame" x="15" y="24" width="37" height="17"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="rWc-a4-jVU" id="ZqR-9P-e1b"/>
-                            <outlet property="delegate" destination="rWc-a4-jVU" id="Xld-nF-zwO"/>
+                            <outlet property="dataSource" destination="ffN-CU-wvJ" id="NOF-dV-lZ3"/>
+                            <outlet property="delegate" destination="ffN-CU-wvJ" id="yTg-eE-3a6"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="WZc-y2-0MJ">
-                        <barButtonItem key="rightBarButtonItem" title="Remove" id="v4J-mA-bjO">
+                    <navigationItem key="navigationItem" title="Root View Controller" id="bNa-i9-JpO">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="c2l-9Y-UVz">
                             <connections>
-                                <action selector="didTouchDelete:" destination="rWc-a4-jVU" id="lbm-ej-ISL"/>
+                                <action selector="didPressDone:" destination="ffN-CU-wvJ" id="hgb-U0-EnJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="20f-yH-kNa" kind="push" identifier="Edit Bottle Category" id="W9H-qs-e9e"/>
-                        <segue destination="vYe-Yf-5fr" kind="push" identifier="Edit Bottle Name" id="Nvm-kH-EUV"/>
-                        <segue destination="f5R-Wi-cca" kind="push" identifier="Edit Bottle Count" id="Kjs-1H-KHF"/>
+                        <segue destination="vYe-Yf-5fr" kind="push" identifier="Edit Bottle Name" id="96L-ko-Lao"/>
+                        <segue destination="20f-yH-kNa" kind="push" identifier="Edit Bottle Category" id="mLm-Bi-xHm"/>
+                        <segue destination="f5R-Wi-cca" kind="push" identifier="Edit Bottle Count" id="003-Qb-AWY"/>
                     </connections>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xUm-Kg-MU8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pm0-RB-CfQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3048" y="194"/>
+            <point key="canvasLocation" x="3005" y="10"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4cg-qr-Rfo">
+            <objects>
+                <navigationController storyboardIdentifier="BottleDetailRootStoryBoardID" id="M8x-Pl-qdf" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8zb-y7-mxB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ffN-CU-wvJ" kind="relationship" relationship="rootViewController" id="Tfr-ds-Yzk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cfT-aI-8Lk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="357" y="416"/>
         </scene>
         <!--Edit Managed Obj Count View Controller-->
         <scene sceneID="GA7-Yx-Qyk">
@@ -997,7 +1006,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uam-Wa-VHp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3818" y="1348"/>
+            <point key="canvasLocation" x="3818" y="1356"/>
         </scene>
         <!--Edit Text View Controller-->
         <scene sceneID="Snp-NO-syU">
@@ -1019,6 +1028,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="pmO-fg-zSE"/>
                     <connections>
                         <outlet property="textFieldForName" destination="pxI-lq-Ylj" id="jjS-QY-9Ab"/>
                         <outlet property="view" destination="RgG-Rc-DOx" id="IDp-Cv-tbO"/>
@@ -1051,6 +1061,7 @@
                             <outlet property="delegate" destination="20f-yH-kNa" id="WhM-mD-1SX"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="yeE-E3-2H2"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="shj-aq-EyU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1204,11 +1215,12 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="HEK-hq-4ib"/>
-        <segue reference="mol-F4-zxD"/>
-        <segue reference="scM-9b-LEy"/>
-        <segue reference="eb0-v6-zfo"/>
         <segue reference="x1p-NG-uUx"/>
+        <segue reference="sZs-gI-2L1"/>
+        <segue reference="8wE-iO-ft0"/>
+        <segue reference="003-Qb-AWY"/>
+        <segue reference="mol-F4-zxD"/>
+        <segue reference="Ncl-VD-cSO"/>
         <segue reference="Pga-Po-JW7"/>
     </inferredMetricsTieBreakers>
 </document>

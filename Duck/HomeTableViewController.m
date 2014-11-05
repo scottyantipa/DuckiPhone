@@ -17,7 +17,7 @@
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize currentScannedBottleBarcode = _currentScannedBottleBarcode;
-
+@synthesize mostRecentFoundBottle = _mostRecentFoundBottle;
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Show Inventory"]) {
@@ -36,16 +36,14 @@
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
     } else if ([segue.identifier isEqualToString:@"Show Losses"]) {
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
+    } else if ([segue.identifier isEqualToString:@"ShowBottleDetailsFromHome"]) {
+        BottleDetailTableViewController * bottleTVC = (BottleDetailTableViewController*)[[segue destinationViewController] topViewController];
+        [bottleTVC setBottle:_mostRecentFoundBottle];
+        [bottleTVC setManagedObjectContext:_managedObjectContext];
+        bottleTVC.delegate = self;
     }
 }
 
--(void)showBottleDetail:(Bottle *)bottle {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    BottleDetailTableViewController * bottleTVC = [storyboard instantiateViewControllerWithIdentifier:@"BottleDetailStoryBoardID"];
-    [bottleTVC setBottle:bottle];
-    [bottleTVC setManagedObjectContext:_managedObjectContext];
-    [self.navigationController pushViewController:bottleTVC animated:YES];
-}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -69,15 +67,19 @@
     // Check and see if there is a bottle with that barcode
     Bottle * bottle = [Bottle bottleForBarcode:resultText inManagedObjectContext:_managedObjectContext];
     
+    [reader dismissViewControllerAnimated:NO completion:nil];
+    
     // If bottle isnt in global db, ask if user wants to create it
     if (!bottle) {
         UIAlertView * noBottleAlertView = [[UIAlertView alloc] initWithTitle:@"We don't have record of this bottle" message:nil delegate:self cancelButtonTitle:@"Add Bottle" otherButtonTitles:@"Cancel", nil];
         noBottleAlertView.tag = 1;
         [noBottleAlertView show];
     } else {
-        [self showBottleDetail:bottle];
+//        [self showBottleDetail:bottle];
+        _mostRecentFoundBottle= bottle;
+        [self performSegueWithIdentifier:@"ShowBottleDetailsFromHome" sender:nil];
     }
-    [reader dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 #pragma Outlets/Actions
@@ -110,9 +112,16 @@
         } else if (buttonIndex == 0) {
             Bottle *newBottle = [Bottle newBottleForBarcode:_currentScannedBottleBarcode inManagedObjectContext:_managedObjectContext];
             newBottle.userHasBottle = [NSNumber numberWithBool:YES];
-            [self showBottleDetail:newBottle];
+            _mostRecentFoundBottle = newBottle;
+            [self performSegueWithIdentifier:@"ShowBottleDetailsFromHome" sender:nil];
         }
     }
 }
+
+#pragma Delegate methods for StandardModal
+-(void)didFinishEditing {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end
