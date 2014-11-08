@@ -9,6 +9,9 @@
 #import "BaseCoreDataTableViewController.h"
 #import "Order+Create.h"
 #import "OrderTableViewController.h"
+#import "UIColor+BFPaperColors.h"
+#import "BFPaperButton.h"
+
 
 @interface PastOrdersTableViewController : BaseCoreDataTableViewController
 @property (nonatomic, strong) NSNumberFormatter * numberFormatter;

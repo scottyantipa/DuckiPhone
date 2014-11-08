@@ -12,6 +12,8 @@
 #import "ToggleBottlesDelegate.h"
 #import "ToggleBottlesTableViewController.h"
 #import "BottleDetailDelegate.h"
+#import "UIColor+BFPaperColors.h"
+#import "BFPaperButton.h"
 
 @interface BottlesForSubTypeTableViewController : BaseCoreDataTableViewController <ToggleBottlesDelegate, BottleDetailDelegate>
 @property (strong, nonatomic) AlcoholSubType *subType;

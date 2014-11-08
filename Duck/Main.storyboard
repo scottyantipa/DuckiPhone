@@ -250,13 +250,10 @@
                             <outlet property="delegate" destination="ZP9-Lt-Yri" id="4fF-ry-Pno"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="g90-uR-LTm">
-                        <barButtonItem key="rightBarButtonItem" title="New Order" id="efK-n8-9k9">
-                            <connections>
-                                <segue destination="fpX-Zj-udA" kind="push" identifier="Show New Order" id="x1p-NG-uUx"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="g90-uR-LTm"/>
+                    <connections>
+                        <segue destination="fpX-Zj-udA" kind="push" identifier="Show New Order" id="WxX-YJ-RMg"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXQ-Sl-nJD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -498,13 +495,10 @@
                             <outlet property="delegate" destination="Qdd-Rt-UI0" id="Dd1-Nq-rdS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="yRQ-if-2SC">
-                        <barButtonItem key="rightBarButtonItem" title="New Invoice" id="aGp-3U-TMl">
-                            <connections>
-                                <segue destination="U2j-8O-QXu" kind="push" identifier="Show New Invoice" id="UnU-qi-g1h"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="yRQ-if-2SC"/>
+                    <connections>
+                        <segue destination="U2j-8O-QXu" kind="push" identifier="Show New Invoice" id="ZBP-mJ-DEk"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KT9-dm-XAr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -905,9 +899,7 @@
                             <outlet property="delegate" destination="xxc-Ne-wLM" id="DU0-8H-LaR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="WUi-yc-Muj">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="dE5-lc-mrQ"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="WUi-yc-Muj"/>
                     <connections>
                         <segue destination="xCa-3a-yKM" kind="push" identifier="Toggle Subtype Bottles Segue ID" id="8wE-iO-ft0"/>
                     </connections>
@@ -1221,12 +1213,12 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="x1p-NG-uUx"/>
-        <segue reference="8wE-iO-ft0"/>
-        <segue reference="sYY-yn-voA"/>
-        <segue reference="003-Qb-AWY"/>
-        <segue reference="mol-F4-zxD"/>
+        <segue reference="TCw-cl-1mJ"/>
+        <segue reference="WxX-YJ-RMg"/>
         <segue reference="Ncl-VD-cSO"/>
         <segue reference="Pga-Po-JW7"/>
+        <segue reference="ZBP-mJ-DEk"/>
+        <segue reference="8wE-iO-ft0"/>
+        <segue reference="003-Qb-AWY"/>
     </inferredMetricsTieBreakers>
 </document>

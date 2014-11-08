@@ -31,14 +31,15 @@
     CGFloat screenWidth = screenRect.size.width;
     int headerHeight = 70;
     UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, screenWidth - 40, headerHeight)];
-    UIButton * addBottlesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
+    BFPaperButton *addBottlesButton = [[BFPaperButton alloc] initWithFrame:CGRectMake(20, 20, 280, 43) raised:NO];
+    [addBottlesButton setTitle:@"Add More Bottles" forState:UIControlStateNormal];
+    addBottlesButton.backgroundColor = [UIColor paperColorGray600];  // This is from the included cocoapod "UIColor+BFPaperColors".
+    [addBottlesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [addBottlesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [addBottlesButton addTarget:self action:@selector(didSelectAddBottles) forControlEvents:UIControlEventTouchUpInside];
-    [addBottlesButton setTitle:@"Click to add more skus to your collection" forState:UIControlStateNormal];
-    addBottlesButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    addBottlesButton.titleLabel.font = [UIFont systemFontOfSize:16.0];
-    addBottlesButton.frame = CGRectMake(0, 0, screenWidth, headerHeight);
     [headerView addSubview:addBottlesButton];
+    
     self.tableView.tableHeaderView = headerView;
 }
 

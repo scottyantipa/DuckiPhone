@@ -19,11 +19,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"All Invoices";
+    [self setHeader];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
+}
+
+// create button as header of table to add more bottles
+-(void)setHeader {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    int headerHeight = 80;
+    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, screenWidth - 40, headerHeight)];
+    
+    BFPaperButton *newOrderButton = [[BFPaperButton alloc] initWithFrame:CGRectMake(20, 20, 280, 43) raised:NO];
+    [newOrderButton setTitle:@"Log Invoice" forState:UIControlStateNormal];
+    newOrderButton.backgroundColor = [UIColor paperColorGray600];  // This is from the included cocoapod "UIColor+BFPaperColors".
+    [newOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [newOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [newOrderButton addTarget:self action:@selector(didSelectNewInvoice) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:newOrderButton];
+    
+    self.tableView.tableHeaderView = headerView;
+}
+
+-(void)didSelectNewInvoice {
+    [self performSegueWithIdentifier:@"Show New Invoice" sender:nil];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
