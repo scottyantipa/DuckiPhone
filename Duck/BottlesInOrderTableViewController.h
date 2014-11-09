@@ -13,6 +13,8 @@
 #import "ToggleBottlesTableViewController.h"
 #import "EditPriceAndQuantityDelegate.h"
 #import "EditPriceAndQtyVC.h"
+#import "UIColor+BFPaperColors.h"
+#import "BFPaperButton.h"
 
 @interface BottlesInOrderTableViewController : UITableViewController <ToggleBottlesDelegate, EditPriceAndQuantityDelegate>
 @property (strong, nonatomic) Order * order;

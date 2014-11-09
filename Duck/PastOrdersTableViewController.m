@@ -35,7 +35,7 @@
     [self.tableView reloadData];
 }
 
-// create button as header of table to add more bottles
+// create button as header of table to create new orders
 -(void)setHeader {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;

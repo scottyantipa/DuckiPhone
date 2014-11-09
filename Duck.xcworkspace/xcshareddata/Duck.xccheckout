@@ -24,13 +24,13 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>27C124310AA95CA2CB088343B7D23EE660630CD9</key>
-		<string>..Duck/tesseract-ios-lib/</string>
+		<string>..Duck/tesseract-ios-lib</string>
 		<key>3AD94AD89E354EA6EB1F558FB495B1217F664761</key>
-		<string>..Duck/tesseract-ios/</string>
+		<string>..Duck/tesseract-ios</string>
 		<key>745738A1ED419F62D1B3EE3968F699A51D0BA5B9</key>
 		<string>..</string>
 		<key>E24247BEF32EEF08CD1DB7BF27E5CF2C1C8612A7</key>
-		<string>..Duck/StringScore/</string>
+		<string>..Duck/StringScore</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:scottyantipa/DuckiPhone.git</string>
@@ -40,14 +40,6 @@
 	<string>745738A1ED419F62D1B3EE3968F699A51D0BA5B9</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>3AD94AD89E354EA6EB1F558FB495B1217F664761</string>
-			<key>IDESourceControlWCCName</key>
-			<string>Duck</string>
-		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
@@ -63,6 +55,14 @@
 			<string>E24247BEF32EEF08CD1DB7BF27E5CF2C1C8612A7</string>
 			<key>IDESourceControlWCCName</key>
 			<string>StringScore</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3AD94AD89E354EA6EB1F558FB495B1217F664761</string>
+			<key>IDESourceControlWCCName</key>
+			<string>tesseract-ios</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>

@@ -671,7 +671,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="1nc-UA-Vn4" kind="modal" identifier="Edit Price And Quantity of Bottle Invoice" id="3gL-ZU-c1M"/>
+                                    <segue destination="1nc-UA-Vn4" kind="modal" identifier="" id="3gL-ZU-c1M"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -680,17 +680,14 @@
                             <outlet property="delegate" destination="CPO-EV-gMd" id="n8F-Gr-P9H"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="hKE-aS-lBL">
-                        <barButtonItem key="rightBarButtonItem" title="Add/Remove" id="ta6-JV-71l">
-                            <connections>
-                                <segue destination="xCa-3a-yKM" kind="push" identifier="Pick Bottles For Invoice" id="eb0-v6-zfo"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="hKE-aS-lBL"/>
+                    <connections>
+                        <segue destination="xCa-3a-yKM" kind="push" id="EB0-8Q-IPC"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CPX-hV-zti" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2190" y="2314"/>
+            <point key="canvasLocation" x="2450" y="-466"/>
         </scene>
         <!--Pick OrderTVC-->
         <scene sceneID="oZR-vf-hzB">
@@ -789,18 +786,14 @@
                             <outlet property="delegate" destination="L8U-UR-1zV" id="CDc-SL-OV4"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="lZz-vj-f1U">
-                        <barButtonItem key="rightBarButtonItem" title="Add/Remove" id="K5W-lG-zca">
-                            <connections>
-                                <action selector="didPressAddButton:" destination="L8U-UR-1zV" id="KCH-i4-GF5"/>
-                                <segue destination="xCa-3a-yKM" kind="push" identifier="Toggle Bottles in Order Segue ID" id="gCl-OI-uA5"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="lZz-vj-f1U"/>
+                    <connections>
+                        <segue destination="xCa-3a-yKM" kind="push" identifier="Toggle Bottles in Order Segue ID" id="3ia-V3-zWx"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U8I-Bp-uxd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1678" y="64"/>
+            <point key="canvasLocation" x="1759" y="-215"/>
         </scene>
         <!--Edit Price And QtyVC-->
         <scene sceneID="VKp-Ct-78L">
@@ -1213,12 +1206,12 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="TCw-cl-1mJ"/>
+        <segue reference="ZBP-mJ-DEk"/>
         <segue reference="WxX-YJ-RMg"/>
         <segue reference="Ncl-VD-cSO"/>
-        <segue reference="Pga-Po-JW7"/>
-        <segue reference="ZBP-mJ-DEk"/>
-        <segue reference="8wE-iO-ft0"/>
+        <segue reference="TCw-cl-1mJ"/>
         <segue reference="003-Qb-AWY"/>
+        <segue reference="EB0-8Q-IPC"/>
+        <segue reference="3gL-ZU-c1M"/>
     </inferredMetricsTieBreakers>
 </document>
