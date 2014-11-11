@@ -64,30 +64,12 @@
 {
     TakeInventoryTableViewCell *cell = (TakeInventoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Take Inventory CellID" forIndexPath:indexPath];
     Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
-    cell.nameLabel.text = bottle.name;
+    [TakeInventoryTableViewCell formatCell:cell forBottle:bottle];
+    [cell.minusButton addTarget:self action:@selector(didSelectMinus:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.plusButton addTarget:self action:@selector(didSelectPlus:) forControlEvents:UIControlEventTouchUpInside];
     
-    BFPaperButton * plusButton = [[BFPaperButton alloc] initWithFrame:CGRectMake(200, 10, 30, 30) raised:YES];
-    BFPaperButton * minusButton = [[BFPaperButton alloc] initWithFrame:CGRectMake(270, 10, 30, 30) raised:YES];
-    
-    [plusButton setTitle:@"+" forState:UIControlStateNormal];
-    [minusButton setTitle:@"-" forState:UIControlStateNormal];
-    
-    [minusButton addTarget:self action:@selector(didSelectMinus:) forControlEvents:UIControlEventTouchUpInside];
-    [plusButton addTarget:self action:@selector(didSelectPlus:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    [self formatButton:plusButton];
-    [self formatButton:minusButton];
-
-    plusButton.tag = indexPath.row;
-    minusButton.tag = indexPath.row;
-    
-    cell.plusButton = plusButton;
-    cell.minusButton = minusButton;
-    
-    [cell addSubview:plusButton];
-    [cell addSubview:minusButton];
-    
+    cell.plusButton.tag = indexPath.row;
+    cell.minusButton.tag = indexPath.row;
     float countToDisplay;
     id editedVal = [_editedValues objectForKey:[bottle objectID]];
     if (editedVal != nil) {
@@ -98,6 +80,10 @@
     cell.editCountLabel.text = [NSString stringWithFormat:@"%g", countToDisplay];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
 }
 
 -(void)didSelectMinus:(UIButton *)sender {
@@ -129,17 +115,6 @@
     UITableViewCell * cell = (UITableViewCell *)[sender superview];
     NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
     return (Bottle *)[_fetchedResultsController objectAtIndexPath:indexPath];
-}
-
--(void)formatButton:(BFPaperButton *)button {
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    button.backgroundColor = [UIColor colorWithRed:0.3 green:0 blue:1 alpha:1];
-    button.tapCircleColor = [UIColor colorWithRed:1 green:0 blue:1 alpha:0.6];  // Setting this color overrides "Smart Color".
-    button.cornerRadius = button.frame.size.width / 2;
-    button.rippleFromTapLocation = NO;
-    button.rippleBeyondBounds = YES;
-    button.tapCircleDiameter = MAX(button.frame.size.width, button.frame.size.height) * 1.3;
 }
 
 

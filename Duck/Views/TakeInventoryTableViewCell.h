@@ -9,10 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "UIColor+BFPaperColors.h"
 #import "BFPaperButton.h"
+#import "Bottle+Create.h"
 
 @interface TakeInventoryTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *editCountLabel;
+
+@property (strong, nonatomic) UILabel * nameLabel;
+@property (strong, nonatomic) UILabel * editCountLabel;
 @property (strong, nonatomic) BFPaperButton * plusButton;
 @property (strong, nonatomic) BFPaperButton * minusButton;
++(void)formatCell:(TakeInventoryTableViewCell *)cell forBottle:(Bottle *)bottle;
++(void)formatButton:(BFPaperButton *)button;
 @end
