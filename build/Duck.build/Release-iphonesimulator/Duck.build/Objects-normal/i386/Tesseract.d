@@ -1,0 +1,24 @@
+dependencies: \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/Classes/Tesseract.mm \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/Classes/Tesseract.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/baseapi.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/platform.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/apitypes.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/publictypes.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/thresholder.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/unichar.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/tesscallback.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/host.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/pageiterator.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/resultiterator.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/ltrresultiterator.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/unicharset.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/errcode.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/helpers.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/strngs.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/memry.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/unicharmap.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/genericvector.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/tesseract/ndminx.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/leptonica/environ.h \
+  /Users/scottantipa/dev/duck/DuckiPhone/Duck/tesseract-ios/tesseract-ios-lib/include/leptonica/pix.h

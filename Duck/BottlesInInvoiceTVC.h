@@ -13,6 +13,8 @@
 #import "InvoiceForBottle.h"
 #import "EditPriceAndQtyVC.h"
 #import "Bottle+Create.h"
+#import "UIColor+BFPaperColors.h"
+#import "BFPaperButton.h"
 
 @interface BottlesInInvoiceTVC : UITableViewController <ToggleBottlesDelegate, EditPriceAndQuantityDelegate, UIAlertViewDelegate>
 

@@ -24,6 +24,7 @@
     _numberFormatter = [[NSNumberFormatter alloc] init];
     [_numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     _noOrderForBottles = [[NSMutableDictionary alloc] init];
+    [self setHeader];
     
 }
 
@@ -33,23 +34,35 @@
 
 // notify user if there are bottles they have never ordered
 -(void)setHeader {
-    if ([_noOrderForBottles count] == 0) {
-        self.tableView.tableHeaderView = nil;
-        return;
-    }
-    
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
+    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 170)];
+    
+
     int labelHeight = 80;
     int labelWidth = screenWidth - 40;
-    UILabel * headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, labelWidth, labelHeight)];
-    [headerView setTextAlignment:NSTextAlignmentCenter];
-    headerView.lineBreakMode = NSLineBreakByWordWrapping;
-    headerView.numberOfLines = 0;
-    headerView.text = [NSString stringWithFormat:@"Bottles in red have not been ordered through ex-86"];
-    headerView.textColor = [UIColor redColor];
+    UILabel * alertLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, labelWidth, labelHeight)];
+    [alertLabel setTextAlignment:NSTextAlignmentCenter];
+    alertLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    alertLabel.numberOfLines = 0;
+    alertLabel.text = [NSString stringWithFormat:@"Bottles in red have not been ordered through ex-86"];
+    alertLabel.textColor = [UIColor redColor];
+    [headerView addSubview:alertLabel];
     
+    BFPaperButton *newOrderButton = [[BFPaperButton alloc] initWithFrame:CGRectMake(20, 100, 280, 43) raised:NO];
+    [newOrderButton setTitle:@"Add Bottles" forState:UIControlStateNormal];
+    newOrderButton.backgroundColor = [UIColor paperColorGray600];  // This is from the included cocoapod "UIColor+BFPaperColors".
+    [newOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [newOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [newOrderButton addTarget:self action:@selector(didSelectAddBottle) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:newOrderButton];
+
     self.tableView.tableHeaderView = headerView;
+}
+
+
+-(void)didSelectAddBottle {
+    [self performSegueWithIdentifier:@"Toggle Bottles in Invoice" sender:nil];
 }
 
 
@@ -115,7 +128,7 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"Pick Bottles For Invoice"]) {
+    if ([segue.identifier isEqualToString:@"Toggle Bottles in Invoice"]) {
         ToggleBottlesTableViewController * tvc = [segue destinationViewController];
         tvc.delegate = self;
         tvc.managedObjectContext = _managedObjectContext;

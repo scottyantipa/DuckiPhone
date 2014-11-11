@@ -682,7 +682,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="hKE-aS-lBL"/>
                     <connections>
-                        <segue destination="xCa-3a-yKM" kind="push" id="EB0-8Q-IPC"/>
+                        <segue destination="xCa-3a-yKM" kind="push" identifier="Toggle Bottles in Invoice" id="EB0-8Q-IPC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CPX-hV-zti" userLabel="First Responder" sceneMemberID="firstResponder"/>
