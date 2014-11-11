@@ -118,7 +118,7 @@
 }
 
 #pragma Delegate methods for StandardModal
--(void)didFinishEditing {
+-(void)didFinishEditingBottle:(Bottle *)bottle {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 

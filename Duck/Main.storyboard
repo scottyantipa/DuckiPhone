@@ -632,7 +632,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="esj-1X-JWp" kind="push" identifier="Show Invoice Photo Segue ID" id="GoC-ZM-ggU"/>
                         <segue destination="CPO-EV-gMd" kind="push" identifier="Show Bottles In Invoice" id="UBW-U9-nqO"/>
                         <segue destination="K1K-8Y-5wK" kind="push" identifier="Show Vendor Contact Info Segue ID" id="scM-9b-LEy"/>
                         <segue destination="TO1-6N-POa" kind="push" identifier="Show Order Picker" id="boc-Lf-JQY"/>
@@ -671,7 +670,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="1nc-UA-Vn4" kind="modal" identifier="" id="3gL-ZU-c1M"/>
+                                    <segue destination="1nc-UA-Vn4" kind="modal" identifier="Show Edit Price and Quantity From Invoice" id="3gL-ZU-c1M"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -687,7 +686,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CPX-hV-zti" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2450" y="-466"/>
+            <point key="canvasLocation" x="1956" y="2091"/>
         </scene>
         <!--Pick OrderTVC-->
         <scene sceneID="oZR-vf-hzB">
@@ -715,36 +714,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xqa-Wv-M9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2188" y="2975"/>
-        </scene>
-        <!--Invoice Photo-->
-        <scene sceneID="FLq-o9-TEX">
-            <objects>
-                <viewController id="esj-1X-JWp" customClass="InvoicePhotoVC" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="oWS-OP-Id7">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="9QW-hD-icd">
-                                <rect key="frame" x="-9" y="62" width="329" height="506"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Voz-hV-TPi">
-                                        <rect key="frame" x="9" y="-182" width="320" height="568"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                </subviews>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Invoice Photo" id="8M4-dq-oz7"/>
-                    <connections>
-                        <outlet property="invoiceImageView" destination="Voz-hV-TPi" id="HGv-vM-8Wg"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pMZ-3c-BOZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2190" y="1634"/>
         </scene>
         <!--Bottles In Order Table View Controller-->
         <scene sceneID="s41-kz-oE7">

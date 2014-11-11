@@ -132,7 +132,7 @@
         ToggleBottlesTableViewController * tvc = [segue destinationViewController];
         tvc.delegate = self;
         tvc.managedObjectContext = _managedObjectContext;
-    } else if ([segue.identifier isEqualToString:@"Edit Price And Quantity of Bottle Invoice"]){
+    } else if ([segue.identifier isEqualToString:@"Show Edit Price and Quantity From Invoice"]){
         NSIndexPath * indexPath = [self.tableView indexPathForCell:sender];
         InvoiceForBottle * invoice = [_sortedInvoicesByBottle objectAtIndex:indexPath.row];
         EditPriceAndQtyVC * vc = segue.destinationViewController;
