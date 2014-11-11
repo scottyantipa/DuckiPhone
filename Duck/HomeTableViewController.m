@@ -24,7 +24,8 @@
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
     }
     else if ([segue.identifier isEqualToString:@"Take Inventory"]) {
-        [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
+        TakeInventoryTVC * tvc = (TakeInventoryTVC *)[[segue destinationViewController] topViewController];
+        [tvc setManagedObjectContext:_managedObjectContext];
     }
     else if ([segue.identifier isEqualToString:@"New Order Segue ID"]) {
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
@@ -117,7 +118,6 @@
     }
 }
 
-#pragma Delegate methods for StandardModal
 -(void)didFinishEditingBottle:(Bottle *)bottle {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }

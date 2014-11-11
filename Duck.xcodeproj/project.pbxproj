@@ -96,6 +96,8 @@
 		E082728518198DDD007A2977 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E082728418198DDD007A2977 /* MessageUI.framework */; };
 		E082728B1819ACE3007A2977 /* PastOrdersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E082728A1819ACE3007A2977 /* PastOrdersTableViewController.m */; };
 		E0876B621911894400AE3248 /* EditVendorInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0876B611911894400AE3248 /* EditVendorInfoViewController.m */; };
+		E0948AE91A11BA7C006B25D2 /* TakeInventoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0948AE81A11BA7C006B25D2 /* TakeInventoryTableViewCell.m */; };
+		E0948AF01A11BB25006B25D2 /* TakeInventoryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0948AEF1A11BB25006B25D2 /* TakeInventoryTVC.m */; };
 		E0A4F8C71839B12A000CA0C6 /* ToggleBottlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A4F8C61839B12A000CA0C6 /* ToggleBottlesTableViewController.m */; };
 		E0B115B619DE1224000DBB42 /* PickOrderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0B115B519DE1224000DBB42 /* PickOrderTVC.m */; };
 		E0C5A55D1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0C5A55B1849ABDD008E9B94 /* Duck.xcdatamodeld */; };
@@ -274,6 +276,10 @@
 		E082728A1819ACE3007A2977 /* PastOrdersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastOrdersTableViewController.m; sourceTree = "<group>"; };
 		E0876B601911894400AE3248 /* EditVendorInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditVendorInfoViewController.h; sourceTree = "<group>"; };
 		E0876B611911894400AE3248 /* EditVendorInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditVendorInfoViewController.m; sourceTree = "<group>"; };
+		E0948AE71A11BA7C006B25D2 /* TakeInventoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TakeInventoryTableViewCell.h; path = Views/TakeInventoryTableViewCell.h; sourceTree = "<group>"; };
+		E0948AE81A11BA7C006B25D2 /* TakeInventoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TakeInventoryTableViewCell.m; path = Views/TakeInventoryTableViewCell.m; sourceTree = "<group>"; };
+		E0948AEE1A11BB25006B25D2 /* TakeInventoryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakeInventoryTVC.h; sourceTree = "<group>"; };
+		E0948AEF1A11BB25006B25D2 /* TakeInventoryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakeInventoryTVC.m; sourceTree = "<group>"; };
 		E0A4F8C51839B12A000CA0C6 /* ToggleBottlesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleBottlesTableViewController.h; sourceTree = "<group>"; };
 		E0A4F8C61839B12A000CA0C6 /* ToggleBottlesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleBottlesTableViewController.m; sourceTree = "<group>"; };
 		E0B115B419DE1224000DBB42 /* PickOrderTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickOrderTVC.h; sourceTree = "<group>"; };
@@ -392,6 +398,7 @@
 				E05015011814AED400A06560 /* AppDelegate.h */,
 				E05015021814AED400A06560 /* AppDelegate.m */,
 				E05014EB1814ADB400A06560 /* Controllers */,
+				E0948AEA1A11BA8A006B25D2 /* Views */,
 				E05014EF1814AE2B00A06560 /* Protocals */,
 				E05014EE1814AE1800A06560 /* Helpers */,
 				E05014EC1814ADE600A06560 /* DataClasses */,
@@ -512,6 +519,8 @@
 				E05014A01814AC9900A06560 /* HomeTableViewController.h */,
 				E05014A11814AC9900A06560 /* HomeTableViewController.m */,
 				E05014B41814AC9900A06560 /* TakeInventoryTableViewController.h */,
+				E0948AEE1A11BB25006B25D2 /* TakeInventoryTVC.h */,
+				E0948AEF1A11BB25006B25D2 /* TakeInventoryTVC.m */,
 				E05014B51814AC9900A06560 /* TakeInventoryTableViewController.m */,
 				E0EF7CB119DE71E5001F5CE6 /* LossesTVC.h */,
 				E0EF7CB219DE71E5001F5CE6 /* LossesTVC.m */,
@@ -620,6 +629,15 @@
 				E079250E19039B4700162737 /* iTunesArtwork@2x.png */,
 			);
 			path = icons;
+			sourceTree = "<group>";
+		};
+		E0948AEA1A11BA8A006B25D2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E0948AE71A11BA7C006B25D2 /* TakeInventoryTableViewCell.h */,
+				E0948AE81A11BA7C006B25D2 /* TakeInventoryTableViewCell.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		E0A41FB11888855C001F7493 /* Orders */ = {
@@ -847,6 +865,7 @@
 				E05014BF1814AC9900A06560 /* OrderTableViewController.m in Sources */,
 				E0309B0E19DB427100F00CA3 /* Vendor.m in Sources */,
 				E024A4EF19081351003A80DB /* OrderForBottle.m in Sources */,
+				E0948AF01A11BB25006B25D2 /* TakeInventoryTVC.m in Sources */,
 				E05015191814AED400A06560 /* Bottle+Create.m in Sources */,
 				E0309B4A19DB84A800F00CA3 /* BottlesInInvoiceTVC.m in Sources */,
 				E05014B91814AC9900A06560 /* EditManagedObjCountViewController.m in Sources */,
@@ -869,6 +888,7 @@
 				E03144391841A1530047FA6F /* Constants.m in Sources */,
 				E0A4F8C71839B12A000CA0C6 /* ToggleBottlesTableViewController.m in Sources */,
 				E05014C11814AC9900A06560 /* Order+Create.m in Sources */,
+				E0948AE91A11BA7C006B25D2 /* TakeInventoryTableViewCell.m in Sources */,
 				E050151C1814AED400A06560 /* BottlesInOrderTableViewController.m in Sources */,
 				E05014631814AB7C00A06560 /* main.m in Sources */,
 				E0E83AEB19189A9D0096233A /* InvoicePhoto.m in Sources */,

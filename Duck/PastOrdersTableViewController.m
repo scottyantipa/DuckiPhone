@@ -41,7 +41,7 @@
     CGFloat screenWidth = screenRect.size.width;
     int headerHeight = 80;
     UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, screenWidth - 40, headerHeight)];
-    
+
     BFPaperButton *newOrderButton = [[BFPaperButton alloc] initWithFrame:CGRectMake(20, 20, 280, 43) raised:NO];
     [newOrderButton setTitle:@"New Order" forState:UIControlStateNormal];
     newOrderButton.backgroundColor = [UIColor paperColorGray600];  // This is from the included cocoapod "UIColor+BFPaperColors".

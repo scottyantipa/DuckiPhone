@@ -125,7 +125,6 @@
     NSError * err;
     NSArray * fetchedBottleInvoices = [_managedObjectContext executeFetchRequest:fetchRequest error:&err];
 
-    
     InvoiceForBottle * oldest = [fetchedBottleInvoices lastObject];
     NSLog(@"oldest: %@", oldest.invoice.dateReceived);
     NSNumber * priceOfOldest = oldest.unitPrice;

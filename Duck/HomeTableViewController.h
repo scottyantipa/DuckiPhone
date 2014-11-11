@@ -14,8 +14,9 @@
 #import <UIKit/UIKit.h>
 #import "ZBarSDK.h"
 #import "BottleDetailDelegate.h"
+#import "TakeInventoryTVC.h"
 
-@interface HomeTableViewController : UITableViewController < ZBarReaderDelegate, UIAlertViewDelegate, BottleDetailDelegate>
+@interface HomeTableViewController : UITableViewController <ZBarReaderDelegate, UIAlertViewDelegate, BottleDetailDelegate>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property  (strong, nonatomic) NSString *currentScannedBottleBarcode;
 @property (strong, nonatomic) Bottle * mostRecentFoundBottle;
