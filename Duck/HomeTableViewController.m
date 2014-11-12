@@ -43,7 +43,8 @@
         [bottleTVC setManagedObjectContext:_managedObjectContext];
         bottleTVC.delegate = self;
     } else if ([segue.identifier isEqualToString:@"Show Single Barcode Reader"]) {
-        NSLog(@"showing barcode reader");
+        SingleBarcodeScanner * scanner = (SingleBarcodeScanner *)[[segue destinationViewController] topViewController];
+        scanner.delegate = self;
     }
 }
 
@@ -54,17 +55,21 @@
 
 #pragma Delegate methods
 
--(void)processScannerInfo
+-(void)didFindMetaData:(AVMetadataMachineReadableCodeObject *)metaDataObj
 {
-    // If bottle isnt in global db, ask if user wants to create it
-//    if (!bottle) {
-//        UIAlertView * noBottleAlertView = [[UIAlertView alloc] initWithTitle:@"We don't have record of this bottle" message:nil delegate:self cancelButtonTitle:@"Add Bottle" otherButtonTitles:@"Cancel", nil];
-//        noBottleAlertView.tag = 1;
-//        [noBottleAlertView show];
-//    } else {
-//        _mostRecentFoundBottle= bottle;
-//        [self performSegueWithIdentifier:@"ShowBottleDetailsFromHome" sender:nil];
-//    }
+    [self.navigationController dismissViewControllerAnimated:YES completion:^(void) {
+        NSString * barcode = [metaDataObj stringValue];
+        _currentScannedBottleBarcode = barcode;
+        Bottle * bottle = [Bottle bottleForBarcode:barcode inManagedObjectContext:_managedObjectContext];
+        if (!bottle) {
+            UIAlertView * noBottleAlertView = [[UIAlertView alloc] initWithTitle:@"We don't have record of this bottle" message:nil delegate:self cancelButtonTitle:@"Add Bottle" otherButtonTitles:@"Cancel", nil];
+            noBottleAlertView.tag = 1;
+            [noBottleAlertView show];
+        } else {
+            _mostRecentFoundBottle= bottle;
+            [self performSegueWithIdentifier:@"ShowBottleDetailsFromHome" sender:nil];
+        }
+    }];
 
 }
 

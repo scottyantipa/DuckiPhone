@@ -125,6 +125,7 @@
 		E00ABBCB1915408F00D6BF17 /* OSXData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = OSXData.sqlite; path = "../../../../Library/Developer/Xcode/DerivedData/OSXData-hkenohltsmtmosbrovqiotxcfwgz/Build/Products/Debug/OSXData.sqlite"; sourceTree = "<group>"; };
 		E00ABBD91915500D00D6BF17 /* InvoiceTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoiceTVC.h; sourceTree = "<group>"; };
 		E00ABBDA1915500D00D6BF17 /* InvoiceTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceTVC.m; sourceTree = "<group>"; };
+		E00D6ADF1A132168002D2B28 /* SingleBarcodeScannerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleBarcodeScannerDelegate.h; sourceTree = "<group>"; };
 		E0156A411A13165A0021AF27 /* SingleBarcodeScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleBarcodeScanner.h; sourceTree = "<group>"; };
 		E0156A421A13165A0021AF27 /* SingleBarcodeScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleBarcodeScanner.m; sourceTree = "<group>"; };
 		E01C5912191DF4E3007DD632 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -608,6 +609,7 @@
 		E05014EF1814AE2B00A06560 /* Protocals */ = {
 			isa = PBXGroup;
 			children = (
+				E00D6ADF1A132168002D2B28 /* SingleBarcodeScannerDelegate.h */,
 				E0671CE21A09908F002DAAE1 /* BottleDetailDelegate.h */,
 				E05014981814AC9900A06560 /* EditCountDelegate.h */,
 				E0B115B719DE125D000DBB42 /* PickOrderDelegate.h */,

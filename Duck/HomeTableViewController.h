@@ -16,8 +16,9 @@
 #import "BottleDetailDelegate.h"
 #import "TakeInventoryTVC.h"
 #import "SingleBarcodeScanner.h"
+#import "SingleBarcodeScannerDelegate.h"
 
-@interface HomeTableViewController : UITableViewController <ZBarReaderDelegate, UIAlertViewDelegate, BottleDetailDelegate>
+@interface HomeTableViewController : UITableViewController <ZBarReaderDelegate, UIAlertViewDelegate, BottleDetailDelegate, SingleBarcodeScannerDelegate>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property  (strong, nonatomic) NSString *currentScannedBottleBarcode;
 @property (strong, nonatomic) Bottle * mostRecentFoundBottle;

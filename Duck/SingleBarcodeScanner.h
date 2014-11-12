@@ -10,7 +10,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import "SingleBarcodeScannerDelegate.h"
 
-@interface SingleBarcodeScanner : UIViewController
-
+@interface SingleBarcodeScanner : UIViewController <AVCaptureMetadataOutputObjectsDelegate>
+@property (nonatomic) BOOL isReading; // whether or not the scanner is reading currently
+@property (nonatomic, strong) AVCaptureSession *captureSession;
+@property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
+@property (weak) id <SingleBarcodeScannerDelegate> delegate;
 @end
