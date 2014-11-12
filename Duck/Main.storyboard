@@ -186,7 +186,7 @@
             </objects>
             <point key="canvasLocation" x="-233" y="2011"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Inventory-->
         <scene sceneID="pAi-Wn-sBH">
             <objects>
                 <tableViewController id="Rhm-Ct-CvO" customClass="TakeInventoryTVC" sceneMemberID="viewController">
@@ -207,7 +207,7 @@
                             <outlet property="delegate" destination="Rhm-Ct-CvO" id="F3R-I6-Wxl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="d98-EV-TEV">
+                    <navigationItem key="navigationItem" title="Inventory" id="d98-EV-TEV">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Uec-yM-RGR">
                             <connections>
                                 <action selector="didPressCancel:" destination="Rhm-Ct-CvO" id="I0O-sH-ajJ"/>

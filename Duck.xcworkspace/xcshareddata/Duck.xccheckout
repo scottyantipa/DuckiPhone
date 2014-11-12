@@ -22,11 +22,11 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>3AD94AD89E354EA6EB1F558FB495B1217F664761</key>
-		<string>..Duck/</string>
+		<string>..Duck</string>
 		<key>745738A1ED419F62D1B3EE3968F699A51D0BA5B9</key>
 		<string>..</string>
 		<key>E24247BEF32EEF08CD1DB7BF27E5CF2C1C8612A7</key>
-		<string>..Duck/StringScore/</string>
+		<string>..Duck/StringScore</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:scottyantipa/DuckiPhone.git</string>
@@ -40,17 +40,17 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>3AD94AD89E354EA6EB1F558FB495B1217F664761</string>
+			<string>745738A1ED419F62D1B3EE3968F699A51D0BA5B9</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Duck</string>
+			<string>DuckiPhone</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>745738A1ED419F62D1B3EE3968F699A51D0BA5B9</string>
+			<string>3AD94AD89E354EA6EB1F558FB495B1217F664761</string>
 			<key>IDESourceControlWCCName</key>
-			<string>DuckiPhone</string>
+			<string>DuckiPhoneDuck</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>

@@ -63,7 +63,7 @@ CGFloat const CELL_HEIGHT = 130;
     }
     
     if (cell.minusButton == nil) {
-        cell.minusButton = [[BFPaperButton alloc] initWithFrame:CGRectMake(screenWidth - (BUTTON_RADIUS * 2) - 40, BUTTONS_VERT_OFFSET, BUTTON_RADIUS, BUTTON_RADIUS) raised:YES];
+        cell.minusButton = [[BFPaperButton alloc] initWithFrame:CGRectMake(screenWidth - (BUTTON_RADIUS * 2) - 40, BUTTONS_VERT_OFFSET, BUTTON_RADIUS, BUTTON_RADIUS) raised:NO];
         [cell.minusButton setTitle:@"-" forState:UIControlStateNormal];
         [self formatButton:cell.minusButton forPlus:NO];
         [cell addSubview:cell.minusButton];
@@ -76,10 +76,10 @@ CGFloat const CELL_HEIGHT = 130;
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     button.backgroundColor = isPlus ? [UIColor colorWithRed:0 green:.7 blue:.27 alpha:.5] : [UIColor colorWithRed:.7 green:0 blue:0 alpha:.5];
-    button.tapCircleColor = isPlus ? [UIColor colorWithRed:0 green:1 blue:0 alpha:0.6] : [UIColor colorWithRed:1 green:0 blue:0 alpha:0.6];
+    button.tapCircleColor = isPlus ? [UIColor colorWithRed:0 green:1 blue:0 alpha:1] : [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
     button.cornerRadius = button.frame.size.width / 2; // make circular
     button.rippleFromTapLocation = NO;
-    button.rippleBeyondBounds = NO;
+    button.rippleBeyondBounds = YES;
     button.tapCircleDiameter = button.frame.size.width;
 }
 

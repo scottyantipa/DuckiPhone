@@ -86,7 +86,7 @@
     return CELL_HEIGHT;
 }
 
--(void)didSelectMinus:(UIButton *)sender {
+-(void)didSelectMinus:(UIButton *)sender {  
     Bottle * bottle = [self bottleForSender:sender];
     [self incrementBottle:bottle byInt:-1];
 }
