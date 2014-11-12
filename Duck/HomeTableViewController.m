@@ -42,6 +42,8 @@
         [bottleTVC setBottle:_mostRecentFoundBottle];
         [bottleTVC setManagedObjectContext:_managedObjectContext];
         bottleTVC.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"Show Single Barcode Reader"]) {
+        NSLog(@"showing barcode reader");
     }
 }
 
@@ -52,55 +54,20 @@
 
 #pragma Delegate methods
 
-- (void) imagePickerController: (UIImagePickerController*) reader
- didFinishPickingMediaWithInfo: (NSDictionary*) info
+-(void)processScannerInfo
 {
-    id <NSFastEnumeration> results = [info objectForKey: ZBarReaderControllerResults];
-    ZBarSymbol *symbol = nil;
-
-    // just grab the first symbol
-    for(symbol in results)
-        break;
-    
-    NSString * resultText = symbol.data;
-    _currentScannedBottleBarcode = resultText;
-    
-    // Check and see if there is a bottle with that barcode
-    Bottle * bottle = [Bottle bottleForBarcode:resultText inManagedObjectContext:_managedObjectContext];
-    
-    [reader dismissViewControllerAnimated:YES completion:nil];
-    
     // If bottle isnt in global db, ask if user wants to create it
-    if (!bottle) {
-        UIAlertView * noBottleAlertView = [[UIAlertView alloc] initWithTitle:@"We don't have record of this bottle" message:nil delegate:self cancelButtonTitle:@"Add Bottle" otherButtonTitles:@"Cancel", nil];
-        noBottleAlertView.tag = 1;
-        [noBottleAlertView show];
-    } else {
-        _mostRecentFoundBottle= bottle;
-        [self performSegueWithIdentifier:@"ShowBottleDetailsFromHome" sender:nil];
-    }
+//    if (!bottle) {
+//        UIAlertView * noBottleAlertView = [[UIAlertView alloc] initWithTitle:@"We don't have record of this bottle" message:nil delegate:self cancelButtonTitle:@"Add Bottle" otherButtonTitles:@"Cancel", nil];
+//        noBottleAlertView.tag = 1;
+//        [noBottleAlertView show];
+//    } else {
+//        _mostRecentFoundBottle= bottle;
+//        [self performSegueWithIdentifier:@"ShowBottleDetailsFromHome" sender:nil];
+//    }
 
 }
 
-#pragma Outlets/Actions
-- (IBAction)didPressScanButton:(id)sender {
-    ZBarReaderViewController *reader = [ZBarReaderViewController new];
-    reader.readerDelegate = self;
-    reader.supportedOrientationsMask = ZBarOrientationMaskAll;
-    
-    ZBarImageScanner *scanner = reader.scanner;
-    
-    // Disable rarely used I2/5 to improve performance
-    [scanner setSymbology: ZBAR_I25
-                   config: ZBAR_CFG_ENABLE
-                       to: 0];
-    
-    // present and release the controller
-    [self presentViewController: reader
-                        animated: YES
-                        completion:nil
-     ];
-}
 
 // Alert View
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

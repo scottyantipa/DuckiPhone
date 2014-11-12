@@ -15,6 +15,7 @@
 #import "ZBarSDK.h"
 #import "BottleDetailDelegate.h"
 #import "TakeInventoryTVC.h"
+#import "SingleBarcodeScanner.h"
 
 @interface HomeTableViewController : UITableViewController <ZBarReaderDelegate, UIAlertViewDelegate, BottleDetailDelegate>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

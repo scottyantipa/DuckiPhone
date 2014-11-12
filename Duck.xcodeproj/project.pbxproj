@@ -12,6 +12,7 @@
 		E00ABBCC1915408F00D6BF17 /* OSXData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E00ABBCB1915408F00D6BF17 /* OSXData.sqlite */; };
 		E00ABBDB1915500D00D6BF17 /* InvoiceTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E00ABBDA1915500D00D6BF17 /* InvoiceTVC.m */; };
 		E011D0C91A1307FF00A5BEAC /* ZBarReaderViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = E05014DC1814AD7100A06560 /* ZBarReaderViewController.h */; };
+		E0156A431A13165A0021AF27 /* SingleBarcodeScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = E0156A421A13165A0021AF27 /* SingleBarcodeScanner.m */; };
 		E01C5916191DF4E3007DD632 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E01C5912191DF4E3007DD632 /* .gitignore */; };
 		E01C5917191DF4E3007DD632 /* NSString+Score.m in Sources */ = {isa = PBXBuildFile; fileRef = E01C5914191DF4E3007DD632 /* NSString+Score.m */; };
 		E01C5918191DF4E3007DD632 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E01C5915191DF4E3007DD632 /* README.md */; };
@@ -124,6 +125,8 @@
 		E00ABBCB1915408F00D6BF17 /* OSXData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = OSXData.sqlite; path = "../../../../Library/Developer/Xcode/DerivedData/OSXData-hkenohltsmtmosbrovqiotxcfwgz/Build/Products/Debug/OSXData.sqlite"; sourceTree = "<group>"; };
 		E00ABBD91915500D00D6BF17 /* InvoiceTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoiceTVC.h; sourceTree = "<group>"; };
 		E00ABBDA1915500D00D6BF17 /* InvoiceTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceTVC.m; sourceTree = "<group>"; };
+		E0156A411A13165A0021AF27 /* SingleBarcodeScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleBarcodeScanner.h; sourceTree = "<group>"; };
+		E0156A421A13165A0021AF27 /* SingleBarcodeScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleBarcodeScanner.m; sourceTree = "<group>"; };
 		E01C5912191DF4E3007DD632 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		E01C5913191DF4E3007DD632 /* NSString+Score.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Score.h"; sourceTree = "<group>"; };
 		E01C5914191DF4E3007DD632 /* NSString+Score.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Score.m"; sourceTree = "<group>"; };
@@ -530,6 +533,8 @@
 				E0948AEF1A11BB25006B25D2 /* TakeInventoryTVC.m */,
 				E0EF7CB119DE71E5001F5CE6 /* LossesTVC.h */,
 				E0EF7CB219DE71E5001F5CE6 /* LossesTVC.m */,
+				E0156A411A13165A0021AF27 /* SingleBarcodeScanner.h */,
+				E0156A421A13165A0021AF27 /* SingleBarcodeScanner.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -877,6 +882,7 @@
 				E0309B4A19DB84A800F00CA3 /* BottlesInInvoiceTVC.m in Sources */,
 				E05014B91814AC9900A06560 /* EditManagedObjCountViewController.m in Sources */,
 				E05014BC1814AC9900A06560 /* HomeTableViewController.m in Sources */,
+				E0156A431A13165A0021AF27 /* SingleBarcodeScanner.m in Sources */,
 				E05015141814AED400A06560 /* AlcoholTypesTableViewController.m in Sources */,
 				E0223CCA191D38A1003EC403 /* InvoicePhotoVC.m in Sources */,
 				E024A4EC19081351003A80DB /* AlcoholType.m in Sources */,
