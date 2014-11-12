@@ -11,8 +11,9 @@
 #import "TakeInventoryTableViewCell.h"
 #import "UIColor+BFPaperColors.h"
 #import "BFPaperButton.h"
+#import "InventorySnapshotForBottle+Create.h"
 
-@interface TakeInventoryTVC : BaseCoreDataTableViewController
+@interface TakeInventoryTVC : BaseCoreDataTableViewController <UIAlertViewDelegate>
 @property (strong, nonatomic) NSMutableDictionary * editedValues;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;

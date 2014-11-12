@@ -11,6 +11,7 @@
 		E000D7411817B0F1006232A8 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E05014DF1814AD7100A06560 /* libzbar.a */; };
 		E00ABBCC1915408F00D6BF17 /* OSXData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E00ABBCB1915408F00D6BF17 /* OSXData.sqlite */; };
 		E00ABBDB1915500D00D6BF17 /* InvoiceTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E00ABBDA1915500D00D6BF17 /* InvoiceTVC.m */; };
+		E011D0C91A1307FF00A5BEAC /* ZBarReaderViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = E05014DC1814AD7100A06560 /* ZBarReaderViewController.h */; };
 		E01C5916191DF4E3007DD632 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E01C5912191DF4E3007DD632 /* .gitignore */; };
 		E01C5917191DF4E3007DD632 /* NSString+Score.m in Sources */ = {isa = PBXBuildFile; fileRef = E01C5914191DF4E3007DD632 /* NSString+Score.m */; };
 		E01C5918191DF4E3007DD632 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E01C5915191DF4E3007DD632 /* README.md */; };
@@ -56,7 +57,6 @@
 		E05014C11814AC9900A06560 /* Order+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014AB1814AC9900A06560 /* Order+Create.m */; };
 		E05014C31814AC9900A06560 /* OrderForBottle+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014AF1814AC9900A06560 /* OrderForBottle+Create.m */; };
 		E05014C51814AC9900A06560 /* PickBottleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014B21814AC9900A06560 /* PickBottleTableViewController.m */; };
-		E05014C61814AC9900A06560 /* TakeInventoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014B51814AC9900A06560 /* TakeInventoryTableViewController.m */; };
 		E05014E61814AD7100A06560 /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = E05014E11814AD7100A06560 /* zbar-back.png */; };
 		E05014E71814AD7100A06560 /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = E05014E21814AD7100A06560 /* zbar-help.html */; };
 		E05014E81814AD7100A06560 /* zbar-helpicons.png in Resources */ = {isa = PBXBuildFile; fileRef = E05014E31814AD7100A06560 /* zbar-helpicons.png */; };
@@ -77,6 +77,7 @@
 		E05015221814B19400A06560 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E05015211814B19400A06560 /* libiconv.dylib */; };
 		E05C1AAD1814BED900FE57EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E05C1AAC1814BED900FE57EF /* Main.storyboard */; };
 		E0612A871917E773004CF026 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E0612A861917E773004CF026 /* libstdc++.6.dylib */; };
+		E07519121A13056400F706B9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E07519111A13056400F706B9 /* Security.framework */; };
 		E079250F19039B4700162737 /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = E07924FF19039B4700162737 /* Icon-40.png */; };
 		E079251019039B4700162737 /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E079250019039B4700162737 /* Icon-40@2x.png */; };
 		E079251119039B4700162737 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = E079250119039B4700162737 /* Icon-60.png */; };
@@ -199,8 +200,6 @@
 		E05014B11814AC9900A06560 /* PickBottleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickBottleTableViewController.h; sourceTree = "<group>"; };
 		E05014B21814AC9900A06560 /* PickBottleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickBottleTableViewController.m; sourceTree = "<group>"; };
 		E05014B31814AC9900A06560 /* SubTypeSelectorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubTypeSelectorDelegate.h; sourceTree = "<group>"; };
-		E05014B41814AC9900A06560 /* TakeInventoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakeInventoryTableViewController.h; sourceTree = "<group>"; };
-		E05014B51814AC9900A06560 /* TakeInventoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakeInventoryTableViewController.m; sourceTree = "<group>"; };
 		E05014CB1814AD7100A06560 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
 		E05014CC1814AD7100A06560 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
 		E05014CD1814AD7100A06560 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
@@ -255,6 +254,10 @@
 		E05C1AAC1814BED900FE57EF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E0612A861917E773004CF026 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		E0671CE21A09908F002DAAE1 /* BottleDetailDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottleDetailDelegate.h; sourceTree = "<group>"; };
+		E07519111A13056400F706B9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E07519131A13057800F706B9 /* libPods-UIColor+BFPaperColors.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-UIColor+BFPaperColors.a"; path = "Pods/build/Debug-iphoneos/libPods-UIColor+BFPaperColors.a"; sourceTree = "<group>"; };
+		E07519151A13058000F706B9 /* libPods-BFPaperButton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-BFPaperButton.a"; path = "Pods/build/Debug-iphoneos/libPods-BFPaperButton.a"; sourceTree = "<group>"; };
+		E07519171A13058900F706B9 /* libPods-Duck-BFPaperButton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Duck-BFPaperButton.a"; path = "Pods/build/Debug-iphoneos/libPods-Duck-BFPaperButton.a"; sourceTree = "<group>"; };
 		E07924FF19039B4700162737 /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
 		E079250019039B4700162737 /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
 		E079250119039B4700162737 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
@@ -298,6 +301,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E07519121A13056400F706B9 /* Security.framework in Frameworks */,
 				E0612A871917E773004CF026 /* libstdc++.6.dylib in Frameworks */,
 				E02D3F741849543C00C435A3 /* CoreVideo.framework in Frameworks */,
 				E02D3F721849542C00C435A3 /* AVFoundation.framework in Frameworks */,
@@ -372,6 +376,10 @@
 		E05014531814AB7C00A06560 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E07519171A13058900F706B9 /* libPods-Duck-BFPaperButton.a */,
+				E07519151A13058000F706B9 /* libPods-BFPaperButton.a */,
+				E07519131A13057800F706B9 /* libPods-UIColor+BFPaperColors.a */,
+				E07519111A13056400F706B9 /* Security.framework */,
 				E0612A861917E773004CF026 /* libstdc++.6.dylib */,
 				E02D3F731849543C00C435A3 /* CoreVideo.framework */,
 				E02D3F711849542C00C435A3 /* AVFoundation.framework */,
@@ -518,10 +526,8 @@
 				E0A41FB11888855C001F7493 /* Orders */,
 				E05014A01814AC9900A06560 /* HomeTableViewController.h */,
 				E05014A11814AC9900A06560 /* HomeTableViewController.m */,
-				E05014B41814AC9900A06560 /* TakeInventoryTableViewController.h */,
 				E0948AEE1A11BB25006B25D2 /* TakeInventoryTVC.h */,
 				E0948AEF1A11BB25006B25D2 /* TakeInventoryTVC.m */,
-				E05014B51814AC9900A06560 /* TakeInventoryTableViewController.m */,
 				E0EF7CB119DE71E5001F5CE6 /* LossesTVC.h */,
 				E0EF7CB219DE71E5001F5CE6 /* LossesTVC.m */,
 			);
@@ -842,6 +848,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E011D0C91A1307FF00A5BEAC /* ZBarReaderViewController.h in Sources */,
 				E024A4E619081351003A80DB /* InventorySnapshotForBottle.m in Sources */,
 				E0309AF919D91BCC00F00CA3 /* InvoicesForOrderTVC.m in Sources */,
 				E0309B0819DB427100F00CA3 /* Bottle.m in Sources */,
@@ -879,7 +886,6 @@
 				E0C5A55D1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */,
 				E0876B621911894400AE3248 /* EditVendorInfoViewController.m in Sources */,
 				E0309AFF19DA840E00F00CA3 /* InvoicesTVC.m in Sources */,
-				E05014C61814AC9900A06560 /* TakeInventoryTableViewController.m in Sources */,
 				E05015101814AED400A06560 /* AlcoholSubType+Create.m in Sources */,
 				E05015161814AED400A06560 /* AppDelegate.m in Sources */,
 				E00ABBDB1915500D00D6BF17 /* InvoiceTVC.m in Sources */,
@@ -1031,8 +1037,9 @@
 					"$(PROJECT_DIR)/Duck/tesseract-ios/tesseract-ios-lib/lib",
 					"$(PROJECT_DIR)/Duck/iOSMagick-6.8.8-9",
 					"$(PROJECT_DIR)/Duck/iOSMagick-6.8.8-9-libs",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1062,6 +1069,7 @@
 					/Users/scottantipa/dev/duck/DuckiPhone/Duck/ZBarSDK,
 					"$(PROJECT_DIR)/Duck/iOSMagick-6.8.8-9",
 					"$(PROJECT_DIR)/Duck/iOSMagick-6.8.8-9-libs",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";

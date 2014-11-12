@@ -189,9 +189,9 @@
                                 <action selector="didPressCancel:" destination="Rhm-Ct-CvO" id="I0O-sH-ajJ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="J8L-3s-suv">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="J8L-3s-suv">
                             <connections>
-                                <action selector="didPressSave:" destination="Rhm-Ct-CvO" id="1eR-MF-5lE"/>
+                                <action selector="didPressDone:" destination="Rhm-Ct-CvO" id="836-Oz-kCz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

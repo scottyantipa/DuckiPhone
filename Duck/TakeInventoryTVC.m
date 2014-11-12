@@ -83,7 +83,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return CELL_HEIGHT;
 }
 
 -(void)didSelectMinus:(UIButton *)sender {
@@ -118,15 +118,55 @@
 }
 
 
-- (IBAction)didPressSave:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (IBAction)didPressDone:(id)sender {
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(135,140,50,50)];
+    spinner.color = [UIColor blueColor];
+    [spinner startAnimating];
+    [self.view addSubview:spinner];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSDate * now = [NSDate date];
+        for (NSManagedObjectID * key in _editedValues) {
+            Bottle * bottle = (Bottle *)[_managedObjectContext objectWithID:key];
+            id editedVal = [_editedValues objectForKey:key];
+            if (editedVal == nil) {
+                continue; // this shouldnt happen, just a safegaurd
+            }
+            [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:now withCount:(NSNumber *)editedVal forBottle:bottle inManagedObjectContext:_managedObjectContext];
+            NSError *error;
+            if (![_managedObjectContext save:&error]) {
+                NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // stop and remove the spinner on the background when done
+            [spinner removeFromSuperview];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
+    });
+
 }
 
 
+// TODO: Alert view
 - (IBAction)didPressCancel:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (_editedValues.count != 0) {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Your changes will not be saved.  Do you still want to cancel?" message:nil delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        alert.tag = 1;
+        [alert show];
+        
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"button index %u", buttonIndex);
+    if (buttonIndex == 1) { // "OK"
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 
+}
 
 @end

@@ -19,4 +19,5 @@
 @property (strong, nonatomic) BFPaperButton * minusButton;
 +(void)formatCell:(TakeInventoryTableViewCell *)cell forBottle:(Bottle *)bottle;
 +(void)formatButton:(BFPaperButton *)button;
+extern CGFloat const CELL_HEIGHT;
 @end
