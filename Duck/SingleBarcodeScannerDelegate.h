@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 @protocol SingleBarcodeScannerDelegate <NSObject>
 -(void)didFindMetaData:(AVMetadataMachineReadableCodeObject *)metaDataObj;

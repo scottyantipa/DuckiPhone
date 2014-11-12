@@ -11,11 +11,12 @@
 #import "SubTypeSelectorDelegate.h"
 #import "EditTextViewDelegate.h"
 #import "EditCountDelegate.h"
-#import "ZBarSDK.h"
 #import <UIKit/UIKit.h>
 #import "BottleDetailDelegate.h"
+#import "SingleBarcodeScannerDelegate.h"
+#import "SingleBarcodeScanner.h"
 
-@interface BottleDetailTableViewController : BaseCoreDataTableViewController <SubTypeSelectorDelegate, EditTextViewDelegate, EditCountDelegate, UIAlertViewDelegate, ZBarReaderDelegate>
+@interface BottleDetailTableViewController : BaseCoreDataTableViewController <SubTypeSelectorDelegate, EditTextViewDelegate, EditCountDelegate, UIAlertViewDelegate, SingleBarcodeScannerDelegate>
 @property (strong, nonatomic) Bottle * bottle;
 @property (strong, nonatomic) NSOrderedSet * whiteList;
 @property (weak) id <BottleDetailDelegate> delegate;

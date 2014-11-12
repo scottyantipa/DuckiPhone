@@ -209,6 +209,9 @@
     else if ([[segue identifier] isEqualToString:@"Edit Bottle Count"]) {
         EditManagedObjCountViewController * editCountView = [segue destinationViewController];
         editCountView.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"Show Scanner From Bottle Detail"]) {
+        SingleBarcodeScanner * scanner = (SingleBarcodeScanner *)[[segue destinationViewController] topViewController];
+        scanner.delegate = self;
     }
 }
 
@@ -231,22 +234,7 @@
         [self performSegueWithIdentifier:@"Edit Bottle Count" sender:nil];
     }
     else if ([property isEqualToString:@"barcode"]) {
-        ZBarReaderViewController *reader = [ZBarReaderViewController new];
-        reader.readerDelegate = self;
-        reader.supportedOrientationsMask = ZBarOrientationMaskAll;
-        
-        ZBarImageScanner *scanner = reader.scanner;
-        
-        // Disable rarely used I2/5 to improve performance
-        [scanner setSymbology: ZBAR_I25
-                       config: ZBAR_CFG_ENABLE
-                           to: 0];
-        
-        // present and release the controller
-        [self presentViewController: reader
-                           animated: YES
-                         completion:nil
-         ];
+        [self performSegueWithIdentifier:@"Show Scanner From Bottle Detail" sender:nil];
     } else if (property == nil) {
         [self didTouchDelete];
     }
@@ -296,22 +284,19 @@
 
 }
 
-#pragma Delegate methods for ZBar
+#pragma Delegate methods for Scanner
 
-- (void) imagePickerController: (UIImagePickerController*) reader
- didFinishPickingMediaWithInfo: (NSDictionary*) info
+-(void)didFindMetaData:(AVMetadataMachineReadableCodeObject *)metaDataObj
 {
-    id <NSFastEnumeration> results = [info objectForKey: ZBarReaderControllerResults];
-    ZBarSymbol *symbol = nil;
+    [self.navigationController dismissViewControllerAnimated:YES completion:^(void) {
+        NSString * barcode = [metaDataObj stringValue];
+        if ([barcode isEqualToString:@""]) {
+            return;
+        }
+        _bottle.barcode = barcode;
+        [self.tableView reloadData];
+    }];
     
-    // just grab the first symbol
-    for(symbol in results)
-        break;
-    
-    NSString * resultText = symbol.data;
-    _bottle.barcode = resultText;
-    [[self tableView] reloadData];
-    [reader dismissViewControllerAnimated:YES completion:nil];
 }
 
 

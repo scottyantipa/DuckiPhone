@@ -12,13 +12,12 @@
 #import "Order+Create.h"
 #import "PastOrdersTableViewController.h"
 #import <UIKit/UIKit.h>
-#import "ZBarSDK.h"
 #import "BottleDetailDelegate.h"
 #import "TakeInventoryTVC.h"
 #import "SingleBarcodeScanner.h"
 #import "SingleBarcodeScannerDelegate.h"
 
-@interface HomeTableViewController : UITableViewController <ZBarReaderDelegate, UIAlertViewDelegate, BottleDetailDelegate, SingleBarcodeScannerDelegate>
+@interface HomeTableViewController : UITableViewController <UIAlertViewDelegate, BottleDetailDelegate, SingleBarcodeScannerDelegate>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property  (strong, nonatomic) NSString *currentScannedBottleBarcode;
 @property (strong, nonatomic) Bottle * mostRecentFoundBottle;

@@ -184,7 +184,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Azj-Pb-pXz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-149" y="1722"/>
+            <point key="canvasLocation" x="-233" y="2011"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="pAi-Wn-sBH">
@@ -957,6 +957,7 @@
                         <segue destination="vYe-Yf-5fr" kind="push" identifier="Edit Bottle Name" id="96L-ko-Lao"/>
                         <segue destination="20f-yH-kNa" kind="push" identifier="Edit Bottle Category" id="mLm-Bi-xHm"/>
                         <segue destination="f5R-Wi-cca" kind="push" identifier="Edit Bottle Count" id="003-Qb-AWY"/>
+                        <segue destination="IR3-QD-jjL" kind="modal" identifier="Show Scanner From Bottle Detail" id="Ry1-pD-on8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pm0-RB-CfQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1232,7 +1233,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kzh-P2-7BZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-537" y="1722"/>
+            <point key="canvasLocation" x="-621" y="2011"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -1241,10 +1242,11 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ZBP-mJ-DEk"/>
         <segue reference="sZs-gI-2L1"/>
+        <segue reference="ZBP-mJ-DEk"/>
+        <segue reference="Ry1-pD-on8"/>
         <segue reference="Ncl-VD-cSO"/>
-        <segue reference="Pga-Po-JW7"/>
         <segue reference="3ia-V3-zWx"/>
+        <segue reference="Pga-Po-JW7"/>
     </inferredMetricsTieBreakers>
 </document>
