@@ -77,11 +77,7 @@
 // Alert View
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == 1) { // its the "No Bottle" alert from the scanner
-        if (buttonIndex == 1) { // the "pick vendor" button
-            NSLog(@"buttonIndex 1");
-        } else if (buttonIndex == 2) {
-            NSLog(@"buttonIndex 2");
-        } else if (buttonIndex == 0) {
+        if (buttonIndex == 0) {
             Bottle *newBottle = [Bottle newBottleForBarcode:_currentScannedBottleBarcode inManagedObjectContext:_managedObjectContext];
             newBottle.userHasBottle = [NSNumber numberWithBool:YES];
             _mostRecentFoundBottle = newBottle;
