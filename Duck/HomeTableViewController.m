@@ -51,6 +51,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     if (_myBottlesToolTip != nil) {
         [_myBottlesToolTip dismissAnimated:NO];
         _myBottlesToolTip = nil;
@@ -58,9 +59,20 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     if ([NSUserDefaultsManager isFirstTimeShowingClass:NSStringFromClass([self class])]) {
         [self showMyBottlesToolTip];
     }
+}
+
+-(void)showMyBottlesToolTip {
+    _myBottlesToolTip = [[CMPopTipView alloc] initWithMessage:@"Start by adding bottles to your collection"];
+    _myBottlesToolTip.delegate = self;
+    _myBottlesToolTip.backgroundColor = [UIColor whiteColor];
+    _myBottlesToolTip.textColor = [UIColor darkTextColor];
+    NSIndexPath * firstCellPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    UITableViewCell * firstCell = [self.tableView cellForRowAtIndexPath:firstCellPath];
+    [_myBottlesToolTip presentPointingAtView:firstCell inView:self.view animated:YES];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -105,23 +117,6 @@
 }
 
 #pragma CMPopUP delegate
-
-- (IBAction)didTouchHelp:(id)sender {
-    if (_myBottlesToolTip != nil) {
-        return;
-    }
-    [self showMyBottlesToolTip];
-}
-
--(void)showMyBottlesToolTip {
-    _myBottlesToolTip = [[CMPopTipView alloc] initWithMessage:@"Start by adding bottles to your collection"];
-    _myBottlesToolTip.delegate = self;
-    _myBottlesToolTip.backgroundColor = [UIColor lightGrayColor];
-    _myBottlesToolTip.textColor = [UIColor darkTextColor];
-    NSIndexPath * firstCellPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    UITableViewCell * firstCell = [self.tableView cellForRowAtIndexPath:firstCellPath];
-    [_myBottlesToolTip presentPointingAtView:firstCell inView:self.view animated:YES];
-}
 
 -(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
     _myBottlesToolTip = nil;

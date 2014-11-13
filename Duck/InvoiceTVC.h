@@ -19,13 +19,15 @@
 #import "Order+Create.h"
 #import "PickOrderDelegate.h"
 #import "PickOrderTVC.h"
+#import "CMPopTipView.h"
+#import "NSUserDefaultsManager.h"
 
-@interface InvoiceTVC : UITableViewController <UIImagePickerControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, PickOrderDelegate>
+@interface InvoiceTVC : UITableViewController <UIImagePickerControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, PickOrderDelegate, CMPopTipViewDelegate>
 @property (nonatomic, strong) Invoice * invoice;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addPhotoBarButton;
 @property (weak, nonatomic) NSManagedObjectContext* managedObjectContext;
 @property (weak, nonatomic) NSArray * sortedBottlesInOrder;
-@property (weak, nonatomic) NSArray * sortedInvoicePhotos;
 @property (nonatomic, strong) NSNumberFormatter * numberFormatter;
 @property (nonatomic, strong) UIDatePicker * datePicker;
+@property (strong, nonatomic) CMPopTipView * skusToolTip;
 @end

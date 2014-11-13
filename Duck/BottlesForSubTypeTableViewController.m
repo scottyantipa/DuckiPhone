@@ -54,7 +54,7 @@
 -(void)showHint {
     _plusButtonToolTip = [[CMPopTipView alloc] initWithMessage:@"You have no bottles in your collection.  Tap here to add some."];
     _plusButtonToolTip.delegate = self;
-    _plusButtonToolTip.backgroundColor = [UIColor lightGrayColor];
+    _plusButtonToolTip.backgroundColor = [UIColor whiteColor];
     _plusButtonToolTip.textColor = [UIColor darkTextColor];
     UIBarButtonItem * addButton = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
     [_plusButtonToolTip presentPointingAtBarButtonItem:addButton animated:YES];

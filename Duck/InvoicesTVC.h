@@ -10,6 +10,8 @@
 #import "Invoice.h"
 #import "InvoiceTVC.h"
 #import "Vendor+Create.h"
+#import "CMPopTipView.h"
 
-@interface InvoicesTVC : BaseCoreDataTableViewController
+@interface InvoicesTVC : BaseCoreDataTableViewController <CMPopTipViewDelegate>
+@property (strong, nonatomic) CMPopTipView * plusButtonToolTip;
 @end

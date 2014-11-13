@@ -15,6 +15,7 @@
 @implementation InvoicesTVC
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize plusButtonToolTip = _plusButtonToolTip;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,7 +24,34 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if (_plusButtonToolTip != nil) {
+        [_plusButtonToolTip dismissAnimated:YES];
+        _plusButtonToolTip = nil;
+    }
     [self.tableView reloadData];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    if (_fetchedResultsController.fetchedObjects.count == 0) {
+        [self showHint];
+    }
+}
+
+
+-(void)showHint {
+    _plusButtonToolTip = [[CMPopTipView alloc] initWithMessage:@"Log your first invoice"];
+    _plusButtonToolTip.delegate = self;
+    _plusButtonToolTip.backgroundColor = [UIColor whiteColor];
+    _plusButtonToolTip.textColor = [UIColor darkTextColor];
+    UIBarButtonItem * addButton = [self.navigationItem.rightBarButtonItems objectAtIndex:0];
+    [_plusButtonToolTip presentPointingAtBarButtonItem:addButton animated:YES];
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated {
+    if (_plusButtonToolTip != nil) {
+        [_plusButtonToolTip dismissAnimated:YES];
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -74,6 +102,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma Delegate methods for tool tip
+-(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
+    _plusButtonToolTip = nil;
 }
 
 @end

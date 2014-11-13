@@ -25,38 +25,43 @@
     [_numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     
     _datePicker = [[UIDatePicker alloc] init];
-    [self setHeader];
 }
 
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:YES];
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (_skusToolTip != nil) {
+        [_skusToolTip dismissAnimated:YES];
+        _skusToolTip = nil;
+    }
     self.title = @"Invoice";
-    [[self tableView] reloadData];
-
+    [self.tableView reloadData];
 }
 
-// create button to order from vendor or duplicate order
--(void)setHeader {
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    int buttonHeight = 55;
-    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, buttonHeight)];
-    UIButton * addPhotoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [addPhotoButton setTitle:@"Add Invoice Photo" forState:UIControlStateNormal];
-    addPhotoButton.frame = CGRectMake(0, 0, screenWidth, buttonHeight);
-    [addPhotoButton addTarget:self action:@selector(didSelectAddPhoto) forControlEvents:UIControlEventTouchUpInside];
-    [headerView addSubview:addPhotoButton];
-    self.tableView.tableHeaderView = headerView;
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if ([NSUserDefaultsManager isFirstTimeShowingClass:NSStringFromClass([self class])]) {
+        [self showHint];
+    }
 }
 
 
--(NSArray *)sortedInvoicePhotos {
-    NSSet * invoicePhotos = _invoice.photos;
-    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"documentName" ascending:NO];
-    NSArray * sortDescriptors = @[sortDescriptor];
-    return [invoicePhotos sortedArrayUsingDescriptors:sortDescriptors];
+-(void)showHint {
+    _skusToolTip = [[CMPopTipView alloc] initWithMessage:@"Enter the bottles in this invoice"];
+    _skusToolTip.delegate = self;
+    _skusToolTip.backgroundColor = [UIColor whiteColor];
+    _skusToolTip.textColor = [UIColor darkTextColor];
+    NSIndexPath * skusPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    UITableViewCell * skusCell = [self.tableView cellForRowAtIndexPath:skusPath];
+    [_skusToolTip presentPointingAtView:skusCell inView:self.view animated:YES];
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (_skusToolTip != nil) {
+        [_skusToolTip dismissAnimated:YES];
+    }
 }
 
 -(NSArray *)sortedBottlesInInvoice {
@@ -69,24 +74,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) { // the photos
-        return [[self sortedInvoicePhotos] count];
-    } else if (section == 1) { // bottles
-        return 1;
-    } else  if (section == 2){ // vendor
-        return 1;
-    } else if (section == 3){ // order
-        return 1;
-    } else if (section == 4){ // date
-        return 1;
-    } else { // shouldnt happen
-        abort();
-    }
+    return 1;
 }
 
 
@@ -94,42 +87,36 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Invoice Photo CellReuse ID" forIndexPath:indexPath];
-    if (indexPath.section == 0) { // invoice photos
-        InvoicePhoto * invoicePhoto = [[self sortedInvoicePhotos] objectAtIndex:indexPath.row];
-        NSString * documentName = invoicePhoto.documentName;
-        UIImage * image = [self loadImage:documentName];
-        cell.imageView.image = image;
-        cell.textLabel.text = [NSString stringWithFormat:@""];
-    } else if (indexPath.section == 1) { // bottles
+    if (indexPath.section == 0) { // bottles
         cell.textLabel.text = [Invoice contentsDescriptionForInvoice:_invoice];
-    } else if (indexPath.section == 2){ // vendor
+    } else if (indexPath.section == 1){ // vendor
         Vendor * vendor = _invoice.vendor;
         NSString * vendorName = [Vendor fullNameOfVendor:vendor];
         cell.textLabel.text = vendorName ? vendorName : @"No name";
         cell.detailTextLabel.text = vendor.email ? vendor.email : @"No Email";
-    } else if (indexPath.section == 3){ // order
+    } else if (indexPath.section == 2){ // order
         Order * order = _invoice.order;
         cell.textLabel.text = order ? [Order description:order withNumForatter:_numberFormatter] : @"Linked Order";
-    } else if (indexPath.section == 4){ // date
+    } else if (indexPath.section == 3){ // date
         _datePicker.date = _invoice.dateReceived ? _invoice.dateReceived : [NSDate date];
         [_datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
         [cell addSubview:_datePicker];
         cell.textLabel.text = @"";
     }
-    if (indexPath.section != 4) { // all but the date picker
+    if (indexPath.section != 3) { // all but the date picker
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     return cell;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
+    if (section == 0) {
         return @"skus in invoice";
-    } else if (section == 2) {
+    } else if (section == 1) {
         return @"vendor";
-    } else if (section == 3){ // order
+    } else if (section == 2){ // order
         return @"order for invoice";
-    } else if (section == 4) {
+    } else if (section == 3) {
         return @"date received";
     } else {
         return @"";
@@ -137,7 +124,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 4) { // its the date picker section (only one row)
+    if (indexPath.section == 3) { // its the date picker section (only one row)
         return _datePicker.bounds.size.height;
     }
     return 44; // defaultl cell height
@@ -145,49 +132,16 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
     if (indexPath.section == 0) {
-        UITableViewCell * cell = [[self tableView] cellForRowAtIndexPath:indexPath];
-        [self performSegueWithIdentifier:@"Show Invoice Photo Segue ID" sender:cell];
-    } else if (indexPath.section == 1) {
         [self performSegueWithIdentifier:@"Show Bottles In Invoice" sender:nil];
-    } else if (indexPath.section == 2) {
+    } else if (indexPath.section == 1) {
         [self alertForPickingManualOrFromAddressBook:@"Pick vendor from address book, or enter manually?"];
-    } else if (indexPath.section == 3) {
+    } else if (indexPath.section == 2) {
         [self performSegueWithIdentifier:@"Show Order Picker" sender:nil];
     }
 }
 
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == 0) { // the photos can be deleted
-        return YES;
-    } else {
-        return NO; // not the bottles in order
-    }
-}
-
-
-
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) { // delete the invoice photo
-        InvoicePhoto * invoicePhoto = [[self sortedInvoicePhotos] objectAtIndex:indexPath.row];
-        [self deleteImageForName:invoicePhoto.documentName];    
-        // NOTE: This should be abstracted in an InvoicePhoto category
-        [_managedObjectContext deleteObject:invoicePhoto];
-
-        NSError *error;
-        if (![_managedObjectContext save:&error]) {
-            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-        }
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        [[self tableView] reloadData];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
 
 -(void)dateChanged {
     _invoice.dateReceived = _datePicker.date;
@@ -199,13 +153,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    if ([[segue destinationViewController] respondsToSelector:@selector(setInvoiceImage:)]) {
-        InvoicePhoto * invoicePhoto = [[self sortedInvoicePhotos] objectAtIndex:indexPath.row];
-        UIImage * invoiceImage = [self loadImage:invoicePhoto.documentName];
-        [[segue destinationViewController] setInvoiceImage:invoiceImage];
-    } else if ([segue.identifier isEqualToString:@"Show Bottles In Invoice"]) {
+    if ([segue.identifier isEqualToString:@"Show Bottles In Invoice"]) {
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
         [segue.destinationViewController setInvoice:_invoice];
     } else if ([segue.identifier isEqualToString:@"Show Vendor Contact Info Segue ID"]) {
@@ -219,39 +167,7 @@
 }
 
 
-#pragma utils
 
--(UIImage *)loadImage:(NSString *)documentName {
-    //NOTE: this code is repeated in save and load image
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * documentsDirectory = [paths objectAtIndex:0];
-    NSString * path = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", documentName]];
-    UIImage * image = [UIImage imageWithContentsOfFile:path];
-    return image;
-}
-
-#pragma Button Delegate
-
-- (void)didSelectAddPhoto {
-    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo", @"Choose Existing", nil];
-    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
-}
-
-#pragma Action Sheet Delegate
-
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    if (buttonIndex == 0) { // take photo
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    } else if (buttonIndex == 1) { // choose existing photo
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    } else {
-        return;
-    }
-    [self presentViewController:picker animated:YES completion:nil];
-}
 
 // delete the invoice and all of its InvoiceForBottle
 - (IBAction)didDelete:(id)sender {
@@ -265,55 +181,6 @@
     
 }
 
-// store the image in app /Documents folder
-//(from this example: http://beageek.biz/save-and-load-uiimage-in-documents-directory-on-iphone-xcode-ios/)
--(void)storeImage:(UIImage *)image forName:(NSString *)name {
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * documentDirectory = [paths objectAtIndex:0];
-    NSString * path = [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", name]];
-    NSData * data = UIImagePNGRepresentation(image);
-    [data writeToFile:path atomically:YES];
-
-}
-
--(void)deleteImageForName:(NSString *)name {
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * documentDirectory = [paths objectAtIndex:0];
-    NSString * path = [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", name]];
-    NSFileManager * fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:path error:NULL];
-}
-
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-
-    // NOTE: this logic for creating InvoicePhoto should be extracted into a InvoicePhoto+Create category
-
-    UIImage * chosenImage = info[UIImagePickerControllerEditedImage];
-
-    
-    // create the photo name to be stored in core data
-    NSDate * now = [NSDate date];
-    double interval = [now timeIntervalSince1970];
-    NSString * documentName = [[NSNumber numberWithDouble:interval] stringValue];
-    
-    // store the photo in app /Documents folder
-    //(from this example: http://beageek.biz/save-and-load-uiimage-in-documents-directory-on-iphone-xcode-ios/)
-    [self storeImage:chosenImage forName:documentName];
-    
-    // create the invoicePhoto class instance
-    InvoicePhoto * invoicePhoto = [NSEntityDescription insertNewObjectForEntityForName:@"InvoicePhoto" inManagedObjectContext:_managedObjectContext];
-    invoicePhoto.invoice = _invoice;
-    invoicePhoto.documentName = documentName;
-    NSError *error;
-    if (![_managedObjectContext save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
-    
-
-    
-    [self dismissViewControllerAnimated:YES completion:^{[self.tableView reloadData];}];
-
-}
 
 //
 // NOTE most of the below is repeated in OrderTVC
@@ -375,6 +242,11 @@
 }
 -(BOOL)orderIsSelected:(Order *)order {
     return [_invoice.order isEqual:order];
+}
+
+#pragma Delegate methods for tool tip
+-(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
+    _skusToolTip = nil;
 }
 
 @end

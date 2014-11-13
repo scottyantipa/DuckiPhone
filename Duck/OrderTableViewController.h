@@ -13,11 +13,14 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import "Vendor+Create.h"
 #import "EditVendorInfoViewController.h"
+#import "CMPopTipView.h"
+#import "NSUserDefaultsManager.h"
 
-@interface OrderTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate>
+@interface OrderTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate, CMPopTipViewDelegate>
 @property (strong, nonatomic) Order * order;
 @property (nonatomic,strong) NSManagedObjectContext * managedObjectContext;
 @property (nonatomic, strong) UIDatePicker * datePicker;
 @property (nonatomic, strong) NSNumberFormatter * numberFormatter;
 @property (nonatomic) ABAddressBookRef addressBook;
+@property (strong, nonatomic) CMPopTipView * skusToolTip;
 @end

@@ -18,6 +18,7 @@
 @synthesize numberFormatter = _numberFormatter;
 @synthesize addressBook = _addressBook;
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize skusToolTip = _skusToolTip;
 
 // Lazy instantiate an order if there isn't one.  If there is an order, add affordance
 // to Re-order from the vendor.  Also intialize class vars -- order, datePicker
@@ -34,6 +35,42 @@
         _order = [Order newOrderForDate:[NSDate date] inManagedObjectContext:_managedObjectContext];
     }
     [self setHeader];
+}
+
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (_skusToolTip != nil) {
+        [_skusToolTip dismissAnimated:YES];
+        _skusToolTip = nil;
+    }
+    [self.tableView reloadData];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if ([NSUserDefaultsManager isFirstTimeShowingClass:NSStringFromClass([self class])]) {
+        [self showHint];
+    }
+}
+
+
+-(void)showHint {
+    _skusToolTip = [[CMPopTipView alloc] initWithMessage:@"Select which bottles you would like to order"];
+    _skusToolTip.delegate = self;
+    _skusToolTip.backgroundColor = [UIColor whiteColor];
+    _skusToolTip.textColor = [UIColor darkTextColor];
+    NSIndexPath * skusPath = [NSIndexPath indexPathForItem:0 inSection:1];
+    UITableViewCell * skusCell = [self.tableView cellForRowAtIndexPath:skusPath];
+    [_skusToolTip presentPointingAtView:skusCell inView:self.view animated:YES];
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (_skusToolTip != nil) {
+        [_skusToolTip dismissAnimated:YES];
+    }
 }
 
 -(void)reloadAll {
@@ -64,11 +101,6 @@
 }
 
 
-// We do this because the _order can be edited by
-// a view before/after it
--(void)viewWillAppear:(BOOL)animated {
-    [self.tableView reloadData];
-}
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Show Bottles in Order Segue ID"]) {
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
@@ -85,18 +117,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4; // Vendor, status, bottles, date
+    return 5; // Vendor, status, bottles, invoices, date
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 1; // vendor
-    } else if (section == 1) {
-        return 2; // contents (bottles, invoices)
-    } else if (section == 2) {
-        return 2; // status section: orderSent, orderArrived
-    } else { // date picker
+    if (section == 3) {
+        return 2; // "status" section has sent/arrived cells
+    } else {
         return 1;
     }
 }
@@ -114,17 +142,15 @@
         NSString * vendorName = [Vendor fullNameOfVendor:vendor];
         labelText = vendorName ? vendorName : noNameText;
         detailText = vendor.email ? vendor.email : @"No Email";
-    } else if (indexPath.section == 1) { // contents
-        if (indexPath.row == 0) { // skus
-            NSString * price = [_numberFormatter stringFromNumber:[NSNumber numberWithFloat:[Order totalAmountOfOrder:_order]]];
-            labelText = [NSString stringWithFormat:@"%d skus totalling %@", _order.ordersByBottle.count, price];
-        } else if (indexPath.row == 1) { // invoices
-            labelText = @"Invoices";
-        }
+    } else if (indexPath.section == 1) { // bottles
+        NSString * price = [_numberFormatter stringFromNumber:[NSNumber numberWithFloat:[Order totalAmountOfOrder:_order]]];
+        labelText = [NSString stringWithFormat:@"%d skus totalling %@", _order.ordersByBottle.count, price];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; // for both the sku and the invoices
-
+    } else if (indexPath.section == 2) {
+        labelText = @"Invoices";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; // for both the sku and the invoices
     }
-    else if (indexPath.section == 2) { // status section
+    else if (indexPath.section == 3) { // status section
         if (indexPath.row == 0) { // orderSent Switch
             labelText = @"Order Sent";
             UISwitch * orderSentSwitch = [[UISwitch alloc]init];
@@ -149,6 +175,7 @@
         _datePicker.date = _order.date ? _order.date : [NSDate date];
         [_datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
         [cell addSubview:_datePicker];
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
     cell.textLabel.text = labelText;
@@ -157,7 +184,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 3) { // its the date picker section (only one row)
+    if (indexPath.section == 4) { // its the date picker section (only one row)
         return _datePicker.bounds.size.height;
     }
     return 44; // defaultl cell height
@@ -166,11 +193,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1 & indexPath.row == 0) {
-        [self performSegueWithIdentifier:@"Show Bottles in Order Segue ID" sender:nil];
-    } else if (indexPath.section == 0 & indexPath.row == 0) { // its the vendor, so present address book
+    if (indexPath.section == 0) {
         [self alertForPickingManualOrFromAddressBook:@"Pick vendor from address book, or enter manually?"];
-    } else if (indexPath.section == 1 & indexPath.row == 1) { // invoices
+    } else if (indexPath.section == 1) {
+        [self performSegueWithIdentifier:@"Show Bottles in Order Segue ID" sender:nil];
+    } else if (indexPath.section == 2) {
         [self performSegueWithIdentifier:@"Show Invoices from OrderTVC" sender:nil];
     }
     else {
@@ -182,10 +209,10 @@
     if (section == 0) { // vendor
         return @"vendor";
     } else if (section == 1) { // contents
-        return @"order contents";
-    } else if (section == 2) { // status
+        return @"skus to order";
+    } else if (section == 3) { // status
         return @"status";
-    } else if (section == 3) { // date
+    } else if (section == 4) { // date
         return @"date ordered";
     } else {
         return @"";
@@ -306,6 +333,12 @@
     ABPeoplePickerNavigationController * peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     peoplePicker.peoplePickerDelegate = self;
     [self presentViewController:peoplePicker animated:YES completion:nil];
+}
+
+
+#pragma Delegate methods for tool tip
+-(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
+    _skusToolTip = nil;
 }
 
 

@@ -18,6 +18,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize numberFormatter = _numberFormatter;
 @synthesize dateFormatter = _dateFormatter;
+@synthesize plusButtonToolTip = _plusButtonToolTip;
 
 - (void)viewDidLoad
 {
@@ -31,7 +32,37 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (_plusButtonToolTip != nil) {
+        [_plusButtonToolTip dismissAnimated:YES];
+        _plusButtonToolTip = nil;
+    }
     [self.tableView reloadData];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (_fetchedResultsController.fetchedObjects.count == 0) {
+        [self showHint];
+    }
+}
+
+
+-(void)showHint {
+    _plusButtonToolTip = [[CMPopTipView alloc] initWithMessage:@"Log your first order"];
+    _plusButtonToolTip.delegate = self;
+    _plusButtonToolTip.backgroundColor = [UIColor whiteColor];
+    _plusButtonToolTip.textColor = [UIColor darkTextColor];
+    UIBarButtonItem * addButton = [self.navigationItem.rightBarButtonItems objectAtIndex:0];
+    [_plusButtonToolTip presentPointingAtBarButtonItem:addButton animated:YES];
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    if (_plusButtonToolTip != nil) {
+        [_plusButtonToolTip dismissAnimated:YES];
+    }
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
@@ -97,6 +128,11 @@
         tvc.order = order;
     }
     [tvc setManagedObjectContext:_managedObjectContext];
+}
+
+#pragma Delegate methods for tool tip
+-(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
+    _plusButtonToolTip = nil;
 }
 
 @end
