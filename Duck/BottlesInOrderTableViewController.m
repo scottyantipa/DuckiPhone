@@ -26,8 +26,6 @@
     self.title = @"Bottles in Order";
     _numberFormatter = [[NSNumberFormatter alloc] init];
     [_numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [self setHeader];
-
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -41,23 +39,6 @@
 -(void)setOrder:(Order *)order {
     _order = order;
 }
-
--(void)setHeader {
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    int headerHeight = 80;
-    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, screenWidth - 40, headerHeight)];
-    
-    BFPaperButton *newOrderButton = [[BFPaperButton alloc] initWithFrame:CGRectMake(20, 20, 280, 43) raised:NO];
-    [newOrderButton setTitle:@"Add Bottles" forState:UIControlStateNormal];
-    newOrderButton.backgroundColor = [UIColor paperColorGray600];  // This is from the included cocoapod "UIColor+BFPaperColors".
-    [newOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [newOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [newOrderButton addTarget:self action:@selector(didSelectAddBottle) forControlEvents:UIControlEventTouchUpInside];
-    [headerView addSubview:newOrderButton];
-    self.tableView.tableHeaderView = headerView;
-}
-
 
 -(void)didSelectAddBottle {
     [self performSegueWithIdentifier:@"Toggle Bottles in Order Segue ID" sender:nil];

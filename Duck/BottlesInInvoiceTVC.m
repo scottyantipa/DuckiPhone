@@ -32,39 +32,30 @@
     [self reload];
 }
 
+const float HEADER_HEIGHT = 30;
+
 // notify user if there are bottles they have never ordered
 -(void)setHeader {
+    if (_noOrderForBottles.count == 0) {
+        return;
+    }
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 170)];
+    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, HEADER_HEIGHT)];
     
 
-    int labelHeight = 80;
     int labelWidth = screenWidth - 40;
-    UILabel * alertLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, labelWidth, labelHeight)];
+    UILabel * alertLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, labelWidth, HEADER_HEIGHT)];
     [alertLabel setTextAlignment:NSTextAlignmentCenter];
     alertLabel.lineBreakMode = NSLineBreakByWordWrapping;
     alertLabel.numberOfLines = 0;
-    alertLabel.text = [NSString stringWithFormat:@"Bottles in red have not been ordered through ex-86"];
+    [alertLabel setFont:[UIFont systemFontOfSize:12.0]];
+    alertLabel.text = [NSString stringWithFormat:@"Bottles in red have not been ordered before"];
     alertLabel.textColor = [UIColor redColor];
     [headerView addSubview:alertLabel];
-    
-    BFPaperButton *newOrderButton = [[BFPaperButton alloc] initWithFrame:CGRectMake(20, 100, 280, 43) raised:NO];
-    [newOrderButton setTitle:@"Add Bottles" forState:UIControlStateNormal];
-    newOrderButton.backgroundColor = [UIColor paperColorGray600];  // This is from the included cocoapod "UIColor+BFPaperColors".
-    [newOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [newOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [newOrderButton addTarget:self action:@selector(didSelectAddBottle) forControlEvents:UIControlEventTouchUpInside];
-    [headerView addSubview:newOrderButton];
 
     self.tableView.tableHeaderView = headerView;
 }
-
-
--(void)didSelectAddBottle {
-    [self performSegueWithIdentifier:@"Toggle Bottles in Invoice" sender:nil];
-}
-
 
 -(void)reload{
     NSSet * invoicesByBottle = _invoice.invoicesByBottle;

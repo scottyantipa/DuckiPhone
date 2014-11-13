@@ -22,39 +22,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Past Orders";
+    self.title = @"Your Orders";
     _numberFormatter = [[NSNumberFormatter alloc] init];
     [_numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     _dateFormatter = [[NSDateFormatter alloc] init];
     [_dateFormatter setDateStyle:NSDateFormatterLongStyle];
     [_dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-    [self setHeader];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [self.tableView reloadData];
-}
-
-// create button as header of table to create new orders
--(void)setHeader {
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    int headerHeight = 80;
-    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, screenWidth - 40, headerHeight)];
-
-    BFPaperButton *newOrderButton = [[BFPaperButton alloc] initWithFrame:CGRectMake(20, 20, 280, 43) raised:NO];
-    [newOrderButton setTitle:@"New Order" forState:UIControlStateNormal];
-    newOrderButton.backgroundColor = [UIColor paperColorGray600];  // This is from the included cocoapod "UIColor+BFPaperColors".
-    [newOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [newOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [newOrderButton addTarget:self action:@selector(didSelectNewOrder) forControlEvents:UIControlEventTouchUpInside];
-    [headerView addSubview:newOrderButton];
-    
-    self.tableView.tableHeaderView = headerView;
-}
-
--(void)didSelectNewOrder {
-    [self performSegueWithIdentifier:@"Show New Order" sender:nil];
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {

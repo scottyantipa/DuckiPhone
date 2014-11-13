@@ -9,8 +9,6 @@
 #import "BaseCoreDataTableViewController.h"
 #import "Bottle+Create.h"
 #import "TakeInventoryTableViewCell.h"
-#import "UIColor+BFPaperColors.h"
-#import "BFPaperButton.h"
 #import "InventorySnapshotForBottle+Create.h"
 
 @interface TakeInventoryTVC : BaseCoreDataTableViewController <UIAlertViewDelegate>

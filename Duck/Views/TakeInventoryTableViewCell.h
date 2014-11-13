@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIColor+BFPaperColors.h"
-#import "BFPaperButton.h"
 #import "Bottle+Create.h"
 
 @interface TakeInventoryTableViewCell : UITableViewCell

@@ -18,6 +18,7 @@
 @implementation BottlesForSubTypeTableViewController
 @synthesize subType = _subType;
 @synthesize fetchedResultsController = _fetchedResultsController;
+@synthesize editButton = _editButton;
 
 -(void)setSubType:(AlcoholSubType *)subType
 {
@@ -25,22 +26,36 @@
     self.title = subType.name;
 }
 
-// create button as header of table to add more bottles
--(void)setHeader {
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    int headerHeight = 70;
-    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, screenWidth - 40, headerHeight)];
+
+-(void)viewDidLoad {
+    [super viewDidLoad];
+    [self drawBarButtons];
+}
+
+-(void)drawBarButtons {
+    UIBarButtonItem * editOrDoneButton;
+    if ([self.tableView isEditing]) {
+        editOrDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didTouchDone)];
+    } else {
+        editOrDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didTouchEdit)];
+    }
+    UIBarButtonItem * addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didTouchAdd)];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:editOrDoneButton, addButton, nil];
+}
+
+-(void)didTouchEdit {
+    [self.tableView setEditing:YES animated:YES];
+    [self drawBarButtons];
+}
+
+-(void)didTouchDone {
+    [self.tableView setEditing:NO animated:YES];
+    [self drawBarButtons];
     
-    BFPaperButton *addBottlesButton = [[BFPaperButton alloc] initWithFrame:CGRectMake(20, 20, 280, 43) raised:NO];
-    [addBottlesButton setTitle:@"Add More Bottles" forState:UIControlStateNormal];
-    addBottlesButton.backgroundColor = [UIColor paperColorGray600];  // This is from the included cocoapod "UIColor+BFPaperColors".
-    [addBottlesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [addBottlesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [addBottlesButton addTarget:self action:@selector(didSelectAddBottles) forControlEvents:UIControlEventTouchUpInside];
-    [headerView addSubview:addBottlesButton];
-    
-    self.tableView.tableHeaderView = headerView;
+}
+
+-(void)didTouchAdd {
+    [self performSegueWithIdentifier:@"Toggle Subtype Bottles Segue ID" sender:nil];
 }
 
 -(NSManagedObjectContext *)context {
@@ -159,21 +174,10 @@
     }
 }
 
--(void)viewDidLoad {
-    [super viewDidLoad];
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self setHeader];
-}
-
 -(void)viewDidUnload
 {
     [super viewDidUnload];
     self.fetchedResultsController = nil;
-}
-
-// User wants to add bottles, so show toggle bottles view
--(void)didSelectAddBottles {
-    [self performSegueWithIdentifier:@"Toggle Subtype Bottles Segue ID" sender:nil];
 }
 
 #pragma Delegate parent methods for toggle bottles

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5561D27BBAEBAB5498845AB1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E8518EE3E7F134E509E822 /* libPods.a */; };
 		E00ABBCC1915408F00D6BF17 /* OSXData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E00ABBCB1915408F00D6BF17 /* OSXData.sqlite */; };
 		E00ABBDB1915500D00D6BF17 /* InvoiceTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E00ABBDA1915500D00D6BF17 /* InvoiceTVC.m */; };
 		E0156A431A13165A0021AF27 /* SingleBarcodeScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = E0156A421A13165A0021AF27 /* SingleBarcodeScanner.m */; };
@@ -288,7 +287,6 @@
 				E050145B1814AB7C00A06560 /* CoreData.framework in Frameworks */,
 				E05014591814AB7C00A06560 /* UIKit.framework in Frameworks */,
 				E05014551814AB7C00A06560 /* Foundation.framework in Frameworks */,
-				5561D27BBAEBAB5498845AB1 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,11 +609,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E050148C1814AB7C00A06560 /* Build configuration list for PBXNativeTarget "Duck" */;
 			buildPhases = (
-				E6677536F764F2547F7BD7D6 /* Check Pods Manifest.lock */,
 				E050144D1814AB7C00A06560 /* Sources */,
 				E050144E1814AB7C00A06560 /* Frameworks */,
 				E050144F1814AB7C00A06560 /* Resources */,
-				3DF07201E74B3C6C45B211E0 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -719,39 +715,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		3DF07201E74B3C6C45B211E0 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E6677536F764F2547F7BD7D6 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E050144D1814AB7C00A06560 /* Sources */ = {
@@ -941,14 +904,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Duck/Duck-Prefix.pch";
 				INFOPLIST_FILE = "Duck/Duck-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/scottantipa/dev/duck/DuckiPhone/Duck/ZBarSDK,
-					"$(PROJECT_DIR)/Duck/tesseract-ios/tesseract-ios-lib/lib",
-					"$(PROJECT_DIR)/Duck/iOSMagick-6.8.8-9",
-					"$(PROJECT_DIR)/Duck/iOSMagick-6.8.8-9-libs",
-					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
-				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -974,14 +929,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Duck/Duck-Prefix.pch";
 				INFOPLIST_FILE = "Duck/Duck-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Duck/tesseract-ios/tesseract-ios-lib/lib",
-					/Users/scottantipa/dev/duck/DuckiPhone/Duck/ZBarSDK,
-					"$(PROJECT_DIR)/Duck/iOSMagick-6.8.8-9",
-					"$(PROJECT_DIR)/Duck/iOSMagick-6.8.8-9-libs",
-					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
-				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
