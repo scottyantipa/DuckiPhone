@@ -77,7 +77,7 @@
     } else {
         countToDisplay = [[Bottle countOfBottle:bottle forContext:_managedObjectContext] floatValue];
     }
-    cell.editCountLabel.text = [NSString stringWithFormat:@"%g", countToDisplay];
+    cell.editCountLabel.text = [NSString stringWithFormat:@"%g units", countToDisplay];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }

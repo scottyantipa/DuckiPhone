@@ -15,9 +15,9 @@
 
 @property (strong, nonatomic) UILabel * nameLabel;
 @property (strong, nonatomic) UILabel * editCountLabel;
-@property (strong, nonatomic) BFPaperButton * plusButton;
-@property (strong, nonatomic) BFPaperButton * minusButton;
+@property (strong, nonatomic) UIButton * plusButton;
+@property (strong, nonatomic) UIButton * minusButton;
 +(void)formatCell:(TakeInventoryTableViewCell *)cell forBottle:(Bottle *)bottle;
-+(void)formatButton:(BFPaperButton *)button;
++(void)formatButton:(UIButton *)button;
 extern CGFloat const CELL_HEIGHT;
 @end
