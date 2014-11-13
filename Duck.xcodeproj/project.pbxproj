@@ -13,6 +13,8 @@
 		E01C5916191DF4E3007DD632 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E01C5912191DF4E3007DD632 /* .gitignore */; };
 		E01C5917191DF4E3007DD632 /* NSString+Score.m in Sources */ = {isa = PBXBuildFile; fileRef = E01C5914191DF4E3007DD632 /* NSString+Score.m */; };
 		E01C5918191DF4E3007DD632 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E01C5915191DF4E3007DD632 /* README.md */; };
+		E01D81491A1496D0007C9BCE /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = E01D81481A1496D0007C9BCE /* CMPopTipView.m */; };
+		E01D814D1A149B8E007C9BCE /* NSUserDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E01D814C1A149B8E007C9BCE /* NSUserDefaultsManager.m */; };
 		E0223CCA191D38A1003EC403 /* InvoicePhotoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0223CC9191D38A1003EC403 /* InvoicePhotoVC.m */; };
 		E024A4E619081351003A80DB /* InventorySnapshotForBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E024A4E519081351003A80DB /* InventorySnapshotForBottle.m */; };
 		E024A4EC19081351003A80DB /* AlcoholType.m in Sources */ = {isa = PBXBuildFile; fileRef = E024A4EB19081351003A80DB /* AlcoholType.m */; };
@@ -125,6 +127,10 @@
 		E01C5913191DF4E3007DD632 /* NSString+Score.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Score.h"; sourceTree = "<group>"; };
 		E01C5914191DF4E3007DD632 /* NSString+Score.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Score.m"; sourceTree = "<group>"; };
 		E01C5915191DF4E3007DD632 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		E01D81471A1496D0007C9BCE /* CMPopTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPopTipView.h; sourceTree = "<group>"; };
+		E01D81481A1496D0007C9BCE /* CMPopTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPopTipView.m; sourceTree = "<group>"; };
+		E01D814B1A149B8D007C9BCE /* NSUserDefaultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUserDefaultsManager.h; sourceTree = "<group>"; };
+		E01D814C1A149B8E007C9BCE /* NSUserDefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUserDefaultsManager.m; sourceTree = "<group>"; };
 		E0223CC8191D38A1003EC403 /* InvoicePhotoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoicePhotoVC.h; sourceTree = "<group>"; };
 		E0223CC9191D38A1003EC403 /* InvoicePhotoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoicePhotoVC.m; sourceTree = "<group>"; };
 		E024A4E419081351003A80DB /* InventorySnapshotForBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventorySnapshotForBottle.h; sourceTree = "<group>"; };
@@ -324,6 +330,15 @@
 			path = StringScore;
 			sourceTree = "<group>";
 		};
+		E01D814A1A1496DA007C9BCE /* CMPopTipView */ = {
+			isa = PBXGroup;
+			children = (
+				E01D81471A1496D0007C9BCE /* CMPopTipView.h */,
+				E01D81481A1496D0007C9BCE /* CMPopTipView.m */,
+			);
+			name = CMPopTipView;
+			sourceTree = "<group>";
+		};
 		E05014481814AB7C00A06560 = {
 			isa = PBXGroup;
 			children = (
@@ -423,6 +438,7 @@
 		E05014EA1814AD8100A06560 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				E01D814A1A1496DA007C9BCE /* CMPopTipView */,
 				E01C5911191DF4E3007DD632 /* StringScore */,
 			);
 			name = Vendor;
@@ -491,6 +507,8 @@
 		E05014EE1814AE1800A06560 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E01D814B1A149B8D007C9BCE /* NSUserDefaultsManager.h */,
+				E01D814C1A149B8E007C9BCE /* NSUserDefaultsManager.m */,
 				E05014B11814AC9900A06560 /* PickBottleTableViewController.h */,
 				E05014B21814AC9900A06560 /* PickBottleTableViewController.m */,
 				E03144371841A1530047FA6F /* Constants.h */,
@@ -727,6 +745,7 @@
 				E05014C31814AC9900A06560 /* OrderForBottle+Create.m in Sources */,
 				E050151B1814AED400A06560 /* BottlesForSubTypeTableViewController.m in Sources */,
 				E0309B1419DB42E300F00CA3 /* Invoice.m in Sources */,
+				E01D81491A1496D0007C9BCE /* CMPopTipView.m in Sources */,
 				E082728B1819ACE3007A2977 /* PastOrdersTableViewController.m in Sources */,
 				E05015131814AED400A06560 /* AlcoholType+Create.m in Sources */,
 				E0309B0519DB427000F00CA3 /* Order.m in Sources */,
@@ -769,6 +788,7 @@
 				E05014C11814AC9900A06560 /* Order+Create.m in Sources */,
 				E0948AE91A11BA7C006B25D2 /* TakeInventoryTableViewCell.m in Sources */,
 				E050151C1814AED400A06560 /* BottlesInOrderTableViewController.m in Sources */,
+				E01D814D1A149B8E007C9BCE /* NSUserDefaultsManager.m in Sources */,
 				E05014631814AB7C00A06560 /* main.m in Sources */,
 				E0E83AEB19189A9D0096233A /* InvoicePhoto.m in Sources */,
 			);

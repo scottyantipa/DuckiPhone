@@ -147,6 +147,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="ex-86" id="x0p-Xh-ysM">
+                        <barButtonItem key="leftBarButtonItem" title="Help" id="OTh-al-Yac">
+                            <connections>
+                                <action selector="didTouchHelp:" destination="9JS-DP-95s" id="JKa-i3-rFG"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Barcode Scan" id="z5B-cH-o19" userLabel="scanButtonForZBar">
                             <connections>
                                 <segue destination="IR3-QD-jjL" kind="modal" identifier="Show Single Barcode Reader" id="bnt-vf-14B"/>
@@ -1278,12 +1283,12 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="sZs-gI-2L1"/>
+        <segue reference="bnt-vf-14B"/>
         <segue reference="PFX-UQ-UWT"/>
-        <segue reference="8wE-iO-ft0"/>
-        <segue reference="TCw-cl-1mJ"/>
-        <segue reference="Ry1-pD-on8"/>
         <segue reference="cpl-N9-7Vy"/>
         <segue reference="Ncl-VD-cSO"/>
         <segue reference="Pga-Po-JW7"/>
+        <segue reference="8wE-iO-ft0"/>
     </inferredMetricsTieBreakers>
 </document>

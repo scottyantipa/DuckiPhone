@@ -18,6 +18,8 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize currentScannedBottleBarcode = _currentScannedBottleBarcode;
 @synthesize mostRecentFoundBottle = _mostRecentFoundBottle;
+@synthesize myBottlesToolTip = _myBottlesToolTip;
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Show Inventory"]) {
@@ -48,6 +50,18 @@
     }
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    if (_myBottlesToolTip != nil) {
+        [_myBottlesToolTip dismissAnimated:NO];
+        _myBottlesToolTip = nil;
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    if ([NSUserDefaultsManager isFirstTimeShowingClass:NSStringFromClass([self class])]) {
+        [self showMyBottlesToolTip];
+    }
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -90,5 +104,30 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma CMPopUP delegate
+
+- (IBAction)didTouchHelp:(id)sender {
+    if (_myBottlesToolTip != nil) {
+        return;
+    }
+    [self showMyBottlesToolTip];
+}
+
+-(void)showMyBottlesToolTip {
+    _myBottlesToolTip = [[CMPopTipView alloc] initWithMessage:@"Start by adding bottles to your collection"];
+    _myBottlesToolTip.delegate = self;
+    _myBottlesToolTip.backgroundColor = [UIColor lightGrayColor];
+    _myBottlesToolTip.textColor = [UIColor darkTextColor];
+    NSIndexPath * firstCellPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    UITableViewCell * firstCell = [self.tableView cellForRowAtIndexPath:firstCellPath];
+    _myBottlesToolTip.tag = 1;
+    [_myBottlesToolTip presentPointingAtView:firstCell inView:self.view animated:YES];
+}
+
+-(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
+    if (popTipView.tag == 1) {
+        _myBottlesToolTip = nil;
+    }
+}
 
 @end
