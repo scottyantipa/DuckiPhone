@@ -18,7 +18,7 @@
 @implementation BottlesForSubTypeTableViewController
 @synthesize subType = _subType;
 @synthesize fetchedResultsController = _fetchedResultsController;
-@synthesize editButton = _editButton;
+@synthesize plusButtonToolTip = _plusButtonToolTip;
 
 -(void)setSubType:(AlcoholSubType *)subType
 {
@@ -30,6 +30,34 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     [self drawBarButtons];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    if (_plusButtonToolTip != nil) {
+        [_plusButtonToolTip dismissAnimated:YES];
+        _plusButtonToolTip = nil;
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    if (_fetchedResultsController.fetchedObjects.count == 0) {
+        [self showHint];
+    }
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    if (_plusButtonToolTip != nil) {
+        [_plusButtonToolTip dismissAnimated:YES];
+    }
+}
+
+-(void)showHint {
+    _plusButtonToolTip = [[CMPopTipView alloc] initWithMessage:@"You have no bottles in your collection.  Tap here to add some."];
+    _plusButtonToolTip.delegate = self;
+    _plusButtonToolTip.backgroundColor = [UIColor lightGrayColor];
+    _plusButtonToolTip.textColor = [UIColor darkTextColor];
+    UIBarButtonItem * addButton = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
+    [_plusButtonToolTip presentPointingAtBarButtonItem:addButton animated:YES];
 }
 
 -(void)drawBarButtons {
@@ -198,4 +226,8 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma Delegate methods for tool tip
+-(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
+    _plusButtonToolTip = nil;
+}
 @end

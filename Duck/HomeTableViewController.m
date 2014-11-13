@@ -120,14 +120,11 @@
     _myBottlesToolTip.textColor = [UIColor darkTextColor];
     NSIndexPath * firstCellPath = [NSIndexPath indexPathForRow:0 inSection:0];
     UITableViewCell * firstCell = [self.tableView cellForRowAtIndexPath:firstCellPath];
-    _myBottlesToolTip.tag = 1;
     [_myBottlesToolTip presentPointingAtView:firstCell inView:self.view animated:YES];
 }
 
 -(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
-    if (popTipView.tag == 1) {
-        _myBottlesToolTip = nil;
-    }
+    _myBottlesToolTip = nil;
 }
 
 @end
