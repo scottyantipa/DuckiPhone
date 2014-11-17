@@ -47,13 +47,17 @@
 
 
 -(void)showHint {
-    _skusToolTip = [[CMPopTipView alloc] initWithMessage:@"Enter the bottles in this invoice"];
+    _skusToolTip = [[CMPopTipViewStyleOverride alloc] initWithMessage:@"Enter the bottles in this invoice"];
     _skusToolTip.delegate = self;
-    _skusToolTip.backgroundColor = [UIColor whiteColor];
-    _skusToolTip.textColor = [UIColor darkTextColor];
+    [CMPopTipViewStyleOverride setStylesForPopup:_skusToolTip];
     NSIndexPath * skusPath = [NSIndexPath indexPathForItem:0 inSection:0];
     UITableViewCell * skusCell = [self.tableView cellForRowAtIndexPath:skusPath];
     [_skusToolTip presentPointingAtView:skusCell inView:self.view animated:YES];
+}
+
+#pragma Delegate methods for tool tip
+-(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
+    [self performSegueWithIdentifier:@"Show Bottles In Invoice" sender:nil];
 }
 
 
@@ -244,9 +248,5 @@
     return [_invoice.order isEqual:order];
 }
 
-#pragma Delegate methods for tool tip
--(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
-    _skusToolTip = nil;
-}
 
 @end

@@ -13,7 +13,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import "Vendor+Create.h"
 #import "EditVendorInfoViewController.h"
-#import "CMPopTipView.h"
+#import "CMPopTipViewStyleOverride.h"
 #import "NSUserDefaultsManager.h"
 
 @interface OrderTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate, CMPopTipViewDelegate>
@@ -22,5 +22,5 @@
 @property (nonatomic, strong) UIDatePicker * datePicker;
 @property (nonatomic, strong) NSNumberFormatter * numberFormatter;
 @property (nonatomic) ABAddressBookRef addressBook;
-@property (strong, nonatomic) CMPopTipView * skusToolTip;
+@property (strong, nonatomic) CMPopTipViewStyleOverride * skusToolTip;
 @end

@@ -9,10 +9,10 @@
 #import "BaseCoreDataTableViewController.h"
 #import "Order+Create.h"
 #import "OrderTableViewController.h"
-#import "CMPopTipView.h"
+#import "CMPopTipViewStyleOverride.h"
 
 @interface PastOrdersTableViewController : BaseCoreDataTableViewController <CMPopTipViewDelegate>
 @property (nonatomic, strong) NSNumberFormatter * numberFormatter;
 @property (nonatomic, strong) NSDateFormatter * dateFormatter;
-@property (strong, nonatomic) CMPopTipView * plusButtonToolTip;
+@property (strong, nonatomic) CMPopTipViewStyleOverride * plusButtonToolTip;
 @end

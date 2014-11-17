@@ -19,7 +19,7 @@
 #import "Order+Create.h"
 #import "PickOrderDelegate.h"
 #import "PickOrderTVC.h"
-#import "CMPopTipView.h"
+#import "CMPopTipViewStyleOverride.h"
 #import "NSUserDefaultsManager.h"
 
 @interface InvoiceTVC : UITableViewController <UIImagePickerControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, PickOrderDelegate, CMPopTipViewDelegate>
@@ -29,5 +29,5 @@
 @property (weak, nonatomic) NSArray * sortedBottlesInOrder;
 @property (nonatomic, strong) NSNumberFormatter * numberFormatter;
 @property (nonatomic, strong) UIDatePicker * datePicker;
-@property (strong, nonatomic) CMPopTipView * skusToolTip;
+@property (strong, nonatomic) CMPopTipViewStyleOverride * skusToolTip;
 @end

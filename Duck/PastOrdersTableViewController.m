@@ -49,14 +49,17 @@
 
 
 -(void)showHint {
-    _plusButtonToolTip = [[CMPopTipView alloc] initWithMessage:@"Log your first order"];
+    _plusButtonToolTip = [[CMPopTipViewStyleOverride alloc] initWithMessage:@"Log your first order"];
     _plusButtonToolTip.delegate = self;
-    _plusButtonToolTip.backgroundColor = [UIColor whiteColor];
-    _plusButtonToolTip.textColor = [UIColor darkTextColor];
+    [CMPopTipViewStyleOverride setStylesForPopup:_plusButtonToolTip];
     UIBarButtonItem * addButton = [self.navigationItem.rightBarButtonItems objectAtIndex:0];
     [_plusButtonToolTip presentPointingAtBarButtonItem:addButton animated:YES];
 }
 
+#pragma Delegate methods for tool tip
+-(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
+    [self performSegueWithIdentifier:@"Show New Order" sender:nil];
+}
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
@@ -130,9 +133,6 @@
     [tvc setManagedObjectContext:_managedObjectContext];
 }
 
-#pragma Delegate methods for tool tip
--(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
-    _plusButtonToolTip = nil;
-}
+
 
 @end

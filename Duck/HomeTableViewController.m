@@ -66,10 +66,9 @@
 }
 
 -(void)showMyBottlesToolTip {
-    _myBottlesToolTip = [[CMPopTipView alloc] initWithMessage:@"Start by adding bottles to your collection"];
+    _myBottlesToolTip = [[CMPopTipViewStyleOverride alloc] initWithTitle:@"Add some bottles to your collection" message:nil];
     _myBottlesToolTip.delegate = self;
-    _myBottlesToolTip.backgroundColor = [UIColor whiteColor];
-    _myBottlesToolTip.textColor = [UIColor darkTextColor];
+    [CMPopTipViewStyleOverride setStylesForPopup:_myBottlesToolTip];
     NSIndexPath * firstCellPath = [NSIndexPath indexPathForRow:0 inSection:0];
     UITableViewCell * firstCell = [self.tableView cellForRowAtIndexPath:firstCellPath];
     [_myBottlesToolTip presentPointingAtView:firstCell inView:self.view animated:YES];
@@ -119,7 +118,7 @@
 #pragma CMPopUP delegate
 
 -(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
-    _myBottlesToolTip = nil;
+    [self performSegueWithIdentifier:@"Show Inventory" sender:nil];
 }
 
 @end

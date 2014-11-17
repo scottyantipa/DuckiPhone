@@ -56,14 +56,19 @@
 
 
 -(void)showHint {
-    _skusToolTip = [[CMPopTipView alloc] initWithMessage:@"Select which bottles you would like to order"];
+    _skusToolTip = [[CMPopTipViewStyleOverride alloc] initWithMessage:@"Select which bottles you would like to order"];
     _skusToolTip.delegate = self;
-    _skusToolTip.backgroundColor = [UIColor whiteColor];
-    _skusToolTip.textColor = [UIColor darkTextColor];
+    [CMPopTipViewStyleOverride setStylesForPopup:_skusToolTip];
     NSIndexPath * skusPath = [NSIndexPath indexPathForItem:0 inSection:1];
     UITableViewCell * skusCell = [self.tableView cellForRowAtIndexPath:skusPath];
     [_skusToolTip presentPointingAtView:skusCell inView:self.view animated:YES];
 }
+
+#pragma Delegate methods for tool tip
+-(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
+    [self performSegueWithIdentifier:@"Show Bottles in Order Segue ID" sender:nil];
+}
+
 
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -335,11 +340,6 @@
     [self presentViewController:peoplePicker animated:YES completion:nil];
 }
 
-
-#pragma Delegate methods for tool tip
--(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
-    _skusToolTip = nil;
-}
 
 
 @end

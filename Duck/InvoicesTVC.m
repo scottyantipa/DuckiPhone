@@ -39,12 +39,16 @@
 
 
 -(void)showHint {
-    _plusButtonToolTip = [[CMPopTipView alloc] initWithMessage:@"Log your first invoice"];
+    _plusButtonToolTip = [[CMPopTipViewStyleOverride alloc] initWithMessage:@"Log your first invoice"];
     _plusButtonToolTip.delegate = self;
-    _plusButtonToolTip.backgroundColor = [UIColor whiteColor];
-    _plusButtonToolTip.textColor = [UIColor darkTextColor];
+    [CMPopTipViewStyleOverride setStylesForPopup:_plusButtonToolTip];
     UIBarButtonItem * addButton = [self.navigationItem.rightBarButtonItems objectAtIndex:0];
     [_plusButtonToolTip presentPointingAtBarButtonItem:addButton animated:YES];
+}
+
+#pragma Delegate methods for tool tip
+-(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
+    [self performSegueWithIdentifier:@"Show New Invoice" sender:nil];
 }
 
 
@@ -104,9 +108,5 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma Delegate methods for tool tip
--(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
-    _plusButtonToolTip = nil;
-}
 
 @end

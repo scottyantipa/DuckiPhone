@@ -117,7 +117,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="" footerTitle="Instantly see money you've lost from price discrepancies in your invoices and get a refund" id="keq-pv-Tm0">
+                            <tableViewSection headerTitle="" footerTitle="Instantly see money you've lost from price discrepancies in your invoices and apply for a refund" id="keq-pv-Tm0">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="xlk-Ij-PBh" style="IBUITableViewCellStyleDefault" id="wiE-6d-rQY">
                                         <rect key="frame" x="0.0" y="299" width="320" height="44"/>

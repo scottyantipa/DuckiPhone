@@ -52,12 +52,16 @@
 }
 
 -(void)showHint {
-    _plusButtonToolTip = [[CMPopTipView alloc] initWithMessage:@"You have no bottles in your collection.  Tap here to add some."];
+    _plusButtonToolTip = [[CMPopTipViewStyleOverride alloc] initWithMessage:[NSString stringWithFormat:@"Tap here to add some %@ to your collection.", _subType.name]];
     _plusButtonToolTip.delegate = self;
-    _plusButtonToolTip.backgroundColor = [UIColor whiteColor];
-    _plusButtonToolTip.textColor = [UIColor darkTextColor];
+    [CMPopTipViewStyleOverride setStylesForPopup:_plusButtonToolTip];
     UIBarButtonItem * addButton = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
     [_plusButtonToolTip presentPointingAtBarButtonItem:addButton animated:YES];
+}
+
+#pragma Delegate methods for tool tip
+-(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
+    [self performSegueWithIdentifier:@"Toggle Subtype Bottles Segue ID" sender:nil];
 }
 
 -(void)drawBarButtons {
@@ -226,8 +230,4 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma Delegate methods for tool tip
--(void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
-    _plusButtonToolTip = nil;
-}
 @end

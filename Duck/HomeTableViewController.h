@@ -16,12 +16,12 @@
 #import "TakeInventoryTVC.h"
 #import "SingleBarcodeScanner.h"
 #import "SingleBarcodeScannerDelegate.h"
-#import "CMPopTipView.h"
+#import "CMPopTipViewStyleOverride.h"
 #import "NSUserDefaultsManager.h"
 
 @interface HomeTableViewController : UITableViewController <UIAlertViewDelegate, BottleDetailDelegate, SingleBarcodeScannerDelegate, CMPopTipViewDelegate>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property  (strong, nonatomic) NSString *currentScannedBottleBarcode;
 @property (strong, nonatomic) Bottle * mostRecentFoundBottle;
-@property (strong, nonatomic) CMPopTipView * myBottlesToolTip;
+@property (strong, nonatomic) CMPopTipViewStyleOverride * myBottlesToolTip;
 @end
