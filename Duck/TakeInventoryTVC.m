@@ -65,11 +65,7 @@
     TakeInventoryTableViewCell *cell = (TakeInventoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Take Inventory CellID" forIndexPath:indexPath];
     Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
     [TakeInventoryTableViewCell formatCell:cell forBottle:bottle];
-    [cell.minusButton addTarget:self action:@selector(didSelectMinus:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.plusButton addTarget:self action:@selector(didSelectPlus:) forControlEvents:UIControlEventTouchUpInside];
-    
-    cell.plusButton.tag = indexPath.row;
-    cell.minusButton.tag = indexPath.row;
+
     float countToDisplay;
     id editedVal = [_editedValues objectForKey:[bottle objectID]];
     if (editedVal != nil) {

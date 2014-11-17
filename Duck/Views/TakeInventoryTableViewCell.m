@@ -10,16 +10,6 @@
 
 @implementation TakeInventoryTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
 const float BUTTON_HEIGHT = 40.0;
 
 const float NAME_HEIGHT = 20.0;
@@ -54,37 +44,11 @@ CGFloat const CELL_HEIGHT = BUTTONS_VERT_OFFSET + BUTTON_HEIGHT + 15;
         [cell addSubview:cell.editCountLabel];
     }
     
-    if (cell.plusButton == nil) {
-        cell.plusButton = [[UIButton alloc] initWithFrame:CGRectMake(screenWidth - BUTTON_HEIGHT - 30, BUTTONS_VERT_OFFSET, BUTTON_HEIGHT, BUTTON_HEIGHT)];
-        
-        [cell.plusButton setTitle:@"+" forState:UIControlStateNormal];
-        [self formatButton:cell.plusButton forPlus:YES];
-        [cell addSubview:cell.plusButton];
-    }
-    
-    if (cell.minusButton == nil) {
-        cell.minusButton = [[UIButton alloc] initWithFrame:CGRectMake(screenWidth - (BUTTON_HEIGHT * 2) - 50, BUTTONS_VERT_OFFSET, BUTTON_HEIGHT, BUTTON_HEIGHT)];
-        [cell.minusButton setTitle:@"-" forState:UIControlStateNormal];
-        [self formatButton:cell.minusButton forPlus:NO];
-        [cell addSubview:cell.minusButton];
+    if (cell.plusMinusView == nil) {
+        CGRect frame = CGRectMake(screenWidth - [PlusMinusButtonsView viewWidth], 0, [PlusMinusButtonsView viewWidth], [PlusMinusButtonsView buttonHeight]);
+        cell.plusMinusView = [[PlusMinusButtonsView alloc] initWithFrame:frame];
+        [PlusMinusButtonsView setupView:cell.plusMinusView];
+        [cell addSubview:cell.plusMinusView];
     }
 }
-
-
-+(void)formatButton:(UIButton *)button forPlus:(bool)isPlus {
-    UIColor * green = [UIColor colorWithRed:0 green:.7 blue:.3 alpha:1];
-    UIColor * red = [UIColor colorWithRed:.7 green:0 blue:.2 alpha:1];
-    UIColor * color = isPlus ? green : red;
-    button.titleLabel.font = [UIFont systemFontOfSize:20.0];
-    [button.titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [button setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-
-    [button setTitleColor:color forState:UIControlStateNormal];
-    [button setTitleColor:color forState:UIControlStateHighlighted];
-    button.layer.borderColor = color.CGColor;
-    button.layer.borderWidth = 0.5;
-    button.layer.cornerRadius = button.frame.size.width / 2;
-}
-
-
 @end
