@@ -11,10 +11,11 @@
 #import "PlusMinusButtonsView.h"
 
 @interface TakeInventoryTableViewCell : UITableViewCell
-
++(void)formatCell:(TakeInventoryTableViewCell *)cell forBottle:(Bottle *)bottle;
++(float)totalCellHeight;
 @property (strong, nonatomic) UILabel * nameLabel;
 @property (strong, nonatomic) UILabel * editCountLabel;
 @property (strong, nonatomic) PlusMinusButtonsView * plusMinusView;
-+(void)formatCell:(TakeInventoryTableViewCell *)cell forBottle:(Bottle *)bottle;
+
 extern CGFloat const CELL_HEIGHT;
 @end

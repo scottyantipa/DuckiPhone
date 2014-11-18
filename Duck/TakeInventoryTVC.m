@@ -65,7 +65,10 @@
     TakeInventoryTableViewCell *cell = (TakeInventoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Take Inventory CellID" forIndexPath:indexPath];
     Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
     [TakeInventoryTableViewCell formatCell:cell forBottle:bottle];
-
+    [cell.plusMinusView.plus1Button addTarget:self action:@selector(didSelectPlus1:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.plusMinusView.plus5Button addTarget:self action:@selector(didSelectPlus5:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.plusMinusView.minus1Button addTarget:self action:@selector(didSelectMinus1:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.plusMinusView.minus5Button addTarget:self action:@selector(didSelectMinus5:) forControlEvents:UIControlEventTouchUpInside];
     float countToDisplay;
     id editedVal = [_editedValues objectForKey:[bottle objectID]];
     if (editedVal != nil) {
@@ -73,24 +76,36 @@
     } else {
         countToDisplay = [[Bottle countOfBottle:bottle forContext:_managedObjectContext] floatValue];
     }
-    cell.editCountLabel.text = [NSString stringWithFormat:@"%g units", countToDisplay];
+    cell.editCountLabel.text = [NSString stringWithFormat:@"%g", countToDisplay];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return CELL_HEIGHT;
+    return [TakeInventoryTableViewCell totalCellHeight];
 }
 
--(void)didSelectMinus:(UIButton *)sender {  
+-(void)didSelectMinus1:(UIButton *)sender {
     Bottle * bottle = [self bottleForSender:sender];
     [self incrementBottle:bottle byInt:-1];
 }
 
--(void)didSelectPlus:(UIButton *)sender {
+-(void)didSelectMinus5:(UIButton *)sender {
+    Bottle * bottle = [self bottleForSender:sender];
+    [self incrementBottle:bottle byInt:-5];
+}
+
+-(void)didSelectPlus1:(UIButton *)sender {
     Bottle * bottle = [self bottleForSender:sender];
     [self incrementBottle:bottle byInt:1];
 }
+
+
+-(void)didSelectPlus5:(UIButton *)sender {
+    Bottle * bottle = [self bottleForSender:sender];
+    [self incrementBottle:bottle byInt:5];
+}
+
 
 -(void)incrementBottle:(Bottle *)bottle byInt:(int)increment {
     id editedVal = [_editedValues objectForKey:[bottle objectID]];
@@ -108,7 +123,7 @@
 }
 
 -(Bottle *)bottleForSender:(id)sender {
-    UITableViewCell * cell = (UITableViewCell *)[sender superview];
+    UITableViewCell * cell = (UITableViewCell *)[[sender superview] superview];
     NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
     return (Bottle *)[_fetchedResultsController objectAtIndexPath:indexPath];
 }
