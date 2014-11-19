@@ -18,6 +18,16 @@ const float BUTTONS_VERT_OFFSET = NAME_HEIGHT + 20;
 const float COUNT_HEIGHT = 30;
 const float COUNT_WIDTH = 300;
 
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [Utils markSubviewsAsNoDelay:self];
+    }
+    return self;
+}
+
+
 +(float)totalCellHeight {
     return [PlusMinusButtonsView buttonHeight] + BUTTONS_VERT_OFFSET + 10;
 }

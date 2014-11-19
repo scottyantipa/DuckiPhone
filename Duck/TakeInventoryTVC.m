@@ -21,8 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _editedValues = [[NSMutableDictionary alloc] init];
-    // Do any additional setup after loading the view.
+    [Utils markSubviewsAsNoDelay:self.tableView];
 }
+
 
 - (NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController != nil) {

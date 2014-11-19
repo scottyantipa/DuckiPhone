@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Bottle+Create.h"
 #import "PlusMinusButtonsView.h"
+#import "Utils.h"
 
 @interface TakeInventoryTableViewCell : UITableViewCell
 +(void)formatCell:(TakeInventoryTableViewCell *)cell forBottle:(Bottle *)bottle;

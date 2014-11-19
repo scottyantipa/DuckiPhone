@@ -28,15 +28,15 @@ const int BUTTON_SPACING = 7;
 +(void)setupView:(PlusMinusButtonsView *)view {
     view.values = @[@-5, @-1, @1, @5];
     int height = [PlusMinusButtonsView buttonHeight];
-    UIButton * button;
+    SARoundedButton * button;
     for (NSNumber * value in view.values) {
         int order = [view.values indexOfObject:value];
         int xOffset = order * (height + BUTTON_SPACING);
-        NSLog(@"xOffset %d", xOffset);
-        button = [[UIButton alloc] initWithFrame:CGRectMake(xOffset, 0, height, height)];
-        [button setTitle:[NSString stringWithFormat:@"%@", value] forState:UIControlStateNormal];
+        button = [[SARoundedButton alloc] initWithFrame:CGRectMake(xOffset, 0, height, height)];
+        [button setTitle:[NSString stringWithFormat:@"%@", value]];
         bool isPositive = [value integerValue] > 0;
         [PlusMinusButtonsView formatButton:button forPlus:isPositive];
+        [button setup];
         switch (order) {
             case 0:
                 if (view.minus5Button == nil) {
@@ -68,19 +68,15 @@ const int BUTTON_SPACING = 7;
     }
 }
 
-+(void)formatButton:(UIButton *)button forPlus:(bool)isPlus {
++(void)formatButton:(SARoundedButton *)button forPlus:(bool)isPlus {
     UIColor * green = [UIColor colorWithRed:0 green:.7 blue:.3 alpha:1];
     UIColor * red = [UIColor colorWithRed:.7 green:0 blue:.2 alpha:1];
     UIColor * color = isPlus ? green : red;
+    [button setMainColor:color];
     button.titleLabel.font = [UIFont systemFontOfSize:25.0];
-    [button.titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [button setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
-    
     [button setTitleColor:color forState:UIControlStateNormal];
-    [button setTitleColor:color forState:UIControlStateHighlighted];
-    button.layer.borderColor = color.CGColor;
-    button.layer.borderWidth = 1;
-    button.layer.cornerRadius = button.frame.size.width / 2;
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [button setCornerRadius:button.frame.size.width/2];
 }
 
 
