@@ -12,11 +12,10 @@
 #import "Utils.h"
 
 @interface TakeInventoryTableViewCell : UITableViewCell
-+(void)formatCell:(TakeInventoryTableViewCell *)cell forBottle:(Bottle *)bottle;
++(void)formatCell:(TakeInventoryTableViewCell *)cell forBottle:(Bottle *)bottle showName:(BOOL)showName;
 +(float)totalCellHeight;
 @property (strong, nonatomic) UILabel * nameLabel;
 @property (strong, nonatomic) UILabel * editCountLabel;
 @property (strong, nonatomic) PlusMinusButtonsView * plusMinusView;
-
 extern CGFloat const CELL_HEIGHT;
 @end

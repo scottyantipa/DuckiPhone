@@ -12,7 +12,6 @@
 #import "AllSubTypesTableViewController.h"
 #import "EditTextViewController.h"
 #import "InventorySnapshotForBottle+Create.h"
-#import "EditManagedObjCountViewController.h"
 
 @interface BottleDetailTableViewController ()
 
@@ -23,7 +22,7 @@
 @synthesize bottle = _bottle;
 @synthesize whiteList = _whiteList;
 @synthesize managedObjectContext = _managedObjectContext;
-
+@synthesize editedCount = _editedCount;
 -(void)viewDidLoad
 {
     if (!_bottle.name) {
@@ -33,6 +32,7 @@
         self.title = _bottle.name;
     }
     self.whiteList = [Bottle whiteList];
+    _editedCount = [[Bottle countOfBottle:_bottle forContext:_managedObjectContext] floatValue];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -57,7 +57,12 @@
         [alert show];
         return;
     }
+    [self setFinalCount];
     [self.delegate didFinishEditingBottle:_bottle];
+}
+
+-(void)setFinalCount {
+    [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:[NSDate date] withCount:[NSNumber numberWithFloat:_editedCount] forBottle:_bottle inManagedObjectContext:_managedObjectContext];
 }
 
 -(void)makeRequest:(NSString *)method {
@@ -132,44 +137,71 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Bottle Property CellID" forIndexPath:indexPath];
-    [self configureCell:cell atIndexPath:indexPath];
-    return cell;
-}
-
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
     NSInteger section = indexPath.section;
     id property;
     if (section <= [_whiteList count] - 1) {
         property = [_whiteList objectAtIndex:section];
     }
-
-    if ([property isEqualToString:@"subType"]) {
-        if (!_bottle.subType) {
-            cell.textLabel.text = @"Enter Category";
-        } else {
-            cell.textLabel.text = [_bottle.subType name];
+    if ([property isEqualToString:@"count"]) {
+        TakeInventoryTableViewCell * cell = (TakeInventoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Take Inventory CellID" forIndexPath:indexPath];
+        [TakeInventoryTableViewCell formatCell:cell forBottle:_bottle showName:NO];
+        // normally this cell would render the bottle name, but we already have the bottle name at the top
+        cell.nameLabel.text = @"";
+        [cell.plusMinusView.plus1Button addTarget:self action:@selector(didSelectPlus1:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.plusMinusView.plus5Button addTarget:self action:@selector(didSelectPlus5:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.plusMinusView.minus1Button addTarget:self action:@selector(didSelectMinus1:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.plusMinusView.minus5Button addTarget:self action:@selector(didSelectMinus5:) forControlEvents:UIControlEventTouchUpInside];
+        cell.editCountLabel.text = [NSString stringWithFormat:@"%g", _editedCount];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        return cell;
+    } else {
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Bottle Property CellID" forIndexPath:indexPath];;
+        if ([property isEqualToString:@"subType"]) {
+            if (!_bottle.subType) {
+                cell.textLabel.text = @"Enter Category";
+            } else {
+                cell.textLabel.text = [_bottle.subType name];
+            }
         }
+        else if ([property isEqualToString:@"count"]) {
+            cell.textLabel.text = [NSString stringWithFormat:@"%@", [Bottle countOfBottle:_bottle forContext:_managedObjectContext]];
+            
+        }
+        else if ([property isEqualToString:@"barcode"]) {
+            NSNumberFormatter * numFormatter = [[NSNumberFormatter alloc] init];
+            [numFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+            NSNumber * barcode = [numFormatter numberFromString:_bottle.barcode];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@", barcode];
+        }
+        else if (property == nil) {
+            cell.backgroundColor = [UIColor redColor];
+            cell.textLabel.textColor = [UIColor whiteColor];
+            cell.textLabel.text = @"REMOVE";
+        }
+        else {
+            cell.textLabel.text = [_bottle valueForKey:property];
+        }
+        
+        return cell;
     }
-    else if ([property isEqualToString:@"count"]) {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", [Bottle countOfBottle:_bottle forContext:_managedObjectContext]];
+
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger section = indexPath.section;
+    id property;
+    if (section <= [_whiteList count] - 1) {
+        property = [_whiteList objectAtIndex:section];
     }
-    else if ([property isEqualToString:@"barcode"]) {
-        NSNumberFormatter * numFormatter = [[NSNumberFormatter alloc] init];
-        [numFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        NSNumber * barcode = [numFormatter numberFromString:_bottle.barcode];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", barcode];
-    }
-    else if (property == nil) {
-        cell.backgroundColor = [UIColor redColor];
-        cell.textLabel.textColor = [UIColor whiteColor];
-        cell.textLabel.text = @"REMOVE";
-    }
-    else {
-        cell.textLabel.text = [_bottle valueForKey:property];
+    if ([property isEqualToString:@"count"]) {
+        return [TakeInventoryTableViewCell totalCellHeight];
+    } else {
+        return 44.0;
     }
 }
+
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     id property;
@@ -181,7 +213,7 @@
         return @"category";
     }
     else if ([property isEqualToString:@"count"]) {
-        return @"your inventory count";
+        return @"edit your inventory count";
     }
     else if ([property isEqualToString:@"barcode"]) {
         return @"tap to scan barcode";
@@ -205,10 +237,6 @@
     else if ([[segue identifier] isEqualToString:@"Edit Bottle Name"]) {
         EditTextViewController * editTextHelperView = [segue destinationViewController];
         editTextHelperView.delegate = self;
-    }
-    else if ([[segue identifier] isEqualToString:@"Edit Bottle Count"]) {
-        EditManagedObjCountViewController * editCountView = [segue destinationViewController];
-        editCountView.delegate = self;
     } else if ([segue.identifier isEqualToString:@"Show Scanner From Bottle Detail"]) {
         SingleBarcodeScanner * scanner = (SingleBarcodeScanner *)[[segue destinationViewController] topViewController];
         scanner.delegate = self;
@@ -230,14 +258,33 @@
     else if ([property isEqualToString:@"subType"]) {
         [self performSegueWithIdentifier:@"Edit Bottle Category" sender:nil];
     }
-    else if ([property isEqualToString:@"count"]) {
-        [self performSegueWithIdentifier:@"Edit Bottle Count" sender:nil];
-    }
     else if ([property isEqualToString:@"barcode"]) {
         [self performSegueWithIdentifier:@"Show Scanner From Bottle Detail" sender:nil];
     } else if (property == nil) {
         [self didTouchDelete];
     }
+}
+
+-(void)didSelectMinus1:(UIButton *)sender {
+    [self incrementBottleCountByInt:-1];
+}
+
+-(void)didSelectMinus5:(UIButton *)sender {
+    [self incrementBottleCountByInt:-5];
+}
+
+-(void)didSelectPlus1:(UIButton *)sender {
+    [self incrementBottleCountByInt:1];
+}
+
+
+-(void)didSelectPlus5:(UIButton *)sender {
+    [self incrementBottleCountByInt:5];
+}
+
+-(void)incrementBottleCountByInt:(int)increment {
+    _editedCount = _editedCount + (float)increment > 0 ? _editedCount + (float)increment : 0;
+    [self.tableView reloadData];
 }
 
 #pragma Protocal Functions
@@ -281,7 +328,7 @@
 
 #pragma Alert View delegate methods
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-
+    [self setFinalCount];
 }
 
 #pragma Delegate methods for Scanner

@@ -927,6 +927,12 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Take Inventory CellID" id="RT2-BV-zWE" customClass="TakeInventoryTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RT2-BV-zWE" id="Z9l-3y-KBw">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="ffN-CU-wvJ" id="NOF-dV-lZ3"/>
@@ -943,7 +949,6 @@
                     <connections>
                         <segue destination="vYe-Yf-5fr" kind="push" identifier="Edit Bottle Name" id="96L-ko-Lao"/>
                         <segue destination="20f-yH-kNa" kind="push" identifier="Edit Bottle Category" id="mLm-Bi-xHm"/>
-                        <segue destination="f5R-Wi-cca" kind="push" identifier="Edit Bottle Count" id="003-Qb-AWY"/>
                         <segue destination="IR3-QD-jjL" kind="modal" identifier="Show Scanner From Bottle Detail" id="Ry1-pD-on8"/>
                     </connections>
                 </tableViewController>
@@ -966,36 +971,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfT-aI-8Lk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2605" y="10"/>
-        </scene>
-        <!--Edit Managed Obj Count View Controller-->
-        <scene sceneID="GA7-Yx-Qyk">
-            <objects>
-                <viewController id="f5R-Wi-cca" customClass="EditManagedObjCountViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="m3g-ll-Osg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="6Wr-2L-Fks">
-                                <rect key="frame" x="20" y="106" width="280" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="f5R-Wi-cca" id="lk4-Tp-fTr"/>
-                                </connections>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="M2c-xR-9QI"/>
-                    <connections>
-                        <outlet property="textFieldForCount" destination="6Wr-2L-Fks" id="lgn-OF-bEZ"/>
-                        <outlet property="view" destination="m3g-ll-Osg" id="6hu-c2-Ski"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uam-Wa-VHp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4350" y="1356"/>
         </scene>
         <!--Edit Text View Controller-->
         <scene sceneID="Snp-NO-syU">
@@ -1230,11 +1205,11 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="sZs-gI-2L1"/>
-        <segue reference="bnt-vf-14B"/>
+        <segue reference="8wE-iO-ft0"/>
+        <segue reference="Ry1-pD-on8"/>
         <segue reference="PFX-UQ-UWT"/>
         <segue reference="cpl-N9-7Vy"/>
         <segue reference="Ncl-VD-cSO"/>
         <segue reference="Pga-Po-JW7"/>
-        <segue reference="8wE-iO-ft0"/>
     </inferredMetricsTieBreakers>
 </document>

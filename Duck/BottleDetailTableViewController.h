@@ -10,14 +10,16 @@
 #import "Bottle.h"
 #import "SubTypeSelectorDelegate.h"
 #import "EditTextViewDelegate.h"
-#import "EditCountDelegate.h"
 #import <UIKit/UIKit.h>
 #import "BottleDetailDelegate.h"
 #import "SingleBarcodeScannerDelegate.h"
 #import "SingleBarcodeScanner.h"
+#import "PlusMinusButtonsView.h"
+#import "TakeInventoryTableViewCell.h"
 
-@interface BottleDetailTableViewController : BaseCoreDataTableViewController <SubTypeSelectorDelegate, EditTextViewDelegate, EditCountDelegate, UIAlertViewDelegate, SingleBarcodeScannerDelegate>
+@interface BottleDetailTableViewController : BaseCoreDataTableViewController <SubTypeSelectorDelegate, EditTextViewDelegate, UIAlertViewDelegate, SingleBarcodeScannerDelegate>
 @property (strong, nonatomic) Bottle * bottle;
 @property (strong, nonatomic) NSOrderedSet * whiteList;
 @property (weak) id <BottleDetailDelegate> delegate;
+@property float editedCount;
 @end

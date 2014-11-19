@@ -65,7 +65,7 @@
 {
     TakeInventoryTableViewCell *cell = (TakeInventoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Take Inventory CellID" forIndexPath:indexPath];
     Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
-    [TakeInventoryTableViewCell formatCell:cell forBottle:bottle];
+    [TakeInventoryTableViewCell formatCell:cell forBottle:bottle showName:YES];
     [cell.plusMinusView.plus1Button addTarget:self action:@selector(didSelectPlus1:) forControlEvents:UIControlEventTouchUpInside];
     [cell.plusMinusView.plus5Button addTarget:self action:@selector(didSelectPlus5:) forControlEvents:UIControlEventTouchUpInside];
     [cell.plusMinusView.minus1Button addTarget:self action:@selector(didSelectMinus1:) forControlEvents:UIControlEventTouchUpInside];

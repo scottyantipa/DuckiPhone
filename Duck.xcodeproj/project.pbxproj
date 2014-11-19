@@ -51,7 +51,6 @@
 		E050147F1814AB7C00A06560 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E050145A1814AB7C00A06560 /* CoreData.framework */; };
 		E05014871814AB7C00A06560 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E05014851814AB7C00A06560 /* InfoPlist.strings */; };
 		E05014891814AB7C00A06560 /* DuckTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014881814AB7C00A06560 /* DuckTests.m */; };
-		E05014B91814AC9900A06560 /* EditManagedObjCountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E050149A1814AC9900A06560 /* EditManagedObjCountViewController.m */; };
 		E05014BA1814AC9900A06560 /* EditPriceAndQtyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E050149D1814AC9900A06560 /* EditPriceAndQtyVC.m */; };
 		E05014BB1814AC9900A06560 /* EditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E050149F1814AC9900A06560 /* EditTextViewController.m */; };
 		E05014BC1814AC9900A06560 /* HomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A11814AC9900A06560 /* HomeTableViewController.m */; };
@@ -196,9 +195,6 @@
 		E05014841814AB7C00A06560 /* DuckTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DuckTests-Info.plist"; sourceTree = "<group>"; };
 		E05014861814AB7C00A06560 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E05014881814AB7C00A06560 /* DuckTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DuckTests.m; sourceTree = "<group>"; };
-		E05014981814AC9900A06560 /* EditCountDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCountDelegate.h; sourceTree = "<group>"; };
-		E05014991814AC9900A06560 /* EditManagedObjCountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditManagedObjCountViewController.h; sourceTree = "<group>"; };
-		E050149A1814AC9900A06560 /* EditManagedObjCountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditManagedObjCountViewController.m; sourceTree = "<group>"; };
 		E050149B1814AC9900A06560 /* EditTextViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTextViewDelegate.h; sourceTree = "<group>"; };
 		E050149D1814AC9900A06560 /* EditPriceAndQtyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPriceAndQtyVC.m; sourceTree = "<group>"; };
 		E050149E1814AC9900A06560 /* EditTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTextViewController.h; sourceTree = "<group>"; };
@@ -538,8 +534,6 @@
 				E05015041814AED400A06560 /* BaseCoreDataTableViewController.m */,
 				E050149E1814AC9900A06560 /* EditTextViewController.h */,
 				E050149F1814AC9900A06560 /* EditTextViewController.m */,
-				E05014991814AC9900A06560 /* EditManagedObjCountViewController.h */,
-				E050149A1814AC9900A06560 /* EditManagedObjCountViewController.m */,
 				E05014FF1814AED400A06560 /* AllSubTypesTableViewController.h */,
 				E05015001814AED400A06560 /* AllSubTypesTableViewController.m */,
 				E0A4F8C51839B12A000CA0C6 /* ToggleBottlesTableViewController.h */,
@@ -555,7 +549,6 @@
 			children = (
 				E00D6ADF1A132168002D2B28 /* SingleBarcodeScannerDelegate.h */,
 				E0671CE21A09908F002DAAE1 /* BottleDetailDelegate.h */,
-				E05014981814AC9900A06560 /* EditCountDelegate.h */,
 				E0B115B719DE125D000DBB42 /* PickOrderDelegate.h */,
 				E0309B4E19DBBEB800F00CA3 /* EditPriceAndQuantityDelegate.h */,
 				E0D5854618402FD10067F3AB /* ToggleBottlesDelegate.h */,
@@ -794,7 +787,6 @@
 				E0948AF01A11BB25006B25D2 /* TakeInventoryTVC.m in Sources */,
 				E05015191814AED400A06560 /* Bottle+Create.m in Sources */,
 				E0309B4A19DB84A800F00CA3 /* BottlesInInvoiceTVC.m in Sources */,
-				E05014B91814AC9900A06560 /* EditManagedObjCountViewController.m in Sources */,
 				E05014BC1814AC9900A06560 /* HomeTableViewController.m in Sources */,
 				E02C7E4B1A1BD921007AF67C /* SARoundedButton.m in Sources */,
 				E0156A431A13165A0021AF27 /* SingleBarcodeScanner.m in Sources */,
