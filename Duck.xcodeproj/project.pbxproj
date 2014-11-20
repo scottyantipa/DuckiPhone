@@ -99,6 +99,7 @@
 		E0948AF01A11BB25006B25D2 /* TakeInventoryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0948AEF1A11BB25006B25D2 /* TakeInventoryTVC.m */; };
 		E0A4F8C71839B12A000CA0C6 /* ToggleBottlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A4F8C61839B12A000CA0C6 /* ToggleBottlesTableViewController.m */; };
 		E0B115B619DE1224000DBB42 /* PickOrderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0B115B519DE1224000DBB42 /* PickOrderTVC.m */; };
+		E0BEEED61A1DB3A70049C195 /* MOCManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BEEED51A1DB3A70049C195 /* MOCManager.m */; };
 		E0C5A55D1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0C5A55B1849ABDD008E9B94 /* Duck.xcdatamodeld */; };
 		E0C5A55E1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0C5A55B1849ABDD008E9B94 /* Duck.xcdatamodeld */; };
 		E0E83AEB19189A9D0096233A /* InvoicePhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E83AEA19189A9D0096233A /* InvoicePhoto.m */; };
@@ -275,6 +276,8 @@
 		E0B115B419DE1224000DBB42 /* PickOrderTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickOrderTVC.h; sourceTree = "<group>"; };
 		E0B115B519DE1224000DBB42 /* PickOrderTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickOrderTVC.m; sourceTree = "<group>"; };
 		E0B115B719DE125D000DBB42 /* PickOrderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickOrderDelegate.h; sourceTree = "<group>"; };
+		E0BEEED41A1DB3A70049C195 /* MOCManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOCManager.h; sourceTree = "<group>"; };
+		E0BEEED51A1DB3A70049C195 /* MOCManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOCManager.m; sourceTree = "<group>"; };
 		E0C5A55C1849ABDD008E9B94 /* Duck.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Duck.xcdatamodel; sourceTree = "<group>"; };
 		E0D5854618402FD10067F3AB /* ToggleBottlesDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleBottlesDelegate.h; sourceTree = "<group>"; };
 		E0E83AE919189A9D0096233A /* InvoicePhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoicePhoto.h; sourceTree = "<group>"; };
@@ -518,6 +521,8 @@
 		E05014EE1814AE1800A06560 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E0BEEED41A1DB3A70049C195 /* MOCManager.h */,
+				E0BEEED51A1DB3A70049C195 /* MOCManager.m */,
 				E02C7E4C1A1C2F89007AF67C /* Utils.h */,
 				E02C7E4D1A1C2F89007AF67C /* Utils.m */,
 				E0F80E541A1A92ED0009AECB /* CMPopTipViewStyleOverride.h */,
@@ -812,6 +817,7 @@
 				E050151C1814AED400A06560 /* BottlesInOrderTableViewController.m in Sources */,
 				E01D814D1A149B8E007C9BCE /* NSUserDefaultsManager.m in Sources */,
 				E05014631814AB7C00A06560 /* main.m in Sources */,
+				E0BEEED61A1DB3A70049C195 /* MOCManager.m in Sources */,
 				E0E83AEB19189A9D0096233A /* InvoicePhoto.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
