@@ -159,8 +159,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         Bottle *bottle = [self.fetchedResultsController objectAtIndexPath:indexPath];
         BottleDetailTableViewController * bottleTVC = (BottleDetailTableViewController*)[[segue destinationViewController] topViewController];
-        bottleTVC.bottle = bottle;
-        bottleTVC.managedObjectContext = [self context];
+        bottleTVC.bottleID = bottle.objectID;
         bottleTVC.delegate = self;
     }
 }
@@ -214,19 +213,29 @@
 
 #pragma Delegate parent methods for toggle bottles
 
--(void)didSelectBottle:(Bottle *)bottle {
+-(void)didSelectBottleWithId:(NSManagedObjectID *)bottleID {
+    _fetchedResultsController = nil; // in case subsequent views alter data, we will want to create a new FRC
+    [self.tableView reloadData];
+    if (bottleID == nil) {
+        return;
+    }
+    Bottle * bottle = (Bottle *)[[self context] objectWithID:bottleID];
     [Bottle toggleUserHasBottle:bottle inContext:[self context]];
+    [[MOCManager sharedInstance] saveContext:[self context]];
     [[self tableView] reloadData];
 }
 
 
--(BOOL)bottleIsSelected:(Bottle *)bottle {
+-(BOOL)bottleIsSelectedWithID:(NSManagedObjectID *)bottleID {
+    Bottle * bottle = (Bottle *)[[self context] objectWithID:bottleID];
     return [bottle.userHasBottle boolValue];
 }
 
 #pragma Delegate methods for StandardModal
 
--(void)didFinishEditingBottle:(Bottle *)bottle {
+-(void)didFinishEditingBottleWithId:(NSManagedObjectID *)bottleID {
+    [[MOCManager sharedInstance] saveContext:[self context]];
+    [self.tableView reloadData];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 

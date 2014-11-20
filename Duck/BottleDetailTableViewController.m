@@ -18,21 +18,24 @@
 @end
 
 @implementation BottleDetailTableViewController
-
-@synthesize bottle = _bottle;
+@synthesize bottleID = _bottleID;
 @synthesize whiteList = _whiteList;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize editedCount = _editedCount;
+@synthesize bottle = _bottle;
+
 -(void)viewDidLoad
 {
+    self.whiteList = [Bottle whiteList];
+    _managedObjectContext = [[MOCManager sharedInstance] newMOC];
+    _bottle = (Bottle *)[_managedObjectContext objectWithID:_bottleID];
+    _editedCount = [[Bottle countOfBottle:_bottle forContext:_managedObjectContext] floatValue];
     if (!_bottle.name) {
         self.title = @"New Bottle";
     }
     else {
         self.title = _bottle.name;
     }
-    self.whiteList = [Bottle whiteList];
-    _editedCount = [[Bottle countOfBottle:_bottle forContext:_managedObjectContext] floatValue];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -57,8 +60,13 @@
         [alert show];
         return;
     }
+    _bottle.userHasBottle = [NSNumber numberWithBool:YES]; //if they ever edit a bottle or create a bottle, add it to their collection.
     [self setFinalCount];
-    [self.delegate didFinishEditingBottle:_bottle];
+    [[MOCManager sharedInstance] saveContext:_managedObjectContext];
+    [self.delegate didFinishEditingBottleWithId:_bottle.objectID];
+}
+- (IBAction)didPressCancel:(id)sender {
+    [self.delegate didFinishEditingBottleWithId:_bottle.objectID];
 }
 
 -(void)setFinalCount {
@@ -114,15 +122,6 @@
 }
 
 
-
--(void)setManagedObjectContext:(NSManagedObjectContext *)context {
-    _managedObjectContext = context;
-}
-
--(void)setBottleInfo:(Bottle *)bottleInfo {
-    _bottle = bottleInfo;
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [_whiteList count] + 1; // all the properties, plus a delete button
@@ -163,10 +162,6 @@
             } else {
                 cell.textLabel.text = [_bottle.subType name];
             }
-        }
-        else if ([property isEqualToString:@"count"]) {
-            cell.textLabel.text = [NSString stringWithFormat:@"%@", [Bottle countOfBottle:_bottle forContext:_managedObjectContext]];
-            
         }
         else if ([property isEqualToString:@"barcode"]) {
             NSNumberFormatter * numFormatter = [[NSNumberFormatter alloc] init];
@@ -251,7 +246,6 @@
     if (section <= [_whiteList count] - 1) {
         property = [_whiteList objectAtIndex:section];
     }
-
     if ([property isEqualToString:@"name"]) {
         [self performSegueWithIdentifier:@"Edit Bottle Name" sender:nil];
     }
@@ -308,22 +302,12 @@
     return _bottle.name;
 }
 
--(void)didFinishEditingCount:(NSNumber *)count forObject:(id)obj {
-    [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:[NSDate date] withCount:count forBottle:_bottle inManagedObjectContext:_managedObjectContext];
-    [self.tableView reloadData];
-}
-
--(float)countOfManagedObject:(id)obj {
-    NSNumber * num = [Bottle countOfBottle:obj forContext:_managedObjectContext];
-    float countAsFloat = [num floatValue];
-    return countAsFloat;
-    
-}
 
 #pragma Actions and Outlets
 - (void)didTouchDelete {
-    self.bottle.userHasBottle = [NSNumber numberWithBool:NO];
-    [self.delegate didFinishEditingBottle:nil];
+    _bottle.userHasBottle = [NSNumber numberWithBool:NO];
+    [[MOCManager sharedInstance] saveContext:_managedObjectContext];
+    [self.delegate didFinishEditingBottleWithId:_bottle.objectID];
 }
 
 #pragma Alert View delegate methods

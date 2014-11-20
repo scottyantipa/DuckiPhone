@@ -102,15 +102,17 @@
 
 #pragma Delegate parent methods for toggle bottles
 
--(void)didSelectBottle:(Bottle *)bottle {
-    [Order toggleBottle:bottle inOrder:_order inContext:_managedObjectContext];
+-(void)didSelectBottleWithId:(NSManagedObjectID *)bottleID {
+    if (bottleID != nil) {
+        Bottle * bottle = (Bottle *)[_managedObjectContext objectWithID:bottleID];
+        [Order toggleBottle:bottle inOrder:_order inContext:_managedObjectContext];
+    }
     [self reload];
 }
 
-
-
 // Iterate over the bottles in the order to find that orderForBottle
--(BOOL)bottleIsSelected:(Bottle *)bottle {
+-(BOOL)bottleIsSelectedWithID:(NSManagedObjectID *)bottleID {
+    Bottle * bottle = (Bottle *)[_managedObjectContext objectWithID:bottleID];
     NSSet * orders = _order.ordersByBottle;
     BOOL bottleIsSelected = NO; // by default
     for (OrderForBottle * orderForBottle in orders) {

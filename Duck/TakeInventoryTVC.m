@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _editedValues = [[NSMutableDictionary alloc] init];
+    _managedObjectContext = [[MOCManager sharedInstance] newMOC];    
     [Utils markSubviewsAsNoDelay:self.tableView];
 }
 
@@ -145,10 +146,7 @@
                 continue; // this shouldnt happen, just a safegaurd
             }
             [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:now withCount:(NSNumber *)editedVal forBottle:bottle inManagedObjectContext:_managedObjectContext];
-            NSError *error;
-            if (![_managedObjectContext save:&error]) {
-                NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-            }
+            [[MOCManager sharedInstance] saveContext:_managedObjectContext];
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{

@@ -76,10 +76,6 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         AlcoholType *alcType = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [segue.destinationViewController setParentType:alcType];
-    } else if ([segue.identifier isEqualToString:@"Show Toggle Bottle Controller SegueID"]) {
-        ToggleBottlesTableViewController * tvc = [segue destinationViewController];
-        tvc.managedObjectContext = _managedObjectContext;
-        tvc.delegate = self;
     }
 }
 
@@ -102,15 +98,5 @@
     cell.textLabel.text = alcType.name;
 }
 
-#pragma Protocol methods
-
--(void)didSelectBottle:(Bottle *)bottle {
-    [Bottle toggleUserHasBottle:bottle inContext:_managedObjectContext];
-    [AlcoholSubType recalculateUserOrderingForSubType:bottle.subType inContext:_managedObjectContext];
-}
-
--(BOOL)bottleIsSelected:(Bottle *)bottle {
-    return [bottle.userHasBottle boolValue];
-}
 
 @end

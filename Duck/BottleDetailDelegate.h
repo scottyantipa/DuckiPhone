@@ -10,5 +10,5 @@
 #import "Bottle+Create.h"
 
 @protocol BottleDetailDelegate <NSObject>
--(void)didFinishEditingBottle:(Bottle *)bottle;
+-(void)didFinishEditingBottleWithId:(NSManagedObjectID *)bottleID;
 @end

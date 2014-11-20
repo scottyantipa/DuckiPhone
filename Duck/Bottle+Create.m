@@ -20,6 +20,7 @@
 
 +(void)toggleUserHasBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context {
     bottle.userHasBottle = [NSNumber numberWithBool:![bottle.userHasBottle boolValue]];
+    [AlcoholSubType recalculateUserOrderingForSubType:bottle.subType inContext:context];
 }
 
 +(Bottle *)bottleForBarcode:(NSString *)barcode inManagedObjectContext:(NSManagedObjectContext *)context {
@@ -57,10 +58,6 @@
                       inManagedObjectContext:context];
     bottle.name = @"No Name";
     bottle.barcode = barcode;
-    NSError *error;
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
     return bottle;
 }
 +(OrderForBottle *)mostRecentOrderForBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context
@@ -103,6 +100,7 @@
 }
 
 
+// THIS IS MESSED UP:  Since I identify the bottle by barcode, all bottles with a null barcode will share the same inventory count
 // Get the most recent InventorySnapshotForBottle
 // and set that count to _count
 +(NSNumber *)countOfBottle:(Bottle *)bottle forContext:(NSManagedObjectContext *)context {

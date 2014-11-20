@@ -15,4 +15,6 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 -(void)saveBaseContext;
+-(void)saveContext:(NSManagedObjectContext *)context;
+-(NSManagedObjectContext *)newMOC;
 @end

@@ -25,10 +25,6 @@
     if ([segue.identifier isEqualToString:@"Show Inventory"]) {
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
     }
-    else if ([segue.identifier isEqualToString:@"Take Inventory"]) {
-        TakeInventoryTVC * tvc = (TakeInventoryTVC *)[[segue destinationViewController] topViewController];
-        [tvc setManagedObjectContext:_managedObjectContext];
-    }
     else if ([segue.identifier isEqualToString:@"New Order Segue ID"]) {
         [segue.destinationViewController setManagedObjectContext:_managedObjectContext];
     }
@@ -104,6 +100,7 @@
     if (alertView.tag == 1) { // its the "No Bottle" alert from the scanner
         if (buttonIndex == 0) {
             Bottle *newBottle = [Bottle newBottleForBarcode:_currentScannedBottleBarcode inManagedObjectContext:_managedObjectContext];
+            [[MOCManager sharedInstance] saveContext:_managedObjectContext];
             newBottle.userHasBottle = [NSNumber numberWithBool:YES];
             _mostRecentFoundBottle = newBottle;
             [self performSegueWithIdentifier:@"ShowBottleDetailsFromHome" sender:nil];
@@ -111,7 +108,8 @@
     }
 }
 
--(void)didFinishEditingBottle:(Bottle *)bottle {
+-(void)didFinishEditingBottleWithId:(NSManagedObjectID *)bottleID
+{
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 

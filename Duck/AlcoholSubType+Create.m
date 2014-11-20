@@ -71,10 +71,6 @@
         int indexInt = (int)index;
         bottle.userOrdering = [NSNumber numberWithInt:indexInt];
     }
-    NSError *error;
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
 }
 
 // change the bottle to a new subtype and then give the bottle a userOrdering as the last bottle in that subtype
@@ -84,10 +80,6 @@
     NSUInteger newOrder = [fetchedBottles count];
     int newOrderInt = (int)newOrder;
     bottle.userOrdering = [NSNumber numberWithInteger:(newOrderInt)];
-    NSError *error;
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
 }
 
 +(void)changeOrderOfBottle:(Bottle *)bottle toNumber:(NSNumber *)number inContext:(NSManagedObjectContext *)context {

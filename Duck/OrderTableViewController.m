@@ -287,6 +287,7 @@
     Vendor * vendor = [Vendor newVendorForRef:person inContext:_managedObjectContext];
     _order.whichVendor = vendor;
     [self.tableView reloadData];
+    [self.view setNeedsDisplay]; // had rendering issues with table cell, hopefully this keeps it fixed
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

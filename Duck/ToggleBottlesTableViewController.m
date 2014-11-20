@@ -177,7 +177,7 @@
 {
     Bottle * bottle = [fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = bottle.name;
-    if ([self.delegate bottleIsSelected:bottle]) {
+    if ([self.delegate bottleIsSelectedWithID:bottle.objectID]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -207,7 +207,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSFetchedResultsController * frc = [self fetchedResultsControllerForTableView:tableView];
     Bottle * bottle = [frc objectAtIndexPath:indexPath];
-    [self.delegate didSelectBottle:bottle];
+    [self.delegate didSelectBottleWithId:bottle.objectID];
     [tableView reloadData];
 }
 
@@ -229,7 +229,11 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"NewBottleFromToggleBottles"]) {
         BottleDetailTableViewController * bottleTVC = (BottleDetailTableViewController*)[[segue destinationViewController] topViewController];
-        bottleTVC.bottle = [Bottle newBottleForBarcode:@"null" inManagedObjectContext:_managedObjectContext];
+        Bottle * newBottle = [Bottle newBottleForBarcode:@"null" inManagedObjectContext:_managedObjectContext];
+        // by default put it in their collection.  If they don't save the bottle then it doesn't matter anyways.
+        newBottle.userHasBottle = [NSNumber numberWithBool:YES];
+        [[MOCManager sharedInstance] saveContext:_managedObjectContext];
+        bottleTVC.bottleID = newBottle.objectID;
         bottleTVC.managedObjectContext = _managedObjectContext;
         bottleTVC.delegate = self;
     }
@@ -358,13 +362,28 @@
     [barButtonAppearanceInSearchBar setTitle:@"Done"];
 }
 
--(void)didFinishEditingBottle:(Bottle *)bottle {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    if (bottle == nil) {
-        return;
-    }
-    [self.delegate didSelectBottle:bottle];
+// This is a little tricky.  This TVC can be used to toggle bottles for any reason -- put them in/out of an order or invoice, or mark them as in the user's collction.
+//  If it's being used to toggle whether they are in the users collection, then when this method is called and the user has created a new bottle, we don't want our delegate
+// to toggle the userHasBottle property because we ourselves have set it in this TVC when we passed the new bottle to BottleDetailTVC.  So don't alert delegate when this is the case.
+-(void)didFinishEditingBottleWithId:(NSManagedObjectID *)bottleID
+{
+    _fetchedResultsController = nil;
     [self.tableView reloadData];
+    [self.view setNeedsDisplay];
+    Bottle * bottle = (Bottle *)[_managedObjectContext objectWithID:bottleID];
+    if (!bottle.userHasBottle) {
+        if  ([self.delegate bottleIsSelectedWithID:bottleID]) {
+            // the bottle isn't selected so we need to alert delegate
+            [self.delegate didSelectBottleWithId:bottleID];
+        } else {
+            [self.delegate didSelectBottleWithId:nil];
+        }
+
+    } else {
+        // The user didn't keep the bottle so we do nothing here
+        [self.delegate didSelectBottleWithId:nil];
+    }
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

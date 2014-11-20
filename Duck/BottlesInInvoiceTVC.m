@@ -135,14 +135,19 @@ const float HEADER_HEIGHT = 30;
 
 #pragma Delegate parent methods for toggle bottles
 
--(void)didSelectBottle:(Bottle *)bottle {
-    [Invoice toggleBottle:bottle inInvoice:_invoice inContext:_managedObjectContext];
+-(void)didSelectBottleWithId:(NSManagedObjectID *)bottleID
+{
+    if (bottleID != nil) {
+        Bottle * bottle = (Bottle *)[_managedObjectContext objectWithID:bottleID];
+        [Invoice toggleBottle:bottle inInvoice:_invoice inContext:_managedObjectContext];
+    }
     [self reload];
 }
 
 
 // Iterate over the bottles in the order to find that orderForBottle
--(BOOL)bottleIsSelected:(Bottle *)bottle {
+-(BOOL)bottleIsSelectedWithID:(NSManagedObjectID *)bottleID {
+    Bottle * bottle = (Bottle *)[_managedObjectContext objectWithID:bottleID];
     NSSet * invoicesByBottle = _invoice.invoicesByBottle;
     BOOL bottleIsSelected = NO; // by default
     for (InvoiceForBottle * invoice in invoicesByBottle) {

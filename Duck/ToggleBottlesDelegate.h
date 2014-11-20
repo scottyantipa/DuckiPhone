@@ -12,9 +12,9 @@
 @protocol ToggleBottlesDelegate <NSObject>
 
 // User selected/unselected a bottle
--(void)didSelectBottle:(Bottle *)bottle;
+-(void)didSelectBottleWithId:(NSManagedObjectID *)bottleID;
 
 // Delegate should know if bottle is selected.  For example, if delegate
 // is the global add/remove bottle, the selected property is userHasBottle
--(BOOL)bottleIsSelected:(Bottle *)bottle;
+-(BOOL)bottleIsSelectedWithID:(NSManagedObjectID *)bottleID;
 @end

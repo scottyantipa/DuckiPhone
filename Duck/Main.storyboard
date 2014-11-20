@@ -940,6 +940,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="bNa-i9-JpO">
+                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="cancel" id="KDP-6c-hrT">
+                            <connections>
+                                <action selector="didPressCancel:" destination="ffN-CU-wvJ" id="p7Q-1Q-EbZ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Done" id="c2l-9Y-UVz">
                             <connections>
                                 <action selector="didPressDone:" destination="ffN-CU-wvJ" id="hgb-U0-EnJ"/>
@@ -1065,14 +1070,7 @@
                             <outlet property="delegate" destination="xsC-LE-tqN" id="cif-eV-cQc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="2sl-WX-wXg">
-                        <barButtonItem key="rightBarButtonItem" title="Add Bottles" id="pDo-tV-E5c">
-                            <connections>
-                                <action selector="didSelectAddBottles:" destination="xsC-LE-tqN" id="hhq-qT-STw"/>
-                                <segue destination="xCa-3a-yKM" kind="push" identifier="Show Toggle Bottle Controller SegueID" id="Ytc-VC-nkZ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="2sl-WX-wXg"/>
                     <connections>
                         <outlet property="view" destination="qic-Fa-B1f" id="sWQ-lu-Jqy"/>
                     </connections>
@@ -1205,9 +1203,9 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="sZs-gI-2L1"/>
+        <segue reference="PFX-UQ-UWT"/>
         <segue reference="8wE-iO-ft0"/>
         <segue reference="Ry1-pD-on8"/>
-        <segue reference="PFX-UQ-UWT"/>
         <segue reference="cpl-N9-7Vy"/>
         <segue reference="Ncl-VD-cSO"/>
         <segue reference="Pga-Po-JW7"/>

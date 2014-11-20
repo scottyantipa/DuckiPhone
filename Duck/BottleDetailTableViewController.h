@@ -16,8 +16,10 @@
 #import "SingleBarcodeScanner.h"
 #import "PlusMinusButtonsView.h"
 #import "TakeInventoryTableViewCell.h"
+#import "MOCManager.h"
 
 @interface BottleDetailTableViewController : BaseCoreDataTableViewController <SubTypeSelectorDelegate, EditTextViewDelegate, UIAlertViewDelegate, SingleBarcodeScannerDelegate>
+@property (strong, nonatomic) NSManagedObjectID * bottleID;
 @property (strong, nonatomic) Bottle * bottle;
 @property (strong, nonatomic) NSOrderedSet * whiteList;
 @property (weak) id <BottleDetailDelegate> delegate;

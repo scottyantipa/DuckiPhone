@@ -10,6 +10,7 @@
 #import "Bottle+Create.h"
 #import "TakeInventoryTableViewCell.h"
 #import "InventorySnapshotForBottle+Create.h"
+#import "MOCManager.h"
 
 @interface TakeInventoryTVC : BaseCoreDataTableViewController <UIAlertViewDelegate>
 @property (strong, nonatomic) NSMutableDictionary * editedValues;
