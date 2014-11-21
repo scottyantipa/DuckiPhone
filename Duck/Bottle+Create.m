@@ -50,16 +50,28 @@
     }
 }
 
+const NSString * NO_NAME_STRING = @"No Name";
+
 // main way to create a new bottle. YOU NEED A BARCODE -- its our way of uniquely identifying bottles
 // and we only let users add a new bottle by scanning the barcode
 +(Bottle *)newBottleForBarcode:(NSString *)barcode inManagedObjectContext:(NSManagedObjectContext *)context {
     Bottle *bottle = [NSEntityDescription
                       insertNewObjectForEntityForName:@"Bottle"
                       inManagedObjectContext:context];
-    bottle.name = @"No Name";
+    bottle.name = [NO_NAME_STRING copy];
     bottle.barcode = barcode;
     return bottle;
 }
+
+// LITTLE hacky, but I know that my Wine Types are Liquor, Wine, Beer and that the NSObjects are just
+// those strings with "Bottle" appended
++(Bottle *)newBottleForType:(AlcoholType *)type inManagedObjectContext:(NSManagedObjectContext *)context {
+    NSString * entityName = [NSString stringWithFormat:@"%@Bottle", type.name];
+    Bottle * bottle = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
+    bottle.name = [NO_NAME_STRING copy];
+    return bottle;
+}
+
 +(OrderForBottle *)mostRecentOrderForBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];

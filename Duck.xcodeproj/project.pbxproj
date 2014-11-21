@@ -26,6 +26,11 @@
 		E02D37F219DF7D64004C9D57 /* LossesForBottleTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E02D37F119DF7D64004C9D57 /* LossesForBottleTVC.m */; };
 		E02D3F721849542C00C435A3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E02D3F711849542C00C435A3 /* AVFoundation.framework */; };
 		E02D3F741849543C00C435A3 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E02D3F731849543C00C435A3 /* CoreVideo.framework */; };
+		E02E82001A1EAA7F0043BB09 /* WineBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E02E81FF1A1EAA7F0043BB09 /* WineBottle.m */; };
+		E02E82031A1EAA800043BB09 /* LiquorBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E02E82021A1EAA800043BB09 /* LiquorBottle.m */; };
+		E02E82061A1EAA800043BB09 /* BeerBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E02E82051A1EAA800043BB09 /* BeerBottle.m */; };
+		E02E82091A1EAB2A0043BB09 /* Varietal.m in Sources */ = {isa = PBXBuildFile; fileRef = E02E82081A1EAB2A0043BB09 /* Varietal.m */; };
+		E02E820C1A1EAB2B0043BB09 /* Vineyard.m in Sources */ = {isa = PBXBuildFile; fileRef = E02E820B1A1EAB2B0043BB09 /* Vineyard.m */; };
 		E0309AF919D91BCC00F00CA3 /* InvoicesForOrderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0309AF819D91BCC00F00CA3 /* InvoicesForOrderTVC.m */; };
 		E0309AFF19DA840E00F00CA3 /* InvoicesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0309AFE19DA840E00F00CA3 /* InvoicesTVC.m */; };
 		E0309B0519DB427000F00CA3 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = E0309B0419DB427000F00CA3 /* Order.m */; };
@@ -156,6 +161,16 @@
 		E02D37F119DF7D64004C9D57 /* LossesForBottleTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossesForBottleTVC.m; sourceTree = "<group>"; };
 		E02D3F711849542C00C435A3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E02D3F731849543C00C435A3 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		E02E81FE1A1EAA7F0043BB09 /* WineBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineBottle.h; sourceTree = "<group>"; };
+		E02E81FF1A1EAA7F0043BB09 /* WineBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineBottle.m; sourceTree = "<group>"; };
+		E02E82011A1EAA800043BB09 /* LiquorBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiquorBottle.h; sourceTree = "<group>"; };
+		E02E82021A1EAA800043BB09 /* LiquorBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiquorBottle.m; sourceTree = "<group>"; };
+		E02E82041A1EAA800043BB09 /* BeerBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeerBottle.h; sourceTree = "<group>"; };
+		E02E82051A1EAA800043BB09 /* BeerBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeerBottle.m; sourceTree = "<group>"; };
+		E02E82071A1EAB2A0043BB09 /* Varietal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Varietal.h; sourceTree = "<group>"; };
+		E02E82081A1EAB2A0043BB09 /* Varietal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Varietal.m; sourceTree = "<group>"; };
+		E02E820A1A1EAB2B0043BB09 /* Vineyard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vineyard.h; sourceTree = "<group>"; };
+		E02E820B1A1EAB2B0043BB09 /* Vineyard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vineyard.m; sourceTree = "<group>"; };
 		E02FFE771A133E4D00B2723C /* libPods-BFPaperButton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-BFPaperButton.a"; path = "Pods/build/Debug-iphoneos/libPods-BFPaperButton.a"; sourceTree = "<group>"; };
 		E02FFE791A133E5600B2723C /* libPods-UIColor+BFPaperColors.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-UIColor+BFPaperColors.a"; path = "Pods/build/Debug-iphoneos/libPods-UIColor+BFPaperColors.a"; sourceTree = "<group>"; };
 		E0309AF719D91BCC00F00CA3 /* InvoicesForOrderTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoicesForOrderTVC.h; sourceTree = "<group>"; };
@@ -478,6 +493,16 @@
 		E05014EC1814ADE600A06560 /* DataClasses */ = {
 			isa = PBXGroup;
 			children = (
+				E02E820A1A1EAB2B0043BB09 /* Vineyard.h */,
+				E02E820B1A1EAB2B0043BB09 /* Vineyard.m */,
+				E02E82071A1EAB2A0043BB09 /* Varietal.h */,
+				E02E82081A1EAB2A0043BB09 /* Varietal.m */,
+				E02E82041A1EAA800043BB09 /* BeerBottle.h */,
+				E02E82051A1EAA800043BB09 /* BeerBottle.m */,
+				E02E82011A1EAA800043BB09 /* LiquorBottle.h */,
+				E02E82021A1EAA800043BB09 /* LiquorBottle.m */,
+				E02E81FE1A1EAA7F0043BB09 /* WineBottle.h */,
+				E02E81FF1A1EAA7F0043BB09 /* WineBottle.m */,
 				E0309B1219DB42E300F00CA3 /* Invoice.h */,
 				E0309B1319DB42E300F00CA3 /* Invoice.m */,
 				E0309B4B19DB87C000F00CA3 /* Invoice+Create.h */,
@@ -772,6 +797,7 @@
 				E082728B1819ACE3007A2977 /* PastOrdersTableViewController.m in Sources */,
 				E05015131814AED400A06560 /* AlcoholType+Create.m in Sources */,
 				E0309B0519DB427000F00CA3 /* Order.m in Sources */,
+				E02E82001A1EAA7F0043BB09 /* WineBottle.m in Sources */,
 				E0B115B619DE1224000DBB42 /* PickOrderTVC.m in Sources */,
 				E0F80E591A1A9B780009AECB /* PlusMinusButtonsView.m in Sources */,
 				E05015171814AED400A06560 /* BaseCoreDataTableViewController.m in Sources */,
@@ -788,12 +814,14 @@
 				E05014BE1814AC9900A06560 /* InventorySnapshotForBottle+Create.m in Sources */,
 				E05014BF1814AC9900A06560 /* OrderTableViewController.m in Sources */,
 				E0309B0E19DB427100F00CA3 /* Vendor.m in Sources */,
+				E02E82061A1EAA800043BB09 /* BeerBottle.m in Sources */,
 				E024A4EF19081351003A80DB /* OrderForBottle.m in Sources */,
 				E0948AF01A11BB25006B25D2 /* TakeInventoryTVC.m in Sources */,
 				E05015191814AED400A06560 /* Bottle+Create.m in Sources */,
 				E0309B4A19DB84A800F00CA3 /* BottlesInInvoiceTVC.m in Sources */,
 				E05014BC1814AC9900A06560 /* HomeTableViewController.m in Sources */,
 				E02C7E4B1A1BD921007AF67C /* SARoundedButton.m in Sources */,
+				E02E82091A1EAB2A0043BB09 /* Varietal.m in Sources */,
 				E0156A431A13165A0021AF27 /* SingleBarcodeScanner.m in Sources */,
 				E05015141814AED400A06560 /* AlcoholTypesTableViewController.m in Sources */,
 				E0223CCA191D38A1003EC403 /* InvoicePhotoVC.m in Sources */,
@@ -804,6 +832,7 @@
 				E0C5A55D1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */,
 				E0876B621911894400AE3248 /* EditVendorInfoViewController.m in Sources */,
 				E0309AFF19DA840E00F00CA3 /* InvoicesTVC.m in Sources */,
+				E02E820C1A1EAB2B0043BB09 /* Vineyard.m in Sources */,
 				E05015101814AED400A06560 /* AlcoholSubType+Create.m in Sources */,
 				E05015161814AED400A06560 /* AppDelegate.m in Sources */,
 				E00ABBDB1915500D00D6BF17 /* InvoiceTVC.m in Sources */,
@@ -816,6 +845,7 @@
 				E0948AE91A11BA7C006B25D2 /* TakeInventoryTableViewCell.m in Sources */,
 				E050151C1814AED400A06560 /* BottlesInOrderTableViewController.m in Sources */,
 				E01D814D1A149B8E007C9BCE /* NSUserDefaultsManager.m in Sources */,
+				E02E82031A1EAA800043BB09 /* LiquorBottle.m in Sources */,
 				E05014631814AB7C00A06560 /* main.m in Sources */,
 				E0BEEED61A1DB3A70049C195 /* MOCManager.m in Sources */,
 				E0E83AEB19189A9D0096233A /* InvoicePhoto.m in Sources */,
