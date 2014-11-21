@@ -52,6 +52,13 @@
     return subType;
 }
 
+// This should probably go in a Varietal+Create but fuck it for now
++(Varietal *)newVarietalForSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context {
+    Varietal * varietal = [NSEntityDescription insertNewObjectForEntityForName:@"Varietal" inManagedObjectContext:context];
+    varietal.subType = subType;
+    return varietal;
+}
+
 // Completely recalculate the userOrdering for all bottles (there may be gaps if a user removed/added a bottle)
 +(void)recalculateUserOrderingForSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context {
     NSString * subTypeName = subType.name;

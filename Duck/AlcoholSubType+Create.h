@@ -8,6 +8,7 @@
 
 #import "AlcoholSubType.h"
 #import "Bottle+Create.h"
+#import "Varietal.h"
 
 @interface AlcoholSubType (Create)
 +(AlcoholSubType *)alcoholSubTypeFromName:(NSString *)name
@@ -26,4 +27,5 @@
 
 // Get the users bottles for a subtype
 +(NSArray *)fetchedBottlesForSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context;
++(Varietal *)newVarietalForSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context;
 @end

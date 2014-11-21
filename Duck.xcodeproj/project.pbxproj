@@ -31,6 +31,7 @@
 		E02E82061A1EAA800043BB09 /* BeerBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E02E82051A1EAA800043BB09 /* BeerBottle.m */; };
 		E02E82091A1EAB2A0043BB09 /* Varietal.m in Sources */ = {isa = PBXBuildFile; fileRef = E02E82081A1EAB2A0043BB09 /* Varietal.m */; };
 		E02E820C1A1EAB2B0043BB09 /* Vineyard.m in Sources */ = {isa = PBXBuildFile; fileRef = E02E820B1A1EAB2B0043BB09 /* Vineyard.m */; };
+		E02E82561A1EE7E50043BB09 /* VarietalsForSubTypeTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E02E82551A1EE7E50043BB09 /* VarietalsForSubTypeTVC.m */; };
 		E0309AF919D91BCC00F00CA3 /* InvoicesForOrderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0309AF819D91BCC00F00CA3 /* InvoicesForOrderTVC.m */; };
 		E0309AFF19DA840E00F00CA3 /* InvoicesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0309AFE19DA840E00F00CA3 /* InvoicesTVC.m */; };
 		E0309B0519DB427000F00CA3 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = E0309B0419DB427000F00CA3 /* Order.m */; };
@@ -171,6 +172,8 @@
 		E02E82081A1EAB2A0043BB09 /* Varietal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Varietal.m; sourceTree = "<group>"; };
 		E02E820A1A1EAB2B0043BB09 /* Vineyard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vineyard.h; sourceTree = "<group>"; };
 		E02E820B1A1EAB2B0043BB09 /* Vineyard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vineyard.m; sourceTree = "<group>"; };
+		E02E82541A1EE7E50043BB09 /* VarietalsForSubTypeTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VarietalsForSubTypeTVC.h; sourceTree = "<group>"; };
+		E02E82551A1EE7E50043BB09 /* VarietalsForSubTypeTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VarietalsForSubTypeTVC.m; sourceTree = "<group>"; };
 		E02FFE771A133E4D00B2723C /* libPods-BFPaperButton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-BFPaperButton.a"; path = "Pods/build/Debug-iphoneos/libPods-BFPaperButton.a"; sourceTree = "<group>"; };
 		E02FFE791A133E5600B2723C /* libPods-UIColor+BFPaperColors.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-UIColor+BFPaperColors.a"; path = "Pods/build/Debug-iphoneos/libPods-UIColor+BFPaperColors.a"; sourceTree = "<group>"; };
 		E0309AF719D91BCC00F00CA3 /* InvoicesForOrderTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoicesForOrderTVC.h; sourceTree = "<group>"; };
@@ -656,6 +659,8 @@
 		E0A41FB218888583001F7493 /* Bottles */ = {
 			isa = PBXGroup;
 			children = (
+				E02E82541A1EE7E50043BB09 /* VarietalsForSubTypeTVC.h */,
+				E02E82551A1EE7E50043BB09 /* VarietalsForSubTypeTVC.m */,
 				E05014FD1814AED400A06560 /* AlcoholTypesTableViewController.h */,
 				E05014FE1814AED400A06560 /* AlcoholTypesTableViewController.m */,
 				E05014F71814AED400A06560 /* AlcoholSubTypesTableViewController.h */,
@@ -829,6 +834,7 @@
 				E031445618431AD20047FA6F /* Vendor+Create.m in Sources */,
 				E05014BB1814AC9900A06560 /* EditTextViewController.m in Sources */,
 				E0309B1119DB427100F00CA3 /* InvoiceForBottle.m in Sources */,
+				E02E82561A1EE7E50043BB09 /* VarietalsForSubTypeTVC.m in Sources */,
 				E0C5A55D1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */,
 				E0876B621911894400AE3248 /* EditVendorInfoViewController.m in Sources */,
 				E0309AFF19DA840E00F00CA3 /* InvoicesTVC.m in Sources */,

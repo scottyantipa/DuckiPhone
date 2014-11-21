@@ -20,6 +20,7 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize parentType = _parentType;
+@synthesize selectedSubType = _selectedSubType;
 
 -(void)setParentType:(AlcoholType *)parentType
 {
@@ -80,6 +81,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    _selectedSubType = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    if ([_parentType.name isEqualToString:@"Wine"]) {
+        [self performSegueWithIdentifier:@"Show Varietals" sender:nil];
+    } else {
+        [self performSegueWithIdentifier:@"Show Bottles For Sub Type Segue ID" sender:nil];
+    }
+
+
 }
 
 
@@ -91,10 +100,8 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    AlcoholSubType *subType = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    if ([segue.destinationViewController respondsToSelector:@selector(setSubType:)]) {
-        [segue.destinationViewController setSubType:subType];
+    if  ([segue.destinationViewController respondsToSelector:@selector(setSubType:)]) {
+        [segue.destinationViewController setSubType:_selectedSubType];
     }
 }
 

@@ -902,7 +902,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h0p-s7-ma7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1836" y="-990"/>
+            <point key="canvasLocation" x="1906" y="-582"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="zcP-uu-TWi">
@@ -1157,9 +1157,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="xxc-Ne-wLM" kind="push" id="QWE-cd-Bbs"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1170,11 +1167,40 @@
                     <navigationItem key="navigationItem" id="Vow-8S-NOn"/>
                     <connections>
                         <outlet property="view" destination="rcc-Nu-tGx" id="yTx-EC-t6H"/>
+                        <segue destination="xxc-Ne-wLM" kind="push" identifier="Show Bottles For Sub Type Segue ID" id="d1r-zX-5F7"/>
+                        <segue destination="tBW-Cm-5TI" kind="push" identifier="Show Varietals" id="rbw-JG-eua"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CHl-7M-5bx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1410" y="-990"/>
+        </scene>
+        <!--Varietals For Sub TypeTVC-->
+        <scene sceneID="AXh-jg-lb4">
+            <objects>
+                <tableViewController id="tBW-Cm-5TI" customClass="VarietalsForSubTypeTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="JrB-6v-zcL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="Varietals Cell ID" selectionStyle="default" indentationWidth="10" reuseIdentifier="Varietals Cell" id="c5C-0I-pyn">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c5C-0I-pyn" id="cQn-2x-Jni">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="tBW-Cm-5TI" id="Gpu-8l-Nd1"/>
+                            <outlet property="delegate" destination="tBW-Cm-5TI" id="ZFj-kW-WeL"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="EOc-bk-YUt"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b4i-0a-h9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1909" y="-1208"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HX8-11-mA5">
@@ -1202,12 +1228,12 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="sZs-gI-2L1"/>
-        <segue reference="PFX-UQ-UWT"/>
         <segue reference="8wE-iO-ft0"/>
+        <segue reference="TCw-cl-1mJ"/>
         <segue reference="Ry1-pD-on8"/>
         <segue reference="cpl-N9-7Vy"/>
         <segue reference="Ncl-VD-cSO"/>
         <segue reference="Pga-Po-JW7"/>
+        <segue reference="PFX-UQ-UWT"/>
     </inferredMetricsTieBreakers>
 </document>
