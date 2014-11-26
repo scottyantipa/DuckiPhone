@@ -9,7 +9,6 @@
 #import "AlcoholType.h"
 
 @interface AlcoholType (Create)
-
 +(AlcoholType *)alcoholTypeFromName:(NSString *)name
              inManagedObjectContext:(NSManagedObjectContext *)context;
 +(AlcoholType *)newTypeForName:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context;

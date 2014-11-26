@@ -35,7 +35,6 @@
 		E0309AF919D91BCC00F00CA3 /* InvoicesForOrderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0309AF819D91BCC00F00CA3 /* InvoicesForOrderTVC.m */; };
 		E0309AFF19DA840E00F00CA3 /* InvoicesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0309AFE19DA840E00F00CA3 /* InvoicesTVC.m */; };
 		E0309B0519DB427000F00CA3 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = E0309B0419DB427000F00CA3 /* Order.m */; };
-		E0309B0819DB427100F00CA3 /* Bottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E0309B0719DB427100F00CA3 /* Bottle.m */; };
 		E0309B0E19DB427100F00CA3 /* Vendor.m in Sources */ = {isa = PBXBuildFile; fileRef = E0309B0D19DB427100F00CA3 /* Vendor.m */; };
 		E0309B1119DB427100F00CA3 /* InvoiceForBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E0309B1019DB427100F00CA3 /* InvoiceForBottle.m */; };
 		E0309B1419DB42E300F00CA3 /* Invoice.m in Sources */ = {isa = PBXBuildFile; fileRef = E0309B1319DB42E300F00CA3 /* Invoice.m */; };
@@ -112,6 +111,7 @@
 		E0EF7CB319DE71E5001F5CE6 /* LossesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0EF7CB219DE71E5001F5CE6 /* LossesTVC.m */; };
 		E0F80E561A1A92ED0009AECB /* CMPopTipViewStyleOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F80E551A1A92ED0009AECB /* CMPopTipViewStyleOverride.m */; };
 		E0F80E591A1A9B780009AECB /* PlusMinusButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F80E581A1A9B780009AECB /* PlusMinusButtonsView.m */; };
+		E0FA940F1A259CA500C829CA /* Bottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E0FA940E1A259CA500C829CA /* Bottle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,8 +182,6 @@
 		E0309AFE19DA840E00F00CA3 /* InvoicesTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoicesTVC.m; sourceTree = "<group>"; };
 		E0309B0319DB427000F00CA3 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		E0309B0419DB427000F00CA3 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
-		E0309B0619DB427100F00CA3 /* Bottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bottle.h; sourceTree = "<group>"; };
-		E0309B0719DB427100F00CA3 /* Bottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bottle.m; sourceTree = "<group>"; };
 		E0309B0C19DB427100F00CA3 /* Vendor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vendor.h; sourceTree = "<group>"; };
 		E0309B0D19DB427100F00CA3 /* Vendor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vendor.m; sourceTree = "<group>"; };
 		E0309B0F19DB427100F00CA3 /* InvoiceForBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoiceForBottle.h; sourceTree = "<group>"; };
@@ -306,6 +304,8 @@
 		E0F80E551A1A92ED0009AECB /* CMPopTipViewStyleOverride.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPopTipViewStyleOverride.m; sourceTree = "<group>"; };
 		E0F80E571A1A9B780009AECB /* PlusMinusButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlusMinusButtonsView.h; sourceTree = "<group>"; };
 		E0F80E581A1A9B780009AECB /* PlusMinusButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlusMinusButtonsView.m; sourceTree = "<group>"; };
+		E0FA940D1A259CA500C829CA /* Bottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bottle.h; sourceTree = "<group>"; };
+		E0FA940E1A259CA500C829CA /* Bottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bottle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -496,6 +496,8 @@
 		E05014EC1814ADE600A06560 /* DataClasses */ = {
 			isa = PBXGroup;
 			children = (
+				E0FA940D1A259CA500C829CA /* Bottle.h */,
+				E0FA940E1A259CA500C829CA /* Bottle.m */,
 				E02E820A1A1EAB2B0043BB09 /* Vineyard.h */,
 				E02E820B1A1EAB2B0043BB09 /* Vineyard.m */,
 				E02E82071A1EAB2A0043BB09 /* Varietal.h */,
@@ -514,8 +516,6 @@
 				E0309B1019DB427100F00CA3 /* InvoiceForBottle.m */,
 				E0309B0C19DB427100F00CA3 /* Vendor.h */,
 				E0309B0D19DB427100F00CA3 /* Vendor.m */,
-				E0309B0619DB427100F00CA3 /* Bottle.h */,
-				E0309B0719DB427100F00CA3 /* Bottle.m */,
 				E0309B0319DB427000F00CA3 /* Order.h */,
 				E0309B0419DB427000F00CA3 /* Order.m */,
 				E0E83AE919189A9D0096233A /* InvoicePhoto.h */,
@@ -794,7 +794,6 @@
 			files = (
 				E024A4E619081351003A80DB /* InventorySnapshotForBottle.m in Sources */,
 				E0309AF919D91BCC00F00CA3 /* InvoicesForOrderTVC.m in Sources */,
-				E0309B0819DB427100F00CA3 /* Bottle.m in Sources */,
 				E05014C31814AC9900A06560 /* OrderForBottle+Create.m in Sources */,
 				E050151B1814AED400A06560 /* BottlesForSubTypeTableViewController.m in Sources */,
 				E0309B1419DB42E300F00CA3 /* Invoice.m in Sources */,
@@ -841,6 +840,7 @@
 				E02E820C1A1EAB2B0043BB09 /* Vineyard.m in Sources */,
 				E05015101814AED400A06560 /* AlcoholSubType+Create.m in Sources */,
 				E05015161814AED400A06560 /* AppDelegate.m in Sources */,
+				E0FA940F1A259CA500C829CA /* Bottle.m in Sources */,
 				E00ABBDB1915500D00D6BF17 /* InvoiceTVC.m in Sources */,
 				E01C5917191DF4E3007DD632 /* NSString+Score.m in Sources */,
 				E0309B4D19DB87C000F00CA3 /* Invoice+Create.m in Sources */,

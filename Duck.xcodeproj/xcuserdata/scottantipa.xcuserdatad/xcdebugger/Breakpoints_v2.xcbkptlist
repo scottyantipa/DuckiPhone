@@ -136,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Duck/BottleDetailTableViewController.m"
-            timestampString = "438196636.096334"
+            timestampString = "438675380.644849"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -216,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Duck/BottleDetailTableViewController.m"
-            timestampString = "438196708.655971"
+            timestampString = "438675380.644849"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
             landmarkName = "-didTouchDelete"
             landmarkType = "5">
          </BreakpointContent>
