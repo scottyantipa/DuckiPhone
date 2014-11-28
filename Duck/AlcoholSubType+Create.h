@@ -9,6 +9,7 @@
 #import "AlcoholSubType.h"
 #import "Bottle+Create.h"
 #import "Varietal.h"
+#import "WineBottle.h"
 
 @interface AlcoholSubType (Create)
 +(AlcoholSubType *)alcoholSubTypeFromName:(NSString *)name
@@ -24,7 +25,7 @@
 
 // When user adjusts the ordering of a bottle
 +(void)changeOrderOfBottle:(Bottle * )bottle toNumber:(NSNumber *)number inContext:(NSManagedObjectContext *)context;
-
++(void)changeOrderOfWineBottle:(WineBottle *)bottle toNumber:(NSNumber *)number inContext:(NSManagedObjectContext *)context;
 // Get the users bottles for a subtype
 +(NSArray *)fetchedBottlesForSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context;
 +(Varietal *)newVarietalForSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context;

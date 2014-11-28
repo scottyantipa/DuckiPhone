@@ -2,7 +2,7 @@
 //  Bottle.h
 //  Duck
 //
-//  Created by Scott Antipa on 11/25/14.
+//  Created by Scott Antipa on 11/28/14.
 //  Copyright (c) 2014 Scott Antipa. All rights reserved.
 //
 
@@ -15,7 +15,6 @@
 
 @property (nonatomic, retain) NSString * barcode;
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * serverID;
 @property (nonatomic, retain) NSNumber * userHasBottle;
 @property (nonatomic, retain) NSNumber * userOrdering;
 @property (nonatomic, retain) NSString * volume;

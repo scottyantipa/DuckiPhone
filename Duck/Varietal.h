@@ -2,7 +2,7 @@
 //  Varietal.h
 //  Duck
 //
-//  Created by Scott Antipa on 11/20/14.
+//  Created by Scott Antipa on 11/28/14.
 //  Copyright (c) 2014 Scott Antipa. All rights reserved.
 //
 
@@ -14,8 +14,8 @@
 @interface Varietal : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSSet *wines;
 @property (nonatomic, retain) AlcoholSubType *subType;
+@property (nonatomic, retain) NSSet *wines;
 @end
 
 @interface Varietal (CoreDataGeneratedAccessors)

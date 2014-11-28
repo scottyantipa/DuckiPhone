@@ -16,8 +16,8 @@
 @implementation ToggleBottlesTableViewController
 // why do I have to synthesize these here, as well as in the parent class?
 @synthesize fetchedResultsController = _fetchedResultsController;
-@synthesize managedObjectContext = _managedObjectContext;
 @synthesize searchFetchedResultsController = _searchFetchedResultsController;
+@synthesize managedObjectContext = _managedObjectContext;
 @synthesize searchBar = _searchBar;
 @synthesize subType = _subType;
 
@@ -63,7 +63,7 @@
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                                                managedObjectContext:self.managedObjectContext
+                                                                                                managedObjectContext:[self managedObjectContext]
                                                                                                   sectionNameKeyPath:nil
                                                                                                            cacheName:nil];
     aFetchedResultsController.delegate = self;
@@ -110,7 +110,7 @@
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:@"subType.name" cacheName:nil];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:@"subType.name" cacheName:nil];
     _fetchedResultsController = aFetchedResultsController;
     _fetchedResultsController.delegate = self;
     
@@ -124,8 +124,16 @@
     return _fetchedResultsController;
 }
 
-// get the search FRC
+-(NSManagedObjectContext *)managedObjectContext {
+    if (_managedObjectContext != nil) {
+        return _managedObjectContext;
+    }
+    _managedObjectContext = [[MOCManager sharedInstance] newMOC];
+    return _managedObjectContext;
+}
 
+
+// get the search FRC
 - (NSFetchedResultsController *)searchFetchedResultsController
 {
     if (_searchFetchedResultsController != nil)
@@ -152,6 +160,10 @@
     self.searchDisplayController.searchBar.delegate = self;
     
     self.fetchedResultsController = nil;
+}
+
+-(void)fullReload {
+    
 }
 
 #pragma Search Bar Delegates
@@ -208,6 +220,9 @@
     NSFetchedResultsController * frc = [self fetchedResultsControllerForTableView:tableView];
     Bottle * bottle = [frc objectAtIndexPath:indexPath];
     [self.delegate didSelectBottleWithId:bottle.objectID];
+    _fetchedResultsController = nil;
+    _searchFetchedResultsController = nil;
+    _managedObjectContext = nil;
     [tableView reloadData];
 }
 
@@ -229,12 +244,12 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"NewBottleFromToggleBottles"]) {
         BottleDetailTableViewController * bottleTVC = (BottleDetailTableViewController*)[[segue destinationViewController] topViewController];
-        Bottle * newBottle = [Bottle newBottleForBarcode:@"null" inManagedObjectContext:_managedObjectContext];
+        Bottle * newBottle = [Bottle newBottleForBarcode:@"null" inManagedObjectContext:[self managedObjectContext]];
         // by default put it in their collection.  If they don't save the bottle then it doesn't matter anyways.
         newBottle.userHasBottle = [NSNumber numberWithBool:YES];
-        [[MOCManager sharedInstance] saveContext:_managedObjectContext];
+        [[MOCManager sharedInstance] saveContext:[self managedObjectContext]];
         bottleTVC.bottleID = newBottle.objectID;
-        bottleTVC.managedObjectContext = _managedObjectContext;
+        bottleTVC.managedObjectContext = [self managedObjectContext];
         bottleTVC.delegate = self;
     }
 }
@@ -370,7 +385,7 @@
     _fetchedResultsController = nil;
     [self.tableView reloadData];
     [self.view setNeedsDisplay];
-    Bottle * bottle = (Bottle *)[_managedObjectContext objectWithID:bottleID];
+    Bottle * bottle = (Bottle *)[[self managedObjectContext] objectWithID:bottleID];
     if (!bottle.userHasBottle) {
         if  ([self.delegate bottleIsSelectedWithID:bottleID]) {
             // the bottle isn't selected so we need to alert delegate

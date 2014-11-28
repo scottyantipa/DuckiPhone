@@ -13,9 +13,11 @@
 #import "ToggleBottlesTableViewController.h"
 #import "BottleDetailDelegate.h"
 #import "CMPopTipViewStyleOverride.h"
+#import "Varietal.h"
 
 @interface BottlesForSubTypeTableViewController : BaseCoreDataTableViewController <ToggleBottlesDelegate, BottleDetailDelegate, CMPopTipViewDelegate>
-@property (strong, nonatomic) AlcoholSubType *subType;
+@property (strong, nonatomic) AlcoholSubType * subType;
+@property (strong, nonatomic) Varietal * varietal;
 @property (nonatomic) BOOL editing;
 @property (strong, nonatomic) CMPopTipViewStyleOverride * plusButtonToolTip;
 @end

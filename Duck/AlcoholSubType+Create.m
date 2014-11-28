@@ -117,6 +117,36 @@
     }
 }
 
+
++(void)changeOrderOfWineBottle:(WineBottle *)bottle toNumber:(NSNumber *)number inContext:(NSManagedObjectContext *)context {
+    int oldOrder = [bottle.userOrdering intValue];
+    int newOrder = [number intValue];
+    bottle.userOrdering = number;
+    
+    // iterate over the other bottles and update their user ordrering
+    NSArray * fetchedBottles = [AlcoholSubType fetchedBottlesForVarietal:bottle.varietal inContext:context];
+    for (Bottle * otherBottle in fetchedBottles) {
+        if (otherBottle.name == bottle.name) { // its the bottle we already moved
+            continue;
+        }
+        int oldOrderForOtherBottle = [otherBottle.userOrdering intValue];
+        NSNumber * newOrderForOtherBottle;
+        if ((oldOrder < oldOrderForOtherBottle) & (newOrder >= oldOrderForOtherBottle)) { // bottle was before, now is after
+            newOrderForOtherBottle = [NSNumber numberWithInt:(oldOrderForOtherBottle - 1)];
+        } else if ((oldOrder > oldOrderForOtherBottle) & (newOrder <= oldOrderForOtherBottle)) {   // bottle was after, now is before
+            newOrderForOtherBottle = [NSNumber numberWithInt:(oldOrderForOtherBottle + 1)];
+        } else {
+            continue; // don't change the ordering
+        }
+        otherBottle.userOrdering = newOrderForOtherBottle;
+    }
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+}
+
+
 +(NSArray *)fetchedBottlesForSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context {
     NSString * subTypeName = subType.name;
     NSFetchRequest * fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
@@ -124,6 +154,16 @@
     // Fetch the bottles that the user has.  We will adjust their userOrdering when the user
     // adds/removes a bottle
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(subType.name = %@) AND (self.userHasBottle = %@)", subTypeName, [NSNumber numberWithBool:YES]];
+    NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userOrdering" ascending:YES];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    NSError *err;
+    return [context executeFetchRequest:fetchRequest error:&err];
+}
+
++(NSArray *)fetchedBottlesForVarietal:(Varietal *)varietal inContext:(NSManagedObjectContext *)context {
+    NSFetchRequest * fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(varietal = %@) AND (self.userHasBottle = %@)", varietal.name, [NSNumber numberWithBool:YES]];
     NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userOrdering" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
     [fetchRequest setSortDescriptors:sortDescriptors];

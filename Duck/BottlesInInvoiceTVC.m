@@ -122,7 +122,6 @@ const float HEADER_HEIGHT = 30;
     if ([segue.identifier isEqualToString:@"Toggle Bottles in Invoice"]) {
         ToggleBottlesTableViewController * tvc = [segue destinationViewController];
         tvc.delegate = self;
-        tvc.managedObjectContext = _managedObjectContext;
     } else if ([segue.identifier isEqualToString:@"Show Edit Price and Quantity From Invoice"]){
         NSIndexPath * indexPath = [self.tableView indexPathForCell:sender];
         InvoiceForBottle * invoice = [_sortedInvoicesByBottle objectAtIndex:indexPath.row];
@@ -140,6 +139,7 @@ const float HEADER_HEIGHT = 30;
     if (bottleID != nil) {
         Bottle * bottle = (Bottle *)[_managedObjectContext objectWithID:bottleID];
         [Invoice toggleBottle:bottle inInvoice:_invoice inContext:_managedObjectContext];
+        [[MOCManager sharedInstance] saveContext:_managedObjectContext];
     }
     [self reload];
 }

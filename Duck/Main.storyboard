@@ -902,7 +902,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h0p-s7-ma7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1909" y="-580"/>
+            <point key="canvasLocation" x="2339" y="-708"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="zcP-uu-TWi">
@@ -1184,11 +1184,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="Varietals Cell ID" selectionStyle="default" indentationWidth="10" reuseIdentifier="Varietals Cell" id="c5C-0I-pyn">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="Varietals Cell ID" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Varietals Cell" id="c5C-0I-pyn">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c5C-0I-pyn" id="cQn-2x-Jni">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="xxc-Ne-wLM" kind="push" identifier="Show Bottles For Varietal Segue ID" id="A7A-cT-tHA"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1228,12 +1231,13 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="8wE-iO-ft0"/>
+        <segue reference="PFX-UQ-UWT"/>
+        <segue reference="A7A-cT-tHA"/>
         <segue reference="TCw-cl-1mJ"/>
+        <segue reference="8wE-iO-ft0"/>
         <segue reference="Ry1-pD-on8"/>
         <segue reference="cpl-N9-7Vy"/>
         <segue reference="Ncl-VD-cSO"/>
         <segue reference="Pga-Po-JW7"/>
-        <segue reference="PFX-UQ-UWT"/>
     </inferredMetricsTieBreakers>
 </document>

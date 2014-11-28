@@ -70,4 +70,12 @@
     return cell;
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"Show Bottles For Varietal Segue ID"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        Varietal * varietal = [_fetchedResultsController objectAtIndexPath:indexPath];
+        [segue.destinationViewController setVarietal:varietal];
+    }
+}
+
 @end

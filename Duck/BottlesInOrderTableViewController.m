@@ -86,7 +86,6 @@
     if ([segue.identifier isEqualToString:@"Toggle Bottles in Order Segue ID"]) {
         ToggleBottlesTableViewController * tvc = [segue destinationViewController];
         tvc.delegate = self;
-        tvc.managedObjectContext = _managedObjectContext;
     } else if ([segue.identifier isEqualToString:@"Edit Order For Bottle Segue ID"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         NSArray * sortedBottleOrders = [Order getSortedBottlesInOrder:_order];

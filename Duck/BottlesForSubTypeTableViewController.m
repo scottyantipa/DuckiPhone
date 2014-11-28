@@ -19,11 +19,18 @@
 @synthesize subType = _subType;
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize plusButtonToolTip = _plusButtonToolTip;
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize varietal = _varietal;
 
 -(void)setSubType:(AlcoholSubType *)subType
 {
     _subType = subType;
     self.title = subType.name;
+}
+
+-(void)setVarietal:(Varietal *)varietal {
+    _varietal = varietal;
+    self.title = varietal.name;
 }
 
 
@@ -51,8 +58,10 @@
     }
 }
 
+
+// i'm using self.title and ASSUMING that the setter code doesn't change for setSubtype/setVarietal which sets the self.title
 -(void)showHint {
-    _plusButtonToolTip = [[CMPopTipViewStyleOverride alloc] initWithMessage:[NSString stringWithFormat:@"Tap here to add some %@ to your collection.", _subType.name]];
+    _plusButtonToolTip = [[CMPopTipViewStyleOverride alloc] initWithMessage:[NSString stringWithFormat:@"Tap here to add some %@ to your collection.", self.title]];
     _plusButtonToolTip.delegate = self;
     [CMPopTipViewStyleOverride setStylesForPopup:_plusButtonToolTip];
     UIBarButtonItem * addButton = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
@@ -83,15 +92,18 @@
 -(void)didTouchDone {
     [self.tableView setEditing:NO animated:YES];
     [self drawBarButtons];
-    
 }
 
 -(void)didTouchAdd {
     [self performSegueWithIdentifier:@"Toggle Subtype Bottles Segue ID" sender:nil];
 }
 
--(NSManagedObjectContext *)context {
-    return self.subType.managedObjectContext;
+-(NSManagedObjectContext *)managedObjectContext {
+    if (_managedObjectContext != nil) {
+        return _managedObjectContext;
+    }
+    _managedObjectContext = [[MOCManager sharedInstance] newMOC];
+    return _managedObjectContext;
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
@@ -99,7 +111,12 @@
         return _fetchedResultsController;
     }
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(subType.name = %@) AND (userHasBottle = %@)", self.subType.name, [NSNumber numberWithBool:YES]];
+    if (_subType != nil) {
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(subType.name = %@) AND (userHasBottle = %@)", _subType.name, [NSNumber numberWithBool:YES]];
+    }
+    if (_varietal != nil) {
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(varietal.name = %@) AND (userHasBottle = %@)", _varietal.name, [NSNumber numberWithBool:YES]];
+    }
 
     
     // Set the batch size to a suitable number.
@@ -112,16 +129,9 @@
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
-    // get the results and print them
-//    NSError *err;
-//    NSArray *fetchedObjects = [self.subType.managedObjectContext executeFetchRequest:fetchRequest error:&err];
-//    for (Bottle *bottle in fetchedObjects) {
-//        NSLog(@"fetched result: %@ with order %@", bottle.name, bottle.userOrdering);
-//    }
-    
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self context] sectionNameKeyPath:nil cacheName:nil];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
     self.fetchedResultsController = aFetchedResultsController;
     _fetchedResultsController.delegate = self;
     
@@ -153,7 +163,6 @@
     if ([segue.identifier isEqualToString:@"Toggle Subtype Bottles Segue ID"]) { // wants to add bottles
         ToggleBottlesTableViewController * tvc = [segue destinationViewController];
         tvc.delegate = self;
-        tvc.managedObjectContext = [self context];
         [[segue destinationViewController] setSubType:_subType];
     } else { // selected a bottle, so show the bottle
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
@@ -172,19 +181,25 @@
     if (sourceIndexPath == destinationIndexPath) {
         return;
     }
-    Bottle * bottle = [_fetchedResultsController objectAtIndexPath:sourceIndexPath];
     NSNumber * newOrderNum = [NSNumber numberWithInt:destinationIndexPath.row];
-    [AlcoholSubType changeOrderOfBottle:bottle toNumber:newOrderNum inContext:[self context]];
+    if  (_subType != nil) {
+        Bottle * bottle = [_fetchedResultsController objectAtIndexPath:sourceIndexPath];
+        [AlcoholSubType changeOrderOfBottle:bottle toNumber:newOrderNum inContext:[self managedObjectContext]];
+    } else if (_varietal != nil) {
+        WineBottle * bottle = [_fetchedResultsController objectAtIndexPath:sourceIndexPath];
+        [AlcoholSubType changeOrderOfWineBottle:bottle toNumber:newOrderNum inContext:[self managedObjectContext]];
+    }
     [[self tableView] reloadData];
 }
 
+// this will work regardless of of type of bottle (liquor, wine, beer)
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     Bottle * bottle = [_fetchedResultsController objectAtIndexPath:indexPath];
     if (editingStyle == UITableViewCellEditingStyleDelete) { // bottle was deleted
         bottle.userHasBottle = [NSNumber numberWithBool:NO];
         int order = [bottle.userOrdering intValue];
         NSArray * fetchedBottles = [_fetchedResultsController fetchedObjects];
-        // update the ordering of the bottles
+        // update the ordering of the bottles THIS SHOULD BE ABSTRACTED into AlcoholSubType
         for (Bottle * otherBottle in fetchedBottles) {
             if (otherBottle.name == bottle.name) {
                 continue;
@@ -198,10 +213,7 @@
                 continue; // removed bottle was after this bottle, so no change to the order
             }
         }
-        NSError *error;
-        if (![[self context] save:&error]) {
-            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-        }
+        [[MOCManager sharedInstance] saveContext:[self managedObjectContext]];
     }
 }
 
@@ -215,26 +227,25 @@
 
 -(void)didSelectBottleWithId:(NSManagedObjectID *)bottleID {
     _fetchedResultsController = nil; // in case subsequent views alter data, we will want to create a new FRC
-    [self.tableView reloadData];
     if (bottleID == nil) {
+        [self.tableView reloadData];
         return;
     }
-    Bottle * bottle = (Bottle *)[[self context] objectWithID:bottleID];
-    [Bottle toggleUserHasBottle:bottle inContext:[self context]];
-    [[MOCManager sharedInstance] saveContext:[self context]];
+    Bottle * bottle = (Bottle *)[[self managedObjectContext] objectWithID:bottleID];
+    [Bottle toggleUserHasBottle:bottle inContext:[self managedObjectContext]];
+    [[MOCManager sharedInstance] saveContext:[self managedObjectContext]];
     [[self tableView] reloadData];
 }
 
-
 -(BOOL)bottleIsSelectedWithID:(NSManagedObjectID *)bottleID {
-    Bottle * bottle = (Bottle *)[[self context] objectWithID:bottleID];
+    Bottle * bottle = (Bottle *)[[self managedObjectContext] objectWithID:bottleID];
     return [bottle.userHasBottle boolValue];
 }
 
 #pragma Delegate methods for StandardModal
 
 -(void)didFinishEditingBottleWithId:(NSManagedObjectID *)bottleID {
-    [[MOCManager sharedInstance] saveContext:[self context]];
+    [[MOCManager sharedInstance] saveContext:[self managedObjectContext]];
     [self.tableView reloadData];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
