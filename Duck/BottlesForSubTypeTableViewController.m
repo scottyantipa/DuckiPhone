@@ -110,15 +110,16 @@
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
+    NSFetchRequest * fetchRequest;
     if (_subType != nil) {
+        fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
         fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(subType.name = %@) AND (userHasBottle = %@)", _subType.name, [NSNumber numberWithBool:YES]];
     }
     if (_varietal != nil) {
+        fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"WineBottle"];
         fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(varietal.name = %@) AND (userHasBottle = %@)", _varietal.name, [NSNumber numberWithBool:YES]];
     }
 
-    
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
     
@@ -163,7 +164,12 @@
     if ([segue.identifier isEqualToString:@"Toggle Subtype Bottles Segue ID"]) { // wants to add bottles
         ToggleBottlesTableViewController * tvc = [segue destinationViewController];
         tvc.delegate = self;
-        [[segue destinationViewController] setSubType:_subType];
+        if (_subType != nil) {
+            [[segue destinationViewController] setSubType:_subType];
+        } else if (_varietal != nil) {
+            [[segue destinationViewController] setVarietal:_varietal];
+        }
+
     } else { // selected a bottle, so show the bottle
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         Bottle *bottle = [self.fetchedResultsController objectAtIndexPath:indexPath];

@@ -15,6 +15,7 @@
 #import "NSString+Score.h"
 #import "InventorySnapshotForBottle+Create.h"
 #import "InvoiceForBottle.h"
+#import "WineBottle.h"
 
 
 @interface Bottle (Create)
@@ -23,6 +24,7 @@
 +(Bottle *)newBottleForBarcode:(NSString *)barcode inManagedObjectContext:(NSManagedObjectContext *)context;
 +(Bottle *)newBottleForType:(AlcoholType *)type inManagedObjectContext:(NSManagedObjectContext *)context;
 +(Bottle *)bottleForBarcode:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context;
++(WineBottle *)newWineBottleForName:(NSString *)name varietal:(Varietal *)varietal inManagedObjectContext:(NSManagedObjectContext *)context;
 
 +(void)toggleUserHasBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
 

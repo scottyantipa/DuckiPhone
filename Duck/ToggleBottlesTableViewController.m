@@ -20,6 +20,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize searchBar = _searchBar;
 @synthesize subType = _subType;
+@synthesize varietal = _varietal;
 
 #pragma FRC creation
 
@@ -33,15 +34,18 @@
     /*
      Set up the fetched results controller.
      */
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
     NSMutableArray *predicateArray = [NSMutableArray array];
-    if(searchString.length)
+    if (searchString.length)
     {
         // your search predicate(s) are added to this array
         [predicateArray addObject:[NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@", searchString]];
         
-        // If we only want to see bottles in a certain subtype.  Note this code is duplicated in the standard tvc.
-        if (_subType != nil) { [predicateArray addObject:[NSPredicate predicateWithFormat:@"subType.name = %@", _subType.name]];}
+        // If we only want to see bottles in a certain subtype or varietal.  Note this code is duplicated in the standard tvc.
+        if (_subType != nil) {
+            [predicateArray addObject:[NSPredicate predicateWithFormat:@"subType.name = %@", _subType.name]];
+        } else if (_varietal) {
+            [predicateArray addObject:[NSPredicate predicateWithFormat:@"varietal.name = %@", _varietal.name]];
+        }
 
         // finally add the filter predicate for this view
         if(filterPredicate)
@@ -53,6 +57,13 @@
             filterPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicateArray];
         }
     }
+    NSString * entityName;
+    if (_subType != nil) {
+        entityName = @"Bottle";
+    } else if (_varietal != nil) {
+        entityName = @"WineBottle";
+    }
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:entityName];
     [fetchRequest setPredicate:filterPredicate];
     
     // Set the batch size to a suitable number.
@@ -91,26 +102,42 @@
         return _fetchedResultsController;
     }
     
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
-
+    NSString * entityName;
     // If we only want to see bottles in a certain subtype.  Note this code is duplicated in th search table frc.
+    NSPredicate * predicate;
     if (_subType != nil) {
-        NSPredicate * predicate = [NSPredicate predicateWithFormat:@"subType.name = %@", _subType.name];
-        [fetchRequest setPredicate:predicate];
+        predicate = [NSPredicate predicateWithFormat:@"subType.name = %@", _subType.name];
+        entityName = @"Bottle";
+    } else if (_varietal != nil) {
+        predicate = [NSPredicate predicateWithFormat:@"varietal.name = %@", _varietal.name];
+        entityName = @"WineBottle";
     }
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:entityName];
+    [fetchRequest setPredicate:predicate];
 
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
     
-    NSSortDescriptor * sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"subType.name" ascending:NO];
+    NSSortDescriptor * sortDescriptor1;
+    if (_subType != nil) {
+        sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"subType.name" ascending:NO];
+    } else if (_varietal != nil) {
+        sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"varietal.name" ascending:NO];
+    }
     NSSortDescriptor * sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     NSArray * sortDescriptors = @[sortDescriptor1, sortDescriptor2];
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:@"subType.name" cacheName:nil];
+    NSString * keyPath;
+    if (_subType != nil) {
+        keyPath = @"subType.name";
+    } else if (_varietal != nil) {
+        keyPath = @"varietal.name";
+    }
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:keyPath cacheName:nil];
     _fetchedResultsController = aFetchedResultsController;
     _fetchedResultsController.delegate = self;
     
@@ -187,9 +214,18 @@
 
 - (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    Bottle * bottle = [fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = bottle.name;
-    if ([self.delegate bottleIsSelectedWithID:bottle.objectID]) {
+    BOOL isChecked = NO;
+    if (_subType != nil) {
+        Bottle * bottle = [fetchedResultsController objectAtIndexPath:indexPath];
+        cell.textLabel.text = bottle.name;
+        isChecked = [self.delegate bottleIsSelectedWithID:bottle.objectID];
+    } else if (_varietal != nil) {
+        WineBottle * wineBottle = [fetchedResultsController objectAtIndexPath:indexPath];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", wineBottle.vineyard.name, wineBottle.varietal.name];
+        isChecked = [self.delegate bottleIsSelectedWithID:wineBottle.objectID];
+    }
+
+    if (isChecked) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;

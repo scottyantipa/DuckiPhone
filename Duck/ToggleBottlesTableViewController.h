@@ -19,6 +19,8 @@
 #import "ToggleBottlesDelegate.h"
 #import "BottleDetailDelegate.h"
 #import "BottleDetailTableViewController.h"
+#import "Varietal.h"
+#import "Vineyard.h"
 
 @interface ToggleBottlesTableViewController : BaseCoreDataTableViewController <UISearchBarDelegate, UISearchDisplayDelegate, BottleDetailDelegate>
 @property (weak) id <ToggleBottlesDelegate> delegate;
@@ -29,4 +31,5 @@
 @property (nonatomic) NSInteger savedScopeButtonIndex;
 @property (nonatomic) BOOL searchWasActive;
 @property (strong, nonatomic) AlcoholSubType *subType;
+@property (strong, nonatomic) Varietal * varietal;
 @end

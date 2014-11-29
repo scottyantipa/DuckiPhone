@@ -29,4 +29,5 @@
 // Get the users bottles for a subtype
 +(NSArray *)fetchedBottlesForSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context;
 +(Varietal *)newVarietalForSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context;
++(Varietal *)varietalForName:(NSString *)name inContext:(NSManagedObjectContext *)context;
 @end

@@ -59,6 +59,26 @@
     return varietal;
 }
 
++(Varietal *)varietalForName:(NSString *)name inContext:(NSManagedObjectContext *)context {
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Varietal"];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name = %@", name];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // get the results and print them
+    NSError *err;
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&err];
+    Varietal * varietal = [fetchedObjects lastObject]; // should only be one anyways
+    return  varietal;
+}
+
 // Completely recalculate the userOrdering for all bottles (there may be gaps if a user removed/added a bottle)
 +(void)recalculateUserOrderingForSubType:(AlcoholSubType *)subType inContext:(NSManagedObjectContext *)context {
     NSString * subTypeName = subType.name;

@@ -72,6 +72,13 @@ const NSString * NO_NAME_STRING = @"No Name";
     return bottle;
 }
 
++(WineBottle *)newWineBottleForName:(NSString *)name varietal:(Varietal *)varietal inManagedObjectContext:(NSManagedObjectContext *)context {
+    WineBottle * bottle = [NSEntityDescription insertNewObjectForEntityForName:@"WineBottle" inManagedObjectContext:context];
+    bottle.name = name;
+    bottle.varietal = varietal;
+    return  bottle;
+}
+
 +(OrderForBottle *)mostRecentOrderForBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
