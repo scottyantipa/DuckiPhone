@@ -32,4 +32,5 @@
 @property (nonatomic) BOOL searchWasActive;
 @property (strong, nonatomic) AlcoholSubType *subType;
 @property (strong, nonatomic) Varietal * varietal;
+@property (strong, nonatomic) NSString * purposeDescription;// e.g. "Bottles with a checkmark will be put in this Order"
 @end

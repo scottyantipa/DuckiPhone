@@ -21,6 +21,7 @@
 @synthesize searchBar = _searchBar;
 @synthesize subType = _subType;
 @synthesize varietal = _varietal;
+@synthesize purposeDescription = _purposeDescription;
 
 #pragma FRC creation
 
@@ -174,10 +175,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 44.0)];
+    float searchBarHeight = 44.0;
+    float totalHeight;
+    float labelHeight;
+    float searchBarYOffset;
+    UILabel * messageLabel;
+    if (_purposeDescription != nil) {
+        labelHeight = 30;
+        messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, self.tableView.frame.size.width - 40, labelHeight)];
+        [messageLabel setTextAlignment:NSTextAlignmentCenter];
+        messageLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        [messageLabel setFont:[UIFont systemFontOfSize:12]];
+        messageLabel.textColor = [UIColor grayColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.text = _purposeDescription;
+        searchBarYOffset = labelHeight;
+    } else {
+        searchBarYOffset = 0;
+        labelHeight = 0;
+        messageLabel = nil;
+    }
+    totalHeight = searchBarHeight + labelHeight;
+    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, totalHeight)];
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, searchBarYOffset, self.tableView.frame.size.width, searchBarHeight)];
     _searchBar.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
     _searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.tableView.tableHeaderView = _searchBar;
+    [headerView addSubview:messageLabel];
+    [headerView addSubview:_searchBar];
+    
+    self.tableView.tableHeaderView = headerView;
     
     self.mySearchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
     self.mySearchDisplayController.delegate = self;
@@ -435,6 +461,9 @@
         [self.delegate didSelectBottleWithId:nil];
     }
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+- (IBAction)didPressDone:(id)sender {
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -162,12 +162,13 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Toggle Subtype Bottles Segue ID"]) { // wants to add bottles
-        ToggleBottlesTableViewController * tvc = [segue destinationViewController];
+        ToggleBottlesTableViewController * tvc = (ToggleBottlesTableViewController *)[[segue destinationViewController] topViewController];
         tvc.delegate = self;
+        [tvc setPurposeDescription:@"Bottles marked with a check are in your collection"];
         if (_subType != nil) {
-            [[segue destinationViewController] setSubType:_subType];
+            [tvc setSubType:_subType];
         } else if (_varietal != nil) {
-            [[segue destinationViewController] setVarietal:_varietal];
+            [tvc setVarietal:_varietal];
         }
 
     } else { // selected a bottle, so show the bottle

@@ -897,7 +897,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="WUi-yc-Muj"/>
                     <connections>
-                        <segue destination="xCa-3a-yKM" kind="push" identifier="Toggle Subtype Bottles Segue ID" id="8wE-iO-ft0"/>
+                        <segue destination="FyF-FW-zNo" kind="modal" identifier="Toggle Subtype Bottles Segue ID" id="iWM-iF-p5X"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h0p-s7-ma7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1079,6 +1079,60 @@
             </objects>
             <point key="canvasLocation" x="1002" y="-991"/>
         </scene>
+        <!--Root View Controller-->
+        <scene sceneID="d54-7R-ObR">
+            <objects>
+                <tableViewController id="Suh-45-NvK" customClass="ToggleBottlesTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="JyE-nU-DCi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="All Bottles to Toggle Cell ID" id="Gp3-38-gdA">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gp3-38-gdA" id="tHr-yz-0nB">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Suh-45-NvK" id="czb-gx-a1H"/>
+                            <outlet property="delegate" destination="Suh-45-NvK" id="qaC-FM-AFX"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="pZz-zc-WDn">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="rz5-We-3bN">
+                            <connections>
+                                <action selector="didPressDone:" destination="Suh-45-NvK" id="jUp-Ox-CjU"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="New Bottle" id="GPc-nD-gxG">
+                            <connections>
+                                <segue destination="M8x-Pl-qdf" kind="modal" identifier="NewBottleFromToggleBottles" id="ZQ4-cP-eVN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rur-Fw-jhq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3189" y="-1426"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vzJ-ku-8YV">
+            <objects>
+                <navigationController id="FyF-FW-zNo" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7gE-Uk-aR9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Suh-45-NvK" kind="relationship" relationship="rootViewController" id="qe4-5p-pgd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AxP-tx-uBz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2791" y="-1426"/>
+        </scene>
         <!--Toggle Bottles Table View Controller-->
         <scene sceneID="F33-I3-hQW">
             <objects>
@@ -1105,7 +1159,7 @@
                     <navigationItem key="navigationItem" id="JCZ-Ac-JMU">
                         <barButtonItem key="rightBarButtonItem" title="Add New" id="g4w-n7-1dV">
                             <connections>
-                                <segue destination="M8x-Pl-qdf" kind="modal" identifier="NewBottleFromToggleBottles" id="sYY-yn-voA"/>
+                                <segue destination="M8x-Pl-qdf" kind="modal" identifier="I" id="sYY-yn-voA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1131,7 +1185,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2934" y="-883"/>
+            <point key="canvasLocation" x="3182" y="-699"/>
         </scene>
         <!--Alcohol Sub Types Table View Controller-->
         <scene sceneID="a3l-kK-viE">
@@ -1233,11 +1287,11 @@
     <inferredMetricsTieBreakers>
         <segue reference="PFX-UQ-UWT"/>
         <segue reference="A7A-cT-tHA"/>
-        <segue reference="TCw-cl-1mJ"/>
-        <segue reference="8wE-iO-ft0"/>
+        <segue reference="ZQ4-cP-eVN"/>
         <segue reference="Ry1-pD-on8"/>
         <segue reference="cpl-N9-7Vy"/>
         <segue reference="Ncl-VD-cSO"/>
+        <segue reference="mms-TW-b5r"/>
         <segue reference="Pga-Po-JW7"/>
     </inferredMetricsTieBreakers>
 </document>
