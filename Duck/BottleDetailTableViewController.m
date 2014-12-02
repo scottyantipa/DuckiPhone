@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Scott Antipa. All rights reserved.
 //
 
+// This is subclassed by WineBottleDetailTVC
+
 #import "BottleDetailTableViewController.h"
 #import "Bottle+Create.h"
 #import "AlcoholSubType+Create.h"
@@ -26,27 +28,33 @@
 
 -(void)viewDidLoad
 {
-    self.whiteList = [Bottle whiteList];
-    _managedObjectContext = [[MOCManager sharedInstance] newMOC];
-    _bottle = (Bottle *)[_managedObjectContext objectWithID:_bottleID];
-    _editedCount = [[Bottle countOfBottle:_bottle forContext:_managedObjectContext] floatValue];
-    if (!_bottle.name) {
+    [self setup];
+    [self setTitle];
+}
+
+-(void)setTitle {
+    Bottle * bottle = (Bottle *)self.bottle;
+    if (!bottle.name) {
         self.title = @"New Bottle";
     }
     else {
-        self.title = _bottle.name;
+        self.title = bottle.name;
     }
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    [self makeRequest:@"POST"];
+-(void)setup {
+    _managedObjectContext = [[MOCManager sharedInstance] newMOC];
+    _whiteList = [Bottle whiteList];
+    _bottle = [_managedObjectContext objectWithID:_bottleID];
+    _editedCount = [[Bottle countOfBottle:_bottle forContext:_managedObjectContext] floatValue];
 }
 
 // check that they've added a name and category before alerting delegate we're done editing
 - (IBAction)didPressDone:(id)sender {
-    bool noCategory = _bottle.subType == nil;
+    Bottle * bottle = (Bottle *)_bottle;
+    bool noCategory = bottle.subType == nil;
     // note that "No Name" is the default name we provide when creating a new bottle
-    bool noName = [_bottle.name isEqualToString:@""] || _bottle.name == nil || [_bottle.name isEqualToString:@"No Name"];
+    bool noName = [bottle.name isEqualToString:@""] || bottle.name == nil || [bottle.name isEqualToString:@"No Name"];
     NSString * alertMessage;
     if (noCategory && noName) {
         alertMessage = @"You must provide a name and a category";
@@ -60,66 +68,28 @@
         [alert show];
         return;
     }
-    _bottle.userHasBottle = [NSNumber numberWithBool:YES]; //if they ever edit a bottle or create a bottle, add it to their collection.
+    bottle.userHasBottle = [NSNumber numberWithBool:YES]; //if they ever edit a bottle or create a bottle, add it to their collection.
     [self setFinalCount];
     [[MOCManager sharedInstance] saveContext:_managedObjectContext];
-    [self.delegate didFinishEditingBottleWithId:_bottle.objectID];
+    [self.delegate didFinishEditingBottleWithId:self.bottleID];
 }
 - (IBAction)didPressCancel:(id)sender {
-    [self.delegate didFinishEditingBottleWithId:_bottle.objectID];
+    [self.delegate didFinishEditingBottleWithId:self.bottleID];
 }
 
 -(void)setFinalCount {
-    [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:[NSDate date] withCount:[NSNumber numberWithFloat:_editedCount] forBottle:_bottle inManagedObjectContext:_managedObjectContext];
-}
-
--(void)makeRequest:(NSString *)method {
-
-    NSString * encodedBottleName = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
-                                                                                  NULL,
-                                                                                  (CFStringRef)_bottle.name,
-                                                                                  NULL,
-                                                                                  (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                                  kCFStringEncodingUTF8 ));
-    
-    
-    NSMutableString * remoteUrl = [NSMutableString stringWithFormat:@"http://ec2-54-82-243-92.compute-1.amazonaws.com:3333/bottle?"];
-    NSMutableString * localUrl = [NSMutableString stringWithFormat:@"http://10.0.1.5:3333/bottle?"];
-    BOOL isRemote = NO;
-    NSString * urlBase = isRemote ? remoteUrl : localUrl;
-    NSString * params = [NSString stringWithFormat:@"name=%@&barcode=%@&category=%@", encodedBottleName, _bottle.barcode, _bottle.subType.name];
-    NSString * urlString = [urlBase stringByAppendingString:params];
-    NSURL * url = [NSURL URLWithString:urlString];
-    
-    // create the reqeust, set the method, and send it
-    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:method];
-    (void) [[NSURLConnection alloc] initWithRequest:request delegate:self];
-}
-
-
-// These connection methods are not in use right now
--(void)connectionDidFinishLoading:(NSURLConnection *)connection {
-//    NSLog(@"finished loading connection %@", connection);
-}
--(void)connection:(NSConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-//    NSLog(@"got response %@", response);
-}
-
--(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-//    NSLog(@"didReceiveData %@", data);
+    [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:[NSDate date] withCount:[NSNumber numberWithFloat:self.editedCount] forBottle:self.bottle inManagedObjectContext:self.managedObjectContext];
 }
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [_whiteList count] + 1; // all the properties, plus a delete button
+    return [self.whiteList count] + 1; // all the properties, plus a delete button
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger count = 1;
-    return count;
+    return 1;
 }
 
 
@@ -130,54 +100,89 @@
     if (section <= [_whiteList count] - 1) {
         property = [_whiteList objectAtIndex:section];
     }
+    return [self configureCellForPath:indexPath tableView:tableView property:property];
+}
+
+
+#pragma Cell Config methods
+-(TakeInventoryTableViewCell *)configureCountCellForPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
+    // normally this cell would render the bottle name, but we already have the bottle name at the top
+    TakeInventoryTableViewCell * cell = [self getCountCellForIndexPath:indexPath tableView:tableView];
+    cell.nameLabel.text = @"";
+    [cell.plusMinusView.plus1Button addTarget:self action:@selector(didSelectPlus1:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.plusMinusView.plus5Button addTarget:self action:@selector(didSelectPlus5:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.plusMinusView.minus1Button addTarget:self action:@selector(didSelectMinus1:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.plusMinusView.minus5Button addTarget:self action:@selector(didSelectMinus5:) forControlEvents:UIControlEventTouchUpInside];
+    cell.editCountLabel.text = [NSString stringWithFormat:@"%g", self.editedCount];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    return cell;
+}
+
+-(TakeInventoryTableViewCell *)getCountCellForIndexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
+    TakeInventoryTableViewCell * cell = (TakeInventoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Take Inventory CellID" forIndexPath:indexPath];
+    [TakeInventoryTableViewCell formatCell:cell forBottle:self.bottle showName:NO];
+    return cell;
+}
+
+-(UITableViewCell *)configureCellForPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView property:(NSString *)property {
     if ([property isEqualToString:@"count"]) {
-        TakeInventoryTableViewCell * cell = (TakeInventoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Take Inventory CellID" forIndexPath:indexPath];
-        [TakeInventoryTableViewCell formatCell:cell forBottle:_bottle showName:NO];
-        // normally this cell would render the bottle name, but we already have the bottle name at the top
-        cell.nameLabel.text = @"";
-        [cell.plusMinusView.plus1Button addTarget:self action:@selector(didSelectPlus1:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.plusMinusView.plus5Button addTarget:self action:@selector(didSelectPlus5:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.plusMinusView.minus1Button addTarget:self action:@selector(didSelectMinus1:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.plusMinusView.minus5Button addTarget:self action:@selector(didSelectMinus5:) forControlEvents:UIControlEventTouchUpInside];
-        cell.editCountLabel.text = [NSString stringWithFormat:@"%g", _editedCount];
-        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        return cell;
+        return [self configureCountCellForPath:indexPath tableView:tableView];
     } else {
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Bottle Property CellID" forIndexPath:indexPath];;
         if ([property isEqualToString:@"subType"]) {
-            if (!_bottle.subType) {
-                cell.textLabel.text = @"Enter Category";
-            } else {
-                cell.textLabel.text = [_bottle.subType name];
-            }
-        }
-        else if ([property isEqualToString:@"barcode"]) {
-            NSNumberFormatter * numFormatter = [[NSNumberFormatter alloc] init];
-            [numFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-            NSNumber * barcode = [numFormatter numberFromString:_bottle.barcode];
-            cell.textLabel.text = [NSString stringWithFormat:@"%@", barcode];
+            return [self configureSubTypeCell:cell];
+        } else if ([property isEqualToString:@"barcode"]) {
+            return [self configureBarcodeCell:cell];
+        } else if ([property isEqualToString:@"volume"]) {
+            return [self configureVolumeCell:cell];
         }
         else if (property == nil) {
             cell.backgroundColor = [UIColor redColor];
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.textLabel.text = @"REMOVE";
+            return cell;
+        } else {
+            cell.textLabel.text = [self valueForBottleProp:property ofBottle:self.bottle];;
+            return cell;
         }
-        else {
-            cell.textLabel.text = [_bottle valueForKey:property];
-        }
-        
-        return cell;
     }
-
 }
 
+-(NSString *)valueForBottleProp:(NSString *)property ofBottle:(id)bottle {
+    return [bottle valueForKey:property];
+}
+
+
+-(UITableViewCell *)configureSubTypeCell:(UITableViewCell *)cell {
+    AlcoholSubType * subType = [(Bottle *)self.bottle subType];
+    if (!subType) {
+        cell.textLabel.text = @"Enter Category";
+    } else {
+        cell.textLabel.text = [subType name];
+    }
+    return cell;
+}
+
+// should not init the numberFormatter here
+-(UITableViewCell *)configureBarcodeCell:(UITableViewCell *)cell {
+    NSNumberFormatter * numFormatter = [[NSNumberFormatter alloc] init];
+    [numFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber * barcode = [numFormatter numberFromString:[(Bottle *)self.bottle barcode]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", barcode];
+    return cell;
+}
+
+-(UITableViewCell *)configureVolumeCell:(UITableViewCell *)cell {
+    cell.textLabel.text = [(Bottle *)self.bottle volume];
+    return cell;
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger section = indexPath.section;
     id property;
-    if (section <= [_whiteList count] - 1) {
-        property = [_whiteList objectAtIndex:section];
+    if (section <= [self.whiteList count] - 1) {
+        property = [self.whiteList objectAtIndex:section];
     }
     if ([property isEqualToString:@"count"]) {
         return [TakeInventoryTableViewCell totalCellHeight];
@@ -189,8 +194,8 @@
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     id property;
-    if (section <= [_whiteList count] - 1) {
-        property = [_whiteList objectAtIndex:section];
+    if (section <= [self.whiteList count] - 1) {
+        property = [self.whiteList objectAtIndex:section];
     }
 
     if ([property isEqualToString:@"subType"]) {
@@ -207,15 +212,17 @@
     }
     else if ([property isEqualToString:@"name"]) {
         return @"name on label";
+    } else if ([property isEqualToString:@"volume"]) {
+        return @"volume";
     } else {
-        return @"error";
+        return @"";
     }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"Edit Bottle Category"]) {
         AllSubTypesTableViewController * subTypesTable = [segue destinationViewController];
-        [subTypesTable setManagedObjectContext:_managedObjectContext];
+        [subTypesTable setManagedObjectContext:self.managedObjectContext];
         subTypesTable.delegate = self;
     }
     else if ([[segue identifier] isEqualToString:@"Edit Bottle Name"]) {
@@ -232,8 +239,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     id property;
     NSInteger section = indexPath.section;
-    if (section <= [_whiteList count] - 1) {
-        property = [_whiteList objectAtIndex:section];
+    if (section <= [self.whiteList count] - 1) {
+        property = [self.whiteList objectAtIndex:section];
     }
     if ([property isEqualToString:@"name"]) {
         [self performSegueWithIdentifier:@"Edit Bottle Name" sender:nil];
@@ -266,37 +273,38 @@
 }
 
 -(void)incrementBottleCountByInt:(int)increment {
-    _editedCount = _editedCount + (float)increment > 0 ? _editedCount + (float)increment : 0;
+    self.editedCount = self.editedCount + (float)increment > 0 ? self.editedCount + (float)increment : 0;
     [self.tableView reloadData];
 }
 
 #pragma Protocal Functions
 
+// protocal for PickCategory
 -(void)didFinishSelectingSubType:(AlcoholSubType *)subType
 {
-    [AlcoholSubType changeBottle:_bottle toSubType:subType inContext:_managedObjectContext];
+    [AlcoholSubType changeBottle:(Bottle *)self.bottle toSubType:subType inContext:_managedObjectContext];
     [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)didFinishEditingText:(NSString *)name
 {
-    _bottle.name = name;
+    [(Bottle *)self.bottle setName:name];
     self.title = name;
     [self.tableView reloadData];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
 -(NSString *)textForNameView {
-    return _bottle.name;
+    return [(Bottle *)self.bottle name];
 }
 
 
 #pragma Actions and Outlets
 - (void)didTouchDelete {
-    _bottle.userHasBottle = [NSNumber numberWithBool:NO];
+    [(Bottle *)self.bottle setUserHasBottle:[NSNumber numberWithBool:NO]];
     [[MOCManager sharedInstance] saveContext:_managedObjectContext];
-    [self.delegate didFinishEditingBottleWithId:_bottle.objectID];
+    [self.delegate didFinishEditingBottleWithId:[(Bottle *)self.bottle objectID]];
 }
 
 #pragma Alert View delegate methods
@@ -313,10 +321,56 @@
         if ([barcode isEqualToString:@""]) {
             return;
         }
-        _bottle.barcode = barcode;
+        [(Bottle *)self.bottle setBarcode:barcode];
         [self.tableView reloadData];
     }];
     
+}
+
+#pragma Sending POST
+-(NSMutableString *)remoteUrl {
+    return [NSMutableString stringWithFormat:@"http://ec2-54-82-243-92.compute-1.amazonaws.com:3333/bottle?"];
+}
+
+-(NSMutableString *)localUrl {
+    return [NSMutableString stringWithFormat:@"http://10.0.1.5:3333/bottle?"];
+}
+
+-(void)makeRequest:(NSString *)method {
+    Bottle * bottle = (Bottle *)self.bottle;
+    NSString * encodedBottleName = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                                         NULL,
+                                                                                                         (CFStringRef)bottle.name,
+                                                                                                         NULL,
+                                                                                                         (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                                         kCFStringEncodingUTF8 ));
+    
+    
+    NSMutableString * remoteUrl = [self remoteUrl];
+    NSMutableString * localUrl = [self localUrl];
+    BOOL isRemote = NO;
+    NSString * urlBase = isRemote ? remoteUrl : localUrl;
+    NSString * params = [NSString stringWithFormat:@"name=%@&barcode=%@&category=%@", encodedBottleName, bottle.barcode, bottle.subType.name];
+    NSString * urlString = [urlBase stringByAppendingString:params];
+    NSURL * url = [NSURL URLWithString:urlString];
+    
+    // create the reqeust, set the method, and send it
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:method];
+    (void) [[NSURLConnection alloc] initWithRequest:request delegate:self];
+}
+
+
+// These connection methods are not in use right now
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    //    NSLog(@"finished loading connection %@", connection);
+}
+-(void)connection:(NSConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    //    NSLog(@"got response %@", response);
+}
+
+-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    //    NSLog(@"didReceiveData %@", data);
 }
 
 

@@ -10,6 +10,11 @@
 #import "Bottle+Create.h"
 
 @implementation InventorySnapshotForBottle (Create)
+
+//
+// Super code repeat below, but not sure how to resolve it
+//
+
 +(InventorySnapshotForBottle *)newInventoryForBottleSnapshotForDate:(NSDate *)date
                                                           withCount:(NSNumber *)count
                                                           forBottle:(Bottle *)bottle
@@ -22,4 +27,12 @@
     return snapShot;
 }
 
++(InventorySnapshotForBottle *)newInventoryForBottleSnapshotForDate:(NSDate *)date withCount:(NSNumber *)count wineBottle:(WineBottle *)bottle inManagedObjectContext:(NSManagedObjectContext *)context {
+
+    InventorySnapshotForBottle * snapShot = [NSEntityDescription insertNewObjectForEntityForName:@"InventorySnapshotForBottle" inManagedObjectContext:context];
+    snapShot.date = date;
+    snapShot.whichBottle = bottle;
+    snapShot.count = count;
+    return snapShot;
+}
 @end

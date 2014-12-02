@@ -20,8 +20,14 @@
 
 @interface BottleDetailTableViewController : BaseCoreDataTableViewController <SubTypeSelectorDelegate, EditTextViewDelegate, UIAlertViewDelegate, SingleBarcodeScannerDelegate>
 @property (strong, nonatomic) NSManagedObjectID * bottleID;
-@property (strong, nonatomic) Bottle * bottle;
+@property (strong, nonatomic) id bottle;
 @property (strong, nonatomic) NSOrderedSet * whiteList;
 @property (weak) id <BottleDetailDelegate> delegate;
 @property float editedCount;
+
+// methods for subclasses to call
+-(UITableViewCell *)configureCellForPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView property:(NSString *)property;
+-(NSMutableString *)localUrl;
+-(NSMutableString *)remoteUrl;
+-(void)setFinalCount;
 @end

@@ -9,11 +9,10 @@
 #import "Bottle+Create.h"
 
 @implementation Bottle (Create)
+// TODO: Vendor should be included here because people don't order the same sku from multiple vendors
 +(NSOrderedSet *)whiteList;
 {
-    NSOrderedSet *set = [NSOrderedSet orderedSetWithObjects:@"name", @"count", @"subType", @"barcode", nil];
-    return set;
-    
+    return [NSOrderedSet orderedSetWithObjects:@"name", @"count", @"subType", @"barcode", @"volume", nil];
 }
 
 
@@ -123,10 +122,18 @@ const NSString * NO_NAME_STRING = @"No Name";
 // Get the most recent InventorySnapshotForBottle
 // and set that count to _count
 +(NSNumber *)countOfBottle:(Bottle *)bottle forContext:(NSManagedObjectContext *)context {
+    return [self countOfBottleForObjectID:bottle.objectID inContext:context];
+}
+
++(NSNumber *)countOfWineBottle:(WineBottle *)wineBottle forContext:(NSManagedObjectContext *)context {
+    return [self countOfBottleForObjectID:wineBottle.objectID inContext:context];
+}
+
++(NSNumber *)countOfBottleForObjectID:(NSManagedObjectID *)objectID inContext:(NSManagedObjectContext *)context {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"InventorySnapshotForBottle" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"whichBottle.barcode = %@", bottle.barcode];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"whichBottle == %@", [context objectWithID:objectID]];
     [fetchRequest setPredicate:predicate];
     
     NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];

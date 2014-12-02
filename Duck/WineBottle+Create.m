@@ -9,6 +9,12 @@
 #import "WineBottle+Create.h"
 
 @implementation WineBottle (Create)
+// note that this is not a direct superset of [Bottle whiteList] so there are repetitions
++(NSOrderedSet *)whiteList;
+{
+    return [NSOrderedSet orderedSetWithObjects:@"vineyard", @"varietal", @"count", @"barcode", @"volume", nil];
+}
+
 +(Vineyard *)newVineyardForName:(NSString *)name inContext:(NSManagedObjectContext *)context {
     Vineyard * vineyard = [NSEntityDescription insertNewObjectForEntityForName:@"Vineyard" inManagedObjectContext:context];
     vineyard.name = name;
@@ -34,4 +40,9 @@
     Vineyard * vineyard = [fetchedObjects lastObject]; // should only be one anyways
     return vineyard;
 }
+
+-(NSString *)name {
+    return [self.vineyard.name stringByAppendingString:[NSString stringWithFormat:@" %@", self.varietal.name]];
+}
+
 @end

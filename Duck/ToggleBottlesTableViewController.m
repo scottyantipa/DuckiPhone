@@ -178,26 +178,23 @@
     float searchBarHeight = 44.0;
     float totalHeight;
     float labelHeight;
-    float searchBarYOffset;
     UILabel * messageLabel;
     if (_purposeDescription != nil) {
         labelHeight = 30;
-        messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, self.tableView.frame.size.width - 40, labelHeight)];
+        messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, searchBarHeight, self.tableView.frame.size.width - 40, labelHeight)];
         [messageLabel setTextAlignment:NSTextAlignmentCenter];
         messageLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [messageLabel setFont:[UIFont systemFontOfSize:12]];
         messageLabel.textColor = [UIColor grayColor];
         messageLabel.numberOfLines = 0;
         messageLabel.text = _purposeDescription;
-        searchBarYOffset = labelHeight;
     } else {
-        searchBarYOffset = 0;
         labelHeight = 0;
         messageLabel = nil;
     }
     totalHeight = searchBarHeight + labelHeight;
     UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, totalHeight)];
-    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, searchBarYOffset, self.tableView.frame.size.width, searchBarHeight)];
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, searchBarHeight)];
     _searchBar.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
     _searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
     [headerView addSubview:messageLabel];
@@ -213,10 +210,6 @@
     self.searchDisplayController.searchBar.delegate = self;
     
     self.fetchedResultsController = nil;
-}
-
--(void)fullReload {
-    
 }
 
 #pragma Search Bar Delegates

@@ -19,7 +19,7 @@
 
 
 @interface Bottle (Create)
-+(NSOrderedSet *)whiteList;
++(NSOrderedSet *)whiteList; // should be a typedef, not a method
 
 +(Bottle *)newBottleForBarcode:(NSString *)barcode inManagedObjectContext:(NSManagedObjectContext *)context;
 +(Bottle *)newBottleForType:(AlcoholType *)type inManagedObjectContext:(NSManagedObjectContext *)context;
@@ -31,6 +31,7 @@
 +(OrderForBottle *)mostRecentOrderForBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
 +(InvoiceForBottle *)mostRecentInvoiceForBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
 +(NSNumber *)countOfBottle:(Bottle *)bottle forContext:(NSManagedObjectContext *)context;
++(NSNumber *)countOfWineBottle:(WineBottle *)wineBottle forContext:(NSManagedObjectContext *)context;
 
 +(NSSet *)bottlesFromSearchText:(NSString *)searchText withOrder:(Order *)order;
 +(NSString *)cleanedSearchText:(NSString *)searchText;

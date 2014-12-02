@@ -21,6 +21,7 @@
 @synthesize plusButtonToolTip = _plusButtonToolTip;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize varietal = _varietal;
+@synthesize selectedBottle = _selectedBottle;
 
 -(void)setSubType:(AlcoholSubType *)subType
 {
@@ -156,24 +157,33 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    _selectedBottle = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    if (_subType != nil) {
+        [self performSegueWithIdentifier:@"Show Bottle From Bottles" sender:nil];
+    } else {
+        [self performSegueWithIdentifier:@"Show WineBottle From Bottles" sender:nil];
+    }
 }
-
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Toggle Subtype Bottles Segue ID"]) { // wants to add bottles
         ToggleBottlesTableViewController * tvc = (ToggleBottlesTableViewController *)[[segue destinationViewController] topViewController];
         tvc.delegate = self;
-        [tvc setPurposeDescription:@"Bottles marked with a check are in your collection"];
+        [tvc setPurposeDescription:@"Check bottles to add to your collection"];
         if (_subType != nil) {
             [tvc setSubType:_subType];
         } else if (_varietal != nil) {
             [tvc setVarietal:_varietal];
         }
 
-    } else { // selected a bottle, so show the bottle
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        Bottle *bottle = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    } else if ([segue.identifier isEqualToString:@"Show WineBottle From Bottles"]) {
+        WineBottle * wineBottle = (WineBottle *)_selectedBottle;
+        WineBottleDetailTVC * wineBottleTVC = (WineBottleDetailTVC *)[[segue destinationViewController] topViewController];
+        wineBottleTVC.bottleID = wineBottle.objectID;
+        wineBottleTVC.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"Show Bottle From Bottles"]) {
+        Bottle *bottle = (Bottle *)_selectedBottle;
         BottleDetailTableViewController * bottleTVC = (BottleDetailTableViewController*)[[segue destinationViewController] topViewController];
         bottleTVC.bottleID = bottle.objectID;
         bottleTVC.delegate = self;
@@ -253,6 +263,8 @@
 
 -(void)didFinishEditingBottleWithId:(NSManagedObjectID *)bottleID {
     [[MOCManager sharedInstance] saveContext:[self managedObjectContext]];
+    _fetchedResultsController = nil;
+    _managedObjectContext = nil;
     [self.tableView reloadData];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }

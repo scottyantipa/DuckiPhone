@@ -7,10 +7,12 @@
 //
 
 #import "InventorySnapshotForBottle.h"
+#import "WineBottle+Create.h"
 
 @interface InventorySnapshotForBottle (Create)
 +(InventorySnapshotForBottle *)newInventoryForBottleSnapshotForDate:(NSDate *)date
                                                           withCount:(NSNumber *)count
                                                           forBottle:(Bottle *)bottle
                                              inManagedObjectContext:(NSManagedObjectContext *)context;
++(InventorySnapshotForBottle *)newInventoryForBottleSnapshotForDate:(NSDate *)date withCount:(NSNumber *)count wineBottle:(WineBottle *)bottle inManagedObjectContext:(NSManagedObjectContext *)context;
 @end

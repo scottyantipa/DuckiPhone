@@ -9,6 +9,7 @@
 #import "BaseCoreDataTableViewController.h"
 #import "AlcoholSubTypesTableViewController.h"
 #import "BottleDetailTableViewController.h"
+#import "WineBottleDetailTVC.h"
 #import "ToggleBottlesDelegate.h"
 #import "ToggleBottlesTableViewController.h"
 #import "BottleDetailDelegate.h"
@@ -20,4 +21,5 @@
 @property (strong, nonatomic) Varietal * varietal;
 @property (nonatomic) BOOL editing;
 @property (strong, nonatomic) CMPopTipViewStyleOverride * plusButtonToolTip;
+@property (strong, nonatomic) id selectedBottle; // could be Bottle or WineBottle
 @end
