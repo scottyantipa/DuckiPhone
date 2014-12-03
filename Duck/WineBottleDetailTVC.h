@@ -8,6 +8,8 @@
 
 #import "BottleDetailTableViewController.h"
 #import "WineBottle+Create.h"
+#import "PickVarietalDelegate.h"
+#import "PickVarietalTVC.h" 
 
-@interface WineBottleDetailTVC : BottleDetailTableViewController
+@interface WineBottleDetailTVC : BottleDetailTableViewController <PickVarietalDelegate>
 @end

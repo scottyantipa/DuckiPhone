@@ -25,6 +25,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize editedCount = _editedCount;
 @synthesize bottle = _bottle;
+@synthesize bottleClass = _bottleClass;
 
 -(void)viewDidLoad
 {
@@ -169,7 +170,11 @@
     NSNumberFormatter * numFormatter = [[NSNumberFormatter alloc] init];
     [numFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     NSNumber * barcode = [numFormatter numberFromString:[(Bottle *)self.bottle barcode]];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", barcode];
+    if (barcode == nil) {
+        cell.textLabel.text = @"Enter Barcode";
+    } else {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", barcode];
+    }
     return cell;
 }
 
@@ -202,7 +207,7 @@
         return @"category";
     }
     else if ([property isEqualToString:@"count"]) {
-        return @"edit your inventory count";
+        return @"inventory";
     }
     else if ([property isEqualToString:@"barcode"]) {
         return @"tap to scan barcode";
@@ -211,7 +216,7 @@
         return @"remove from your collection";
     }
     else if ([property isEqualToString:@"name"]) {
-        return @"name on label";
+        return @"name";
     } else if ([property isEqualToString:@"volume"]) {
         return @"volume";
     } else {
@@ -231,6 +236,22 @@
     } else if ([segue.identifier isEqualToString:@"Show Scanner From Bottle Detail"]) {
         SingleBarcodeScanner * scanner = (SingleBarcodeScanner *)[[segue destinationViewController] topViewController];
         scanner.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"Show Volume Picker Segue ID"]) {
+        BaseOptionPickerTVC * tvc = (BaseOptionPickerTVC *)[segue.destinationViewController topViewController];
+        [tvc setData:[Utils volumesForBottleClass:[self classForBottleType]]];
+        tvc.delegate = self;
+        tvc.title = @"Edit Volume";
+        tvc.selectedValue = [(Bottle *)_bottle volume];
+    }
+}
+
+// override this and return the type of bottle e.g. WineBottle
+-(Class)classForBottleType {
+    if (_bottleClass != nil)
+    {
+        return _bottleClass;
+    } else {
+        return [Bottle class];
     }
 }
 
@@ -252,7 +273,16 @@
         [self performSegueWithIdentifier:@"Show Scanner From Bottle Detail" sender:nil];
     } else if (property == nil) {
         [self didTouchDelete];
+    } else if ([property isEqualToString:@"volume"]) {
+        [self performSegueWithIdentifier:@"Show Volume Picker Segue ID" sender:nil];
     }
+}
+
+// Volue picker delegate method
+-(void)didFinishPickingWithValue:(NSString *)value {
+    Bottle * bottle = (Bottle *)_bottle;
+    [bottle setVolume:value];
+    [self.tableView reloadData];
 }
 
 -(void)didSelectMinus1:(UIButton *)sender {

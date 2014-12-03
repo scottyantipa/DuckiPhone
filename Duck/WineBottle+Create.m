@@ -12,7 +12,7 @@
 // note that this is not a direct superset of [Bottle whiteList] so there are repetitions
 +(NSOrderedSet *)whiteList;
 {
-    return [NSOrderedSet orderedSetWithObjects:@"vineyard", @"varietal", @"count", @"barcode", @"volume", nil];
+    return [NSOrderedSet orderedSetWithObjects:@"vineyard", @"varietal", @"volume", @"count", @"barcode", nil];
 }
 
 +(Vineyard *)newVineyardForName:(NSString *)name inContext:(NSManagedObjectContext *)context {

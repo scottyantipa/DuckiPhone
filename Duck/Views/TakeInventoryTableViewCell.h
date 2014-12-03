@@ -17,5 +17,4 @@
 @property (strong, nonatomic) UILabel * nameLabel;
 @property (strong, nonatomic) UILabel * editCountLabel;
 @property (strong, nonatomic) PlusMinusButtonsView * plusMinusView;
-extern CGFloat const CELL_HEIGHT;
 @end

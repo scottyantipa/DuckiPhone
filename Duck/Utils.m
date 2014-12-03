@@ -9,7 +9,6 @@
 #import "Utils.h"
 
 @implementation Utils
-
 +(void)markSubviewsAsNoDelay:(UIView *)view {
     if ([[view class] isKindOfClass:[UIScrollView class]]) {
         ((UIScrollView *)view).delaysContentTouches = NO;
@@ -60,4 +59,13 @@
 }
 
 
++(NSArray *)volumesForBottleClass:(Class)bottleClass {
+    if ([bottleClass isSubclassOfClass:[WineBottle class]]) {
+        return @[@"350ml", @"750ml", @"1.5L", @"1.75L", @"3.0L", @"4.5L"];
+    } else if ([bottleClass isSubclassOfClass:[BeerBottle class]]) {
+        return @[@"8oz", @"9oz", @"10oz", @"11oz", @"12oz", @"13oz", @"14oz", @"15oz", @"16oz", @"18oz", @"24oz", @"28oz", @"32oz"];
+    } else { // liquor
+        return @[@"350ml", @"750ml", @"1.75L"];
+    }
+}
 @end

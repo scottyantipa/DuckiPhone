@@ -39,7 +39,7 @@
     if (searchString.length)
     {
         // your search predicate(s) are added to this array
-        [predicateArray addObject:[NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@", searchString]];
+        [predicateArray addObject:[NSPredicate predicateWithFormat:@"(varietal.name CONTAINS[cd] %@) || (vineyard.name CONTAINS[cd] %@)", searchString, searchString]];
         
         // If we only want to see bottles in a certain subtype or varietal.  Note this code is duplicated in the standard tvc.
         if (_subType != nil) {

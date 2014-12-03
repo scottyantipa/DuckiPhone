@@ -12,7 +12,7 @@
 // TODO: Vendor should be included here because people don't order the same sku from multiple vendors
 +(NSOrderedSet *)whiteList;
 {
-    return [NSOrderedSet orderedSetWithObjects:@"name", @"count", @"subType", @"barcode", @"volume", nil];
+    return [NSOrderedSet orderedSetWithObjects:@"name", @"volume", @"subType",@"count", @"barcode", nil];
 }
 
 

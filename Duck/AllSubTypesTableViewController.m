@@ -14,8 +14,6 @@
 @end
 
 @implementation AllSubTypesTableViewController
-
-// why do I have to synthesize these here, as well as in the parent class?
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext = _managedObjectContext;
 
@@ -56,11 +54,6 @@
     
     return _fetchedResultsController;
 }
-
--(void)setManagedObjectContext:(NSManagedObjectContext *)context {
-    _managedObjectContext = context;
-}
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

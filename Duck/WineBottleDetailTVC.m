@@ -35,7 +35,9 @@
     }
 }
 
-
+-(Class)classForBottleType {
+    return [WineBottle class];
+}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger section = indexPath.section;
@@ -161,5 +163,45 @@
         return [super tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section];
     }
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    id property;
+    NSInteger section = indexPath.section;
+    if (section <= [self.whiteList count] - 1) {
+        property = [self.whiteList objectAtIndex:section];
+    }
+    if ([property isEqualToString:@"varietal"]) {
+        [self performSegueWithIdentifier:@"Show Varietal Picker Segue ID" sender:nil];
+    } else {
+        [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"Show Varietal Picker Segue ID"]) {
+        WineBottle * bottle = (WineBottle *)_bottle;
+        PickVarietalTVC * tvc = (PickVarietalTVC *)[segue.destinationViewController topViewController];
+        tvc.selectedVarietal = bottle.varietal;
+        tvc.managedObjectContext = _managedObjectContext;
+        tvc.delegate = self;
+    } else {
+        [super prepareForSegue:segue sender:sender];
+    }
+}
+
+// Volue picker delegate method
+-(void)didFinishPickingWithValue:(NSString *)value {
+    WineBottle * bottle = (WineBottle *)_bottle;
+    [bottle setVolume:value];
+    [self.tableView reloadData];
+}
+
+-(void)didFinishPickingVarietal:(Varietal *)varietal {
+    WineBottle * bottle = (WineBottle *)_bottle;
+    [bottle setVarietal:varietal];
+    [self.tableView reloadData];
+}
+
 
 @end

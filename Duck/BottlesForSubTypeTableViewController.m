@@ -187,6 +187,12 @@
         BottleDetailTableViewController * bottleTVC = (BottleDetailTableViewController*)[[segue destinationViewController] topViewController];
         bottleTVC.bottleID = bottle.objectID;
         bottleTVC.delegate = self;
+        AlcoholType * type = bottle.subType.parent;
+        if ([type.name isEqualToString:@"Liquor"]) {
+            bottleTVC.bottleClass = [LiquorBottle class];
+        } else if ([type.name isEqualToString:@"Beer"]) {
+            bottleTVC.bottleClass = [BeerBottle class];
+        }
     }
 }
 

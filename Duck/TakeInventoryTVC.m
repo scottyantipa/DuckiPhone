@@ -23,8 +23,29 @@
     _editedValues = [[NSMutableDictionary alloc] init];
     _managedObjectContext = [[MOCManager sharedInstance] newMOC];    
     [Utils markSubviewsAsNoDelay:self.tableView];
+//    [self setHeader];
 }
 
+//
+// THIS STILL NEEDS TO BE IMPLEMENTED.  It creates a segmented control to toggle between Wine/Liquor/Beer
+//
+-(void)setHeader {
+    UISegmentedControl * control = [[UISegmentedControl alloc] initWithItems:@[@"Wine", @"Liquor", @"Beer"]];
+    
+    CGFloat fullWidth = self.tableView.frame.size.width;
+    CGFloat fullHeight = 50;
+    CGFloat controlWidth = fullWidth - 40;
+    CGFloat controlHeight = control.frame.size.height;
+    CGFloat controlXOffset = (fullWidth / 2) - (controlWidth / 2);
+    CGFloat controlYOffset = (fullHeight / 2);
+    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, fullWidth, fullHeight)];
+
+
+    [control setFrame:CGRectMake(controlXOffset, controlYOffset, controlWidth, controlHeight)];
+    [headerView addSubview:control];
+    
+    self.tableView.tableHeaderView = headerView;
+}
 
 - (NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController != nil) {

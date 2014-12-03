@@ -17,10 +17,14 @@
 #import "PlusMinusButtonsView.h"
 #import "TakeInventoryTableViewCell.h"
 #import "MOCManager.h"
+#import "Utils.h"
+#import "BasePickerDelegate.h"
+#import "BaseOptionPickerTVC.h"
 
-@interface BottleDetailTableViewController : BaseCoreDataTableViewController <SubTypeSelectorDelegate, EditTextViewDelegate, UIAlertViewDelegate, SingleBarcodeScannerDelegate>
+@interface BottleDetailTableViewController : BaseCoreDataTableViewController <SubTypeSelectorDelegate, EditTextViewDelegate, UIAlertViewDelegate, SingleBarcodeScannerDelegate, BasePickerDelegate>
 @property (strong, nonatomic) NSManagedObjectID * bottleID;
 @property (strong, nonatomic) id bottle;
+@property (weak) Class bottleClass;
 @property (strong, nonatomic) NSOrderedSet * whiteList;
 @property (weak) id <BottleDetailDelegate> delegate;
 @property float editedCount;
