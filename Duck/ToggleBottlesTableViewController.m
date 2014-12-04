@@ -305,9 +305,16 @@
     if ([segue.identifier isEqualToString:@"Show New Bottle Segue ID"]) {
         BottleDetailTableViewController * bottleTVC = (BottleDetailTableViewController*)[[segue destinationViewController] topViewController];
         bottleTVC.delegate = self;
+        if (_subType != nil) {
+            bottleTVC.subTypeForNewBottleID = _subType.objectID;
+        }
     } else if ([segue.identifier isEqualToString:@"Show New Wine Bottle Segue ID"]) {
         WineBottleDetailTVC * wineTVC = (WineBottleDetailTVC *)[[segue destinationViewController] topViewController];
         wineTVC.delegate = self;
+        if (_varietal != nil) {
+            wineTVC.varietalForNewBottleID = _varietal.objectID;
+        }
+
     }
 }
 

@@ -20,6 +20,8 @@
 #import "Utils.h"
 #import "BasePickerDelegate.h"
 #import "BaseOptionPickerTVC.h"
+#import "AlcoholSubType+Create.h"
+#import "Varietal.h"
 
 @interface BottleDetailTableViewController : BaseCoreDataTableViewController <SubTypeSelectorDelegate, EditTextViewDelegate, UIAlertViewDelegate, SingleBarcodeScannerDelegate, BasePickerDelegate>
 @property (strong, nonatomic) NSManagedObjectID * bottleID;
@@ -28,6 +30,7 @@
 @property (strong, nonatomic) NSOrderedSet * whiteList;
 @property (weak) id <BottleDetailDelegate> delegate;
 @property float editedCount;
+@property (strong, nonatomic) NSManagedObjectID * subTypeForNewBottleID;  // if this is a new bottle, we can start it off with a subtype
 
 // methods for subclasses to call
 -(UITableViewCell *)configureCellForPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView property:(NSString *)property;

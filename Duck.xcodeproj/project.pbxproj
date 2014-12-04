@@ -111,6 +111,7 @@
 		E0E274A31A2FFC490013DFF5 /* Bottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E274A21A2FFC490013DFF5 /* Bottle.m */; };
 		E0E274A61A2FFCE20013DFF5 /* WineBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E274A51A2FFCE20013DFF5 /* WineBottle.m */; };
 		E0E274AB1A3004EE0013DFF5 /* BaseOptionPickerTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E274AA1A3004EE0013DFF5 /* BaseOptionPickerTVC.m */; };
+		E0E274AE1A3016BD0013DFF5 /* PickProducerTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E274AD1A3016BD0013DFF5 /* PickProducerTVC.m */; };
 		E0E83AEB19189A9D0096233A /* InvoicePhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E83AEA19189A9D0096233A /* InvoicePhoto.m */; };
 		E0EF7CB319DE71E5001F5CE6 /* LossesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0EF7CB219DE71E5001F5CE6 /* LossesTVC.m */; };
 		E0F4A3F51A2BF44D00FC59B0 /* WineBottleDetailTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F4A3F41A2BF44D00FC59B0 /* WineBottleDetailTVC.m */; };
@@ -310,6 +311,9 @@
 		E0E274A41A2FFCE20013DFF5 /* WineBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineBottle.h; sourceTree = "<group>"; };
 		E0E274A51A2FFCE20013DFF5 /* WineBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineBottle.m; sourceTree = "<group>"; };
 		E0E274AA1A3004EE0013DFF5 /* BaseOptionPickerTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseOptionPickerTVC.m; sourceTree = "<group>"; };
+		E0E274AC1A3016BD0013DFF5 /* PickProducerTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickProducerTVC.h; sourceTree = "<group>"; };
+		E0E274AD1A3016BD0013DFF5 /* PickProducerTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickProducerTVC.m; sourceTree = "<group>"; };
+		E0E274AF1A30178E0013DFF5 /* PickProducerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickProducerDelegate.h; sourceTree = "<group>"; };
 		E0E83AE919189A9D0096233A /* InvoicePhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoicePhoto.h; sourceTree = "<group>"; };
 		E0E83AEA19189A9D0096233A /* InvoicePhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoicePhoto.m; sourceTree = "<group>"; };
 		E0EF7CB119DE71E5001F5CE6 /* LossesTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossesTVC.h; sourceTree = "<group>"; };
@@ -565,6 +569,8 @@
 		E05014EE1814AE1800A06560 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E0E274AC1A3016BD0013DFF5 /* PickProducerTVC.h */,
+				E0E274AD1A3016BD0013DFF5 /* PickProducerTVC.m */,
 				E0E2749A1A2F8F730013DFF5 /* PickVarietalTVC.h */,
 				E0E2749B1A2F8F730013DFF5 /* PickVarietalTVC.m */,
 				E0E274961A2EAFC30013DFF5 /* BaseOptionPickerTVC.h */,
@@ -600,6 +606,7 @@
 		E05014EF1814AE2B00A06560 /* Protocals */ = {
 			isa = PBXGroup;
 			children = (
+				E0E274AF1A30178E0013DFF5 /* PickProducerDelegate.h */,
 				E0E2749D1A2F90F60013DFF5 /* PickVarietalDelegate.h */,
 				E00D6ADF1A132168002D2B28 /* SingleBarcodeScannerDelegate.h */,
 				E0671CE21A09908F002DAAE1 /* BottleDetailDelegate.h */,
@@ -868,6 +875,7 @@
 				E0876B621911894400AE3248 /* EditVendorInfoViewController.m in Sources */,
 				E040E2AB1A295A7D00AFDE52 /* LiquorBottle.m in Sources */,
 				E0309AFF19DA840E00F00CA3 /* InvoicesTVC.m in Sources */,
+				E0E274AE1A3016BD0013DFF5 /* PickProducerTVC.m in Sources */,
 				E05015101814AED400A06560 /* AlcoholSubType+Create.m in Sources */,
 				E05015161814AED400A06560 /* AppDelegate.m in Sources */,
 				E00ABBDB1915500D00D6BF17 /* InvoiceTVC.m in Sources */,

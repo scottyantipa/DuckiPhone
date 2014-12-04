@@ -182,7 +182,7 @@
 }
 
 +(NSArray *)fetchedBottlesForVarietal:(Varietal *)varietal inContext:(NSManagedObjectContext *)context {
-    NSFetchRequest * fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
+    NSFetchRequest * fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"WineBottle"];
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(varietal = %@) AND (self.userHasBottle = %@)", varietal.name, [NSNumber numberWithBool:YES]];
     NSSortDescriptor * sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userOrdering" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];

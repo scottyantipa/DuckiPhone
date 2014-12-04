@@ -11,6 +11,9 @@
 #import "PickVarietalDelegate.h"
 #import "PickVarietalTVC.h" 
 #import "Producer.h"
+#import "PickProducerTVC.h"
+#import "PickProducerDelegate.h"
 
-@interface WineBottleDetailTVC : BottleDetailTableViewController <PickVarietalDelegate>
+@interface WineBottleDetailTVC : BottleDetailTableViewController <PickVarietalDelegate, PickProducerDelegate>
+@property (strong, nonatomic) NSManagedObjectID * varietalForNewBottleID; // if this is a new wine bottle, we can pass a Varietal to start off with
 @end

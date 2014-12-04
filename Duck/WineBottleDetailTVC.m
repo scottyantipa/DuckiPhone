@@ -14,9 +14,14 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize editedCount = _editedCount;
 @synthesize bottle = _bottle;
+@synthesize varietalForNewBottleID = _varietalForNewBottleID;
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self setTitle];
 }
 
 -(void)setup {
@@ -27,6 +32,11 @@
         _bottle = [Bottle newWineBottleForName:@"" varietal:nil inManagedObjectContext:[self managedObjectContext]];
         WineBottle * bottle = (WineBottle *)_bottle;
         bottle.userHasBottle = [NSNumber numberWithBool:YES];
+        if (_varietalForNewBottleID != nil) {
+            Varietal * varietal = (Varietal *)[_managedObjectContext objectWithID:_varietalForNewBottleID];
+            bottle.varietal = varietal;
+            bottle.subType = varietal.subType;
+        }
         _bottleID = bottle.objectID;
     }
     _whiteList = [WineBottle whiteList];
@@ -180,24 +190,32 @@
     }
     if ([property isEqualToString:@"varietal"]) {
         [self performSegueWithIdentifier:@"Show Varietal Picker Segue ID" sender:nil];
-    } else {
+    }
+    else if ([property isEqualToString:@"producer"]) {
+        [self performSegueWithIdentifier:@"Show Producer Picker Segue ID" sender:nil];
+    }
+    else {
         [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    WineBottle * bottle = (WineBottle *)_bottle;
     if ([segue.identifier isEqualToString:@"Show Varietal Picker Segue ID"]) {
-        WineBottle * bottle = (WineBottle *)_bottle;
         PickVarietalTVC * tvc = (PickVarietalTVC *)[segue.destinationViewController topViewController];
         tvc.selectedVarietal = bottle.varietal;
         tvc.managedObjectContext = _managedObjectContext;
+        tvc.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"Show Producer Picker Segue ID"]) {
+        PickProducerTVC * tvc = (PickProducerTVC *)[segue.destinationViewController topViewController];
+        tvc.managedObjectContext = _managedObjectContext;
+        tvc.selectedProducer = bottle.producer;
         tvc.delegate = self;
     } else {
         [super prepareForSegue:segue sender:sender];
     }
 }
 
-// Volue picker delegate method
 -(void)didFinishPickingWithValue:(NSString *)value {
     WineBottle * bottle = (WineBottle *)_bottle;
     [bottle setVolume:value];
@@ -206,9 +224,15 @@
 
 -(void)didFinishPickingVarietal:(Varietal *)varietal {
     WineBottle * bottle = (WineBottle *)_bottle;
-    [bottle setVarietal:varietal];
+    bottle.varietal = varietal;
+    bottle.subType = varietal.subType;
     [self.tableView reloadData];
 }
 
+-(void)didFinishPickingProducer:(Producer *)producer {
+    WineBottle * bottle = (WineBottle *)_bottle;
+    bottle.producer = producer;
+    [self.tableView reloadData];
+}
 
 @end

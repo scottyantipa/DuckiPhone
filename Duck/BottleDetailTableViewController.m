@@ -26,6 +26,7 @@
 @synthesize editedCount = _editedCount;
 @synthesize bottle = _bottle;
 @synthesize bottleClass = _bottleClass;
+@synthesize subTypeForNewBottleID = _subTypeForNewBottleID;
 
 -(void)viewDidLoad
 {
@@ -52,6 +53,12 @@
         _bottle = [Bottle newBottleForBarcode:@"" inManagedObjectContext:_managedObjectContext];
         Bottle * bottle = (Bottle *)_bottle;
         bottle.userHasBottle = [NSNumber numberWithBool:YES];
+
+        if  (_subTypeForNewBottleID != nil) {
+            AlcoholSubType * subType = (AlcoholSubType *)[_managedObjectContext objectWithID:_subTypeForNewBottleID];
+            bottle.subType = subType;
+            bottle.type = subType.parent;
+        }
         _bottleID = bottle.objectID;
     }
 
