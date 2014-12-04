@@ -36,4 +36,6 @@
 +(NSSet *)bottlesFromSearchText:(NSString *)searchText withOrder:(Order *)order;
 +(NSString *)cleanedSearchText:(NSString *)searchText;
 
++(Producer *)newProducerForName:(NSString *)name inContext:(NSManagedObjectContext *)context;
++(Producer *)producerForName:(NSString *)name inContext:(NSManagedObjectContext *)context;
 @end

@@ -39,8 +39,6 @@
 		E031445618431AD20047FA6F /* Vendor+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E031445518431AD20047FA6F /* Vendor+Create.m */; };
 		E031445718431AD20047FA6F /* Vendor+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E031445518431AD20047FA6F /* Vendor+Create.m */; };
 		E040E29C1A292EED00AFDE52 /* Varietal.m in Sources */ = {isa = PBXBuildFile; fileRef = E040E29B1A292EED00AFDE52 /* Varietal.m */; };
-		E040E29F1A292EED00AFDE52 /* WineBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E040E29E1A292EED00AFDE52 /* WineBottle.m */; };
-		E040E2A51A295A1700AFDE52 /* Vineyard.m in Sources */ = {isa = PBXBuildFile; fileRef = E040E2A41A295A1700AFDE52 /* Vineyard.m */; };
 		E040E2A81A295A7C00AFDE52 /* BeerBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E040E2A71A295A7C00AFDE52 /* BeerBottle.m */; };
 		E040E2AB1A295A7D00AFDE52 /* LiquorBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E040E2AA1A295A7D00AFDE52 /* LiquorBottle.m */; };
 		E040E2B11A295AD000AFDE52 /* WineBottle+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E040E2B01A295AD000AFDE52 /* WineBottle+Create.m */; };
@@ -108,14 +106,16 @@
 		E0BEEED61A1DB3A70049C195 /* MOCManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BEEED51A1DB3A70049C195 /* MOCManager.m */; };
 		E0C5A55D1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0C5A55B1849ABDD008E9B94 /* Duck.xcdatamodeld */; };
 		E0C5A55E1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0C5A55B1849ABDD008E9B94 /* Duck.xcdatamodeld */; };
-		E0E274981A2EAFC30013DFF5 /* BaseOptionPickerTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E274971A2EAFC30013DFF5 /* BaseOptionPickerTVC.m */; };
 		E0E2749C1A2F8F730013DFF5 /* PickVarietalTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E2749B1A2F8F730013DFF5 /* PickVarietalTVC.m */; };
+		E0E274A01A2FFB8A0013DFF5 /* Producer.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E2749F1A2FFB8A0013DFF5 /* Producer.m */; };
+		E0E274A31A2FFC490013DFF5 /* Bottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E274A21A2FFC490013DFF5 /* Bottle.m */; };
+		E0E274A61A2FFCE20013DFF5 /* WineBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E274A51A2FFCE20013DFF5 /* WineBottle.m */; };
+		E0E274AB1A3004EE0013DFF5 /* BaseOptionPickerTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E274AA1A3004EE0013DFF5 /* BaseOptionPickerTVC.m */; };
 		E0E83AEB19189A9D0096233A /* InvoicePhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E83AEA19189A9D0096233A /* InvoicePhoto.m */; };
 		E0EF7CB319DE71E5001F5CE6 /* LossesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0EF7CB219DE71E5001F5CE6 /* LossesTVC.m */; };
 		E0F4A3F51A2BF44D00FC59B0 /* WineBottleDetailTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F4A3F41A2BF44D00FC59B0 /* WineBottleDetailTVC.m */; };
 		E0F80E561A1A92ED0009AECB /* CMPopTipViewStyleOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F80E551A1A92ED0009AECB /* CMPopTipViewStyleOverride.m */; };
 		E0F80E591A1A9B780009AECB /* PlusMinusButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F80E581A1A9B780009AECB /* PlusMinusButtonsView.m */; };
-		E0FA94121A29032C00C829CA /* Bottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E0FA94111A29032C00C829CA /* Bottle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,10 +193,6 @@
 		E031445518431AD20047FA6F /* Vendor+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Vendor+Create.m"; sourceTree = "<group>"; };
 		E040E29A1A292EED00AFDE52 /* Varietal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Varietal.h; sourceTree = "<group>"; };
 		E040E29B1A292EED00AFDE52 /* Varietal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Varietal.m; sourceTree = "<group>"; };
-		E040E29D1A292EED00AFDE52 /* WineBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineBottle.h; sourceTree = "<group>"; };
-		E040E29E1A292EED00AFDE52 /* WineBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineBottle.m; sourceTree = "<group>"; };
-		E040E2A31A295A1700AFDE52 /* Vineyard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vineyard.h; sourceTree = "<group>"; };
-		E040E2A41A295A1700AFDE52 /* Vineyard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vineyard.m; sourceTree = "<group>"; };
 		E040E2A61A295A7C00AFDE52 /* BeerBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeerBottle.h; sourceTree = "<group>"; };
 		E040E2A71A295A7C00AFDE52 /* BeerBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeerBottle.m; sourceTree = "<group>"; };
 		E040E2A91A295A7D00AFDE52 /* LiquorBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiquorBottle.h; sourceTree = "<group>"; };
@@ -303,11 +299,17 @@
 		E0C5A55C1849ABDD008E9B94 /* Duck.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Duck.xcdatamodel; sourceTree = "<group>"; };
 		E0D5854618402FD10067F3AB /* ToggleBottlesDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleBottlesDelegate.h; sourceTree = "<group>"; };
 		E0E274961A2EAFC30013DFF5 /* BaseOptionPickerTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseOptionPickerTVC.h; sourceTree = "<group>"; };
-		E0E274971A2EAFC30013DFF5 /* BaseOptionPickerTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseOptionPickerTVC.m; sourceTree = "<group>"; };
 		E0E274991A2EB12E0013DFF5 /* BasePickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasePickerDelegate.h; sourceTree = "<group>"; };
 		E0E2749A1A2F8F730013DFF5 /* PickVarietalTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickVarietalTVC.h; sourceTree = "<group>"; };
 		E0E2749B1A2F8F730013DFF5 /* PickVarietalTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickVarietalTVC.m; sourceTree = "<group>"; };
 		E0E2749D1A2F90F60013DFF5 /* PickVarietalDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickVarietalDelegate.h; sourceTree = "<group>"; };
+		E0E2749E1A2FFB8A0013DFF5 /* Producer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Producer.h; sourceTree = "<group>"; };
+		E0E2749F1A2FFB8A0013DFF5 /* Producer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Producer.m; sourceTree = "<group>"; };
+		E0E274A11A2FFC490013DFF5 /* Bottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bottle.h; sourceTree = "<group>"; };
+		E0E274A21A2FFC490013DFF5 /* Bottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bottle.m; sourceTree = "<group>"; };
+		E0E274A41A2FFCE20013DFF5 /* WineBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineBottle.h; sourceTree = "<group>"; };
+		E0E274A51A2FFCE20013DFF5 /* WineBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineBottle.m; sourceTree = "<group>"; };
+		E0E274AA1A3004EE0013DFF5 /* BaseOptionPickerTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseOptionPickerTVC.m; sourceTree = "<group>"; };
 		E0E83AE919189A9D0096233A /* InvoicePhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoicePhoto.h; sourceTree = "<group>"; };
 		E0E83AEA19189A9D0096233A /* InvoicePhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoicePhoto.m; sourceTree = "<group>"; };
 		E0EF7CB119DE71E5001F5CE6 /* LossesTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossesTVC.h; sourceTree = "<group>"; };
@@ -318,8 +320,6 @@
 		E0F80E551A1A92ED0009AECB /* CMPopTipViewStyleOverride.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPopTipViewStyleOverride.m; sourceTree = "<group>"; };
 		E0F80E571A1A9B780009AECB /* PlusMinusButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlusMinusButtonsView.h; sourceTree = "<group>"; };
 		E0F80E581A1A9B780009AECB /* PlusMinusButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlusMinusButtonsView.m; sourceTree = "<group>"; };
-		E0FA94101A29032C00C829CA /* Bottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bottle.h; sourceTree = "<group>"; };
-		E0FA94111A29032C00C829CA /* Bottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bottle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -510,20 +510,20 @@
 		E05014EC1814ADE600A06560 /* DataClasses */ = {
 			isa = PBXGroup;
 			children = (
+				E0E274A41A2FFCE20013DFF5 /* WineBottle.h */,
+				E0E274A51A2FFCE20013DFF5 /* WineBottle.m */,
+				E0E274A11A2FFC490013DFF5 /* Bottle.h */,
+				E0E274A21A2FFC490013DFF5 /* Bottle.m */,
+				E0E2749E1A2FFB8A0013DFF5 /* Producer.h */,
+				E0E2749F1A2FFB8A0013DFF5 /* Producer.m */,
 				E040E2AF1A295AD000AFDE52 /* WineBottle+Create.h */,
 				E040E2B01A295AD000AFDE52 /* WineBottle+Create.m */,
-				E040E2A31A295A1700AFDE52 /* Vineyard.h */,
-				E040E2A41A295A1700AFDE52 /* Vineyard.m */,
-				E040E29D1A292EED00AFDE52 /* WineBottle.h */,
-				E040E29E1A292EED00AFDE52 /* WineBottle.m */,
 				E040E2A91A295A7D00AFDE52 /* LiquorBottle.h */,
 				E040E2AA1A295A7D00AFDE52 /* LiquorBottle.m */,
 				E040E2A61A295A7C00AFDE52 /* BeerBottle.h */,
 				E040E2A71A295A7C00AFDE52 /* BeerBottle.m */,
 				E040E29A1A292EED00AFDE52 /* Varietal.h */,
 				E040E29B1A292EED00AFDE52 /* Varietal.m */,
-				E0FA94101A29032C00C829CA /* Bottle.h */,
-				E0FA94111A29032C00C829CA /* Bottle.m */,
 				E0309B1219DB42E300F00CA3 /* Invoice.h */,
 				E0309B1319DB42E300F00CA3 /* Invoice.m */,
 				E0309B4B19DB87C000F00CA3 /* Invoice+Create.h */,
@@ -568,7 +568,7 @@
 				E0E2749A1A2F8F730013DFF5 /* PickVarietalTVC.h */,
 				E0E2749B1A2F8F730013DFF5 /* PickVarietalTVC.m */,
 				E0E274961A2EAFC30013DFF5 /* BaseOptionPickerTVC.h */,
-				E0E274971A2EAFC30013DFF5 /* BaseOptionPickerTVC.m */,
+				E0E274AA1A3004EE0013DFF5 /* BaseOptionPickerTVC.m */,
 				E0BEEED41A1DB3A70049C195 /* MOCManager.h */,
 				E0BEEED51A1DB3A70049C195 /* MOCManager.m */,
 				E02C7E4C1A1C2F89007AF67C /* Utils.h */,
@@ -820,22 +820,23 @@
 				E040E2A81A295A7C00AFDE52 /* BeerBottle.m in Sources */,
 				E0309AF919D91BCC00F00CA3 /* InvoicesForOrderTVC.m in Sources */,
 				E05014C31814AC9900A06560 /* OrderForBottle+Create.m in Sources */,
-				E040E2A51A295A1700AFDE52 /* Vineyard.m in Sources */,
 				E050151B1814AED400A06560 /* BottlesForSubTypeTableViewController.m in Sources */,
+				E0E274A01A2FFB8A0013DFF5 /* Producer.m in Sources */,
 				E0309B1419DB42E300F00CA3 /* Invoice.m in Sources */,
 				E01D81491A1496D0007C9BCE /* CMPopTipView.m in Sources */,
-				E040E29F1A292EED00AFDE52 /* WineBottle.m in Sources */,
 				E082728B1819ACE3007A2977 /* PastOrdersTableViewController.m in Sources */,
 				E05015131814AED400A06560 /* AlcoholType+Create.m in Sources */,
 				E0309B0519DB427000F00CA3 /* Order.m in Sources */,
 				E0B115B619DE1224000DBB42 /* PickOrderTVC.m in Sources */,
 				E0F80E591A1A9B780009AECB /* PlusMinusButtonsView.m in Sources */,
 				E0F4A3F51A2BF44D00FC59B0 /* WineBottleDetailTVC.m in Sources */,
+				E0E274A31A2FFC490013DFF5 /* Bottle.m in Sources */,
 				E05015171814AED400A06560 /* BaseCoreDataTableViewController.m in Sources */,
 				E05014BA1814AC9900A06560 /* EditPriceAndQtyVC.m in Sources */,
 				E0EF7CB319DE71E5001F5CE6 /* LossesTVC.m in Sources */,
 				E05015151814AED400A06560 /* AllSubTypesTableViewController.m in Sources */,
 				E0F80E561A1A92ED0009AECB /* CMPopTipViewStyleOverride.m in Sources */,
+				E0E274A61A2FFCE20013DFF5 /* WineBottle.m in Sources */,
 				E050151A1814AED400A06560 /* BottleDetailTableViewController.m in Sources */,
 				E02D37F219DF7D64004C9D57 /* LossesForBottleTVC.m in Sources */,
 				E02C7E4E1A1C2F89007AF67C /* Utils.m in Sources */,
@@ -848,6 +849,7 @@
 				E024A4EF19081351003A80DB /* OrderForBottle.m in Sources */,
 				E0948AF01A11BB25006B25D2 /* TakeInventoryTVC.m in Sources */,
 				E05015191814AED400A06560 /* Bottle+Create.m in Sources */,
+				E0E274AB1A3004EE0013DFF5 /* BaseOptionPickerTVC.m in Sources */,
 				E0309B4A19DB84A800F00CA3 /* BottlesInInvoiceTVC.m in Sources */,
 				E05014BC1814AC9900A06560 /* HomeTableViewController.m in Sources */,
 				E02C7E4B1A1BD921007AF67C /* SARoundedButton.m in Sources */,
@@ -859,7 +861,6 @@
 				E031445618431AD20047FA6F /* Vendor+Create.m in Sources */,
 				E05014BB1814AC9900A06560 /* EditTextViewController.m in Sources */,
 				E0309B1119DB427100F00CA3 /* InvoiceForBottle.m in Sources */,
-				E0E274981A2EAFC30013DFF5 /* BaseOptionPickerTVC.m in Sources */,
 				E040E2B11A295AD000AFDE52 /* WineBottle+Create.m in Sources */,
 				E02E82561A1EE7E50043BB09 /* VarietalsForSubTypeTVC.m in Sources */,
 				E0C5A55D1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */,
@@ -869,7 +870,6 @@
 				E0309AFF19DA840E00F00CA3 /* InvoicesTVC.m in Sources */,
 				E05015101814AED400A06560 /* AlcoholSubType+Create.m in Sources */,
 				E05015161814AED400A06560 /* AppDelegate.m in Sources */,
-				E0FA94121A29032C00C829CA /* Bottle.m in Sources */,
 				E00ABBDB1915500D00D6BF17 /* InvoiceTVC.m in Sources */,
 				E01C5917191DF4E3007DD632 /* NSString+Score.m in Sources */,
 				E0309B4D19DB87C000F00CA3 /* Invoice+Create.m in Sources */,

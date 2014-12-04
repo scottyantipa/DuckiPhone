@@ -174,7 +174,7 @@
         if (_subType != nil) {
             [tvc setSubType:_subType];
         } else if (_varietal != nil) {
-            [tvc setVarietal:_varietal];
+            [tvc setVarietalID:_varietal.objectID];
         }
 
     } else if ([segue.identifier isEqualToString:@"Show WineBottle From Bottles"]) {

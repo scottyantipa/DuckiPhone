@@ -951,7 +951,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pm0-RB-CfQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3037" y="-194"/>
+            <point key="canvasLocation" x="3097" y="-182"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="hyt-9m-qRD">
@@ -1007,7 +1007,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cg7-jJ-Au8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3073" y="486"/>
+            <point key="canvasLocation" x="3078" y="652"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YPW-gE-tfc">
@@ -1023,7 +1023,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="shb-4v-ffs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2658" y="486"/>
+            <point key="canvasLocation" x="2662" y="652"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4cg-qr-Rfo">
@@ -1039,7 +1039,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfT-aI-8Lk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2637" y="-194"/>
+            <point key="canvasLocation" x="2662" y="-174"/>
         </scene>
         <!--Edit Text View Controller-->
         <scene sceneID="Snp-NO-syU">
@@ -1139,7 +1139,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3bl-gF-No2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3853" y="567"/>
+            <point key="canvasLocation" x="4997" y="771"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AQU-Xj-YLT">
@@ -1155,7 +1155,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iGh-Da-ZLD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3471" y="567"/>
+            <point key="canvasLocation" x="4615" y="771"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ms5-OY-O1m">
@@ -1274,10 +1274,14 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="New Bottle" id="GPc-nD-gxG">
                             <connections>
-                                <segue destination="M8x-Pl-qdf" kind="modal" identifier="NewBottleFromToggleBottles" id="ZQ4-cP-eVN"/>
+                                <action selector="didPressNewBottle:" destination="Suh-45-NvK" id="pfs-6Z-Ggy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="M8x-Pl-qdf" kind="modal" identifier="Show New Bottle Segue ID" id="7aC-jx-QCT"/>
+                        <segue destination="Es6-Gf-hbm" kind="modal" identifier="Show New Wine Bottle Segue ID" id="1iH-W7-Bj5"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rur-Fw-jhq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1402,7 +1406,8 @@
         <segue reference="Pga-Po-JW7"/>
         <segue reference="PFX-UQ-UWT"/>
         <segue reference="A7A-cT-tHA"/>
-        <segue reference="ZQ4-cP-eVN"/>
+        <segue reference="7aC-jx-QCT"/>
+        <segue reference="1iH-W7-Bj5"/>
         <segue reference="Ry1-pD-on8"/>
         <segue reference="iu5-9G-zY2"/>
     </inferredMetricsTieBreakers>

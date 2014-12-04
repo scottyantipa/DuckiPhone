@@ -21,13 +21,20 @@
 
 -(void)setup {
     _managedObjectContext = [[MOCManager sharedInstance] newMOC];
-    _bottle = [_managedObjectContext objectWithID:_bottleID];
+    if (_bottleID != nil) {
+        _bottle = [_managedObjectContext objectWithID:_bottleID];
+    } else {
+        _bottle = [Bottle newWineBottleForName:@"" varietal:nil inManagedObjectContext:[self managedObjectContext]];
+        WineBottle * bottle = (WineBottle *)_bottle;
+        bottle.userHasBottle = [NSNumber numberWithBool:YES];
+        _bottleID = bottle.objectID;
+    }
     _whiteList = [WineBottle whiteList];
     _editedCount = [[Bottle countOfWineBottle:_bottle forContext:_managedObjectContext] floatValue];
 }
 
 -(void)setTitle {
-    if (![(WineBottle *)_bottle vineyard]) {
+    if (![(WineBottle *)_bottle producer]) {
         self.title = @"New Wine";
     }
     else {
@@ -50,14 +57,14 @@
 
 // if property is not in Bottle whiteList, then do unique thing, otherwise delegate to super
 -(UITableViewCell *)configureCellForPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView property:(NSString *)property {
-    if  ([property isEqualToString:@"varietal"] || [property isEqualToString:@"vineyard"]) {
+    if  ([property isEqualToString:@"varietal"] || [property isEqualToString:@"producer"]) {
         WineBottle * bottle = (WineBottle *)_bottle;
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Bottle Property CellID" forIndexPath:indexPath];;
         if ([property isEqualToString:@"varietal"]) {
             cell.textLabel.text = [[bottle varietal] name];
             return cell;
-        } else if ([property isEqualToString:@"vineyard"]) {
-            cell.textLabel.text= [[bottle vineyard] name];
+        } else if ([property isEqualToString:@"producer"]) {
+            cell.textLabel.text= [[bottle producer] name];
             return cell;
         }
     }
@@ -73,11 +80,11 @@
     WineBottle * wineBottle = (WineBottle *)_bottle;
     bool noVarietal = wineBottle.varietal == nil;
     // note that "No Name" is the default name we provide when creating a new bottle
-    bool noVineyard = wineBottle.vineyard == nil;
+    bool noProducer = wineBottle.producer == nil;
     NSString * alertMessage;
-    if (noVarietal && noVineyard) {
+    if (noVarietal && noProducer) {
         alertMessage = @"You must provide a Vineyard and a Varietal";
-    } else if (noVineyard) {
+    } else if (noProducer) {
         alertMessage = @"You must provide a Vineyard";
     } else if (noVarietal) {
         alertMessage = @"You must provide a Varietal";
@@ -155,7 +162,7 @@
     if (section <= [self.whiteList count] - 1) {
         property = [self.whiteList objectAtIndex:section];
     }
-    if ([property isEqualToString:@"vineyard"]) {
+    if ([property isEqualToString:@"producer"]) {
         return @"vineyard";
     } else if ([property isEqualToString:@"varietal"]) {
         return @"varietal";

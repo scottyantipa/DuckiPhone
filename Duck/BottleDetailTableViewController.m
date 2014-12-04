@@ -46,7 +46,15 @@
 -(void)setup {
     _managedObjectContext = [[MOCManager sharedInstance] newMOC];
     _whiteList = [Bottle whiteList];
-    _bottle = [_managedObjectContext objectWithID:_bottleID];
+    if (_bottleID != nil) {
+        _bottle = [_managedObjectContext objectWithID:_bottleID];
+    } else {
+        _bottle = [Bottle newBottleForBarcode:@"" inManagedObjectContext:_managedObjectContext];
+        Bottle * bottle = (Bottle *)_bottle;
+        bottle.userHasBottle = [NSNumber numberWithBool:YES];
+        _bottleID = bottle.objectID;
+    }
+
     _editedCount = [[Bottle countOfBottle:_bottle forContext:_managedObjectContext] floatValue];
 }
 

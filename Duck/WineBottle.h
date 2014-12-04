@@ -2,7 +2,7 @@
 //  WineBottle.h
 //  Duck
 //
-//  Created by Scott Antipa on 11/28/14.
+//  Created by Scott Antipa on 12/3/14.
 //  Copyright (c) 2014 Scott Antipa. All rights reserved.
 //
 
@@ -10,12 +10,11 @@
 #import <CoreData/CoreData.h>
 #import "Bottle.h"
 
-@class Varietal, Vineyard;
+@class Varietal;
 
 @interface WineBottle : Bottle
 
 @property (nonatomic, retain) NSNumber * vintage;
 @property (nonatomic, retain) Varietal *varietal;
-@property (nonatomic, retain) Vineyard *vineyard;
 
 @end

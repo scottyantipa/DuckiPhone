@@ -2,7 +2,7 @@
 //  Bottle.m
 //  Duck
 //
-//  Created by Scott Antipa on 11/28/14.
+//  Created by Scott Antipa on 12/3/14.
 //  Copyright (c) 2014 Scott Antipa. All rights reserved.
 //
 
@@ -13,6 +13,7 @@
 #import "InvoiceForBottle.h"
 #import "InvoicePhoto.h"
 #import "OrderForBottle.h"
+#import "Producer.h"
 
 
 @implementation Bottle
@@ -28,5 +29,6 @@
 @dynamic orders;
 @dynamic subType;
 @dynamic type;
+@dynamic producer;
 
 @end

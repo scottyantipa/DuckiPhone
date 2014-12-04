@@ -20,6 +20,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize searchBar = _searchBar;
 @synthesize subType = _subType;
+@synthesize varietalID = _varietalID;
 @synthesize varietal = _varietal;
 @synthesize purposeDescription = _purposeDescription;
 
@@ -39,7 +40,7 @@
     if (searchString.length)
     {
         // your search predicate(s) are added to this array
-        [predicateArray addObject:[NSPredicate predicateWithFormat:@"(varietal.name CONTAINS[cd] %@) || (vineyard.name CONTAINS[cd] %@)", searchString, searchString]];
+        [predicateArray addObject:[NSPredicate predicateWithFormat:@"(varietal.name CONTAINS[cd] %@) || (producer.name CONTAINS[cd] %@)", searchString, searchString]];
         
         // If we only want to see bottles in a certain subtype or varietal.  Note this code is duplicated in the standard tvc.
         if (_subType != nil) {
@@ -175,6 +176,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if  (_varietalID != nil) {
+        _varietal = (Varietal *)[[self managedObjectContext] objectWithID:_varietalID];
+    }
     float searchBarHeight = 44.0;
     float totalHeight;
     float labelHeight;
@@ -240,7 +244,7 @@
         isChecked = [self.delegate bottleIsSelectedWithID:bottle.objectID];
     } else if (_varietal != nil) {
         WineBottle * wineBottle = [fetchedResultsController objectAtIndexPath:indexPath];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", wineBottle.vineyard.name, wineBottle.varietal.name];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", wineBottle.producer.name, wineBottle.varietal.name];
         isChecked = [self.delegate bottleIsSelectedWithID:wineBottle.objectID];
     }
 
@@ -297,15 +301,13 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"NewBottleFromToggleBottles"]) {
+    [[MOCManager sharedInstance] saveContext:[self managedObjectContext]];
+    if ([segue.identifier isEqualToString:@"Show New Bottle Segue ID"]) {
         BottleDetailTableViewController * bottleTVC = (BottleDetailTableViewController*)[[segue destinationViewController] topViewController];
-        Bottle * newBottle = [Bottle newBottleForBarcode:@"null" inManagedObjectContext:[self managedObjectContext]];
-        // by default put it in their collection.  If they don't save the bottle then it doesn't matter anyways.
-        newBottle.userHasBottle = [NSNumber numberWithBool:YES];
-        [[MOCManager sharedInstance] saveContext:[self managedObjectContext]];
-        bottleTVC.bottleID = newBottle.objectID;
-        bottleTVC.managedObjectContext = [self managedObjectContext];
         bottleTVC.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"Show New Wine Bottle Segue ID"]) {
+        WineBottleDetailTVC * wineTVC = (WineBottleDetailTVC *)[[segue destinationViewController] topViewController];
+        wineTVC.delegate = self;
     }
 }
 
@@ -440,8 +442,16 @@
     _fetchedResultsController = nil;
     [self.tableView reloadData];
     [self.view setNeedsDisplay];
-    Bottle * bottle = (Bottle *)[[self managedObjectContext] objectWithID:bottleID];
-    if (!bottle.userHasBottle) {
+    BOOL hasBottle;
+    if  (_subType != nil) {
+        Bottle * bottle = (Bottle *)[[self managedObjectContext] objectWithID:bottleID];
+        hasBottle = [bottle.userHasBottle boolValue];
+    } else {
+        WineBottle * wineBottle = (WineBottle *)[[self managedObjectContext] objectWithID:bottleID];
+        hasBottle = [wineBottle.userHasBottle boolValue];
+    }
+
+    if (!hasBottle) {
         if  ([self.delegate bottleIsSelectedWithID:bottleID]) {
             // the bottle isn't selected so we need to alert delegate
             [self.delegate didSelectBottleWithId:bottleID];
@@ -457,6 +467,19 @@
 }
 - (IBAction)didPressDone:(id)sender {
         [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (IBAction)didPressNewBottle:(id)sender {
+    if ([self isShowingWines]) {
+        [self performSegueWithIdentifier:@"Show New Wine Bottle Segue ID" sender:nil];
+    } else {
+        [self performSegueWithIdentifier:@"Show New Bottle Segue ID" sender:nil];
+    }
+}
+
+#pragma Utils
+
+-(BOOL)isShowingWines {
+    return _varietal != nil;
 }
 
 @end

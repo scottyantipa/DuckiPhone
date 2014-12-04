@@ -2,14 +2,14 @@
 //  Bottle.h
 //  Duck
 //
-//  Created by Scott Antipa on 11/28/14.
+//  Created by Scott Antipa on 12/3/14.
 //  Copyright (c) 2014 Scott Antipa. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class AlcoholSubType, AlcoholType, InventorySnapshotForBottle, InvoiceForBottle, InvoicePhoto, OrderForBottle;
+@class AlcoholSubType, AlcoholType, InventorySnapshotForBottle, InvoiceForBottle, InvoicePhoto, OrderForBottle, Producer;
 
 @interface Bottle : NSManagedObject
 
@@ -24,6 +24,7 @@
 @property (nonatomic, retain) NSSet *orders;
 @property (nonatomic, retain) AlcoholSubType *subType;
 @property (nonatomic, retain) AlcoholType *type;
+@property (nonatomic, retain) Producer *producer;
 @end
 
 @interface Bottle (CoreDataGeneratedAccessors)

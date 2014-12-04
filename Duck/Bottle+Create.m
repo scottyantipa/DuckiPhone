@@ -207,4 +207,31 @@ const NSString * NO_NAME_STRING = @"No Name";
     }
     return foundBottles;
 }
+
++(Producer *)newProducerForName:(NSString *)name inContext:(NSManagedObjectContext *)context {
+    Producer * producer = [NSEntityDescription insertNewObjectForEntityForName:@"Producer" inManagedObjectContext:context];
+    producer.name = name;
+    return producer;
+}
+
++(Producer *)producerForName:(NSString *)name inContext:(NSManagedObjectContext *)context {
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Producer"];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name = %@", name];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // get the results and print them
+    NSError *err;
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&err];
+    Producer * producer = [fetchedObjects lastObject]; // should only be one anyways
+    return producer;
+}
+
 @end

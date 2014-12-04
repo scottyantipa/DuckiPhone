@@ -1,18 +1,18 @@
 //
-//  WineBottle.m
+//  Producer.m
 //  Duck
 //
 //  Created by Scott Antipa on 12/3/14.
 //  Copyright (c) 2014 Scott Antipa. All rights reserved.
 //
 
-#import "WineBottle.h"
-#import "Varietal.h"
+#import "Producer.h"
+#import "Bottle.h"
 
 
-@implementation WineBottle
+@implementation Producer
 
-@dynamic vintage;
-@dynamic varietal;
+@dynamic name;
+@dynamic bottles;
 
 @end
