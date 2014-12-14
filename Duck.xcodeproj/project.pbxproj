@@ -57,7 +57,6 @@
 		E05014891814AB7C00A06560 /* DuckTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014881814AB7C00A06560 /* DuckTests.m */; };
 		E05014BA1814AC9900A06560 /* EditPriceAndQtyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E050149D1814AC9900A06560 /* EditPriceAndQtyVC.m */; };
 		E05014BB1814AC9900A06560 /* EditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E050149F1814AC9900A06560 /* EditTextViewController.m */; };
-		E05014BC1814AC9900A06560 /* HomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A11814AC9900A06560 /* HomeTableViewController.m */; };
 		E05014BE1814AC9900A06560 /* InventorySnapshotForBottle+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A51814AC9900A06560 /* InventorySnapshotForBottle+Create.m */; };
 		E05014BF1814AC9900A06560 /* OrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014A71814AC9900A06560 /* OrderTableViewController.m */; };
 		E05014C11814AC9900A06560 /* Order+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = E05014AB1814AC9900A06560 /* Order+Create.m */; };
@@ -113,7 +112,6 @@
 		E0E274AB1A3004EE0013DFF5 /* BaseOptionPickerTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E274AA1A3004EE0013DFF5 /* BaseOptionPickerTVC.m */; };
 		E0E274AE1A3016BD0013DFF5 /* PickProducerTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E274AD1A3016BD0013DFF5 /* PickProducerTVC.m */; };
 		E0E83AEB19189A9D0096233A /* InvoicePhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E83AEA19189A9D0096233A /* InvoicePhoto.m */; };
-		E0EF7CB319DE71E5001F5CE6 /* LossesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0EF7CB219DE71E5001F5CE6 /* LossesTVC.m */; };
 		E0F4A3F51A2BF44D00FC59B0 /* WineBottleDetailTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F4A3F41A2BF44D00FC59B0 /* WineBottleDetailTVC.m */; };
 		E0F80E561A1A92ED0009AECB /* CMPopTipViewStyleOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F80E551A1A92ED0009AECB /* CMPopTipViewStyleOverride.m */; };
 		E0F80E591A1A9B780009AECB /* PlusMinusButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F80E581A1A9B780009AECB /* PlusMinusButtonsView.m */; };
@@ -219,8 +217,6 @@
 		E050149D1814AC9900A06560 /* EditPriceAndQtyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPriceAndQtyVC.m; sourceTree = "<group>"; };
 		E050149E1814AC9900A06560 /* EditTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTextViewController.h; sourceTree = "<group>"; };
 		E050149F1814AC9900A06560 /* EditTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTextViewController.m; sourceTree = "<group>"; };
-		E05014A01814AC9900A06560 /* HomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewController.h; sourceTree = "<group>"; };
-		E05014A11814AC9900A06560 /* HomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewController.m; sourceTree = "<group>"; };
 		E05014A41814AC9900A06560 /* InventorySnapshotForBottle+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "InventorySnapshotForBottle+Create.h"; sourceTree = "<group>"; };
 		E05014A51814AC9900A06560 /* InventorySnapshotForBottle+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "InventorySnapshotForBottle+Create.m"; sourceTree = "<group>"; };
 		E05014A61814AC9900A06560 /* OrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewController.h; sourceTree = "<group>"; };
@@ -316,8 +312,6 @@
 		E0E274AF1A30178E0013DFF5 /* PickProducerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickProducerDelegate.h; sourceTree = "<group>"; };
 		E0E83AE919189A9D0096233A /* InvoicePhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoicePhoto.h; sourceTree = "<group>"; };
 		E0E83AEA19189A9D0096233A /* InvoicePhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoicePhoto.m; sourceTree = "<group>"; };
-		E0EF7CB119DE71E5001F5CE6 /* LossesTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LossesTVC.h; sourceTree = "<group>"; };
-		E0EF7CB219DE71E5001F5CE6 /* LossesTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LossesTVC.m; sourceTree = "<group>"; };
 		E0F4A3F31A2BF44D00FC59B0 /* WineBottleDetailTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineBottleDetailTVC.h; sourceTree = "<group>"; };
 		E0F4A3F41A2BF44D00FC59B0 /* WineBottleDetailTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineBottleDetailTVC.m; sourceTree = "<group>"; };
 		E0F80E541A1A92ED0009AECB /* CMPopTipViewStyleOverride.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPopTipViewStyleOverride.h; sourceTree = "<group>"; };
@@ -499,12 +493,8 @@
 			children = (
 				E0A41FB218888583001F7493 /* Bottles */,
 				E0A41FB11888855C001F7493 /* Orders */,
-				E05014A01814AC9900A06560 /* HomeTableViewController.h */,
-				E05014A11814AC9900A06560 /* HomeTableViewController.m */,
 				E0948AEE1A11BB25006B25D2 /* TakeInventoryTVC.h */,
 				E0948AEF1A11BB25006B25D2 /* TakeInventoryTVC.m */,
-				E0EF7CB119DE71E5001F5CE6 /* LossesTVC.h */,
-				E0EF7CB219DE71E5001F5CE6 /* LossesTVC.m */,
 				E0156A411A13165A0021AF27 /* SingleBarcodeScanner.h */,
 				E0156A421A13165A0021AF27 /* SingleBarcodeScanner.m */,
 			);
@@ -840,7 +830,6 @@
 				E0E274A31A2FFC490013DFF5 /* Bottle.m in Sources */,
 				E05015171814AED400A06560 /* BaseCoreDataTableViewController.m in Sources */,
 				E05014BA1814AC9900A06560 /* EditPriceAndQtyVC.m in Sources */,
-				E0EF7CB319DE71E5001F5CE6 /* LossesTVC.m in Sources */,
 				E05015151814AED400A06560 /* AllSubTypesTableViewController.m in Sources */,
 				E0F80E561A1A92ED0009AECB /* CMPopTipViewStyleOverride.m in Sources */,
 				E0E274A61A2FFCE20013DFF5 /* WineBottle.m in Sources */,
@@ -858,7 +847,6 @@
 				E05015191814AED400A06560 /* Bottle+Create.m in Sources */,
 				E0E274AB1A3004EE0013DFF5 /* BaseOptionPickerTVC.m in Sources */,
 				E0309B4A19DB84A800F00CA3 /* BottlesInInvoiceTVC.m in Sources */,
-				E05014BC1814AC9900A06560 /* HomeTableViewController.m in Sources */,
 				E02C7E4B1A1BD921007AF67C /* SARoundedButton.m in Sources */,
 				E0156A431A13165A0021AF27 /* SingleBarcodeScanner.m in Sources */,
 				E05015141814AED400A06560 /* AlcoholTypesTableViewController.m in Sources */,

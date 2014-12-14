@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "HomeTableViewController.h"
 #import "MOCManager.h"
 
 @implementation AppDelegate
@@ -19,9 +18,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    HomeTableViewController *controller = (HomeTableViewController *)navigationController.topViewController;
-    controller.managedObjectContext = [[MOCManager sharedInstance] managedObjectContext];
+    UITabBarController * mainTabBar = (UITabBarController *)self.window.rootViewController;
+    mainTabBar.delegate = self;
     return YES;
 }
 
@@ -32,5 +30,8 @@
     
 }
 
+-(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    NSLog(@"Selected view controlelr %@ ", viewController);
+}
 
 @end

@@ -23,7 +23,6 @@
     _editedValues = [[NSMutableDictionary alloc] init];
     _managedObjectContext = [[MOCManager sharedInstance] newMOC];    
     [Utils markSubviewsAsNoDelay:self.tableView];
-//    [self setHeader];
 }
 
 //
