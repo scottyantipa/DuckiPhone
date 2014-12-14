@@ -93,9 +93,9 @@
     bool noProducer = wineBottle.producer == nil;
     NSString * alertMessage;
     if (noVarietal && noProducer) {
-        alertMessage = @"You must provide a Vineyard and a Varietal";
+        alertMessage = @"You must provide a Winery and a Varietal";
     } else if (noProducer) {
-        alertMessage = @"You must provide a Vineyard";
+        alertMessage = @"You must provide a Winery";
     } else if (noVarietal) {
         alertMessage = @"You must provide a Varietal";
     }
@@ -173,7 +173,7 @@
         property = [self.whiteList objectAtIndex:section];
     }
     if ([property isEqualToString:@"producer"]) {
-        return @"vineyard";
+        return @"winery";
     } else if ([property isEqualToString:@"varietal"]) {
         return @"varietal";
     } else {
