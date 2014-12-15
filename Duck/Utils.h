@@ -18,4 +18,5 @@
 +(UIColor *)darkerColorForColor:(UIColor *)c byPercent:(CGFloat)percent;
 +(UIImage *)imageWithColor:(UIColor *)color;
 +(NSArray *)volumesForBottleClass:(Class)bottleClass;
++(NSArray *)typesOfAlcohol;
 @end

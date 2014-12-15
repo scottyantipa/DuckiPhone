@@ -9,6 +9,11 @@
 #import "Utils.h"
 
 @implementation Utils
+
++(NSArray *)typesOfAlcohol {
+    return @[@"Liquor", @"Wine", @"Beer"];
+}
+
 +(void)markSubviewsAsNoDelay:(UIView *)view {
     if ([[view class] isKindOfClass:[UIScrollView class]]) {
         ((UIScrollView *)view).delaysContentTouches = NO;

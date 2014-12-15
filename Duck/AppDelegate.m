@@ -31,7 +31,7 @@
 }
 
 -(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    NSLog(@"Selected view controlelr %@ ", viewController);
+    // prepare for tab bar changes
 }
 
 @end
