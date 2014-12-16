@@ -26,11 +26,71 @@
                             <outlet property="delegate" destination="bBa-yR-BU7" id="DxB-Yk-AkD"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Bottles" id="Grg-E7-qTP"/>
+                    <navigationItem key="navigationItem" title="My Bottles" id="Grg-E7-qTP">
+                        <barButtonItem key="rightBarButtonItem" title="More" id="7nz-ay-UrE">
+                            <connections>
+                                <segue destination="hEe-XF-QY3" kind="modal" id="8SR-9S-8Av"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PED-VX-40r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-636" y="195"/>
+        </scene>
+        <!--All Bottles-->
+        <scene sceneID="D2Y-I9-bMO">
+            <objects>
+                <tableViewController id="ChQ-Ok-1pC" customClass="SearchAllBottlesTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3YO-PZ-gUN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Search All Cell ID" id="cTg-l4-Yuz">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cTg-l4-Yuz" id="t92-II-Orp">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ChQ-Ok-1pC" id="r8w-MV-cvN"/>
+                            <outlet property="delegate" destination="ChQ-Ok-1pC" id="YHW-2l-u4j"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="All Bottles" id="ETr-hZ-1PQ">
+                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="VaZ-1F-kME">
+                            <connections>
+                                <action selector="didPressSearch:" destination="ChQ-Ok-1pC" id="Tt1-Qg-sLW"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="xzI-OV-vux">
+                            <connections>
+                                <action selector="didPressDone:" destination="ChQ-Ok-1pC" id="FCw-6A-yqp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NfM-BQ-IIk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="301" y="195"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="1WQ-Hh-6ua">
+            <objects>
+                <navigationController id="hEe-XF-QY3" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iyx-0m-7pa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ChQ-Ok-1pC" kind="relationship" relationship="rootViewController" id="93g-bw-veg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FCK-Q0-dl4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-77" y="195"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Yp4-06-D11">

@@ -17,6 +17,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // parse initiation
+    [Parse setApplicationId:@"xrw9LuESwAswf7YeNXSDHPFf5j1rj2Ro42YLCIwf"
+                  clientKey:@"3SsSzFyOXLnUcKJiwREvObnsFlfMz4B3sXm4Vqdx"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     UITabBarController * mainTabBar = (UITabBarController *)self.window.rootViewController;
     mainTabBar.delegate = self;

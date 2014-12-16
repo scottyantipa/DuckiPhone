@@ -41,7 +41,6 @@
 
 -(void)controlChanged {
     _alcoholTypeToFilter = [[Utils typesOfAlcohol] objectAtIndex:_filterControl.selectedSegmentIndex];
-    NSLog(@"control changed to: %@ ", _alcoholTypeToFilter);
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
