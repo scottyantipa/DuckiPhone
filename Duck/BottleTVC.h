@@ -14,6 +14,4 @@
 @property (strong, nonatomic) NSString * bottleServerID;
 @property (strong, nonatomic) Bottle * bottle;
 @property (strong, nonatomic) NSManagedObjectContext * managedObjectContext;
-@property (strong, nonatomic) NSArray * tableIndexingForUserHasBottle;
-@property (strong, nonatomic) NSArray * tableIndexingForUserDoesntHaveBottle;
 @end

@@ -15,57 +15,57 @@
     return [NSOrderedSet orderedSetWithObjects:@"name", @"volume", @"subType",@"count", @"barcode", nil];
 }
 
-+(Bottle *)bottleFromServerID:(NSString *)serverID inManagedObjectContext:(NSManagedObjectContext *)context {
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"serverID = %@", serverID];
++(void)bottleFromServerID:(NSString *)serverID inManagedObjectContext:(NSManagedObjectContext *)context forTarget:(id)target withSelector:(SEL)selector {
     
-    // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
-    
-    // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // get the results and print them
-    NSError *err;
-    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&err];
-    
-    // if none were returned, create one
-    if ([fetchedObjects count] == 0) {
-        Bottle * newBottle = [NSEntityDescription
-                          insertNewObjectForEntityForName:@"Bottle"
-                          inManagedObjectContext:context];
-        newBottle.serverID = serverID;
-        [[MOCManager sharedInstance] saveContext:context];
-        return newBottle;
-    }
-    else {
-        Bottle *bottle = [fetchedObjects lastObject];
-        return bottle;
-    }
-}
-
-// Syncs a standard Bottle with a bottle obj fetched from server
-// pass forTarget:self withSelector:mySelector to have mySelector called after sync is done
-+(void)syncBottleWithServer:(Bottle *)bottle inManagedObjectContext:(NSManagedObjectContext *)context forTarget:(id)target withSelector:(SEL)selector {
+    // fetch object from server
     PFQuery * query = [PFQuery queryWithClassName:@"Bottle"];
-    [query getObjectInBackgroundWithId:bottle.serverID block:^(PFObject *bottleInfo, NSError *error) {
-        bottle.name = (NSString *)bottleInfo[@"name"];
-        bottle.alcoholType = (NSString *)bottleInfo[@"alcoholType"];
-        bottle.alcoholSubType = (NSString *)bottleInfo[@"alcoholSubType"];
-        bottle.volume = (NSString *)bottleInfo[@"volume"];
-        NSNumber * barcodeNum = (NSNumber *)bottleInfo[@"barcode"];
-        bottle.barcode = [barcodeNum stringValue];
+    [query getObjectInBackgroundWithId:serverID block:^(PFObject *bottleInfo, NSError *error) {
+        if  (!bottleInfo) {
+            [target performSelectorOnMainThread:selector withObject:nil waitUntilDone:NO];
+            return;
+        }
+        NSString * alcoholType = (NSString *)bottleInfo[@"alcoholType"];
+        NSString * entityName = [Bottle classNameForAlcoholType:alcoholType];
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:entityName];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"serverID = %@", serverID];
+        // Set the batch size to a suitable number.
+        [fetchRequest setFetchBatchSize:20];
         
-        // call the selector like this so we don't get a warning http://stackoverflow.com/questions/7017281/performselector-may-cause-a-leak-because-its-selector-is-unknown
-        IMP imp  = [target methodForSelector:selector];
-        void (*func)(id, SEL) = (void *)imp;
-        func(target, selector);
+        // Edit the sort key as appropriate.
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
+        NSArray *sortDescriptors = @[sortDescriptor];
+        
+        [fetchRequest setSortDescriptors:sortDescriptors];
+        
+        // get the results and print them
+        NSError *err;
+        NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&err];
+
+        // if none were returned, create one
+        if ([fetchedObjects count] == 0) {
+            Bottle * newBottle = [Bottle newBottleForType:alcoholType inManagedObjectContext:context];
+            newBottle.serverID = serverID;
+            [Bottle syncBottleWithServerObj:newBottle obj:bottleInfo inContext:context];
+            [[MOCManager sharedInstance] saveContext:context];
+            [target performSelectorOnMainThread:selector withObject:newBottle waitUntilDone:NO];
+        }
+        else {
+            Bottle *bottle = (Bottle *)[fetchedObjects lastObject];
+            [Bottle syncBottleWithServerObj:bottle obj:bottleInfo inContext:context];
+            [target performSelectorOnMainThread:selector withObject:bottle waitUntilDone:NO];
+        }
     }];
 }
 
+// given obj from server, sync the bottle to that obj
++(void)syncBottleWithServerObj:(Bottle *)bottle obj:(PFObject *)obj inContext:(NSManagedObjectContext *)context {
+    bottle.name = (NSString *)obj[@"name"];
+    bottle.alcoholType = (NSString *)obj[@"alcoholType"];
+    bottle.alcoholSubType = (NSString *)obj[@"alcoholSubType"];
+    bottle.volume = (NSString *)obj[@"volume"];
+    NSNumber * barcodeNum = (NSNumber *)obj[@"barcode"];
+    bottle.barcode = [barcodeNum stringValue];
+}
 
 +(void)toggleUserHasBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context {
     bottle.userHasBottle = [NSNumber numberWithBool:![bottle.userHasBottle boolValue]];
@@ -112,13 +112,24 @@ const NSString * NO_NAME_STRING = @"No Name";
     return bottle;
 }
 
-// LITTLE hacky, but I know that my Wine Types are Liquor, Wine, Beer and that the NSObjects are just
-// those strings with "Bottle" appended
-+(Bottle *)newBottleForType:(AlcoholType *)type inManagedObjectContext:(NSManagedObjectContext *)context {
-    NSString * entityName = [NSString stringWithFormat:@"%@Bottle", type.name];
++(Bottle *)newBottleForType:(NSString *)type inManagedObjectContext:(NSManagedObjectContext *)context {
+    NSString * entityName = [Bottle classNameForAlcoholType:type];
     Bottle * bottle = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
     bottle.name = [NO_NAME_STRING copy];
     return bottle;
+}
+
++(NSString *)classNameForAlcoholType:(NSString *)alcoholType {
+    if ([alcoholType isEqualToString:@"Liquor"]) {
+        return @"LiquorBottle";
+    } else if ([alcoholType isEqualToString:@"Beer"]) {
+        return @"BeerBottle";
+    } else if ([alcoholType isEqualToString:@"Wine"]) {
+        return @"WineBottle";
+    } else {
+        [NSException raise:@"Improper className in classNameForAlcoholType" format:nil];
+        return nil;
+    }
 }
 
 +(WineBottle *)newWineBottleForName:(NSString *)name varietal:(Varietal *)varietal inManagedObjectContext:(NSManagedObjectContext *)context {

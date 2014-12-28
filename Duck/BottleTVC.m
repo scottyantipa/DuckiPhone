@@ -16,24 +16,19 @@
 @synthesize bottleServerID = _bottleServerID;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize bottle = _bottle;
-@synthesize tableIndexingForUserHasBottle = _tableIndexingForUserHasBottle;
-@synthesize tableIndexingForUserDoesntHaveBottle = _tableIndexingForUserDoesntHaveBottle;
 
 - (void)viewDidLoad {
-    _tableIndexingForUserHasBottle = @[@[@"name", @"volume"], @[@"userHasStatus"], @[@"inventory"]];
-    _tableIndexingForUserDoesntHaveBottle = @[@[@"name", @"volume"], @[@"userHasStatus"]];
     [super viewDidLoad];
     _managedObjectContext = [[MOCManager sharedInstance] newMOC];
-    _bottle = [Bottle bottleFromServerID:_bottleServerID inManagedObjectContext:_managedObjectContext];
+    [Bottle bottleFromServerID:_bottleServerID inManagedObjectContext:_managedObjectContext forTarget:self withSelector:@selector(syncFinished:)];
     // TODO : This needs to provide a callback for when query is done so I can reload the table
-    SEL selector = NSSelectorFromString(@"syncFinished");
-    [Bottle syncBottleWithServer:_bottle inManagedObjectContext:_managedObjectContext forTarget:self withSelector:selector];
 }
 
 // bottle has been synced with server
- -(void)syncFinished {
-     [[MOCManager sharedInstance] saveContext:_managedObjectContext];
-     [self.tableView reloadData];
+-(void)syncFinished:(id)bottle {
+    _bottle = (Bottle *)bottle;
+    [[MOCManager sharedInstance] saveContext:_managedObjectContext];
+    [self.tableView reloadData];
  }
  
 #pragma mark - Table view data source

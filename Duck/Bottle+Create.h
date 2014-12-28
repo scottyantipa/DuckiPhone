@@ -23,13 +23,14 @@
 +(NSOrderedSet *)whiteList; // should be a typedef, not a method
 
 +(Bottle *)newBottleForBarcode:(NSString *)barcode inManagedObjectContext:(NSManagedObjectContext *)context;
-+(Bottle *)newBottleForType:(AlcoholType *)type inManagedObjectContext:(NSManagedObjectContext *)context;
++(Bottle *)newBottleForType:(NSString *)type inManagedObjectContext:(NSManagedObjectContext *)context;
++(NSString *)classNameForAlcoholType:(NSString *)alcoholType;
 +(Bottle *)bottleForBarcode:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context;
 +(WineBottle *)newWineBottleForName:(NSString *)name varietal:(Varietal *)varietal inManagedObjectContext:(NSManagedObjectContext *)context;
 
 
-+(Bottle *)bottleFromServerID:(NSString *)serverID inManagedObjectContext:(NSManagedObjectContext *)context;
-+(void)syncBottleWithServer:(Bottle *)bottle inManagedObjectContext:(NSManagedObjectContext *)context forTarget:(id)target withSelector:(SEL)selector;
++(void)bottleFromServerID:(NSString *)serverID inManagedObjectContext:(NSManagedObjectContext *)context forTarget:(id)target withSelector:(SEL)selector;
++(void)syncBottleWithServerObj:(Bottle *)bottle obj:(PFObject *)obj inContext:(NSManagedObjectContext *)context;
 
 +(void)toggleUserHasBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
 
