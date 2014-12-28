@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AFNetworking.h"
 #import "Utils.h"
+#import <Parse/Parse.h>
+#import "Bottle+Create.h"
+#import "MOCManager.h"
+#import "BottleTVC.h"
 
 @interface SearchAllBottlesTVC : UITableViewController
 @property (strong, nonatomic) NSString * alcoholTypeToFilter;
 @property (strong, nonatomic) UISegmentedControl * filterControl;
 @property (strong, nonatomic) NSArray * foundObjects;
+@property (strong, nonatomic) NSManagedObjectContext * managedObjectContext;
 @end

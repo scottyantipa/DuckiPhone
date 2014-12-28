@@ -47,11 +47,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Search All Cell ID" id="cTg-l4-Yuz">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Search All Cell ID" id="cTg-l4-Yuz">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cTg-l4-Yuz" id="t92-II-Orp">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="yKN-r0-zEz" kind="modal" identifier="Show Bottle From Search Segue ID" id="xZJ-vM-ygM"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -75,6 +78,56 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NfM-BQ-IIk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="301" y="195"/>
+        </scene>
+        <!--Bottle-->
+        <scene sceneID="zWh-nh-jSe">
+            <objects>
+                <tableViewController id="yhi-1V-bRh" customClass="BottleTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Nyq-hX-o2V">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BottleTVC Cell ID" id="JKm-0u-IuW">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JKm-0u-IuW" id="ZJm-Cl-V7F">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="yhi-1V-bRh" id="y5y-83-rfh"/>
+                            <outlet property="delegate" destination="yhi-1V-bRh" id="3jU-gt-n62"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Bottle" id="8RI-bK-Hwi">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="kBO-FM-mYv">
+                            <connections>
+                                <action selector="didPressDone:" destination="yhi-1V-bRh" id="onb-zc-mCa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ucZ-xB-6fc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1311" y="195"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3gq-xZ-BNc">
+            <objects>
+                <navigationController id="yKN-r0-zEz" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="KBN-JI-wUD"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aaF-5G-IHm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="yhi-1V-bRh" kind="relationship" relationship="rootViewController" id="UJ2-OV-Y9b"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FQd-SD-5kE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="918" y="199"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1WQ-Hh-6ua">

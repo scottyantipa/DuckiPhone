@@ -11,16 +11,17 @@
 //
 
 #import "SearchAllBottlesTVC.h"
-#import <Parse/Parse.h>
 
 @implementation SearchAllBottlesTVC
 @synthesize alcoholTypeToFilter = _alcoholTypeToFilter;
 @synthesize foundObjects = _foundObjects;
+@synthesize managedObjectContext = _managedObjectContext;
 
 -(void)viewDidLoad {
     _alcoholTypeToFilter = [[Utils typesOfAlcohol] objectAtIndex:0]; // first one is liquor;
     [self setHeader];
     [self fetch];
+    _managedObjectContext = [[MOCManager sharedInstance] managedObjectContext]; // use the shared MOC instead of creating a new one
 }
 
 -(void)fetch {
@@ -29,7 +30,6 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
-            NSLog(@"Successfully retrieved %d scores.", objects.count);
             _foundObjects = objects;
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -76,6 +76,16 @@
     _alcoholTypeToFilter = [[Utils typesOfAlcohol] objectAtIndex:_filterControl.selectedSegmentIndex];
     [self fetch];
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    if ([segue.identifier isEqualToString:@"Show Bottle From Search Segue ID"]) {
+        PFObject * selectedObject = [_foundObjects objectAtIndex:indexPath.row];
+        BottleTVC * tvc = (BottleTVC *)[[segue destinationViewController] topViewController];
+        tvc.bottleServerID = selectedObject.objectId;
+    }
+}
+
 - (IBAction)didPressSearch:(id)sender {
 
 }

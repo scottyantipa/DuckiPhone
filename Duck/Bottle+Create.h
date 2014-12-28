@@ -16,7 +16,8 @@
 #import "InventorySnapshotForBottle+Create.h"
 #import "InvoiceForBottle.h"
 #import "WineBottle.h"
-
+#import <Parse/Parse.h>
+#import "MOCManager.h"
 
 @interface Bottle (Create)
 +(NSOrderedSet *)whiteList; // should be a typedef, not a method
@@ -25,6 +26,10 @@
 +(Bottle *)newBottleForType:(AlcoholType *)type inManagedObjectContext:(NSManagedObjectContext *)context;
 +(Bottle *)bottleForBarcode:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context;
 +(WineBottle *)newWineBottleForName:(NSString *)name varietal:(Varietal *)varietal inManagedObjectContext:(NSManagedObjectContext *)context;
+
+
++(Bottle *)bottleFromServerID:(NSString *)serverID inManagedObjectContext:(NSManagedObjectContext *)context;
++(void)syncBottleWithServer:(Bottle *)bottle inManagedObjectContext:(NSManagedObjectContext *)context forTarget:(id)target withSelector:(SEL)selector;
 
 +(void)toggleUserHasBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
 

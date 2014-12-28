@@ -15,6 +15,56 @@
     return [NSOrderedSet orderedSetWithObjects:@"name", @"volume", @"subType",@"count", @"barcode", nil];
 }
 
++(Bottle *)bottleFromServerID:(NSString *)serverID inManagedObjectContext:(NSManagedObjectContext *)context {
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bottle"];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"serverID = %@", serverID];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // get the results and print them
+    NSError *err;
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&err];
+    
+    // if none were returned, create one
+    if ([fetchedObjects count] == 0) {
+        Bottle * newBottle = [NSEntityDescription
+                          insertNewObjectForEntityForName:@"Bottle"
+                          inManagedObjectContext:context];
+        newBottle.serverID = serverID;
+        [[MOCManager sharedInstance] saveContext:context];
+        return newBottle;
+    }
+    else {
+        Bottle *bottle = [fetchedObjects lastObject];
+        return bottle;
+    }
+}
+
+// Syncs a standard Bottle with a bottle obj fetched from server
+// pass forTarget:self withSelector:mySelector to have mySelector called after sync is done
++(void)syncBottleWithServer:(Bottle *)bottle inManagedObjectContext:(NSManagedObjectContext *)context forTarget:(id)target withSelector:(SEL)selector {
+    PFQuery * query = [PFQuery queryWithClassName:@"Bottle"];
+    [query getObjectInBackgroundWithId:bottle.serverID block:^(PFObject *bottleInfo, NSError *error) {
+        bottle.name = (NSString *)bottleInfo[@"name"];
+        bottle.alcoholType = (NSString *)bottleInfo[@"alcoholType"];
+        bottle.alcoholSubType = (NSString *)bottleInfo[@"alcoholSubType"];
+        bottle.volume = (NSString *)bottleInfo[@"volume"];
+        NSNumber * barcodeNum = (NSNumber *)bottleInfo[@"barcode"];
+        bottle.barcode = [barcodeNum stringValue];
+        
+        // call the selector like this so we don't get a warning http://stackoverflow.com/questions/7017281/performselector-may-cause-a-leak-because-its-selector-is-unknown
+        IMP imp  = [target methodForSelector:selector];
+        void (*func)(id, SEL) = (void *)imp;
+        func(target, selector);
+    }];
+}
 
 
 +(void)toggleUserHasBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context {

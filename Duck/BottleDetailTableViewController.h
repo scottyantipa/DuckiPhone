@@ -23,6 +23,7 @@
 #import "AlcoholSubType+Create.h"
 #import "Varietal.h"
 
+
 @interface BottleDetailTableViewController : BaseCoreDataTableViewController <SubTypeSelectorDelegate, EditTextViewDelegate, UIAlertViewDelegate, SingleBarcodeScannerDelegate, BasePickerDelegate>
 @property (strong, nonatomic) NSManagedObjectID * bottleID;
 @property (strong, nonatomic) id bottle;

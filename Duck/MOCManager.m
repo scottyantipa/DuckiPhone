@@ -33,10 +33,7 @@
     NSError *error = nil;
     if (context != nil) {
         if ([context hasChanges] && ![context save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
         }
     }
 }
@@ -82,6 +79,11 @@
         return _persistentStoreCoordinator;
     }
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    NSURL *appDirPath = [self applicationDocumentsDirectory];
+    NSString *storeFileName = @"mainStore.sqlite";
+    NSURL *storeUrl = [appDirPath URLByAppendingPathComponent:storeFileName];
+    NSError * error = nil;
+    [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error];
 
     return _persistentStoreCoordinator;
 }
