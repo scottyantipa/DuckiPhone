@@ -9,12 +9,12 @@
         <scene sceneID="u1E-mv-ABc">
             <objects>
                 <tableViewController id="bBa-yR-BU7" customClass="AllMyBottlesTVC" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="q1e-y8-Gtr">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="q1e-y8-Gtr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Tor-e0-MqB">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="All My Bottles Cell ID" id="Tor-e0-MqB">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tor-e0-MqB" id="hS0-ZL-5XB">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -27,9 +27,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My Bottles" id="Grg-E7-qTP">
-                        <barButtonItem key="rightBarButtonItem" title="More" id="7nz-ay-UrE">
+                        <barButtonItem key="rightBarButtonItem" title="Discover" id="7nz-ay-UrE">
                             <connections>
-                                <segue destination="hEe-XF-QY3" kind="modal" id="8SR-9S-8Av"/>
+                                <segue destination="hEe-XF-QY3" kind="modal" identifier="Show All Bottles Segue ID" id="8SR-9S-8Av"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -52,9 +52,6 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cTg-l4-Yuz" id="t92-II-Orp">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="yKN-r0-zEz" kind="modal" identifier="Show Bottle From Search Segue ID" id="xZJ-vM-ygM"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -74,6 +71,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="yKN-r0-zEz" kind="modal" identifier="Show Bottle From Search Segue ID" id="x9L-6X-jzq"/>
+                        <segue destination="Xme-ve-Ukh" kind="modal" identifier="Show Wine Bottle From Search Segue ID" id="f48-3u-QaU"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NfM-BQ-IIk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -94,6 +95,12 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Take Inventory CellID" id="5MH-lU-yvo" customClass="TakeInventoryTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5MH-lU-yvo" id="u3n-Ut-LGM">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="yhi-1V-bRh" id="y5y-83-rfh"/>
@@ -110,7 +117,62 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ucZ-xB-6fc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1311" y="195"/>
+            <point key="canvasLocation" x="1237" y="-411"/>
+        </scene>
+        <!--Wine Bottle-->
+        <scene sceneID="fPD-Mf-HTc">
+            <objects>
+                <tableViewController id="4c0-Du-1MA" customClass="WineTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zEn-gU-bMk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Wine BottleTVC Cell ID" id="W2J-jo-Ukn">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W2J-jo-Ukn" id="NAx-hm-Knb">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Take Inventory CellID" id="CDg-Wr-bmR" customClass="TakeInventoryTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CDg-Wr-bmR" id="uFk-ds-Ntg">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="4c0-Du-1MA" id="W1N-wb-AKx"/>
+                            <outlet property="delegate" destination="4c0-Du-1MA" id="IDh-lR-ihC"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Wine Bottle" id="wd5-AR-xJd">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="h1A-bo-Cgh">
+                            <connections>
+                                <action selector="didPressDone:" destination="4c0-Du-1MA" id="6WW-zn-59c"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5vw-1r-nRi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1219" y="451"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dJ3-Le-pFP">
+            <objects>
+                <navigationController id="Xme-ve-Ukh" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wYx-cP-cEq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="4c0-Du-1MA" kind="relationship" relationship="rootViewController" id="QVb-7r-cDG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pOs-xu-tjP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="807" y="451"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3gq-xZ-BNc">
@@ -127,7 +189,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQd-SD-5kE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="918" y="199"/>
+            <point key="canvasLocation" x="844" y="-407"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1WQ-Hh-6ua">

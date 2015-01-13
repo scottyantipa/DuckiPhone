@@ -30,7 +30,6 @@
 
 
 +(void)bottleFromServerID:(NSString *)serverID inManagedObjectContext:(NSManagedObjectContext *)context forTarget:(id)target withSelector:(SEL)selector;
-+(void)syncBottleWithServerObj:(Bottle *)bottle obj:(PFObject *)obj inContext:(NSManagedObjectContext *)context;
 
 +(void)toggleUserHasBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
 
@@ -44,4 +43,6 @@
 
 +(Producer *)newProducerForName:(NSString *)name inContext:(NSManagedObjectContext *)context;
 +(Producer *)producerForName:(NSString *)name inContext:(NSManagedObjectContext *)context;
+
+-(void)syncWithServerInfo:(PFObject *)serverInfo;
 @end

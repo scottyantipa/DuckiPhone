@@ -13,8 +13,10 @@
 #import "BeerBottle.h"
 #import "Utils.h"
 #import "MOCManager.h"
+#import "SearchBottlesDelegate.h"
+#import "SearchAllBottlesTVC.h"
 
-@interface AllMyBottlesTVC : BaseCoreDataTableViewController
+@interface AllMyBottlesTVC : BaseCoreDataTableViewController <SearchBottlesDelegate>
 @property (strong, nonatomic) NSString * alcoholTypeToFilter;
 @property (strong, nonatomic) UISegmentedControl * filterControl;
 @end

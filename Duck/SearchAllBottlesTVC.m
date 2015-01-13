@@ -16,6 +16,8 @@
 @synthesize alcoholTypeToFilter = _alcoholTypeToFilter;
 @synthesize foundObjects = _foundObjects;
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize selectedBottleObject = _selectedBottleObject;
+@synthesize selectedBottle = _selectedBottle;
 
 -(void)viewDidLoad {
     _alcoholTypeToFilter = [[Utils typesOfAlcohol] objectAtIndex:0]; // first one is liquor;
@@ -77,13 +79,26 @@
     [self fetch];
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    if ([segue.identifier isEqualToString:@"Show Bottle From Search Segue ID"]) {
-        PFObject * selectedObject = [_foundObjects objectAtIndex:indexPath.row];
-        BottleTVC * tvc = (BottleTVC *)[[segue destinationViewController] topViewController];
-        tvc.bottleServerID = selectedObject.objectId;
+// When table cell is selected, sync the bottle and then perform segue when sync comes back
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    _selectedBottleObject = (PFObject *)[_foundObjects objectAtIndex:indexPath.row];
+    [Bottle bottleFromServerID:_selectedBottleObject.objectId inManagedObjectContext:_managedObjectContext forTarget:self withSelector:@selector(syncFinished:)];
+}
+
+// bottle has been synced with server after selecting it
+-(void)syncFinished:(id)bottle {
+    _selectedBottle = (Bottle *)bottle;
+    if ([_selectedBottle.alcoholType isEqualToString:@"Wine"]) {
+        [self performSegueWithIdentifier:@"Show Wine Bottle From Search Segue ID" sender:nil];
+    } else {
+        [self performSegueWithIdentifier:@"Show Bottle From Search Segue ID" sender:nil];
     }
+}
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    BottleTVC * tvc = (BottleTVC *)[[segue destinationViewController] topViewController];
+    tvc.bottleID = _selectedBottle.objectID;
 }
 
 - (IBAction)didPressSearch:(id)sender {
@@ -92,7 +107,7 @@
 
 
 - (IBAction)didPressDone:(id)sender {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self.delegate didPressDoneOnModal];
 }
 
 @end

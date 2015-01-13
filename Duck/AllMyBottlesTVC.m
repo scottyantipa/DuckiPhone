@@ -16,7 +16,7 @@
 @synthesize filterControl = _filterControl;
 
 -(void)viewDidLoad {
-    _managedObjectContext = [[MOCManager sharedInstance] newMOC];
+    _managedObjectContext = [[MOCManager sharedInstance] managedObjectContext];
     _alcoholTypeToFilter = [[Utils typesOfAlcohol] objectAtIndex:0]; // first one is liquor;
     [self setHeader];
 }
@@ -27,7 +27,7 @@
     [control addTarget:self action:@selector(controlChanged) forControlEvents:UIControlEventValueChanged];
     [control setSelectedSegmentIndex:0];
     CGFloat fullWidth = self.tableView.frame.size.width;
-    CGFloat fullHeight = 50;
+    CGFloat fullHeight = 60;
     CGFloat controlWidth = fullWidth - 40;
     CGFloat controlHeight = control.frame.size.height;
     CGFloat controlXOffset = (fullWidth / 2) - (controlWidth / 2);
@@ -40,7 +40,9 @@
 }
 
 -(void)controlChanged {
+    _fetchedResultsController = nil;
     _alcoholTypeToFilter = [[Utils typesOfAlcohol] objectAtIndex:_filterControl.selectedSegmentIndex];
+    [self.tableView reloadData];
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
@@ -54,6 +56,7 @@
     // Edit the entity name as appropriate.
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:_managedObjectContext];
     [fetchRequest setEntity:entity];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"userHasBottle = %@", [NSNumber numberWithBool:YES]];
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
@@ -85,17 +88,36 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"All My Bottles Cell ID"];
     NSManagedObject * obj = [_fetchedResultsController objectAtIndexPath:indexPath];
-    if ([_alcoholTypeToFilter isEqualToString:@"WineBottle"]) {
+    if ([_alcoholTypeToFilter isEqualToString:@"Wine"]) {
         WineBottle * wineBottle = (WineBottle *)obj;
         cell.textLabel.text = wineBottle.varietalName;
-    } else if ([_alcoholTypeToFilter isEqualToString:@"LiquorBottle"]) {
+    } else if ([_alcoholTypeToFilter isEqualToString:@"Liquor"]) {
         LiquorBottle * liquorBottle = (LiquorBottle *)obj;
         cell.textLabel.text = liquorBottle.name;
-    } else if ([_alcoholTypeToFilter isEqualToString:@"BeerBottle"]) {
+    } else if ([_alcoholTypeToFilter isEqualToString:@"Beer"]) {
         BeerBottle * beerBottle = (BeerBottle *)obj;
         cell.textLabel.text = beerBottle.name;
     }
     return cell;
+}
+
+// removes the vertical scroll navigation with letters in it
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return nil;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"Show All Bottles Segue ID"]) {
+        SearchAllBottlesTVC * tvc = (SearchAllBottlesTVC *)[segue.destinationViewController topViewController];
+        tvc.delegate = self;
+    }
+}
+
+// delegate method for search tvc
+-(void)didPressDoneOnModal {
+    [self.tableView reloadData];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

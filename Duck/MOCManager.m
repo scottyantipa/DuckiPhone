@@ -25,6 +25,7 @@
 
 -(NSManagedObjectContext *)newMOC {
     NSManagedObjectContext * context = [[NSManagedObjectContext alloc] init];
+    [context setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
     [context setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
     return context;
 }

@@ -9,6 +9,7 @@
 #import "WineBottle.h"
 #import "Varietal.h"
 #import "Producer.h"
+#import <Parse/Parse.h>
 
 @interface WineBottle (Create)
 +(NSOrderedSet *)whiteList; // extends Bottle whitelist, this should be a typedef

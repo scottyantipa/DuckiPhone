@@ -45,31 +45,20 @@
         if ([fetchedObjects count] == 0) {
             Bottle * newBottle = [Bottle newBottleForType:alcoholType inManagedObjectContext:context];
             newBottle.serverID = serverID;
-            [Bottle syncBottleWithServerObj:newBottle obj:bottleInfo inContext:context];
+            [newBottle syncWithServerInfo:bottleInfo];
             [[MOCManager sharedInstance] saveContext:context];
             [target performSelectorOnMainThread:selector withObject:newBottle waitUntilDone:NO];
         }
         else {
             Bottle *bottle = (Bottle *)[fetchedObjects lastObject];
-            [Bottle syncBottleWithServerObj:bottle obj:bottleInfo inContext:context];
+            [bottle syncWithServerInfo:bottleInfo];
             [target performSelectorOnMainThread:selector withObject:bottle waitUntilDone:NO];
         }
     }];
 }
 
-// given obj from server, sync the bottle to that obj
-+(void)syncBottleWithServerObj:(Bottle *)bottle obj:(PFObject *)obj inContext:(NSManagedObjectContext *)context {
-    bottle.name = (NSString *)obj[@"name"];
-    bottle.alcoholType = (NSString *)obj[@"alcoholType"];
-    bottle.alcoholSubType = (NSString *)obj[@"alcoholSubType"];
-    bottle.volume = (NSString *)obj[@"volume"];
-    NSNumber * barcodeNum = (NSNumber *)obj[@"barcode"];
-    bottle.barcode = [barcodeNum stringValue];
-}
-
 +(void)toggleUserHasBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context {
     bottle.userHasBottle = [NSNumber numberWithBool:![bottle.userHasBottle boolValue]];
-    [AlcoholSubType recalculateUserOrderingForSubType:bottle.subType inContext:context];
 }
 
 +(Bottle *)bottleForBarcode:(NSString *)barcode inManagedObjectContext:(NSManagedObjectContext *)context {
@@ -112,11 +101,12 @@ const NSString * NO_NAME_STRING = @"No Name";
     return bottle;
 }
 
+// Creates a LiquorBottle, WineBottle, or BeerBottle
 +(Bottle *)newBottleForType:(NSString *)type inManagedObjectContext:(NSManagedObjectContext *)context {
     NSString * entityName = [Bottle classNameForAlcoholType:type];
     Bottle * bottle = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
     bottle.name = [NO_NAME_STRING copy];
-    return bottle;
+    return bottle; // remember this is not a Bottle, it's a subclass of Bottle
 }
 
 +(NSString *)classNameForAlcoholType:(NSString *)alcoholType {
@@ -293,6 +283,29 @@ const NSString * NO_NAME_STRING = @"No Name";
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&err];
     Producer * producer = [fetchedObjects lastObject]; // should only be one anyways
     return producer;
+}
+
+-(void)syncWithServerInfo:(PFObject *)serverInfo {
+    NSString * alcoholSubType = (NSString *)serverInfo[@"alcoholSubType"];
+    NSString * volume = (NSString *)serverInfo[@"volume"];
+    NSNumber * barcodeNum = (NSNumber *)serverInfo[@"barcode"];
+    NSString * barcode = [barcodeNum stringValue];
+    NSString * alcoholType = (NSString *)serverInfo[@"alcoholType"];
+
+    
+    self.alcoholSubType = alcoholSubType;
+    self.volume = volume;
+    self.barcode = barcode;
+    self.alcoholType = alcoholType;
+    
+    if ([self.alcoholType isEqualToString:@"Wine"]) {
+        NSNumber * vintageNum = (NSNumber *)serverInfo[@"vintage"];
+        WineBottle * selfAsWine = (WineBottle *)self;
+        selfAsWine.vintage = vintageNum;
+    } else {
+        NSString * name = (NSString *)serverInfo[@"name"];
+        self.name = name;
+    }
 }
 
 @end
