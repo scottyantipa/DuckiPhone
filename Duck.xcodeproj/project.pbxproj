@@ -78,7 +78,6 @@
 		E079251D19039B4700162737 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = E079250D19039B4700162737 /* iTunesArtwork.png */; };
 		E079251E19039B4700162737 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E079250E19039B4700162737 /* iTunesArtwork@2x.png */; };
 		E07D92D81A3E994000BE2738 /* AllMyBottlesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E07D92D71A3E994000BE2738 /* AllMyBottlesTVC.m */; };
-		E07D92E11A3E9FF900BE2738 /* WineBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E07D92E01A3E9FF900BE2738 /* WineBottle.m */; };
 		E07D93081A3FF61000BE2738 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E07D92E41A3FF61000BE2738 /* AFHTTPRequestOperation.m */; };
 		E07D93091A3FF61000BE2738 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E07D92E61A3FF61000BE2738 /* AFHTTPRequestOperationManager.m */; };
 		E07D930A1A3FF61000BE2738 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E07D92E81A3FF61000BE2738 /* AFHTTPSessionManager.m */; };
@@ -112,6 +111,7 @@
 		E082728518198DDD007A2977 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E082728418198DDD007A2977 /* MessageUI.framework */; };
 		E0948AE91A11BA7C006B25D2 /* TakeInventoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0948AE81A11BA7C006B25D2 /* TakeInventoryTableViewCell.m */; };
 		E0948AF01A11BB25006B25D2 /* TakeInventoryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0948AEF1A11BB25006B25D2 /* TakeInventoryTVC.m */; };
+		E09DFF941A663E9600FF463F /* WineBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E09DFF931A663E9600FF463F /* WineBottle.m */; };
 		E0BE72751A5F9B040065812A /* WineTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BE72741A5F9B040065812A /* WineTVC.m */; };
 		E0BEEED61A1DB3A70049C195 /* MOCManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BEEED51A1DB3A70049C195 /* MOCManager.m */; };
 		E0C5A55D1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0C5A55B1849ABDD008E9B94 /* Duck.xcdatamodeld */; };
@@ -239,8 +239,6 @@
 		E079250E19039B4700162737 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		E07D92D61A3E994000BE2738 /* AllMyBottlesTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllMyBottlesTVC.h; sourceTree = "<group>"; };
 		E07D92D71A3E994000BE2738 /* AllMyBottlesTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllMyBottlesTVC.m; sourceTree = "<group>"; };
-		E07D92DF1A3E9FF900BE2738 /* WineBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineBottle.h; sourceTree = "<group>"; };
-		E07D92E01A3E9FF900BE2738 /* WineBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineBottle.m; sourceTree = "<group>"; };
 		E07D92E31A3FF61000BE2738 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		E07D92E41A3FF61000BE2738 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		E07D92E51A3FF61000BE2738 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -298,6 +296,8 @@
 		E0948AE81A11BA7C006B25D2 /* TakeInventoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TakeInventoryTableViewCell.m; path = Views/TakeInventoryTableViewCell.m; sourceTree = "<group>"; };
 		E0948AEE1A11BB25006B25D2 /* TakeInventoryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakeInventoryTVC.h; sourceTree = "<group>"; };
 		E0948AEF1A11BB25006B25D2 /* TakeInventoryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakeInventoryTVC.m; sourceTree = "<group>"; };
+		E09DFF921A663E9600FF463F /* WineBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineBottle.h; sourceTree = "<group>"; };
+		E09DFF931A663E9600FF463F /* WineBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineBottle.m; sourceTree = "<group>"; };
 		E0BE72721A5F82E80065812A /* SearchBottlesDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchBottlesDelegate.h; sourceTree = "<group>"; };
 		E0BE72731A5F9B040065812A /* WineTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineTVC.h; sourceTree = "<group>"; };
 		E0BE72741A5F9B040065812A /* WineTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineTVC.m; sourceTree = "<group>"; };
@@ -512,10 +512,10 @@
 		E05014EC1814ADE600A06560 /* DataClasses */ = {
 			isa = PBXGroup;
 			children = (
+				E09DFF921A663E9600FF463F /* WineBottle.h */,
+				E09DFF931A663E9600FF463F /* WineBottle.m */,
 				E07DB76B1A48F0A100626DBC /* Bottle.h */,
 				E07DB76C1A48F0A100626DBC /* Bottle.m */,
-				E07D92DF1A3E9FF900BE2738 /* WineBottle.h */,
-				E07D92E01A3E9FF900BE2738 /* WineBottle.m */,
 				E0E2749E1A2FFB8A0013DFF5 /* Producer.h */,
 				E0E2749F1A2FFB8A0013DFF5 /* Producer.m */,
 				E040E2AF1A295AD000AFDE52 /* WineBottle+Create.h */,
@@ -827,6 +827,7 @@
 				E0E274A01A2FFB8A0013DFF5 /* Producer.m in Sources */,
 				E07D93141A3FF61000BE2738 /* UIButton+AFNetworking.m in Sources */,
 				E0309B1419DB42E300F00CA3 /* Invoice.m in Sources */,
+				E09DFF941A663E9600FF463F /* WineBottle.m in Sources */,
 				E01D81491A1496D0007C9BCE /* CMPopTipView.m in Sources */,
 				E05015131814AED400A06560 /* AlcoholType+Create.m in Sources */,
 				E0309B0519DB427000F00CA3 /* Order.m in Sources */,
@@ -850,7 +851,6 @@
 				E07D930B1A3FF61000BE2738 /* AFNetworkReachabilityManager.m in Sources */,
 				E0948AF01A11BB25006B25D2 /* TakeInventoryTVC.m in Sources */,
 				E05015191814AED400A06560 /* Bottle+Create.m in Sources */,
-				E07D92E11A3E9FF900BE2738 /* WineBottle.m in Sources */,
 				E07D93081A3FF61000BE2738 /* AFHTTPRequestOperation.m in Sources */,
 				E02C7E4B1A1BD921007AF67C /* SARoundedButton.m in Sources */,
 				E0156A431A13165A0021AF27 /* SingleBarcodeScanner.m in Sources */,

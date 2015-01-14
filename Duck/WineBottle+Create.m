@@ -14,8 +14,8 @@
 {
     return [NSOrderedSet orderedSetWithObjects:@"producer", @"varietal", @"volume", @"count", @"barcode", nil];
 }
--(NSString *)name {
-    return [self.producer.name stringByAppendingString:[NSString stringWithFormat:@" %@", self.varietal.name]];
+-(NSString *)fullName {
+    return [self.producerName stringByAppendingString:[NSString stringWithFormat:@" %@", self.varietalName]];
 }
 
 @end

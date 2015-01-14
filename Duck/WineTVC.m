@@ -27,31 +27,33 @@
 
 -(NSOrderedSet *)calculateCellsForTable {
     if ([self.bottle.userHasBottle isEqualToNumber:[NSNumber numberWithBool:YES]]) {
-        return [[NSOrderedSet alloc] initWithObjects:@"name", @"volume", @"varietal", @"vintage", @"count", @"remove", nil];
+        return [[NSOrderedSet alloc] initWithObjects:@"name", @"volume", @"producer", @"varietal", @"vintage", @"count", @"remove", nil];
     } else {
-        return [[NSOrderedSet alloc] initWithObjects:@"name", @"volume", @"varietal", @"vintage", @"add", nil];
+        return [[NSOrderedSet alloc] initWithObjects:@"name", @"volume", @"producer", @"varietal", @"vintage", @"add", nil];
     }
 }
 
 // if property is not in Bottle whiteList, then do unique thing, otherwise delegate to super
--(UITableViewCell *)configureCellForPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView cellType:(NSString *)cellType identifier:(NSString *)identifier {
-    if  ([cellType isEqualToString:@"varietal"] || [cellType isEqualToString:@"producer"]) {
-        WineBottle * bottle = (WineBottle *)_bottle;
-        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Bottle Property CellID" forIndexPath:indexPath];;
+-(UITableViewCell *)configureCellForPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView cellType:(NSString *)cellType {
+    WineBottle * bottle = (WineBottle *)_bottle;
+    NSInteger isInMyProperties = [@[@"varietal", @"producer", @"vintage", @"name"] indexOfObject:cellType];
+    if (!(NSNotFound == isInMyProperties)) {
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:[self tableCellIdentifier] forIndexPath:indexPath];
         if ([cellType isEqualToString:@"varietal"]) {
             cell.textLabel.text = bottle.varietalName;
-            return cell;
         } else if ([cellType isEqualToString:@"producer"]) {
-            cell.textLabel.text= [[bottle producer] name];
+            cell.textLabel.text= bottle.producerName;
+        } else if ([cellType isEqualToString:@"vintage"]) {
+            cell.textLabel.text = [bottle.vintage stringValue];
             return cell;
+        } else if ([cellType isEqualToString:@"name"]) {
+            cell.textLabel.text = [bottle fullName];
         }
-    }
-    if (cellType) {
-        return [super configureCellForPath:indexPath tableView:tableView cellType:cellType];
+        return cell;
     } else {
-        return nil;
+        UITableViewCell * superCell = [super configureCellForPath:indexPath tableView:tableView cellType:cellType];
+        return superCell;
     }
-
 }
 
 // need to override this because there is a special Wine method for InventorySnapShot we need to call
@@ -66,6 +68,8 @@
         return @"winery";
     } else if ([cellType isEqualToString:@"varietal"]) {
         return @"varietal";
+    } else if ([cellType isEqualToString:@"vintage"]) {
+        return @"vintage";
     } else {
         return [super tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section];
     }
@@ -76,6 +80,5 @@
     [self setFinalCount];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 @end

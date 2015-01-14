@@ -62,10 +62,10 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString * cellType = [_cellsForTable objectAtIndex:indexPath.section];
+    NSString * cellType = [self.cellsForTable objectAtIndex:indexPath.section];
     if ([cellType isEqualToString:@"add"] || [cellType isEqualToString:@"remove"]) {
-        [Bottle toggleUserHasBottle:_bottle inContext:_managedObjectContext];
-        [[MOCManager sharedInstance] saveContext:_managedObjectContext];
+        [Bottle toggleUserHasBottle:self.bottle inContext:self.managedObjectContext];
+        [[MOCManager sharedInstance] saveContext:self.managedObjectContext];
         self.cellsForTable = [self calculateCellsForTable];
         [self.tableView reloadData];
     }
@@ -101,11 +101,10 @@
     if ([cellType isEqualToString:@"count"]) {
         return [self configureCountCellForPath:indexPath tableView:tableView];
     } else {
-        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:[self tableCellIdentifier] forIndexPath:indexPath];;
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:[self tableCellIdentifier] forIndexPath:indexPath];
         if ([cellType isEqualToString:@"volume"]) {
             [self configureVolumeCell:cell];
-        }
-        else if ([cellType isEqualToString:@"add"]) {
+        } else if ([cellType isEqualToString:@"add"]) {
             cell.textLabel.text = @"Add to collection";
             cell.backgroundColor = [UIColor greenColor];
             cell.textLabel.textColor = [UIColor whiteColor];

@@ -88,6 +88,7 @@
         <relationship name="whichOrder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="whichVendor" inverseEntity="Order" syncable="YES"/>
     </entity>
     <entity name="WineBottle" representedClassName="WineBottle" parentEntity="Bottle" syncable="YES">
+        <attribute name="producerName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="varietalName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="vintage" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="varietal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Varietal" inverseName="wines" inverseEntity="Varietal" syncable="YES"/>
@@ -107,6 +108,6 @@
         <element name="Producer" positionX="-630" positionY="-1123" width="128" height="73"/>
         <element name="Varietal" positionX="-801" positionY="-1170" width="128" height="88"/>
         <element name="Vendor" positionX="-146" positionY="-1494" width="128" height="148"/>
-        <element name="WineBottle" positionX="-837" positionY="-1018" width="128" height="88"/>
+        <element name="WineBottle" positionX="-837" positionY="-1018" width="128" height="105"/>
     </elements>
 </model>

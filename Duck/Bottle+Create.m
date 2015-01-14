@@ -285,13 +285,13 @@ const NSString * NO_NAME_STRING = @"No Name";
     return producer;
 }
 
+// We don't know if it is a Bottle or WineBottle, so check serverInfo.alcoholType
 -(void)syncWithServerInfo:(PFObject *)serverInfo {
     NSString * alcoholSubType = (NSString *)serverInfo[@"alcoholSubType"];
     NSString * volume = (NSString *)serverInfo[@"volume"];
     NSNumber * barcodeNum = (NSNumber *)serverInfo[@"barcode"];
     NSString * barcode = [barcodeNum stringValue];
     NSString * alcoholType = (NSString *)serverInfo[@"alcoholType"];
-
     
     self.alcoholSubType = alcoholSubType;
     self.volume = volume;
@@ -299,9 +299,14 @@ const NSString * NO_NAME_STRING = @"No Name";
     self.alcoholType = alcoholType;
     
     if ([self.alcoholType isEqualToString:@"Wine"]) {
+        // it's a wine bottle, so cast as WineBottle and add wine specific attributes
         NSNumber * vintageNum = (NSNumber *)serverInfo[@"vintage"];
+        NSString * varietal = (NSString *)serverInfo[@"varietal"];
+        NSString * producer = (NSString *)serverInfo[@"producer"];
         WineBottle * selfAsWine = (WineBottle *)self;
         selfAsWine.vintage = vintageNum;
+        selfAsWine.varietalName = varietal;
+        selfAsWine.producerName = producer;
     } else {
         NSString * name = (NSString *)serverInfo[@"name"];
         self.name = name;
