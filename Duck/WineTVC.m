@@ -24,31 +24,30 @@
     return @"Wine BottleTVC Cell ID";
 }
 
+-(NSArray *)wineProps {
+    return @[@"varietal", @"vintage"];
+}
 
--(NSOrderedSet *)calculateCellsForTable {
-    if ([self.bottle.userHasBottle isEqualToNumber:[NSNumber numberWithBool:YES]]) {
-        return [[NSOrderedSet alloc] initWithObjects:@"name", @"volume", @"producer", @"varietal", @"vintage", @"count", @"remove", nil];
-    } else {
-        return [[NSOrderedSet alloc] initWithObjects:@"name", @"volume", @"producer", @"varietal", @"vintage", @"add", nil];
-    }
+// use the base properties provided by super class (like "name", "volume")
+-(NSMutableOrderedSet *)calculateCellsForTable {
+    NSMutableOrderedSet * toReturn = [NSMutableOrderedSet orderedSetWithOrderedSet:[super calculateCellsForTable]];
+    [toReturn addObjectsFromArray:[self wineProps]];
+    return toReturn;
 }
 
 // if property is not in Bottle whiteList, then do unique thing, otherwise delegate to super
 -(UITableViewCell *)configureCellForPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView cellType:(NSString *)cellType {
     WineBottle * bottle = (WineBottle *)_bottle;
-    NSInteger isInMyProperties = [@[@"varietal", @"producer", @"vintage", @"name"] indexOfObject:cellType];
+    NSInteger isInMyProperties = [[self wineProps] indexOfObject:cellType];
+    bool showDetail = YES;
     if (!(NSNotFound == isInMyProperties)) {
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:[self tableCellIdentifier] forIndexPath:indexPath];
         if ([cellType isEqualToString:@"varietal"]) {
             cell.textLabel.text = bottle.varietalName;
-        } else if ([cellType isEqualToString:@"producer"]) {
-            cell.textLabel.text= bottle.producerName;
         } else if ([cellType isEqualToString:@"vintage"]) {
             cell.textLabel.text = [bottle.vintage stringValue];
-            return cell;
-        } else if ([cellType isEqualToString:@"name"]) {
-            cell.textLabel.text = [bottle fullName];
         }
+        cell.detailTextLabel.text = showDetail ? cellType : @"";
         return cell;
     } else {
         UITableViewCell * superCell = [super configureCellForPath:indexPath tableView:tableView cellType:cellType];
@@ -61,19 +60,6 @@
     [InventorySnapshotForBottle newInventoryForBottleSnapshotForDate:[NSDate date] withCount:[NSNumber numberWithFloat:_editedCount] wineBottle:(WineBottle *)_bottle inManagedObjectContext:_managedObjectContext];
 }
 
-
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString * cellType = [self.cellsForTable objectAtIndex:section];
-    if ([cellType isEqualToString:@"producer"]) {
-        return @"winery";
-    } else if ([cellType isEqualToString:@"varietal"]) {
-        return @"varietal";
-    } else if ([cellType isEqualToString:@"vintage"]) {
-        return @"vintage";
-    } else {
-        return [super tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section];
-    }
-}
 
 // annoying that this can't be a super method
 - (IBAction)didPressDone:(id)sender {

@@ -2,8 +2,8 @@
 //  Bottle.h
 //  Duck
 //
-//  Created by Scott Antipa on 12/22/14.
-//  Copyright (c) 2014 Scott Antipa. All rights reserved.
+//  Created by Scott Antipa on 1/14/15.
+//  Copyright (c) 2015 Scott Antipa. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -17,10 +17,11 @@
 @property (nonatomic, retain) NSString * alcoholType;
 @property (nonatomic, retain) NSString * barcode;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * serverID;
 @property (nonatomic, retain) NSNumber * userHasBottle;
 @property (nonatomic, retain) NSNumber * userOrdering;
 @property (nonatomic, retain) NSString * volume;
-@property (nonatomic, retain) NSString * serverID;
+@property (nonatomic, retain) NSString * producerName;
 @property (nonatomic, retain) NSSet *inventoryShapshots;
 @property (nonatomic, retain) NSSet *invoicePhotos;
 @property (nonatomic, retain) NSSet *invoicesForBottle;

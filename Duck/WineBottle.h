@@ -2,7 +2,7 @@
 //  WineBottle.h
 //  Duck
 //
-//  Created by Scott Antipa on 1/13/15.
+//  Created by Scott Antipa on 1/14/15.
 //  Copyright (c) 2015 Scott Antipa. All rights reserved.
 //
 
@@ -16,7 +16,6 @@
 
 @property (nonatomic, retain) NSString * varietalName;
 @property (nonatomic, retain) NSNumber * vintage;
-@property (nonatomic, retain) NSString * producerName;
 @property (nonatomic, retain) Varietal *varietal;
 
 @end

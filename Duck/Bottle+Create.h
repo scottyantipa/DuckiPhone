@@ -21,6 +21,7 @@
 
 @interface Bottle (Create)
 +(NSOrderedSet *)whiteList; // should be a typedef, not a method
+-(NSString *)fullName;
 
 +(Bottle *)newBottleForBarcode:(NSString *)barcode inManagedObjectContext:(NSManagedObjectContext *)context;
 +(Bottle *)newBottleForType:(NSString *)type inManagedObjectContext:(NSManagedObjectContext *)context;

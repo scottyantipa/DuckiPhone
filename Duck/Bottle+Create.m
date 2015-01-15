@@ -15,6 +15,10 @@
     return [NSOrderedSet orderedSetWithObjects:@"name", @"volume", @"subType",@"count", @"barcode", nil];
 }
 
+-(NSString *)fullName {
+    return self.name; // WineBottle overrides this
+}
+
 +(void)bottleFromServerID:(NSString *)serverID inManagedObjectContext:(NSManagedObjectContext *)context forTarget:(id)target withSelector:(SEL)selector {
     
     // fetch object from server
@@ -292,22 +296,23 @@ const NSString * NO_NAME_STRING = @"No Name";
     NSNumber * barcodeNum = (NSNumber *)serverInfo[@"barcode"];
     NSString * barcode = [barcodeNum stringValue];
     NSString * alcoholType = (NSString *)serverInfo[@"alcoholType"];
+    NSString * producer = (NSString *)serverInfo[@"producer"];
     
     self.alcoholSubType = alcoholSubType;
     self.volume = volume;
     self.barcode = barcode;
     self.alcoholType = alcoholType;
+    self.producerName = producer;
     
     if ([self.alcoholType isEqualToString:@"Wine"]) {
-        // it's a wine bottle, so cast as WineBottle and add wine specific attributes
         NSNumber * vintageNum = (NSNumber *)serverInfo[@"vintage"];
         NSString * varietal = (NSString *)serverInfo[@"varietal"];
-        NSString * producer = (NSString *)serverInfo[@"producer"];
+
         WineBottle * selfAsWine = (WineBottle *)self;
         selfAsWine.vintage = vintageNum;
         selfAsWine.varietalName = varietal;
-        selfAsWine.producerName = producer;
-    } else {
+
+    } else { // wine bottles have a method 'name', not attr
         NSString * name = (NSString *)serverInfo[@"name"];
         self.name = name;
     }

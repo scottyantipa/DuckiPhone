@@ -2,8 +2,8 @@
 //  Bottle.m
 //  Duck
 //
-//  Created by Scott Antipa on 12/22/14.
-//  Copyright (c) 2014 Scott Antipa. All rights reserved.
+//  Created by Scott Antipa on 1/14/15.
+//  Copyright (c) 2015 Scott Antipa. All rights reserved.
 //
 
 #import "Bottle.h"
@@ -22,10 +22,11 @@
 @dynamic alcoholType;
 @dynamic barcode;
 @dynamic name;
+@dynamic serverID;
 @dynamic userHasBottle;
 @dynamic userOrdering;
 @dynamic volume;
-@dynamic serverID;
+@dynamic producerName;
 @dynamic inventoryShapshots;
 @dynamic invoicePhotos;
 @dynamic invoicesForBottle;

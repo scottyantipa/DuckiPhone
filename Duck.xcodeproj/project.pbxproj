@@ -106,12 +106,12 @@
 		E07D932E1A40027100BE2738 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E07D932D1A40027100BE2738 /* SystemConfiguration.framework */; };
 		E07D93301A40027E00BE2738 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E07D932F1A40027E00BE2738 /* libz.dylib */; };
 		E07D93321A40028B00BE2738 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E07D93311A40028B00BE2738 /* libsqlite3.dylib */; };
-		E07DB76D1A48F0A100626DBC /* Bottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E07DB76C1A48F0A100626DBC /* Bottle.m */; };
 		E07DB7701A48F90300626DBC /* BottleTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E07DB76F1A48F90300626DBC /* BottleTVC.m */; };
 		E082728518198DDD007A2977 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E082728418198DDD007A2977 /* MessageUI.framework */; };
 		E0948AE91A11BA7C006B25D2 /* TakeInventoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0948AE81A11BA7C006B25D2 /* TakeInventoryTableViewCell.m */; };
 		E0948AF01A11BB25006B25D2 /* TakeInventoryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0948AEF1A11BB25006B25D2 /* TakeInventoryTVC.m */; };
-		E09DFF941A663E9600FF463F /* WineBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E09DFF931A663E9600FF463F /* WineBottle.m */; };
+		E09DFF971A6779C100FF463F /* Bottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E09DFF961A6779C100FF463F /* Bottle.m */; };
+		E09DFF9A1A6779C200FF463F /* WineBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E09DFF991A6779C200FF463F /* WineBottle.m */; };
 		E0BE72751A5F9B040065812A /* WineTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BE72741A5F9B040065812A /* WineTVC.m */; };
 		E0BEEED61A1DB3A70049C195 /* MOCManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BEEED51A1DB3A70049C195 /* MOCManager.m */; };
 		E0C5A55D1849ABDD008E9B94 /* Duck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0C5A55B1849ABDD008E9B94 /* Duck.xcdatamodeld */; };
@@ -287,8 +287,6 @@
 		E07D932D1A40027100BE2738 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E07D932F1A40027E00BE2738 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		E07D93311A40028B00BE2738 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		E07DB76B1A48F0A100626DBC /* Bottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bottle.h; sourceTree = "<group>"; };
-		E07DB76C1A48F0A100626DBC /* Bottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bottle.m; sourceTree = "<group>"; };
 		E07DB76E1A48F90300626DBC /* BottleTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottleTVC.h; sourceTree = "<group>"; };
 		E07DB76F1A48F90300626DBC /* BottleTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottleTVC.m; sourceTree = "<group>"; };
 		E082728418198DDD007A2977 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -296,8 +294,10 @@
 		E0948AE81A11BA7C006B25D2 /* TakeInventoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TakeInventoryTableViewCell.m; path = Views/TakeInventoryTableViewCell.m; sourceTree = "<group>"; };
 		E0948AEE1A11BB25006B25D2 /* TakeInventoryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakeInventoryTVC.h; sourceTree = "<group>"; };
 		E0948AEF1A11BB25006B25D2 /* TakeInventoryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakeInventoryTVC.m; sourceTree = "<group>"; };
-		E09DFF921A663E9600FF463F /* WineBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineBottle.h; sourceTree = "<group>"; };
-		E09DFF931A663E9600FF463F /* WineBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineBottle.m; sourceTree = "<group>"; };
+		E09DFF951A6779C100FF463F /* Bottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bottle.h; sourceTree = "<group>"; };
+		E09DFF961A6779C100FF463F /* Bottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bottle.m; sourceTree = "<group>"; };
+		E09DFF981A6779C200FF463F /* WineBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineBottle.h; sourceTree = "<group>"; };
+		E09DFF991A6779C200FF463F /* WineBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineBottle.m; sourceTree = "<group>"; };
 		E0BE72721A5F82E80065812A /* SearchBottlesDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchBottlesDelegate.h; sourceTree = "<group>"; };
 		E0BE72731A5F9B040065812A /* WineTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineTVC.h; sourceTree = "<group>"; };
 		E0BE72741A5F9B040065812A /* WineTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineTVC.m; sourceTree = "<group>"; };
@@ -512,10 +512,10 @@
 		E05014EC1814ADE600A06560 /* DataClasses */ = {
 			isa = PBXGroup;
 			children = (
-				E09DFF921A663E9600FF463F /* WineBottle.h */,
-				E09DFF931A663E9600FF463F /* WineBottle.m */,
-				E07DB76B1A48F0A100626DBC /* Bottle.h */,
-				E07DB76C1A48F0A100626DBC /* Bottle.m */,
+				E09DFF981A6779C200FF463F /* WineBottle.h */,
+				E09DFF991A6779C200FF463F /* WineBottle.m */,
+				E09DFF951A6779C100FF463F /* Bottle.h */,
+				E09DFF961A6779C100FF463F /* Bottle.m */,
 				E0E2749E1A2FFB8A0013DFF5 /* Producer.h */,
 				E0E2749F1A2FFB8A0013DFF5 /* Producer.m */,
 				E040E2AF1A295AD000AFDE52 /* WineBottle+Create.h */,
@@ -827,7 +827,7 @@
 				E0E274A01A2FFB8A0013DFF5 /* Producer.m in Sources */,
 				E07D93141A3FF61000BE2738 /* UIButton+AFNetworking.m in Sources */,
 				E0309B1419DB42E300F00CA3 /* Invoice.m in Sources */,
-				E09DFF941A663E9600FF463F /* WineBottle.m in Sources */,
+				E09DFF9A1A6779C200FF463F /* WineBottle.m in Sources */,
 				E01D81491A1496D0007C9BCE /* CMPopTipView.m in Sources */,
 				E05015131814AED400A06560 /* AlcoholType+Create.m in Sources */,
 				E0309B0519DB427000F00CA3 /* Order.m in Sources */,
@@ -854,6 +854,7 @@
 				E07D93081A3FF61000BE2738 /* AFHTTPRequestOperation.m in Sources */,
 				E02C7E4B1A1BD921007AF67C /* SARoundedButton.m in Sources */,
 				E0156A431A13165A0021AF27 /* SingleBarcodeScanner.m in Sources */,
+				E09DFF971A6779C100FF463F /* Bottle.m in Sources */,
 				E07D93171A3FF61000BE2738 /* UIRefreshControl+AFNetworking.m in Sources */,
 				E040E29C1A292EED00AFDE52 /* Varietal.m in Sources */,
 				E07D930D1A3FF61000BE2738 /* AFURLConnectionOperation.m in Sources */,
@@ -867,7 +868,6 @@
 				E05015101814AED400A06560 /* AlcoholSubType+Create.m in Sources */,
 				E0BE72751A5F9B040065812A /* WineTVC.m in Sources */,
 				E05015161814AED400A06560 /* AppDelegate.m in Sources */,
-				E07DB76D1A48F0A100626DBC /* Bottle.m in Sources */,
 				E01C5917191DF4E3007DD632 /* NSString+Score.m in Sources */,
 				E0309B4D19DB87C000F00CA3 /* Invoice+Create.m in Sources */,
 				E03144391841A1530047FA6F /* Constants.m in Sources */,
