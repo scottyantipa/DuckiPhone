@@ -14,7 +14,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="All My Bottles Cell ID" id="Tor-e0-MqB">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="All My Bottles Cell ID" id="Tor-e0-MqB" customClass="BottleInfoTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tor-e0-MqB" id="hS0-ZL-5XB">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -33,12 +33,16 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="yKN-r0-zEz" kind="modal" identifier="Show Bottle From My Bottles Cell ID" id="4nE-Ml-aHk"/>
+                        <segue destination="Xme-ve-Ukh" kind="modal" id="O1a-po-pPa"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PED-VX-40r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-636" y="195"/>
+            <point key="canvasLocation" x="-646" y="189"/>
         </scene>
-        <!--All Bottles-->
+        <!--Browse Bottles-->
         <scene sceneID="D2Y-I9-bMO">
             <objects>
                 <tableViewController id="ChQ-Ok-1pC" customClass="SearchAllBottlesTVC" sceneMemberID="viewController">
@@ -47,7 +51,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Search All Cell ID" id="cTg-l4-Yuz">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Search All Cell ID" id="cTg-l4-Yuz" customClass="BottleInfoTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cTg-l4-Yuz" id="t92-II-Orp">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -59,7 +63,7 @@
                             <outlet property="delegate" destination="ChQ-Ok-1pC" id="YHW-2l-u4j"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="All Bottles" id="ETr-hZ-1PQ">
+                    <navigationItem key="navigationItem" title="Browse Bottles" id="ETr-hZ-1PQ">
                         <barButtonItem key="leftBarButtonItem" systemItem="search" id="VaZ-1F-kME">
                             <connections>
                                 <action selector="didPressSearch:" destination="ChQ-Ok-1pC" id="Tt1-Qg-sLW"/>
@@ -78,7 +82,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NfM-BQ-IIk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="301" y="195"/>
+            <point key="canvasLocation" x="263" y="-517"/>
         </scene>
         <!--Bottle-->
         <scene sceneID="zWh-nh-jSe">
@@ -233,7 +237,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FCK-Q0-dl4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-77" y="195"/>
+            <point key="canvasLocation" x="-115" y="-517"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Yp4-06-D11">
@@ -364,4 +368,8 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="O1a-po-pPa"/>
+        <segue reference="4nE-Ml-aHk"/>
+    </inferredMetricsTieBreakers>
 </document>

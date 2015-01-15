@@ -31,6 +31,8 @@
 
 
 +(void)bottleFromServerID:(NSString *)serverID inManagedObjectContext:(NSManagedObjectContext *)context forTarget:(id)target withSelector:(SEL)selector;
++(Bottle *)bottleFromServerInfo:(PFObject *)serverInfo inContext:(NSManagedObjectContext *)context;
++(Bottle *)fetchBottleFromServerID:(NSString *)serverID forType:(NSString *)alcoholType inContext:(NSManagedObjectContext *)context;
 
 +(void)toggleUserHasBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context;
 

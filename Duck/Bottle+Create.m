@@ -19,6 +19,35 @@
     return self.name; // WineBottle overrides this
 }
 
++(Bottle *)fetchBottleFromServerID:(NSString *)serverID forType:(NSString *)alcoholType inContext:(NSManagedObjectContext *)context {
+    NSString * entityName = [Bottle classNameForAlcoholType:alcoholType];
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:entityName];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"serverID = %@", serverID];
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // get the results and print them
+    NSError *err;
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&err];
+    
+    // if none were returned, create one
+    if ([fetchedObjects count] == 0) {
+        Bottle * newBottle = [Bottle newBottleForType:alcoholType inManagedObjectContext:context];
+        newBottle.serverID = serverID;
+        return newBottle;
+    }
+    else {
+        return (Bottle *)[fetchedObjects lastObject];
+    }
+}
+
+// Given a serverID, query on server for bottle then store it in persistent store
 +(void)bottleFromServerID:(NSString *)serverID inManagedObjectContext:(NSManagedObjectContext *)context forTarget:(id)target withSelector:(SEL)selector {
     
     // fetch object from server
@@ -29,36 +58,19 @@
             return;
         }
         NSString * alcoholType = (NSString *)bottleInfo[@"alcoholType"];
-        NSString * entityName = [Bottle classNameForAlcoholType:alcoholType];
-        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:entityName];
-        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"serverID = %@", serverID];
-        // Set the batch size to a suitable number.
-        [fetchRequest setFetchBatchSize:20];
-        
-        // Edit the sort key as appropriate.
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
-        NSArray *sortDescriptors = @[sortDescriptor];
-        
-        [fetchRequest setSortDescriptors:sortDescriptors];
-        
-        // get the results and print them
-        NSError *err;
-        NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&err];
+        Bottle * bottle = [Bottle fetchBottleFromServerID:serverID forType:alcoholType inContext:context];
 
-        // if none were returned, create one
-        if ([fetchedObjects count] == 0) {
-            Bottle * newBottle = [Bottle newBottleForType:alcoholType inManagedObjectContext:context];
-            newBottle.serverID = serverID;
-            [newBottle syncWithServerInfo:bottleInfo];
-            [[MOCManager sharedInstance] saveContext:context];
-            [target performSelectorOnMainThread:selector withObject:newBottle waitUntilDone:NO];
-        }
-        else {
-            Bottle *bottle = (Bottle *)[fetchedObjects lastObject];
-            [bottle syncWithServerInfo:bottleInfo];
-            [target performSelectorOnMainThread:selector withObject:bottle waitUntilDone:NO];
-        }
+        [bottle syncWithServerInfo:bottleInfo];
+        [target performSelectorOnMainThread:selector withObject:bottle waitUntilDone:NO];
+
     }];
+}
+
+// given info fetched from server about a bottle, try to fetch a managed object for it, otherwise create one
++(Bottle *)bottleFromServerInfo:(PFObject *)serverInfo inContext:(NSManagedObjectContext *)context {
+    Bottle * bottle = [Bottle fetchBottleFromServerID:serverInfo.objectId forType:serverInfo[@"alcoholType"] inContext:context];
+    [bottle syncWithServerInfo:serverInfo]; // sync them locally
+    return bottle;
 }
 
 +(void)toggleUserHasBottle:(Bottle *)bottle inContext:(NSManagedObjectContext *)context {

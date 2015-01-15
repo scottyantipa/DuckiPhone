@@ -14,6 +14,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize alcoholTypeToFilter = _alcoholTypeToFilter;
 @synthesize filterControl = _filterControl;
+@synthesize selectedBottle = _selectedBottle;
 
 -(void)viewDidLoad {
     _managedObjectContext = [[MOCManager sharedInstance] managedObjectContext];
@@ -86,19 +87,21 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"All My Bottles Cell ID"];
-    NSManagedObject * obj = [_fetchedResultsController objectAtIndexPath:indexPath];
-    if ([_alcoholTypeToFilter isEqualToString:@"Wine"]) {
-        WineBottle * wineBottle = (WineBottle *)obj;
-        cell.textLabel.text = wineBottle.varietalName;
-    } else if ([_alcoholTypeToFilter isEqualToString:@"Liquor"]) {
-        LiquorBottle * liquorBottle = (LiquorBottle *)obj;
-        cell.textLabel.text = liquorBottle.name;
-    } else if ([_alcoholTypeToFilter isEqualToString:@"Beer"]) {
-        BeerBottle * beerBottle = (BeerBottle *)obj;
-        cell.textLabel.text = beerBottle.name;
-    }
+    BottleInfoTableViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"All My Bottles Cell ID"];
+    Bottle * bottle = (Bottle *)[_fetchedResultsController objectAtIndexPath:indexPath];
+    [BottleInfoTableViewCell formatCell:cell forBottle:bottle];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
+}
+
+// When table cell is selected, sync the bottle and then perform segue when sync comes back
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    _selectedBottle = (Bottle *)[_fetchedResultsController objectAtIndexPath:indexPath];
+    if ([_selectedBottle.alcoholType isEqualToString:@"Wine"]) {
+        [self performSegueWithIdentifier:@"Show Wine Bottle From Search Segue ID" sender:nil];
+    } else {
+        [self performSegueWithIdentifier:@"Show Bottle From My Bottles Cell ID" sender:nil];
+    }
 }
 
 // removes the vertical scroll navigation with letters in it
@@ -111,6 +114,9 @@
     if ([segue.identifier isEqualToString:@"Show All Bottles Segue ID"]) {
         SearchAllBottlesTVC * tvc = (SearchAllBottlesTVC *)[segue.destinationViewController topViewController];
         tvc.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"Show Bottle From My Bottles Cell ID"] || [segue.identifier isEqualToString:@"Show Bottle From My Bottles Cell ID"]) {
+        BottleTVC * tvc = (BottleTVC *)[[segue destinationViewController] topViewController];
+        tvc.bottleID = _selectedBottle.objectID;
     }
 }
 
@@ -118,6 +124,10 @@
 -(void)didPressDoneOnModal {
     [self.tableView reloadData];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [BottleInfoTableViewCell totalCellHeight];
 }
 
 @end

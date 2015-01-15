@@ -14,25 +14,35 @@
 
 @implementation SearchAllBottlesTVC
 @synthesize alcoholTypeToFilter = _alcoholTypeToFilter;
-@synthesize foundObjects = _foundObjects;
+@synthesize fetchedBottles = _fetchedBottles;
 @synthesize managedObjectContext = _managedObjectContext;
-@synthesize selectedBottleObject = _selectedBottleObject;
 @synthesize selectedBottle = _selectedBottle;
 
 -(void)viewDidLoad {
-    _alcoholTypeToFilter = [[Utils typesOfAlcohol] objectAtIndex:0]; // first one is liquor;
+    _alcoholTypeToFilter = [[Utils typesOfAlcohol] objectAtIndex:0]; // get default filter, which is 'Liquor'
     [self setHeader];
-    [self fetch];
     _managedObjectContext = [[MOCManager sharedInstance] managedObjectContext]; // use the shared MOC instead of creating a new one
+    [self fetch];
+}
+
+// Do fetch here so that if we pop a modal up showing a bottle, we reload when modal is closed
+// Instead of this though we should have a modal method for when modal closes --> reload
+-(void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
 }
 
 -(void)fetch {
     PFQuery * query = [PFQuery queryWithClassName:@"Bottle"];
+    _fetchedBottles = [[NSMutableArray alloc] init]; // reset
     [query whereKey:@"alcoholType" equalTo:_alcoholTypeToFilter];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
-            _foundObjects = objects;
+            for (PFObject * serverObj in objects) {
+                Bottle * bottle = [Bottle bottleFromServerInfo:serverObj inContext:_managedObjectContext];
+                [_fetchedBottles addObject:bottle];
+            }
+            [[MOCManager sharedInstance] saveContext:_managedObjectContext];
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
@@ -63,16 +73,21 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _foundObjects.count;
+    return _fetchedBottles.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Search All Cell ID"];
-    PFObject * foundObj = [_foundObjects objectAtIndex:indexPath.row];
-    NSString * name = [foundObj valueForKey:@"name"];
-    cell.textLabel.text = name;
+    Bottle * bottle = (Bottle *)[_fetchedBottles objectAtIndex:indexPath.row];
+    BottleInfoTableViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"Search All Cell ID"];
+    [BottleInfoTableViewCell formatCell:cell forBottle:bottle];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [BottleInfoTableViewCell totalCellHeight];
+}
+
 
 -(void)controlChanged {
     _alcoholTypeToFilter = [[Utils typesOfAlcohol] objectAtIndex:_filterControl.selectedSegmentIndex];
@@ -81,13 +96,7 @@
 
 // When table cell is selected, sync the bottle and then perform segue when sync comes back
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    _selectedBottleObject = (PFObject *)[_foundObjects objectAtIndex:indexPath.row];
-    [Bottle bottleFromServerID:_selectedBottleObject.objectId inManagedObjectContext:_managedObjectContext forTarget:self withSelector:@selector(syncFinished:)];
-}
-
-// bottle has been synced with server after selecting it
--(void)syncFinished:(id)bottle {
-    _selectedBottle = (Bottle *)bottle;
+    _selectedBottle = (Bottle *)[_fetchedBottles objectAtIndex:indexPath.row];
     if ([_selectedBottle.alcoholType isEqualToString:@"Wine"]) {
         [self performSegueWithIdentifier:@"Show Wine Bottle From Search Segue ID" sender:nil];
     } else {

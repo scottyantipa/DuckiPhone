@@ -15,8 +15,11 @@
 #import "MOCManager.h"
 #import "SearchBottlesDelegate.h"
 #import "SearchAllBottlesTVC.h"
+#import "BottleInfoTableViewCell.h"
+#import "BottleTVC.h"
 
 @interface AllMyBottlesTVC : BaseCoreDataTableViewController <SearchBottlesDelegate>
 @property (strong, nonatomic) NSString * alcoholTypeToFilter;
 @property (strong, nonatomic) UISegmentedControl * filterControl;
+@property (strong, nonatomic) Bottle * selectedBottle; // when user selects a bottle keep track of it for segue
 @end
