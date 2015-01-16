@@ -122,7 +122,11 @@
     Bottle * bottle = (Bottle *)[_fetchedResultsController objectAtIndexPath:indexPath];
     BottleInfoTableViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"Search All Cell ID"];
     [BottleInfoTableViewCell formatCell:cell forBottle:bottle];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if ([bottle.userHasBottle isEqualToNumber:[NSNumber numberWithBool:YES]]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone; // have to do this otherwise the reused cells will always have a checkmark
+    }
     return cell;
 }
 
