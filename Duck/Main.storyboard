@@ -42,7 +42,7 @@
             </objects>
             <point key="canvasLocation" x="-646" y="189"/>
         </scene>
-        <!--Popular Bottles-->
+        <!--Search All BottlesTVC-->
         <scene sceneID="D2Y-I9-bMO">
             <objects>
                 <tableViewController id="ChQ-Ok-1pC" customClass="SearchAllBottlesTVC" sceneMemberID="viewController">
@@ -63,12 +63,7 @@
                             <outlet property="delegate" destination="ChQ-Ok-1pC" id="YHW-2l-u4j"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Popular Bottles" id="ETr-hZ-1PQ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="VaZ-1F-kME">
-                            <connections>
-                                <action selector="didPressSearch:" destination="ChQ-Ok-1pC" id="Tt1-Qg-sLW"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" id="ETr-hZ-1PQ">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="xzI-OV-vux">
                             <connections>
                                 <action selector="didPressDone:" destination="ChQ-Ok-1pC" id="FCw-6A-yqp"/>

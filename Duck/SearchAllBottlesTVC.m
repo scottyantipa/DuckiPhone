@@ -22,11 +22,48 @@
     _managedObjectContext = [self getContext]; // use the shared MOC instead of creating a new one
     _alcoholTypeToFilter = [[Utils typesOfAlcohol] objectAtIndex:0]; // get default filter, which is 'Liquor'
     [self setHeader];
+    [self initSearchBar];
     [self fetch];
+}
+
+
+-(void)setHeader {
+    _filterControl = nil; // just to be safe
+    UISegmentedControl * control = [[UISegmentedControl alloc] initWithItems:[Utils typesOfAlcohol]];
+    [control addTarget:self action:@selector(controlChanged) forControlEvents:UIControlEventValueChanged];
+    [control setSelectedSegmentIndex:0];
+    CGFloat fullWidth = self.tableView.frame.size.width;
+    CGFloat fullHeight = 100;
+    CGFloat controlWidth = fullWidth - 40;
+    CGFloat controlHeight = control.frame.size.height;
+    CGFloat controlXOffset = (fullWidth / 2) - (controlWidth / 2);
+    CGFloat controlYOffset = (fullHeight / 2) - 20; // remove ten so the middle of the control is more or less in middle vertically
+    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, fullWidth, fullHeight)];
+    [control setFrame:CGRectMake(controlXOffset, controlYOffset, controlWidth, controlHeight)];
+    [headerView addSubview:control];
+    
+    UILabel * descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(controlXOffset, controlYOffset + controlHeight + 15, controlWidth, 20)];
+    descriptionLabel.text = @"All ex86 bottles sorted by popularity";
+    descriptionLabel.font = [UIFont systemFontOfSize:11.0];
+    descriptionLabel.textColor = [UIColor grayColor];
+    descriptionLabel.textAlignment = NSTextAlignmentCenter;
+    [headerView addSubview:descriptionLabel];
+    
+    _filterControl = control;
+    self.tableView.tableHeaderView = headerView;
 }
 
 -(NSManagedObjectContext *)getContext {
     return [[MOCManager sharedInstance] managedObjectContext];
+}
+
+-(void)initSearchBar {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    UISearchBar * searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, screenWidth * .75, 30)];
+    searchBar.placeholder = @"Search ex86";
+    UIBarButtonItem *searchBarItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+    self.navigationItem.leftBarButtonItem = searchBarItem;
 }
 
 //
@@ -34,8 +71,6 @@
 // They will do very similar things.  Once we fetch from server we will populate core data and then
 // render.
 //
-
-
 - (NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
@@ -100,23 +135,6 @@
 }
 
 
--(void)setHeader {
-    _filterControl = nil; // just to be safe
-    UISegmentedControl * control = [[UISegmentedControl alloc] initWithItems:[Utils typesOfAlcohol]];
-    [control addTarget:self action:@selector(controlChanged) forControlEvents:UIControlEventValueChanged];
-    [control setSelectedSegmentIndex:0];
-    CGFloat fullWidth = self.tableView.frame.size.width;
-    CGFloat fullHeight = 70;
-    CGFloat controlWidth = fullWidth - 40;
-    CGFloat controlHeight = control.frame.size.height;
-    CGFloat controlXOffset = (fullWidth / 2) - (controlWidth / 2);
-    CGFloat controlYOffset = (fullHeight / 2) - 10; // remove ten so the middle of the control is more or less in middle vertically
-    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, fullWidth, fullHeight)];
-    [control setFrame:CGRectMake(controlXOffset, controlYOffset, controlWidth, controlHeight)];
-    [headerView addSubview:control];
-    _filterControl = control;
-    self.tableView.tableHeaderView = headerView;
-}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     Bottle * bottle = (Bottle *)[_fetchedResultsController objectAtIndexPath:indexPath];
@@ -162,11 +180,6 @@
     BottleTVC * tvc = (BottleTVC *)[[segue destinationViewController] topViewController];
     tvc.bottleID = _selectedBottle.objectID;
 }
-
-- (IBAction)didPressSearch:(id)sender {
-
-}
-
 
 - (IBAction)didPressDone:(id)sender {
     [self.delegate didPressDoneOnModal];

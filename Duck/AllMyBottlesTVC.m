@@ -36,6 +36,7 @@
     UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, fullWidth, fullHeight)];
     [control setFrame:CGRectMake(controlXOffset, controlYOffset, controlWidth, controlHeight)];
     [headerView addSubview:control];
+        
     _filterControl = control;
     self.tableView.tableHeaderView = headerView;
 }
