@@ -2,7 +2,7 @@
 //  Bottle.h
 //  Duck
 //
-//  Created by Scott Antipa on 1/14/15.
+//  Created by Scott Antipa on 1/15/15.
 //  Copyright (c) 2015 Scott Antipa. All rights reserved.
 //
 
@@ -17,11 +17,12 @@
 @property (nonatomic, retain) NSString * alcoholType;
 @property (nonatomic, retain) NSString * barcode;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * producerName;
 @property (nonatomic, retain) NSString * serverID;
 @property (nonatomic, retain) NSNumber * userHasBottle;
 @property (nonatomic, retain) NSNumber * userOrdering;
 @property (nonatomic, retain) NSString * volume;
-@property (nonatomic, retain) NSString * producerName;
+@property (nonatomic, retain) NSNumber * ranking;
 @property (nonatomic, retain) NSSet *inventoryShapshots;
 @property (nonatomic, retain) NSSet *invoicePhotos;
 @property (nonatomic, retain) NSSet *invoicesForBottle;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E0027F781A68DE32009C5508 /* Bottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E0027F771A68DE32009C5508 /* Bottle.m */; };
 		E0156A431A13165A0021AF27 /* SingleBarcodeScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = E0156A421A13165A0021AF27 /* SingleBarcodeScanner.m */; };
 		E01C5916191DF4E3007DD632 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E01C5912191DF4E3007DD632 /* .gitignore */; };
 		E01C5917191DF4E3007DD632 /* NSString+Score.m in Sources */ = {isa = PBXBuildFile; fileRef = E01C5914191DF4E3007DD632 /* NSString+Score.m */; };
@@ -110,7 +111,6 @@
 		E082728518198DDD007A2977 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E082728418198DDD007A2977 /* MessageUI.framework */; };
 		E0948AE91A11BA7C006B25D2 /* TakeInventoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0948AE81A11BA7C006B25D2 /* TakeInventoryTableViewCell.m */; };
 		E0948AF01A11BB25006B25D2 /* TakeInventoryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0948AEF1A11BB25006B25D2 /* TakeInventoryTVC.m */; };
-		E09DFF971A6779C100FF463F /* Bottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E09DFF961A6779C100FF463F /* Bottle.m */; };
 		E09DFF9A1A6779C200FF463F /* WineBottle.m in Sources */ = {isa = PBXBuildFile; fileRef = E09DFF991A6779C200FF463F /* WineBottle.m */; };
 		E09DFF9D1A679EE100FF463F /* BottleInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E09DFF9C1A679EE100FF463F /* BottleInfoTableViewCell.m */; };
 		E0BE72751A5F9B040065812A /* WineTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BE72741A5F9B040065812A /* WineTVC.m */; };
@@ -136,6 +136,8 @@
 /* Begin PBXFileReference section */
 		8DE148B1402A726E463D7B63 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C1AABF924DCB465CB66AAB43 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E0027F761A68DE32009C5508 /* Bottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bottle.h; sourceTree = "<group>"; };
+		E0027F771A68DE32009C5508 /* Bottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bottle.m; sourceTree = "<group>"; };
 		E00D6ADF1A132168002D2B28 /* SingleBarcodeScannerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleBarcodeScannerDelegate.h; sourceTree = "<group>"; };
 		E0156A411A13165A0021AF27 /* SingleBarcodeScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleBarcodeScanner.h; sourceTree = "<group>"; };
 		E0156A421A13165A0021AF27 /* SingleBarcodeScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleBarcodeScanner.m; sourceTree = "<group>"; };
@@ -295,8 +297,6 @@
 		E0948AE81A11BA7C006B25D2 /* TakeInventoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TakeInventoryTableViewCell.m; path = Views/TakeInventoryTableViewCell.m; sourceTree = "<group>"; };
 		E0948AEE1A11BB25006B25D2 /* TakeInventoryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakeInventoryTVC.h; sourceTree = "<group>"; };
 		E0948AEF1A11BB25006B25D2 /* TakeInventoryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakeInventoryTVC.m; sourceTree = "<group>"; };
-		E09DFF951A6779C100FF463F /* Bottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bottle.h; sourceTree = "<group>"; };
-		E09DFF961A6779C100FF463F /* Bottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bottle.m; sourceTree = "<group>"; };
 		E09DFF981A6779C200FF463F /* WineBottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineBottle.h; sourceTree = "<group>"; };
 		E09DFF991A6779C200FF463F /* WineBottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineBottle.m; sourceTree = "<group>"; };
 		E09DFF9B1A679EE100FF463F /* BottleInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottleInfoTableViewCell.h; sourceTree = "<group>"; };
@@ -515,10 +515,10 @@
 		E05014EC1814ADE600A06560 /* DataClasses */ = {
 			isa = PBXGroup;
 			children = (
+				E0027F761A68DE32009C5508 /* Bottle.h */,
+				E0027F771A68DE32009C5508 /* Bottle.m */,
 				E09DFF981A6779C200FF463F /* WineBottle.h */,
 				E09DFF991A6779C200FF463F /* WineBottle.m */,
-				E09DFF951A6779C100FF463F /* Bottle.h */,
-				E09DFF961A6779C100FF463F /* Bottle.m */,
 				E0E2749E1A2FFB8A0013DFF5 /* Producer.h */,
 				E0E2749F1A2FFB8A0013DFF5 /* Producer.m */,
 				E040E2AF1A295AD000AFDE52 /* WineBottle+Create.h */,
@@ -859,7 +859,6 @@
 				E07D93081A3FF61000BE2738 /* AFHTTPRequestOperation.m in Sources */,
 				E02C7E4B1A1BD921007AF67C /* SARoundedButton.m in Sources */,
 				E0156A431A13165A0021AF27 /* SingleBarcodeScanner.m in Sources */,
-				E09DFF971A6779C100FF463F /* Bottle.m in Sources */,
 				E07D93171A3FF61000BE2738 /* UIRefreshControl+AFNetworking.m in Sources */,
 				E040E29C1A292EED00AFDE52 /* Varietal.m in Sources */,
 				E07D930D1A3FF61000BE2738 /* AFURLConnectionOperation.m in Sources */,
@@ -875,6 +874,7 @@
 				E05015161814AED400A06560 /* AppDelegate.m in Sources */,
 				E01C5917191DF4E3007DD632 /* NSString+Score.m in Sources */,
 				E0309B4D19DB87C000F00CA3 /* Invoice+Create.m in Sources */,
+				E0027F781A68DE32009C5508 /* Bottle.m in Sources */,
 				E03144391841A1530047FA6F /* Constants.m in Sources */,
 				E07D930F1A3FF61000BE2738 /* AFURLResponseSerialization.m in Sources */,
 				E05014C11814AC9900A06560 /* Order+Create.m in Sources */,

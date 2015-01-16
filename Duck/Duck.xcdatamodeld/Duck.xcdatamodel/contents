@@ -18,6 +18,7 @@
         <attribute name="barcode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="producerName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ranking" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="serverID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userHasBottle" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="userOrdering" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -97,7 +98,7 @@
         <element name="AlcoholSubType" positionX="-801" positionY="-1287" width="128" height="103"/>
         <element name="AlcoholType" positionX="-801" positionY="-1380" width="128" height="88"/>
         <element name="BeerBottle" positionX="-837" positionY="-864" width="128" height="45"/>
-        <element name="Bottle" positionX="-639" positionY="-999" width="128" height="285"/>
+        <element name="Bottle" positionX="-639" positionY="-999" width="128" height="300"/>
         <element name="InventorySnapshotForBottle" positionX="-648" positionY="-756" width="128" height="90"/>
         <element name="Invoice" positionX="-38" positionY="-1269" width="128" height="118"/>
         <element name="InvoiceForBottle" positionX="-146" positionY="-1008" width="128" height="103"/>

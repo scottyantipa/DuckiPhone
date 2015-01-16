@@ -42,7 +42,7 @@
             </objects>
             <point key="canvasLocation" x="-646" y="189"/>
         </scene>
-        <!--Browse Bottles-->
+        <!--Popular Bottles-->
         <scene sceneID="D2Y-I9-bMO">
             <objects>
                 <tableViewController id="ChQ-Ok-1pC" customClass="SearchAllBottlesTVC" sceneMemberID="viewController">
@@ -63,7 +63,7 @@
                             <outlet property="delegate" destination="ChQ-Ok-1pC" id="YHW-2l-u4j"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Browse Bottles" id="ETr-hZ-1PQ">
+                    <navigationItem key="navigationItem" title="Popular Bottles" id="ETr-hZ-1PQ">
                         <barButtonItem key="leftBarButtonItem" systemItem="search" id="VaZ-1F-kME">
                             <connections>
                                 <action selector="didPressSearch:" destination="ChQ-Ok-1pC" id="Tt1-Qg-sLW"/>
@@ -369,7 +369,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="O1a-po-pPa"/>
-        <segue reference="4nE-Ml-aHk"/>
+        <segue reference="x9L-6X-jzq"/>
+        <segue reference="f48-3u-QaU"/>
     </inferredMetricsTieBreakers>
 </document>

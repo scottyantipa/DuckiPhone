@@ -309,12 +309,14 @@ const NSString * NO_NAME_STRING = @"No Name";
     NSString * barcode = [barcodeNum stringValue];
     NSString * alcoholType = (NSString *)serverInfo[@"alcoholType"];
     NSString * producer = (NSString *)serverInfo[@"producer"];
+    NSNumber * ranking = (NSNumber *)serverInfo[@"ranking"];
     
     self.alcoholSubType = alcoholSubType;
     self.volume = volume;
     self.barcode = barcode;
     self.alcoholType = alcoholType;
     self.producerName = producer;
+    self.ranking = ranking;
     
     if ([self.alcoholType isEqualToString:@"Wine"]) {
         NSNumber * vintageNum = (NSNumber *)serverInfo[@"vintage"];

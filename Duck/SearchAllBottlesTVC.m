@@ -14,33 +14,75 @@
 
 @implementation SearchAllBottlesTVC
 @synthesize alcoholTypeToFilter = _alcoholTypeToFilter;
-@synthesize fetchedBottles = _fetchedBottles;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize selectedBottle = _selectedBottle;
+@synthesize fetchedResultsController = _fetchedResultsController;
 
 -(void)viewDidLoad {
+    _managedObjectContext = [self getContext]; // use the shared MOC instead of creating a new one
     _alcoholTypeToFilter = [[Utils typesOfAlcohol] objectAtIndex:0]; // get default filter, which is 'Liquor'
     [self setHeader];
-    _managedObjectContext = [[MOCManager sharedInstance] managedObjectContext]; // use the shared MOC instead of creating a new one
     [self fetch];
 }
 
-// Do fetch here so that if we pop a modal up showing a bottle, we reload when modal is closed
-// Instead of this though we should have a modal method for when modal closes --> reload
--(void)viewWillAppear:(BOOL)animated {
-    [self.tableView reloadData];
+-(NSManagedObjectContext *)getContext {
+    return [[MOCManager sharedInstance] managedObjectContext];
 }
 
+//
+// Methods for fetching data from server and fetching data from core date
+// They will do very similar things.  Once we fetch from server we will populate core data and then
+// render.
+//
+
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSString * entityName = [_alcoholTypeToFilter stringByAppendingString:@"Bottle"];  // kind of hacky, but creates WineBottle, LiquorBottle, or BeerBottle
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    fetchRequest.predicate = nil;
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"ranking" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // No section because we are showing all of a type sorted by ranking
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
+    self.fetchedResultsController = aFetchedResultsController;
+    _fetchedResultsController.delegate = self;
+    
+    NSError *error = nil;
+    if (![aFetchedResultsController performFetch:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return _fetchedResultsController;
+}
+
+// Get data from server
 -(void)fetch {
     PFQuery * query = [PFQuery queryWithClassName:@"Bottle"];
-    _fetchedBottles = [[NSMutableArray alloc] init]; // reset
     [query whereKey:@"alcoholType" equalTo:_alcoholTypeToFilter];
+    [query orderByDescending:@"ranking"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            // The find succeeded.
+            // The find succeeded, so make sure bottle is stored in persistent store
             for (PFObject * serverObj in objects) {
-                Bottle * bottle = [Bottle bottleFromServerInfo:serverObj inContext:_managedObjectContext];
-                [_fetchedBottles addObject:bottle];
+                [Bottle bottleFromServerInfo:serverObj inContext:_managedObjectContext];
             }
             [[MOCManager sharedInstance] saveContext:_managedObjectContext];
         } else {
@@ -49,6 +91,14 @@
         [self.tableView reloadData];
     }];
 }
+
+// Do fetch here so that if we pop a modal up showing a bottle, we reload when modal is closed
+// Instead of this though we should have a modal method for when modal closes --> reload
+-(void)viewWillAppear:(BOOL)animated {
+    [self resetCoreDataElements];
+    [self.tableView reloadData];
+}
+
 
 -(void)setHeader {
     _filterControl = nil; // just to be safe
@@ -68,16 +118,8 @@
     self.tableView.tableHeaderView = headerView;
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _fetchedBottles.count;
-}
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    Bottle * bottle = (Bottle *)[_fetchedBottles objectAtIndex:indexPath.row];
+    Bottle * bottle = (Bottle *)[_fetchedResultsController objectAtIndexPath:indexPath];
     BottleInfoTableViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"Search All Cell ID"];
     [BottleInfoTableViewCell formatCell:cell forBottle:bottle];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -90,13 +132,20 @@
 
 
 -(void)controlChanged {
+    [self resetCoreDataElements];
     _alcoholTypeToFilter = [[Utils typesOfAlcohol] objectAtIndex:_filterControl.selectedSegmentIndex];
     [self fetch];
 }
 
+-(void)resetCoreDataElements {
+    _fetchedResultsController = nil;
+    _managedObjectContext = nil; // reset the managedObjectContext
+    _managedObjectContext = [self getContext];
+}
+
 // When table cell is selected, sync the bottle and then perform segue when sync comes back
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    _selectedBottle = (Bottle *)[_fetchedBottles objectAtIndex:indexPath.row];
+    _selectedBottle = (Bottle *)[_fetchedResultsController objectAtIndexPath:indexPath];
     if ([_selectedBottle.alcoholType isEqualToString:@"Wine"]) {
         [self performSegueWithIdentifier:@"Show Wine Bottle From Search Segue ID" sender:nil];
     } else {

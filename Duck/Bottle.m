@@ -2,7 +2,7 @@
 //  Bottle.m
 //  Duck
 //
-//  Created by Scott Antipa on 1/14/15.
+//  Created by Scott Antipa on 1/15/15.
 //  Copyright (c) 2015 Scott Antipa. All rights reserved.
 //
 
@@ -22,11 +22,12 @@
 @dynamic alcoholType;
 @dynamic barcode;
 @dynamic name;
+@dynamic producerName;
 @dynamic serverID;
 @dynamic userHasBottle;
 @dynamic userOrdering;
 @dynamic volume;
-@dynamic producerName;
+@dynamic ranking;
 @dynamic inventoryShapshots;
 @dynamic invoicePhotos;
 @dynamic invoicesForBottle;
