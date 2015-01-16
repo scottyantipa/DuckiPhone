@@ -19,7 +19,7 @@ const float SMALL_FONT = 13.0;
 const float NAME_LABEL_HEIGHT = FONT_SIZE + 4;
 const float DETAIL_LABEL_HEIGHT = SMALL_FONT + 2;
 
-const float DETAIL_LABEL_OFFSET = TOP_BOTTOM_PAD + NAME_LABEL_HEIGHT + 10;
+const float DETAIL_LABEL_OFFSET = TOP_BOTTOM_PAD + NAME_LABEL_HEIGHT + 5;
 
 
 +(void)formatCell:(BottleInfoTableViewCell *)cell forBottle:(Bottle *)bottle {

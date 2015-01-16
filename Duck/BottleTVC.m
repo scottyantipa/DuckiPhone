@@ -35,6 +35,8 @@
     [super viewDidLoad];
     self.managedObjectContext = [[MOCManager sharedInstance] managedObjectContext];
     self.bottle = (Bottle *)[self.managedObjectContext objectWithID:self.bottleID];
+    NSString * name = [self.bottle fullName];
+    self.title = name ? name : @"Bottle";
     self.editedCount = [[Bottle countOfBottle:self.bottle forContext:self.managedObjectContext] floatValue];
     self.cellsForTable = [self calculateCellsForTable];
 }
